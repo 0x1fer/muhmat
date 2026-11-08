@@ -1,0 +1,10 @@
+{
+  "html_pages": 10,
+  "local_links_checked": 1121,
+  "missing_links": 0,
+  "original_photos_hash_matched": 156,
+  "examples": 89,
+  "direct_photo_examples": 70,
+  "numerical_derivative_checks": "passed",
+  "notes": "Sayısal kontroller genel matematiksel kanıtların yerine geçmez; hassas katsayı ve işaret hatalarını yakalamak için kullanıldı."
+}

@@ -1,0 +1,1844 @@
+[
+  {
+    "id": 1,
+    "file": "IMG-20261001-WA0014.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Çalışma soruları: nokta-düzlem uzaklığı; üç noktadan düzlem; doğru-düzlem kesişimi; doğru açısı.",
+    "examples": [
+      "Tahtadaki sıfır paydalı gösterim",
+      "Koordinat eksenlerini kesen düzlem",
+      "Dersteki doğru-düzlem kesişimi",
+      "Çalışma sorusu: nokta-düzlem uzaklığı"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 2,
+    "file": "IMG-20261002-WA0018.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Doğru açısı, doğruya uzaklık ve düzlemlere giriş; geniş tahta görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 3,
+    "file": "IMG-20261002-WA0019.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Noktanın doğruya uzaklığının alanla türetilmesi; izdüşüm geometrisi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 4,
+    "file": "IMG-20261002-WA0020.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Düzlem normali, nokta-normal denklemi; (2,3,-5) ve (7,3,4) örneği.",
+    "examples": [
+      "Aynı yöntemin ikinci örneği"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 5,
+    "file": "IMG-20261002-WA0021.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Doğruya dik düzlem ve üç noktadan düzlem için karma çarpım.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 6,
+    "file": "IMG-20261002-WA0022.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Düzlem denklemleri ve üç nokta yöntemi; genel tahta görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 7,
+    "file": "IMG-20261002-WA0023.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Doğruya uzaklık, düzlem denklemleri ve kesişimler; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 8,
+    "file": "IMG-20261002-WA0024.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Verilen doğruya dik ve P=(2,3,5) noktasından geçen düzlem.",
+    "examples": [
+      "Doğruya dik düzlem"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 9,
+    "file": "IMG-20261002-WA0025.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki düzlemin paralelliği ve dikliği; nokta-düzlem uzaklığına geçiş.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 10,
+    "file": "IMG-20261002-WA0026.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Paralel düzlemler arası uzaklık; doğru-düzlem kesişimi; iki düzlemin arakesiti.",
+    "examples": [
+      "Tahtadaki ikinci kesişim örneği",
+      "İki düzlemin arakesiti: tahta örneği"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 11,
+    "file": "IMG-20261002-WA0027.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Çalışma sorularının tekrar görünümü; kesişim konusunun devamı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 12,
+    "file": "IMG-20261009-WA0016.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonu tanımı ve ortak tanım kümesi; logaritma/karekök örneği.",
+    "examples": [
+      "Defterdeki tanım kümesi örneği"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 13,
+    "file": "IMG-20261009-WA0017.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonlarıyla toplam, çarpım, bileşke; ortogonal fonksiyon örneği.",
+    "examples": [
+      "Vektör fonksiyonlarıyla işlemler"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 14,
+    "file": "IMG-20261009-WA0018.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonunun normu; limit tanımı ve limit kuralları.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 15,
+    "file": "IMG-20261009-WA0019.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Skaler/vektörel çarpım limitleri; tam kısımlı fonksiyonun sürekliliği.",
+    "examples": [
+      "Defterdeki limit işlemleri",
+      "Tam kısım içeren süreklilik"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 16,
+    "file": "IMG-20261009-WA0020.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Tam kısım sürekliliğinin devamı; çemberin yönü ve vektör türevi tanımı.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 17,
+    "file": "IMG-20261009-WA0021.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Parametrik uzay eğrisi; doğrusal bileşenli eğrinin doğru olması.",
+    "examples": [
+      "Parametrik eğrinin türü"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 18,
+    "file": "IMG-20261009-WA0022.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Çemberin iki yönde taranması ve (cos t,sin t,3t) helisi.",
+    "examples": [
+      "Çember ve helis"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 19,
+    "file": "IMG-20261009-WA0023.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Kirişten teğete limit; vektörel türev ve çarpım kuralları.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 20,
+    "file": "IMG-20261009-WA0024.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Noktada ilk/ikinci türev; genel helis ve vektörel çarpımın türevi.",
+    "examples": [
+      "Türev ve ikinci türevin noktadaki değeri",
+      "Vektörel çarpımın türevini iki yoldan almak"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 21,
+    "file": "IMG-20261009-WA0025.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Yarıçapı 2 helis; katlı nokta, basit/kapalı eğri; polinom eğrisi.",
+    "examples": [
+      "Kapalı eğri ve uç teğetler"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 22,
+    "file": "IMG-20261009-WA0026.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Birim vektör, paralellik, skaler çarpım ve diklik; (3,4) örneği.",
+    "examples": [
+      "Birim vektör"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 23,
+    "file": "IMG-20261009-WA0027.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Nokta ve yön vektörü ile doğrunun parametrik ve simetrik denklemi.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 24,
+    "file": "IMG-20261009-WA0028.jpg",
+    "topics": [
+      1,
+      2
+    ],
+    "summary": "Kürenin merkez-yarıçap hesabı; standart baz ve yön kosinüsleri.",
+    "examples": [
+      "Defterdeki ikinci küre"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 25,
+    "file": "IMG-20261009-WA0029.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Vektör toplamı/farkı, norm, birim vektör ve düzlemde yön kosinüsleri.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 26,
+    "file": "IMG-20261009-WA0030.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Nokta/yön ve iki noktadan doğru; paralellik örnekleri.",
+    "examples": [
+      "Nokta ve paralel vektör"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 27,
+    "file": "IMG-20261009-WA0031.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki nokta uzaklığı; kürenin standart ve genel denklemi.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 28,
+    "file": "IMG-20261009-WA0032.jpg",
+    "topics": [
+      1,
+      2
+    ],
+    "summary": "Diklik ve açı; küre; A=(0,1,2),B=(3,1,-1) doğrusu çalışma soruları.",
+    "examples": [
+      "Dersteki açı sorusu",
+      "İki noktadan geçen doğru",
+      "Dersteki küre sorusu"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 29,
+    "file": "IMG-20261009-WA0033.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Lineer bağımlılık/bağımsızlık; (1,2),(-3,-6) örneği.",
+    "examples": [
+      "Düzlemde bağımlı vektörler"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 30,
+    "file": "IMG-20261009-WA0034.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "(2,-3),(-5,4) baz örneği; uzay vektörlerine geçiş.",
+    "examples": [
+      "Düzlemde baz"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 31,
+    "file": "IMG-20261009-WA0035.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Vektörel çarpım; (1,2,3),(2,0,1) örneği ve karma çarpım hacmi.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 32,
+    "file": "IMG-20261015-WA0033.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Yay parametresi ve Frenet teğet-normal-binormal tanımları.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 33,
+    "file": "IMG-20261015-WA0034.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Çemberin Frenet çatısı; hız, ivme ve sürat tanımları.",
+    "examples": [
+      "Çemberin Frenet çatısı"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 34,
+    "file": "IMG-20261015-WA0035.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Eğrilik ve yarıçap; ivmenin teğetsel-normal bileşenlerinin türetilmesi.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 35,
+    "file": "IMG-20261015-WA0036.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Dairesel harekette diklik; 5cos t,5sin t,6t² ve üstel/trigonometrik hareket.",
+    "examples": [
+      "Tahtadaki hareket örneği",
+      "Üstel ve trigonometrik hareket",
+      "Sabit normun türevi"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 36,
+    "file": "IMG-20261015-WA0037.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonunun belirsiz integrali ve başlangıç koşulu; belirli integral.",
+    "examples": [
+      "Başlangıç koşullu integral"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 37,
+    "file": "IMG-20261015-WA0038.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Eğrilik formülünün devamı; düzgün/parçalı düzgün eğri ve mutlak sinüs.",
+    "examples": [
+      "Parçalı düzgün eğri"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 38,
+    "file": "IMG-20261015-WA0039.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Belirli vektör integrali; 5-12-13 helisinin yay uzunluğu; türev alıştırmaları.",
+    "examples": [
+      "Dersteki 5-12-13 helisi"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 39,
+    "file": "IMG-20261015-WA0040.jpg",
+    "topics": [
+      3,
+      4
+    ],
+    "summary": "Frenet ve üç integral çalışma sorusu; çok değişkenli fonksiyon tanımı.",
+    "examples": [
+      "Dersteki uzay eğrisinin Frenet üçlüsü"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 40,
+    "file": "IMG-20261015-WA0041.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Karekökün disk biçimli bölgesi; arccos(x-y) için şerit ve görüntü.",
+    "examples": [
+      "Disk ve eğik şerit"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 41,
+    "file": "IMG-20261015-WA0042.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Kök ve logaritma ortak tanım bölgesi; paraboloidin seviye eğrileri.",
+    "examples": [
+      "Kök ve logaritmayı birlikte ele almak",
+      "Paraboloidin seviye eğrileri"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 42,
+    "file": "IMG-20261015-WA0043.jpg",
+    "topics": [
+      2,
+      4
+    ],
+    "summary": "Seviye eğrilerinin uzaydaki yüzeyle bağlantısı; elipsoid ve kesitleri.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 43,
+    "file": "IMG-20261022-WA0049.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Elipsoid, tek ve çift kanatlı hiperboloidlerin işaret ve kesitleri.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 44,
+    "file": "IMG-20261022-WA0050.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Eliptik paraboloid; silindir tanımı ve dairesel/parabolik/hiperbolik örnekler.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 45,
+    "file": "IMG-20261022-WA0051.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Açık disk komşuluğu, epsilon-delta limit tanımı, yaklaşım yolları.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 46,
+    "file": "IMG-20261022-WA0052.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Silindir kesitleri, eliptik koni ve hiperbolik paraboloid.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 47,
+    "file": "IMG-20261022-WA0053.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Süreklilik, tanım bölgeleri; polinom/rasyonel limit ve eşlenik yöntemi.",
+    "examples": [
+      "İşaret ayırımı gerektiren kök",
+      "Her yerde tanımlı logaritma",
+      "Polinom limiti",
+      "Dersin kısa limitleri",
+      "Eşlenikle sadeleştirme"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 48,
+    "file": "IMG-20261022-WA0054.jpg",
+    "topics": [
+      4,
+      5
+    ],
+    "summary": "Yola bağlı limit; sin(xy²)/(x²+y²) süreklilik kanıtı; kısmi türev tanımı.",
+    "examples": [
+      "İki başka karşı örnek",
+      "Dersteki parçalı fonksiyonun sürekliliği"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 49,
+    "file": "IMG-20261022-WA0055.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "x²y³+3x kısmi türevleri; xy/(x²+y²) ikinci türevleri.",
+    "examples": [
+      "Dersteki temel kısmi türev",
+      "Dersteki rasyonel fonksiyonun ikinci türevleri"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 50,
+    "file": "IMG-20261022-WA0056.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Sinüs/üstel standart limitler; parabol ve doğru yollarıyla limit yokluğu.",
+    "examples": [
+      "Sinüs içeren limitler",
+      "Parabol yoluyla limitin yokluğu"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 51,
+    "file": "IMG-20261022-WA0057.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Diferansiyellenebilirlik, artışın lineer kısmı, lineerleştirme ve hata.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 52,
+    "file": "IMG-20261022-WA0058.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "2xy/(x²+y²) için yol/kutupsal test; limit kuralları ve polinomlar.",
+    "examples": [
+      "Doğruya bağlı sonuç"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 53,
+    "file": "IMG-20261022-WA0059.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Rasyonel fonksiyonun karma türevlerinin devamı; Clairaut teoremi.",
+    "examples": [],
+    "kind": "Defter",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 54,
+    "file": "IMG-20261022-WA0060.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Lineerleştirme hata üst sınırı ve (2,1) merkezli ikinci derece polinom.",
+    "examples": [
+      "Defterdeki hata sınırı"
+    ],
+    "kind": "Defter",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 55,
+    "file": "IMG-20261023-WA0008.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Lineer bağımsızlık tanımı ve katsayı sistemi; kısmen engellenmiş tahta.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 56,
+    "file": "IMG-20261023-WA0009.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Düzlemde norm, birim vektör ve geometrik bileşenler.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 57,
+    "file": "IMG-20261023-WA0010.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Baz örneğinin denklem sistemi; vektör fonksiyonlarının işlemleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 58,
+    "file": "IMG-20261023-WA0011.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Uzay normu, standart baz, skaler çarpım ve yön kosinüsleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 59,
+    "file": "IMG-20261023-WA0012.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Skaler çarpım, diklik, paralellik ve vektörel çarpım.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 60,
+    "file": "IMG-20261023-WA0013.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Küre denklemi ve kareye tamamlama; standart baz tekrarı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 61,
+    "file": "IMG-20261023-WA0014.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "Karma çarpım, hacim ve aynı düzlemde olma.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 62,
+    "file": "IMG-20261023-WA0015.jpg",
+    "topics": [
+      1,
+      3
+    ],
+    "summary": "Lineer bağımsızlık ve vektör fonksiyonu işlemlerinin geniş görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 63,
+    "file": "IMG-20261023-WA0016.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonlarının türevleri. Soldaki araya sokma sıralaması slaytı başka derse ait; matematik kapsamına alınmadı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 64,
+    "file": "IMG-20261023-WA0017.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki noktadan doğru ve paralel doğru yönleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 65,
+    "file": "IMG-20261023-WA0018.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Doğru denklemleri ve nokta/yön örnekleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 66,
+    "file": "IMG-20261023-WA0019.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki doğru açısı: yönlerin skaler çarpımı ve küçük açı seçimi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 67,
+    "file": "IMG-20261023-WA0020.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Noktanın doğruya uzaklığının vektörel alan bağıntısı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 68,
+    "file": "IMG-20261023-WA0021.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Düzlemin normal vektörden türetilmesi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 69,
+    "file": "IMG-20261023-WA0022.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Üç noktadan düzlem; determinant biçimi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 70,
+    "file": "IMG-20261023-WA0023.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki düzlemin paralellik koşulu, doğruya dik düzlem ve normal ilişkisi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 71,
+    "file": "IMG-20261023-WA0024.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Dik düzlem koşulunda m,n katsayıları için bağıntı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 72,
+    "file": "IMG-20261023-WA0025.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Nokta-düzlem uzaklığının izdüşümle türetilmesi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 73,
+    "file": "IMG-20261023-WA0026.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Doğru yönleriyle diklik koşulu.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 74,
+    "file": "IMG-20261023-WA0027.jpg",
+    "topics": [
+      1,
+      2
+    ],
+    "summary": "Vektör dikliği, küre ve iki noktadan doğru çalışma soruları.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 75,
+    "file": "IMG-20261023-WA0028.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki noktadan doğru ve paralellik; geniş tahta görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 76,
+    "file": "IMG-20261023-WA0029.jpg",
+    "topics": [
+      1
+    ],
+    "summary": "(1,2,3)×(2,0,1)=(2,5,-4) ve diklik kontrolü.",
+    "examples": [
+      "Tahtadaki vektörel çarpım"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 77,
+    "file": "IMG-20261023-WA0030.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "(2,3,4) noktası ve (1,3,4) normalinden düzlem.",
+    "examples": [
+      "Nokta ve normal ile düzlem"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 78,
+    "file": "IMG-20261023-WA0031.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Nokta-düzlem uzaklık formülü ve sayısal uygulama.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 79,
+    "file": "IMG-20261023-WA0032.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Verilen noktadan doğruya dik düzlem; (2,3,5) uygulaması.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 80,
+    "file": "IMG-20261023-WA0033.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki düzlemin arakesit doğrusu ve çapraz normal yöntemi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 81,
+    "file": "IMG-20261023-WA0034.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonu ve eğriye giriş; uzak/soluk tahta.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 82,
+    "file": "IMG-20261023-WA0035.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektörel işlemler, limit ve süreklilik; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 83,
+    "file": "IMG-20261023-WA0036.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektörel limit kuralları ve türev örnekleri; kısmi görünüm.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 84,
+    "file": "IMG-20261023-WA0037.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektörel türev kuralları ve teğet yönü; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 85,
+    "file": "IMG-20261023-WA0038.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Üstel hareketin hız/ivme büyüklükleri ve eğrilik.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 86,
+    "file": "IMG-20261023-WA0039.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "İvme, eğrilik ve integral konularının geniş görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 87,
+    "file": "IMG-20261023-WA0040.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Belirli integral ve 5cos t,5sin t,12t helisinin uzunluğu.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 88,
+    "file": "IMG-20261023-WA0041.jpg",
+    "topics": [
+      3,
+      4
+    ],
+    "summary": "Türev, eğri ve çok değişkenli fonksiyonlara geçiş; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 89,
+    "file": "IMG-20261023-WA0042.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Disk, arccos şeridi ve tanım kümesi çizimleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 90,
+    "file": "IMG-20261023-WA0043.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "İki/üç değişkenli fonksiyon tanımı; alan ve hacim örnekleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 91,
+    "file": "IMG-20261023-WA0044.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Kök/logaritma ortak bölgesi; seviye eğrileri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 92,
+    "file": "IMG-20261023-WA0045.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İki düzlemin paralelliği ve çakışıklığı; normal katsayıları.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 93,
+    "file": "IMG-20261023-WA0046.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Genel vektör fonksiyonu integrali ve başlangıç koşulu; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 94,
+    "file": "IMG-20261023-WA0047.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Çemberin normal/binormali; hız, ivme ve sürat.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 95,
+    "file": "IMG-20261023-WA0048.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "İlk tahta çalışma sorularının tekrar görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 96,
+    "file": "IMG-20261023-WA0049.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Dairesel harekette konuma dik hız; hareket türevleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 97,
+    "file": "IMG-20261023-WA0050.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Üç sayısal noktadan geçen düzlemin determinant hesabı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 98,
+    "file": "IMG-20261023-WA0051.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör integralinin ve başlangıç koşullarının uzak görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 99,
+    "file": "IMG-20261023-WA0052.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "İvmenin T,N bileşenleri; eğrilik formülü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 100,
+    "file": "IMG-20261023-WA0053.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Düzgün ve parçalı düzgün eğri; |sin t| ile yarım çember.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 101,
+    "file": "IMG-20261023-WA0054.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Yay uzunluğu ve integral başlıklarının geniş görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 102,
+    "file": "IMG-20261023-WA0055.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Belirsiz vektör integrali; 2t,e^(3t),4sin2t başlangıç koşulu.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 103,
+    "file": "IMG-20261023-WA0056.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Paralel düzlemler arasındaki uzaklığın formülü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 104,
+    "file": "IMG-20261023-WA0057.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "P=(2,3,-1) noktasının (1,2,13)+(1,1,4)t doğrusuna uzaklığı.",
+    "examples": [
+      "Tahtadaki nokta-doğru uzaklığı"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 105,
+    "file": "IMG-20261023-WA0058.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör türev alıştırmaları, çapraz çarpım özdeşliği, Frenet ve üç integral.",
+    "examples": [
+      "Dersteki temel türevler",
+      "Zincir kuralı içeren vektör türevi",
+      "Tahtadaki özdeşliğin kanıtı",
+      "Dersteki belirli integral üçlüsü"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 106,
+    "file": "IMG-20261023-WA0059.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Eğri tanımı, çember ve helis; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 107,
+    "file": "IMG-20261023-WA0060.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektörel fonksiyon ve işlemler; uzak/soluk tahta.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 108,
+    "file": "IMG-20261023-WA0061.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Doğru-düzlem kesişiminde parametrik yerine koyma.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 109,
+    "file": "IMG-20261023-WA0062.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonlarında limit ve süreklilik; uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 110,
+    "file": "IMG-20261023-WA0063.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Çember parametrizasyonu, yön ve teğet; kısmi görünüm.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 111,
+    "file": "IMG-20261023-WA0064.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör türevi ve çarpım kurallarının geniş görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 112,
+    "file": "IMG-20261023-WA0065.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonu ve ortak tanım kümesi; dikey uzak çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 113,
+    "file": "IMG-20261023-WA0067.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Aynı giriş tahtasının farklı açıdan çekimi; kısmen soluk.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 114,
+    "file": "IMG-20261023-WA0068.jpg",
+    "topics": [
+      3
+    ],
+    "summary": "Vektör fonksiyonu, işlemler ve türevlerin genel görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 115,
+    "file": "IMG-20261105-WA0034.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "İki/üç değişkenli polinomların birinci ve ikinci diferansiyelleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 116,
+    "file": "IMG-20261105-WA0035.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Üç değişkenli diferansiyelin devamı; silindir hacmi değişimi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 117,
+    "file": "IMG-20261105-WA0036.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Yarıçap ve yükseklik değişiminden hacim diferansiyeli.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 118,
+    "file": "IMG-20261105-WA0037.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Üstel lineerleştirme ve hata sınırı problemleri; genel tahta.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 119,
+    "file": "IMG-20261105-WA0038.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "e^(2y-x) için iki merkez; x²-3xy+y² için hata sınırı.",
+    "examples": [
+      "Dersteki üstel fonksiyonun iki lineerleştirmesi",
+      "İkinci hata sınırı sorusu"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 120,
+    "file": "IMG-20261105-WA0039.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Hata üst sınırında ikinci türevlerin bölgesel sınırlandırılması.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 121,
+    "file": "IMG-20261105-WA0040.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "1+x+cos y lineerleştirme ve hata; ikinci türevler.",
+    "examples": [
+      "Küçük bölgede kosinüs hatası"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 122,
+    "file": "IMG-20261105-WA0041.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Tek parametreli zincir kuralı; x²+y² ve xy örnekleri.",
+    "examples": [
+      "Tahtadaki trigonometrik zincir örneği",
+      "Çarpanlı fonksiyonda zincir kuralı"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 123,
+    "file": "IMG-20261105-WA0042.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "x=e^t değişken dönüşümü ve Cauchy-Euler denklemi türevleri.",
+    "examples": [
+      "Dersteki diferansiyel denklem dönüşümü"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 124,
+    "file": "IMG-20261108-WA0065.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Tam diferansiyel tanımı, gerçek artış ve silindir hacmi sorusu.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 125,
+    "file": "IMG-20261108-WA0066.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "r=3,h=10 için dr=0.01,dh=-0.1 hacim hesabı.",
+    "examples": [
+      "Tahtadaki silindir hacmi değişimi"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 126,
+    "file": "IMG-20261108-WA0067.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Silindir hacmi değişimi ve geometrik artışın tekrar görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 127,
+    "file": "IMG-20261108-WA0068.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "İkinci ve yüksek mertebeli diferansiyellerin tanımı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 128,
+    "file": "IMG-20261108-WA0069.jpg",
+    "topics": [
+      5,
+      6
+    ],
+    "summary": "z=xy ikinci diferansiyeli; tek/iki parametreli zincir ağacı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 129,
+    "file": "IMG-20261108-WA0070.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "İki bağımsız değişkenli zincir kuralı; geniş ve soluk çekim.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 130,
+    "file": "IMG-20261108-WA0071.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Aynı zincir ağacı ve kısmi türev formülleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 131,
+    "file": "IMG-20261108-WA0072.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Zincir kuralı ve logaritma örneğinin uzak görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 132,
+    "file": "IMG-20261108-WA0073.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "ln(x²+y²), üstel-trigonometrik değişken dönüşümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 133,
+    "file": "IMG-20261108-WA0074.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Logaritma zincir kuralının sadeleşmesi; z=2u kontrolü.",
+    "examples": [
+      "Tahtadaki logaritma örneği"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 134,
+    "file": "IMG-20261108-WA0075.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Tek parametreli z=xy örneği ve bağımlılık ağacı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 135,
+    "file": "IMG-20261108-WA0076.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Üç ara değişkenli w=f(x,y,z) zincir ağacı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 136,
+    "file": "IMG-20261108-WA0077.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "ln(x²+y²+z²), x=u+v,y=u-v,z=2sqrt(uv) örneği.",
+    "examples": [
+      "Üç ara değişkenli ders örneği"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 137,
+    "file": "IMG-20261108-WA0078.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Logaritma örneğinin S_u=S_v=2/(u+v) sadeleşmesi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 138,
+    "file": "IMG-20261108-WA0079.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "e^(x/y), x=sin u,y=u²v zincir kuralı.",
+    "examples": [
+      "İki bağımsız yeni değişkenle karmaşık örnek"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 139,
+    "file": "IMG-20261108-WA0080.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Kapalı türev: F(x,y)=0 ve F(x,y,z)=0 formülleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 140,
+    "file": "IMG-20261108-WA0081.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Kapalı polinomdan (1,2,0) noktasında z_x=-17/4,z_y=-15/4.",
+    "examples": [
+      "Tahtadaki kapalı türev sorusu"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 141,
+    "file": "IMG-20261108-WA0082.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Birinci ve ikinci diferansiyeller için iki/üç değişkenli polinomlar.",
+    "examples": [
+      "Tahtadaki polinom diferansiyeli",
+      "Üç değişkenli polinomun diferansiyelleri"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 142,
+    "file": "IMG-20261108-WA0083.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "İkinci diferansiyel karma terimleri; 10→9.9,30→30.3 silindir sorusu.",
+    "examples": [
+      "Silindir için ikinci ders sorusu"
+    ],
+    "kind": "Tahta",
+    "reading": "Örnek metni yakından okunup çözüldü."
+  },
+  {
+    "id": 143,
+    "file": "IMG-20261108-WA0084.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Silindir hacmi diferansiyeli; sonuç ve üstel lineerleştirme.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 144,
+    "file": "IMG-20261108-WA0085.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Lineerleştirme ve hata sorularının uzak genel görünümü.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 145,
+    "file": "IMG-20261108-WA0086.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Hata sınırı örneklerinin ikinci türev kontrolleri.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 146,
+    "file": "IMG-20261108-WA0087.jpg",
+    "topics": [
+      6
+    ],
+    "summary": "Zincir kuralı örnekleri ve doğrudan yerine koyarak kontrol.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 147,
+    "file": "IMG-20261108-WA0088.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Tanım bölgesi ve basit/cebirsel limitler; geniş tahta.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 148,
+    "file": "IMG-20261108-WA0089.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Standart limitler; doğru/parabol/kutupsal yoldan limitin yokluğu.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 149,
+    "file": "IMG-20261108-WA0090.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Kısmi türev ve ikinci türev; geniş tahta.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 150,
+    "file": "IMG-20261108-WA0091.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "xy/(x²+y²) ikinci ve karma türevlerinin ayrıntılı hesabı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 151,
+    "file": "IMG-20261108-WA0092.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Clairaut teoremi, türevlenebilirlik ve lineerleştirme tanımı.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 152,
+    "file": "IMG-20261108-WA0093.jpg",
+    "topics": [
+      5
+    ],
+    "summary": "Lineer yaklaşım hata sınırı ve (2,1) merkezli polinom.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 153,
+    "file": "IMG-20261108-WA0094.jpg",
+    "topics": [
+      4
+    ],
+    "summary": "Kutupsal limit/sıkıştırma ve çok değişkenli limit kuralları.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 154,
+    "file": "IMG-20261108-WA0095.jpg",
+    "topics": [
+      2,
+      4
+    ],
+    "summary": "Hiperbolik paraboloid; komşuluk, epsilon-delta ve yaklaşım yolları.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 155,
+    "file": "IMG-20261108-WA0096.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Paraboloid, koni ve silindir örneklerinin farklı açıdan çekimi.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  },
+  {
+    "id": 156,
+    "file": "IMG-20261108-WA0097.jpg",
+    "topics": [
+      2
+    ],
+    "summary": "Elipsoid ve hiperboloidler; silindir ve eksik değişken.",
+    "examples": [],
+    "kind": "Tahta",
+    "reading": "Konu tespiti yapıldı; tekrar veya genel anlatım görünümü. Soluk/engellenen sembollerden yeni soru türetilmedi."
+  }
+]
