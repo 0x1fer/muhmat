@@ -111,7 +111,6 @@ button { font: inherit; color: inherit; }
 .tb-btn:hover { border-color: var(--border-2); color: var(--text); background: var(--surface-2); }
 .tb-btn kbd { font: 500 11px/1 var(--f-mono); padding: 4px 6px; border-radius: 6px; background: var(--surface-3); color: var(--text-3); }
 .tb-btn[aria-pressed="true"] { background: color-mix(in srgb, var(--amber) var(--tint), var(--surface)); border-color: color-mix(in srgb, var(--amber) 55%, transparent); color: var(--text); }
-.tb-btn.menu { display: none; }
 .ic { width: 18px; height: 18px; display: inline-block; background: currentColor; -webkit-mask: var(--m) center/contain no-repeat; mask: var(--m) center/contain no-repeat; flex: none; }
 .ic-search { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E"); }
 .ic-theme { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z'/%3E%3C/svg%3E"); }
@@ -145,6 +144,11 @@ button { font: inherit; color: inherit; }
 .toc a.done::after { content: "✓"; margin-left: auto; flex: none; font-size: 12px; font-weight: 700; color: var(--green); }
 
 .content { padding: 0 clamp(18px, 4vw, 60px) 90px; min-width: 0; overflow-x: clip; }
+/* geniş ekranda içindekiler menü düğmesiyle gizlenebilir; tercih tarayıcıda saklanır */
+@media (min-width: 981px) {
+  html.toc-hidden .layout { grid-template-columns: minmax(0, 1fr); max-width: 62rem; }
+  html.toc-hidden .toc { display: none; }
+}
 .doc-hero { max-width: 52rem; padding: 64px 0 34px; margin-bottom: 10px; position: relative; isolation: isolate; }
 .doc-hero::before {
   content: ""; position: absolute; z-index: -1; inset: -40px -40% 0 -30%; pointer-events: none;
@@ -389,7 +393,6 @@ details[open] > .box-b { animation: reveal .28s ease-out; }
 /* ------------------------------------------------ dar ekran */
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; }
-  .tb-btn.menu { display: inline-flex; }
   .toc {
     position: fixed; z-index: 70; top: var(--topbar); left: 0; width: min(330px, 88vw); height: calc(100vh - var(--topbar));
     background: var(--bg-2); border-right: 1px solid var(--border); box-shadow: var(--shadow); transform: translateX(-104%); transition: transform .25s ease;

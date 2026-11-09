@@ -97,7 +97,7 @@
   document.addEventListener('keydown', function (e) {
     var typing = /INPUT|TEXTAREA/.test((document.activeElement || {}).tagName || '');
     if ((e.key === 'k' && (e.ctrlKey || e.metaKey)) || (e.key === '/' && !typing)) { e.preventDefault(); openSearch(); }
-    else if (e.key === 'Escape') { closeSearch(); closeLB(); body.classList.remove('toc-open'); }
+    else if (e.key === 'Escape') { closeSearch(); closeLB(); body.classList.remove('toc-open'); if (menuBtn && isDoc) syncMenu(); }
   });
   window.BZOpenSearch = openSearch;
 
@@ -137,10 +137,29 @@
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ---------- içindekiler (dar ekranda çekmece) */
+  /* ---------- içindekiler (geniş ekranda gizle / göster, dar ekranda çekmece) */
   var menuBtn = document.getElementById('menuBtn');
-  if (menuBtn) menuBtn.addEventListener('click', function () { body.classList.toggle('toc-open'); });
-  document.getElementById('toc').addEventListener('click', function (e) { if (e.target.closest('a')) body.classList.remove('toc-open'); });
+  var narrow = matchMedia('(max-width: 980px)');
+  var root = document.documentElement;
+  function syncMenu() {
+    var shown = narrow.matches ? body.classList.contains('toc-open') : !root.classList.contains('toc-hidden');
+    menuBtn.setAttribute('aria-expanded', shown);
+    menuBtn.title = shown ? 'İçindekileri gizle' : 'İçindekileri göster';
+  }
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      if (narrow.matches) body.classList.toggle('toc-open');
+      else {
+        var hidden = root.classList.toggle('toc-hidden');
+        if (hidden) store.set('tocHidden', true); else store.del('tocHidden');
+        if (!hidden) onScroll();
+      }
+      syncMenu();
+    });
+    if (narrow.addEventListener) narrow.addEventListener('change', syncMenu);
+    syncMenu();
+  }
+  document.getElementById('toc').addEventListener('click', function (e) { if (e.target.closest('a')) { body.classList.remove('toc-open'); if (menuBtn) syncMenu(); } });
 
   /* ---------- "çalıştım" işaretleri */
   var unitTag = body.dataset.unit || 'h2';

@@ -1120,8 +1120,9 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400'
          '&family=Plus+Jakarta+Sans:wght@600;700;800'
          '&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">')
-THEME_JS = ("<script>var t='dark';try{t=localStorage.getItem('muhmat:theme')||'dark';}catch(e){}"
-            "document.documentElement.dataset.theme=t;</script>")
+THEME_JS = ("<script>var t='dark',h=false;try{t=localStorage.getItem('muhmat:theme')||'dark';"
+            "h=localStorage.getItem('muhmat:tocHidden')==='true';}catch(e){}"
+            "document.documentElement.dataset.theme=t;if(h)document.documentElement.classList.add('toc-hidden');</script>")
 
 
 def plain(h, maths):
@@ -1201,7 +1202,7 @@ def page_html(doc, meta, body, toc, prev, nxt, stats):
 <body class="doc g-{doc["group"]}" data-page="{doc["out"]}" data-group="{doc["group"]}" data-unit="h{stats["unit"]}" data-title="{H.escape(doc["label"])}" style="--accent:{doc["hue"]}">
 <div class="readbar"><span></span></div>
 <header class="topbar">
-  <button class="tb-btn menu" id="menuBtn" type="button" aria-label="İçindekiler"><span class="ic ic-menu"></span></button>
+  <button class="tb-btn menu" id="menuBtn" type="button" aria-label="İçindekileri gizle veya göster" aria-controls="toc" title="İçindekileri gizle / göster"><span class="ic ic-menu"></span></button>
   <a class="brand" href="../index.html"><span class="brand-dot"></span>Müh. Matematiği</a>
   <span class="crumb">{H.escape(doc["label"])}</span>
   <div class="tb-actions">
