@@ -84,6 +84,38 @@ button { font: inherit; color: inherit; }
 * { scrollbar-width: thin; scrollbar-color: var(--surface-3) transparent; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 
+/* ------------------------------------------------ giriş duası */
+html.welcome-open { overflow: hidden; }
+.welcome-dialog {
+  width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px);
+  margin: auto; padding: 36px 28px 28px; overflow: auto;
+  border: 1px solid var(--border-2); border-radius: 24px;
+  background: var(--surface); color: var(--text); text-align: center;
+  box-shadow: 0 28px 90px rgba(0,0,0,.35);
+}
+.welcome-dialog::backdrop {
+  background: rgba(5,7,14,.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.welcome-icon {
+  display: grid; place-items: center; width: 72px; height: 72px; margin: 0 auto 24px;
+  border-radius: 22px; background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  font-size: 36px; line-height: 1;
+}
+.welcome-dialog h2 { margin: 0; font: 800 clamp(1.35rem, 5vw, 1.7rem)/1.4 var(--f-head); letter-spacing: -.025em; }
+.welcome-dialog p {
+  margin: 24px 0 28px; padding: 20px 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border)); border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--text);
+  font: 700 clamp(1.2rem, 5vw, 1.5rem)/1.55 var(--f-head); letter-spacing: -.015em;
+}
+.welcome-dialog button {
+  display: block; width: 100%; min-height: 50px; padding: 12px 24px;
+  border: 0; border-radius: 13px; background: #818CF8; color: #0D0F14;
+  font-weight: 700; cursor: pointer; transition: background .15s;
+}
+.welcome-dialog button:hover { background: #A5B4FC; }
+@media print { .welcome-dialog { display: none !important; } }
+
 /* ------------------------------------------------ üst çubuk */
 .readbar { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 60; pointer-events: none; }
 .readbar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, var(--pink))); box-shadow: 0 0 12px var(--accent); }

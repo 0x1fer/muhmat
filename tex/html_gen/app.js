@@ -13,6 +13,30 @@
   };
   window.BZStore = store;
 
+  /* ---------- giriş duası (bu tarayıcıda yalnızca bir kez) */
+  var welcomeSeen = store.get('welcomeSeen', false);
+  var welcomeDialog;
+  if (!welcomeSeen) {
+    welcomeDialog = document.createElement('dialog');
+    welcomeDialog.className = 'welcome-dialog';
+    welcomeDialog.setAttribute('aria-labelledby', 'welcomeTitle');
+    welcomeDialog.setAttribute('aria-describedby', 'welcomePrayer');
+    welcomeDialog.innerHTML = '<form method="dialog">' +
+      '<span class="welcome-icon" aria-hidden="true">🤲</span>' +
+      '<h2 id="welcomeTitle">O kadar giriyorsunuz bi dua edin bari :D</h2>' +
+      '<p id="welcomePrayer">İnşallah bu siteye katkısı olan herkes sınavı geçer.</p>' +
+      '<button type="submit" autofocus>Amin</button>' +
+      '</form>';
+    body.appendChild(welcomeDialog);
+    welcomeDialog.addEventListener('close', function () {
+      document.documentElement.classList.remove('welcome-open');
+      welcomeDialog.remove();
+    });
+    welcomeDialog.showModal();
+    document.documentElement.classList.add('welcome-open');
+    store.set('welcomeSeen', true);
+  }
+
   /* ---------- tema */
   var themeBtn = document.getElementById('themeBtn');
   function currentTheme() {
@@ -76,7 +100,7 @@
       return '<li' + (i === 0 ? ' class="sel"' : '') + '><a href="' + BASE + e.p + '.html#' + e.id + '"><small>' + esc(e.d) + '</small><span>' + esc(e.t) + '</span><em>' + snippet(e, terms) + '</em></a></li>';
     }).join('');
   }
-  function openSearch() { if (!sBox) return; sBox.hidden = false; sIn.focus(); sIn.select(); doSearch(); }
+  function openSearch() { if (!sBox || (welcomeDialog && welcomeDialog.open)) return; sBox.hidden = false; sIn.focus(); sIn.select(); doSearch(); }
   function closeSearch() { if (sBox) sBox.hidden = true; }
   if (sBox) {
     sIn.addEventListener('input', doSearch);
