@@ -1,0 +1,524 @@
+\section{Konu 3: Vektör Fonksiyonları ve Uzay Eğrileri}
+
+Bu bölümde 09.10 ve 15.10 tarihli defter sayfalarında ve 23.10 tarihli tahta fotoğraflarında çözülen bütün sorular, derste
+işlenme sırasıyla verilmiştir. Aynı soru birden fazla fotoğrafta geçiyorsa bütün kaynaklar başlıkta yazılıdır. Sonda, derste
+çalışma sorusu olarak verilen problemlerin ve kaynak kitaplardaki tipik alıştırmalara benzeyen ek alıştırmaların tam çözümleri vardır.
+
+\begin{bilgi}[Hatırlatma]
+Vektör fonksiyonlarda limit, süreklilik, türev ve integral \emph{bileşen bileşen} yapılır:
+$\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j+z(t)\mathbf k$ ise $\mathbf r'(t)=x'(t)\mathbf i+y'(t)\mathbf j+z'(t)\mathbf k$,
+$\int\mathbf r\,dt=\big(\int x\,dt\big)\mathbf i+\big(\int y\,dt\big)\mathbf j+\big(\int z\,dt\big)\mathbf k+\mathbf C$.
+\end{bilgi}
+
+%======================================================================
+\subsection{Vektör fonksiyonları: tanım kümesi, işlemler, limit, süreklilik}
+
+\begin{soru}[Soru 1 \foto{IMG-20261009-WA0016}, \foto{IMG-20261023-WA0060}]
+$\mathbf F(t)=(t+1)\,\mathbf i+\ln(1-t)\,\mathbf j+\sqrt{4-t^2}\,\mathbf k$ fonksiyonunun tanım kümesini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Fikir:} $\mathbf F(t)$'nin tanımlı olması için üç bileşenin de tanımlı olması gerekir: $T_{\mathbf F}=T_f\cap T_g\cap T_h$.
+
+\textbf{Adım 1.} $f(t)=t+1$ polinomdur, her reel sayıda tanımlı: $T_f=(-\infty,+\infty)$.
+
+\textbf{Adım 2.} $g(t)=\ln(1-t)$: logaritmanın argümanı pozitif olmalı. $1-t>0\iff t<1$, \ $T_g=(-\infty,1)$.
+
+\textbf{Adım 3.} $h(t)=\sqrt{4-t^2}$: kök içi negatif olamaz. $4-t^2\ge0\iff t^2\le4\iff-2\le t\le2$, \ $T_h=[-2,2]$.
+
+\textbf{Adım 4.} Kesişim (sayı doğrusunda üçünün ortak kısmı):
+\[ T_{\mathbf F}=(-\infty,+\infty)\cap(-\infty,1)\cap[-2,2]=\boxed{[-2,1)} . \]
+$-2$ dahildir ($\sqrt0=0$), $1$ dahil değildir ($\ln0$ tanımsız).
+\end{cevap}
+
+\begin{soru}[Soru 2 \foto{IMG-20261009-WA0017}, \foto{IMG-20261023-WA0060}, \foto{IMG-20261023-WA0035}]
+$\mathbf F(t)=t\,\mathbf i+t^2\mathbf j+t^3\mathbf k$, $\mathbf G(t)=(1-t)\,\mathbf i+(1+t^2)\,\mathbf j+t\,\mathbf k$, $f(t)=t+1$, $g(t)=t-2$ için
+$(\mathbf F+\mathbf G)(t)$, $(\mathbf F\cdot\mathbf G)(t)$, $(\mathbf F\times\mathbf G)(t)$, $(f\mathbf G)(t)$ ve $(\mathbf F\circ g)(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Toplam:} karşılıklı bileşenler toplanır.
+\[ (\mathbf F+\mathbf G)(t)=(t+1-t)\,\mathbf i+(t^2+1+t^2)\,\mathbf j+(t^3+t)\,\mathbf k=\mathbf i+(2t^2+1)\,\mathbf j+(t^3+t)\,\mathbf k . \]
+\textbf{Skaler çarpım:} $x$'ler, $y$'ler, $z$'ler çarpılıp toplanır; sonuç reel fonksiyondur.
+\[ (\mathbf F\cdot\mathbf G)(t)=t(1-t)+t^2(1+t^2)+t^3\cdot t=t-t^2+t^2+t^4+t^4=2t^4+t . \]
+\textbf{Vektörel çarpım:} determinant birinci satıra göre açılır.
+\begin{align*}
+(\mathbf F\times\mathbf G)(t)&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\t&t^2&t^3\\1-t&1+t^2&t\end{vmatrix}\\
+&=\mathbf i\big(t^3-t^3(1+t^2)\big)-\mathbf j\big(t^2-t^3(1-t)\big)+\mathbf k\big(t(1+t^2)-t^2(1-t)\big)\\
+&=-t^5\,\mathbf i-(t^4-t^3+t^2)\,\mathbf j+(2t^3-t^2+t)\,\mathbf k .
+\end{align*}
+\textbf{Skalerle çarpım:}
+\[ (f\mathbf G)(t)=(t+1)\big[(1-t)\mathbf i+(1+t^2)\mathbf j+t\,\mathbf k\big]=(1-t^2)\,\mathbf i+(t^3+t^2+t+1)\,\mathbf j+(t^2+t)\,\mathbf k . \]
+\textbf{Bileşke:} $\mathbf F$'de $t$ yerine $g(t)=t-2$ yazılır.
+\[ (\mathbf F\circ g)(t)=\mathbf F(t-2)=(t-2)\,\mathbf i+(t-2)^2\,\mathbf j+(t-2)^3\,\mathbf k . \]
+\textbf{Kontrol:} $t=1$'de $\mathbf F=(1,1,1)$, $\mathbf G=(0,2,1)$, $\mathbf F\times\mathbf G=(1\cdot1-1\cdot2,\ 1\cdot0-1\cdot1,\ 1\cdot2-1\cdot0)=(-1,-1,2)$;
+formülümüz de $(-1,-(1-1+1),2-1+1)=(-1,-1,2)$ verir. \checkmark
+\end{cevap}
+
+\begin{soru}[Soru 3 \foto{IMG-20261009-WA0017}, \foto{IMG-20261023-WA0035}]
+$\mathbf F(t)=(t+t^2)\,\mathbf i+2t\,\mathbf j-4t\,\mathbf k$ ve $\mathbf G(t)=(2+4t)\,\mathbf i+(1-3t)\,\mathbf j+(1+t^2)\,\mathbf k$ ortogonal midir?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+Ortogonallik için \emph{her} $t$'de $\mathbf F(t)\cdot\mathbf G(t)=0$ olmalıdır.
+\begin{align*}
+\mathbf F\cdot\mathbf G&=(t+t^2)(2+4t)+2t(1-3t)+(-4t)(1+t^2)\\
+&=(2t+4t^2+2t^2+4t^3)+(2t-6t^2)+(-4t-4t^3)\\
+&=(2t+2t-4t)+(6t^2-6t^2)+(4t^3-4t^3)=0 .
+\end{align*}
+Özdeş olarak sıfırdır: fonksiyonlar \textbf{ortogonaldir}.
+\end{cevap}
+
+\begin{soru}[Soru 4 \foto{IMG-20261009-WA0018}, \foto{IMG-20261023-WA0035}, \foto{IMG-20261023-WA0046}]
+$\mathbf F(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+3t\,\mathbf k$ fonksiyonunun normunu bulunuz.
+\end{soru}
+\begin{cevap}
+\[ \|\mathbf F(t)\|=\sqrt{(2\cos t)^2+(2\sin t)^2+(3t)^2}=\sqrt{4(\cos^2t+\sin^2t)+9t^2}=\sqrt{4+9t^2} . \]
+\end{cevap}
+
+\begin{soru}[Soru 5 \foto{IMG-20261009-WA0018}, \foto{IMG-20261023-WA0036}]
+$\mathbf F(t)=(1-t^2)\,\mathbf i+\dfrac{\sin8t}{t}\,\mathbf j+(e^t+1)\,\mathbf k$ için $\displaystyle\lim_{t\to0}\mathbf F(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+Limit bileşen bileşen alınır.
+\begin{itemize}
+\item $\mathbf i$: $\lim_{t\to0}(1-t^2)=1$.
+\item $\mathbf j$: $\dfrac{\sin8t}{t}=8\cdot\dfrac{\sin8t}{8t}$ ve $u=8t\to0$ iken $\dfrac{\sin u}{u}\to1$; limit $8$.
+\item $\mathbf k$: $\lim_{t\to0}(e^t+1)=2$.
+\end{itemize}
+\[ \lim_{t\to0}\mathbf F(t)=\mathbf i+8\,\mathbf j+2\,\mathbf k . \]
+\textit{Not:} Tahtada limit ``$t\to t_0$'' diye yazılmıştır; sonuç yalnızca $t\to0$ için geçerlidir.
+\end{cevap}
+
+\begin{soru}[Soru 6 \foto{IMG-20261009-WA0019}, \foto{IMG-20261023-WA0046}, \foto{IMG-20261023-WA0037}]
+$\mathbf F(t)=\sin t\,\mathbf i+\cos t\,\mathbf j+(1+t)\,\mathbf k$, $\mathbf G(t)=\cos2t\,\mathbf i+\sin3t\,\mathbf j+(e^t+1)\,\mathbf k$ için
+$\displaystyle\lim_{t\to0}\mathbf F(t)\cdot\mathbf G(t)$ ve $\displaystyle\lim_{t\to0}\mathbf F(t)\times\mathbf G(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $\lim_{t\to0}\mathbf F(t)=(\sin0,\cos0,1+0)=(0,1,1)$; \ $\lim_{t\to0}\mathbf G(t)=(\cos0,\sin0,e^0+1)=(1,0,2)$.
+
+\textbf{Adım 2.} Limit kuralları: çarpımın limiti, limitlerin çarpımıdır.
+\[ \lim_{t\to0}\mathbf F\cdot\mathbf G=(0,1,1)\cdot(1,0,2)=0+0+2=2 . \]
+\[ \lim_{t\to0}\mathbf F\times\mathbf G=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\0&1&1\\1&0&2\end{vmatrix}=\mathbf i(2-0)-\mathbf j(0-1)+\mathbf k(0-1)=2\,\mathbf i+\mathbf j-\mathbf k . \]
+\end{cevap}
+
+\begin{soru}[Soru 7 \foto{IMG-20261009-WA0019}, \foto{IMG-20261009-WA0021}, \foto{IMG-20261023-WA0037}]
+$\mathbf F(t)=(|t|+1)\,\mathbf i+t\,[\![t]\!]\,\mathbf j+(2+t^2)\,\mathbf k$ fonksiyonu $t=0$ ve $t=1$ noktalarında sürekli midir?
+($[\![t]\!]$: tam değer fonksiyonu.)
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+$\mathbf F$'nin sürekliliği bileşenlerin sürekliliğine denktir. $|t|+1$ ve $2+t^2$ her yerde süreklidir; yalnızca
+$g(t)=t\,[\![t]\!]$ incelenir.
+
+\textbf{$t=0$:} $g(0)=0$. Soldan ($-1<t<0$): $[\![t]\!]=-1$, $g(t)=-t\to0$. Sağdan ($0<t<1$): $[\![t]\!]=0$, $g(t)=0$.
+Sağ limit $=$ sol limit $=g(0)=0$ $\Rightarrow$ $\mathbf F$, $t=0$'da \textbf{süreklidir}.
+
+\textbf{$t=1$:} Soldan ($0<t<1$): $g(t)=t\cdot0\to0$. Sağdan ($1<t<2$): $g(t)=t\cdot1\to1$. Sol ve sağ limitler farklı, limit yok
+$\Rightarrow$ $\mathbf F$, $t=1$'de \textbf{sürekli değildir}.
+\end{cevap}
+
+%======================================================================
+\subsection{Uzay eğrileri}
+
+\begin{soru}[Soru 8 \foto{IMG-20261009-WA0021}, \foto{IMG-20261023-WA0051}, \foto{IMG-20261023-WA0054}]
+$\mathbf r(t)=(2+3t)\,\mathbf i+(4+5t)\,\mathbf j+(6+4t)\,\mathbf k$ eğrisinin cinsi nedir?
+\end{soru}
+\begin{cevap}
+$x=2+3t$, $y=4+5t$, $z=6+4t$; her birinden $t$ çekilip eşitlenirse
+\[ \frac{x-2}{3}=\frac{y-4}{5}=\frac{z-6}{4}\ (=t) . \]
+Bu, $(2,4,6)$ noktasından geçen ve $\mathbf v=(3,5,4)$ vektörüne paralel \textbf{doğrunun} denklemidir.
+\end{cevap}
+
+\begin{soru}[Soru 9 \foto{IMG-20261009-WA0022}, \foto{IMG-20261023-WA0051}, \foto{IMG-20261023-WA0054}]
+$\mathbf r(t)=4\cos t\,\mathbf i+4\sin t\,\mathbf j$, $0\le t\le2\pi$ eğrisini tanıyınız.
+\end{soru}
+\begin{cevap}
+$x=4\cos t$, $y=4\sin t$ $\Rightarrow$ $x^2+y^2=16(\cos^2t+\sin^2t)=16$. $xy$ düzleminde, merkezi orijin, yarıçapı $4$ olan \textbf{çember}.
+\end{cevap}
+
+\begin{soru}[Soru 10 \foto{IMG-20261009-WA0022}, \foto{IMG-20261023-WA0054}, \foto{IMG-20261023-WA0059}]
+$\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+3\,\mathbf k$, $0\le t\le2\pi$ eğrisini tanıyınız.
+\end{soru}
+\begin{cevap}
+$x=\cos t$, $y=\sin t$, $z=3$. $z$ sabit: eğri $z=3$ düzleminde. $x^2+y^2=\cos^2t+\sin^2t=1$ (tahtada ``$y^2+y^2$'' yazılmış,
+doğrusu $x^2+y^2$). Sonuç: $z=3$ düzleminde, merkezi $(0,0,3)$, yarıçapı $1$ olan \textbf{çember}.
+\end{cevap}
+
+\begin{soru}[Soru 11 \foto{IMG-20261009-WA0025}, \foto{IMG-20261023-WA0054}]
+$\mathbf r(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+4t\,\mathbf k$ eğrisini inceleyiniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $x=2\cos t$, $y=2\sin t$, $z=4t$.
+
+\textbf{Adım 2.} $x^2+y^2=4(\cos^2t+\sin^2t)=4$: noktalar $x^2+y^2=4$ silindiri üzerindedir. (Defter ve tahtada
+``$4(\cos t+\sin t)$'' yazılmış; kareler unutulmuştur.)
+
+\textbf{Adım 3.} $z=4t$ düzgün artar: $t=1\Rightarrow z=4$, $t=2\Rightarrow z=8$. Bir turda ($t:0\to2\pi$) yükselme $4\cdot2\pi=8\pi$.
+
+\textbf{Sonuç:} Silindire sarılan, adımı $8\pi$ olan \textbf{dairesel helis}.
+\end{cevap}
+
+\begin{soru}[Soru 12 \foto{IMG-20261009-WA0025}, \foto{IMG-20261009-WA0020}, \foto{IMG-20261023-WA0039}, \foto{IMG-20261023-WA0059}]
+$\mathbf r(t)=(t^2-4)\,\mathbf i+(t^3-4t)\,\mathbf j$, $-2\le t\le2$ eğrisi kapalı mıdır? Basit midir? Orijinde köşe var mıdır?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1 (kapalılık).} $\mathbf r(-2)=(0,0)$ ve $\mathbf r(2)=(0,0)$; uçlar çakışır, eğri \textbf{kapalıdır}.
+
+\textbf{Adım 2 (katlı nokta araması).} $\mathbf r(t_1)=\mathbf r(t_2)$ olsun. $x$'lerden $t_1^2=t_2^2$, yani $t_1=t_2$ (aynı nokta) ya da
+$t_2=-t_1$. İkinci durumda $y$'ler:
+\[ t_1^3-4t_1=-t_1^3+4t_1\ \Rightarrow\ 2t_1^3-8t_1=0\ \Rightarrow\ t_1(t_1^2-4)=0\ \Rightarrow\ t_1\in\{0,\,2,\,-2\}. \]
+$t_1=0$ ise $t_2=0$ (aynı parametre); $t_1=\pm2$ ise $t_2=\mp2$ (uç noktalar). Uçlar dışında kesişme yok:
+eğri \textbf{basit kapalı eğridir}.
+
+\textbf{Adım 3 (köşe).} $\mathbf r'(t)=2t\,\mathbf i+(3t^2-4)\,\mathbf j$; $\mathbf r'(2)=4\mathbf i+8\mathbf j$, $\mathbf r'(-2)=-4\mathbf i+8\mathbf j$.
+Bu vektörler paralel değil (biri diğerinin skaler katı değil): eğri orijinde \textbf{köşe yapar}, düzgün kapanmaz.
+\end{cevap}
+
+\begin{soru}[Soru 13 \foto{IMG-20261009-WA0020}, \foto{IMG-20261023-WA0041}, \foto{IMG-20261023-WA0059}]
+$\mathbf r(t)=3\cos t\,\mathbf i+3\sin t\,\mathbf j$, $0\le t\le2\pi$ eğrisinin grafiği ve yönü nedir?
+\end{soru}
+\begin{cevap}
+$x^2+y^2=9$: yarıçapı $3$, merkezi orijin olan çember. $t=0:(3,0)$, $t=\pi/2:(0,3)$, $t=\pi:(-3,0)$, $t=3\pi/2:(0,-3)$,
+$t=2\pi:(3,0)$. Nokta çemberi \textbf{saat yönünün tersine} dolaşır; bu, pozitif yön kabul edilir.
+\end{cevap}
+
+%======================================================================
+\subsection{Türev ve türev kuralları}
+
+\begin{soru}[Soru 14 \foto{IMG-20261009-WA0023}, \foto{IMG-20261023-WA0062}]
+$\mathbf F(t)=t^2\,\mathbf i+e^{-t}\,\mathbf j+\sin t\,\mathbf k$ için birinci, ikinci ve üçüncü türevleri bulunuz.
+\end{soru}
+\begin{cevap}
+\begin{align*}
+\frac{d\mathbf F}{dt}&=2t\,\mathbf i-e^{-t}\,\mathbf j+\cos t\,\mathbf k, &
+\frac{d^2\mathbf F}{dt^2}&=2\,\mathbf i+e^{-t}\,\mathbf j-\sin t\,\mathbf k, &
+\frac{d^3\mathbf F}{dt^3}&=-e^{-t}\,\mathbf j-\cos t\,\mathbf k .
+\end{align*}
+(Paydalar $dt^2$, $dt^3$ olmalıdır; tahtada ``$dt$'' yazılmıştır.)
+\end{cevap}
+
+\begin{soru}[Soru 15 \foto{IMG-20261009-WA0024}, \foto{IMG-20261023-WA0062}, \foto{IMG-20261023-WA0064}, \foto{IMG-20261023-WA0068}]
+$\mathbf r(t)=(1-\cos t)\,\mathbf i+\sin t\,\mathbf j+t\,\mathbf k$ için $\mathbf r'$, $\mathbf r''$ ve $t=\pi/2$'deki değerlerini bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf r'(t)=\sin t\,\mathbf i+\cos t\,\mathbf j+\mathbf k$, \ $\mathbf r'(\pi/2)=\mathbf i+0\,\mathbf j+\mathbf k=\mathbf i+\mathbf k$.
+
+$\mathbf r''(t)=\cos t\,\mathbf i-\sin t\,\mathbf j$, \ $\mathbf r''(\pi/2)=-\mathbf j$.
+
+(Tahtada $\mathbf r'(\pi/2)$'de $\mathbf k$ katsayısı ``$0$'' gibi okunuyor; $\mathbf k$ bileşeni sabit $1$'dir.)
+\end{cevap}
+
+\begin{soru}[Soru 16 \foto{IMG-20261009-WA0024}, \foto{IMG-20261023-WA0064}, \foto{IMG-20261023-WA0068}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j+bt\,\mathbf k$ için $\mathbf r'$, $\mathbf r''$ ve $\mathbf r'\times\mathbf r''$'yü bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+$\mathbf r'(t)=-a\sin t\,\mathbf i+a\cos t\,\mathbf j+b\,\mathbf k$, \quad $\mathbf r''(t)=-a\cos t\,\mathbf i-a\sin t\,\mathbf j$.
+\begin{align*}
+\mathbf r'\times\mathbf r''&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-a\sin t&a\cos t&b\\-a\cos t&-a\sin t&0\end{vmatrix}\\
+&=\mathbf i\big(a\cos t\cdot0-b(-a\sin t)\big)-\mathbf j\big(-a\sin t\cdot0-b(-a\cos t)\big)+\mathbf k\big(a^2\sin^2t+a^2\cos^2t\big)\\
+&=ab\sin t\,\mathbf i-ab\cos t\,\mathbf j+a^2\,\mathbf k .
+\end{align*}
+\end{cevap}
+
+\begin{soru}[Soru 17 \foto{IMG-20261009-WA0024}, \foto{IMG-20261023-WA0064}, \foto{IMG-20261023-WA0068}]
+$\mathbf u(t)=t\,\mathbf i-t\,\mathbf j+\frac{t^2}{2}\,\mathbf k$, $\mathbf v(t)=\frac{t^4}{4}\,\mathbf i+\frac{t^3}{3}\,\mathbf j+\frac{t^2}{2}\,\mathbf k$ için
+$\dfrac{d}{dt}(\mathbf u\times\mathbf v)$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (iki yol)]
+\textbf{1. yol.}
+\[ \mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\t&-t&\frac{t^2}{2}\\\frac{t^4}{4}&\frac{t^3}{3}&\frac{t^2}{2}\end{vmatrix}
+=\Big(-\frac{t^3}{2}-\frac{t^5}{6}\Big)\mathbf i+\Big(\frac{t^6}{8}-\frac{t^3}{2}\Big)\mathbf j+\Big(\frac{t^4}{3}+\frac{t^5}{4}\Big)\mathbf k . \]
+\[ \frac{d}{dt}(\mathbf u\times\mathbf v)=\Big(-\frac{3t^2}{2}-\frac{5t^4}{6}\Big)\mathbf i+\Big(\frac{3t^5}{4}-\frac{3t^2}{2}\Big)\mathbf j+\Big(\frac{4t^3}{3}+\frac{5t^4}{4}\Big)\mathbf k . \]
+\textbf{2. yol.} $(\mathbf u\times\mathbf v)'=\mathbf u'\times\mathbf v+\mathbf u\times\mathbf v'$, \ $\mathbf u'=(1,-1,t)$, $\mathbf v'=(t^3,t^2,t)$:
+\begin{align*}
+\mathbf u'\times\mathbf v&=\Big(-\frac{t^2}{2}-\frac{t^4}{3},\ \frac{t^5}{4}-\frac{t^2}{2},\ \frac{t^3}{3}+\frac{t^4}{4}\Big),\\
+\mathbf u\times\mathbf v'&=\Big(-t^2-\frac{t^4}{2},\ \frac{t^5}{2}-t^2,\ t^3+t^4\Big).
+\end{align*}
+Toplam 1. yoldaki sonucun aynısıdır. \checkmark
+\end{cevap}
+
+\begin{dikkat}[Defterdeki hata]
+09.10 defterinde (\foto{IMG-20261009-WA0024}) $\mathbf j$ bileşeninin türevi $\frac{3t^5}{2}$ ile yazılmıştır;
+$\frac{d}{dt}\frac{t^6}{8}=\frac{3t^5}{4}$'tür. 23.10 tahtasında doğru ($\frac68t^5$) yazılmıştır.
+\end{dikkat}
+
+%======================================================================
+\subsection{Frenet üçlüsü, hız--ivme ve eğrilik}
+
+\begin{soru}[Soru 18 \foto{IMG-20261015-WA0034}, \foto{IMG-20261023-WA0047}, \foto{IMG-20261023-WA0067}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ ($a>0$) çemberinin $\mathbf T$, $\mathbf N$, $\mathbf B$ vektörlerini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $\mathbf r'(t)=-a\sin t\,\mathbf i+a\cos t\,\mathbf j$, \ $\|\mathbf r'(t)\|=\sqrt{a^2(\sin^2t+\cos^2t)}=a$.
+
+\textbf{Adım 2.} $\mathbf T=\dfrac{\mathbf r'}{\|\mathbf r'\|}=-\sin t\,\mathbf i+\cos t\,\mathbf j$ (defterde işaret unutulmuş: ``$\sin t\,\mathbf i+\cos t\,\mathbf j$'').
+
+\textbf{Adım 3.} $\mathbf T'(t)=-\cos t\,\mathbf i-\sin t\,\mathbf j$, \ $\|\mathbf T'\|=1$ $\Rightarrow$ $\mathbf N=-\cos t\,\mathbf i-\sin t\,\mathbf j=-\frac1a\mathbf r(t)$ (merkeze doğru).
+
+\textbf{Adım 4.}
+\[ \mathbf B=\mathbf T\times\mathbf N=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-\sin t&\cos t&0\\-\cos t&-\sin t&0\end{vmatrix}=(\sin^2t+\cos^2t)\,\mathbf k=\mathbf k . \]
+\end{cevap}
+
+\begin{soru}[Soru 19 \foto{IMG-20261015-WA0036}, \foto{IMG-20261023-WA0049}, \foto{IMG-20261023-WA0067}]
+$a>0$, $\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ olan hareketlinin hız vektörü konum vektörüne dik midir?
+\end{soru}
+\begin{cevap}
+$\mathbf v=\mathbf r'=-a\sin t\,\mathbf i+a\cos t\,\mathbf j$; \ $\mathbf v\cdot\mathbf r=-a^2\sin t\cos t+a^2\sin t\cos t=0$.
+Her $t$ için $\mathbf v\perp\mathbf r$ (çemberde hız yarıçapa diktir).
+\end{cevap}
+
+\begin{soru}[Soru 20 \foto{IMG-20261015-WA0036}, \foto{IMG-20261023-WA0049}, \foto{IMG-20261023-WA0067}]
+$\mathbf r(t)=5\cos t\,\mathbf i+5\sin t\,\mathbf j+6t^2\,\mathbf k$ olan hareketlinin hızı ve ivmesi nedir? Hız ve ivme ne zaman diktir?
+\end{soru}
+\begin{cevap}
+$\mathbf v(t)=-5\sin t\,\mathbf i+5\cos t\,\mathbf j+12t\,\mathbf k$, \ $\mathbf a(t)=-5\cos t\,\mathbf i-5\sin t\,\mathbf j+12\,\mathbf k$.
+\[ \mathbf a\cdot\mathbf v=25\sin t\cos t-25\sin t\cos t+144t=144t=0\ \Rightarrow\ t=0 . \]
+\end{cevap}
+
+\begin{soru}[Soru 21 \foto{IMG-20261015-WA0036}, \foto{IMG-20261023-WA0049}, \foto{IMG-20261023-WA0038}]
+Parametrik denklemleri $x=e^{-t}$, $y=2\cos3t$, $z=2\sin3t$ olan eğri boyunca bir cisim hareket ediyor ($t$: zaman).
+(a) Hız ve ivme? (b) $t=0$ iken büyüklükleri? (c) $t=0$ iken birim teğet vektör?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+$\mathbf r(t)=e^{-t}\,\mathbf i+2\cos3t\,\mathbf j+2\sin3t\,\mathbf k$.
+
+\textbf{(a)} Zincir kuralıyla ($\frac{d}{dt}\cos3t=-3\sin3t$):
+$\mathbf v=-e^{-t}\,\mathbf i-6\sin3t\,\mathbf j+6\cos3t\,\mathbf k$, \ $\mathbf a=e^{-t}\,\mathbf i-18\cos3t\,\mathbf j-18\sin3t\,\mathbf k$.
+
+\textbf{(b)} $\mathbf v(0)=-\mathbf i+6\mathbf k$, $\|\mathbf v(0)\|=\sqrt{37}$; \ $\mathbf a(0)=\mathbf i-18\mathbf j$, $\|\mathbf a(0)\|=\sqrt{325}=5\sqrt{13}$.
+
+\textbf{(c)} $\mathbf T(0)=\dfrac{\mathbf v(0)}{\|\mathbf v(0)\|}=-\dfrac{1}{\sqrt{37}}\,\mathbf i+\dfrac{6}{\sqrt{37}}\,\mathbf k$.
+\end{cevap}
+
+\begin{soru}[Soru 22 \foto{IMG-20261015-WA0035}, \foto{IMG-20261023-WA0052}]
+Bir nokta $\mathbf r=\mathbf r(t)$ eğrisi boyunca hareket ediyor; $s$ alınan yol, $\upsilon=\|d\mathbf r/dt\|=ds/dt$.
+$\mathbf a=\dfrac{d\upsilon}{dt}\mathbf T+\dfrac{\upsilon^2}{\rho}\mathbf N$ olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $\mathbf v=\dfrac{d\mathbf r}{dt}=\dfrac{d\mathbf r}{ds}\dfrac{ds}{dt}=\upsilon\,\mathbf T$.
+
+\textbf{Adım 2.} Çarpım kuralı: $\mathbf a=\dfrac{d\mathbf v}{dt}=\dfrac{d\upsilon}{dt}\mathbf T+\upsilon\dfrac{d\mathbf T}{dt}$.
+
+\textbf{Adım 3.} Zincir kuralı: $\dfrac{d\mathbf T}{dt}=\dfrac{d\mathbf T}{ds}\dfrac{ds}{dt}=\upsilon\dfrac{d\mathbf T}{ds}$; eğrilik tanımından $\dfrac{d\mathbf T}{ds}=\kappa\mathbf N=\dfrac1\rho\mathbf N$.
+
+\textbf{Adım 4.} Yerine yazılırsa $\mathbf a=\dfrac{d\upsilon}{dt}\mathbf T+\upsilon^2\dfrac{d\mathbf T}{ds}=\dfrac{d\upsilon}{dt}\mathbf T+\dfrac{\upsilon^2}{\rho}\mathbf N$. \hfill$\blacksquare$
+\end{cevap}
+
+\begin{soru}[Soru 23 \foto{IMG-20261015-WA0038}, \foto{IMG-20261023-WA0052}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ çemberinin eğriliğini ve eğrilik yarıçapını bulunuz; $t$ zaman ise ivmeyi
+$\mathbf T$, $\mathbf N$ bileşenlerine ayırınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+Soru 18'den $\mathbf T'(t)=-\cos t\,\mathbf i-\sin t\,\mathbf j$, $\frac{ds}{dt}=a$.
+\[ \frac{d\mathbf T}{ds}=\frac{d\mathbf T/dt}{ds/dt}=\frac1a(-\cos t\,\mathbf i-\sin t\,\mathbf j)\ \Rightarrow\ \kappa=\frac1a,\quad\rho=a . \]
+Sürat $\upsilon=a$ sabit $\Rightarrow\frac{d\upsilon}{dt}=0$. \
+$\mathbf a(t)=\mathbf r''(t)=-a\cos t\,\mathbf i-a\sin t\,\mathbf j=a\,\mathbf N=\dfrac{\upsilon^2}{\rho}\mathbf N$ ($a^2/a=a$ \checkmark).
+\end{cevap}
+
+%======================================================================
+\subsection{Düzgün eğri, integral ve yay uzunluğu}
+
+\begin{soru}[Soru 24 \foto{IMG-20261015-WA0038}, \foto{IMG-20261023-WA0053}]
+$\mathbf r(t)=a(t-\sin t)\,\mathbf i+a(1-\cos t)\,\mathbf j$, $-2\pi\le t\le2\pi$ eğrisi düzgün müdür, parçalı düzgün müdür?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $\mathbf r'(t)=a(1-\cos t)\,\mathbf i+a\sin t\,\mathbf j$ süreklidir.
+
+\textbf{Adım 2.} $\mathbf r'=\mathbf 0\iff\cos t=1$ ve $\sin t=0\iff t=2k\pi$. Aralıkta: $t=-2\pi,\,0,\,2\pi$.
+
+\textbf{Adım 3.} $t=0$ iç nokta olduğundan eğri $[-2\pi,2\pi]$'de düzgün değildir. Ama $[-2\pi,0]$ ve $[0,2\pi]$ alt aralıklarının
+iç noktalarında $\mathbf r'\neq\mathbf 0$: her biri düzgündür. Eğri \textbf{parçalı düzgündür}; $x=-2\pi a,0,2\pi a$ sivri uçlardır.
+\end{cevap}
+
+\begin{soru}[Soru 25 \foto{IMG-20261015-WA0037}, \foto{IMG-20261023-WA0055}]
+$\mathbf r(t)=2t\,\mathbf i+e^t\,\mathbf j+4\sin2t\,\mathbf k$ fonksiyonunun belirsiz integralini bulunuz.
+\end{soru}
+\begin{cevap}
+\[ \int\mathbf r\,dt=t^2\,\mathbf i+e^t\,\mathbf j-2\cos2t\,\mathbf k+\mathbf C=(t^2+c_1)\,\mathbf i+(e^t+c_2)\,\mathbf j+(-2\cos2t+c_3)\,\mathbf k . \]
+($4\int\sin2t\,dt=4\cdot\big(-\frac12\cos2t\big)=-2\cos2t$.)
+\end{cevap}
+
+\begin{soru}[Soru 26 \foto{IMG-20261015-WA0037}, \foto{IMG-20261023-WA0055}]
+$\mathbf r'(t)=2t\,\mathbf i+\sin t\,\mathbf j+e^t\,\mathbf k$ ve $\mathbf r(0)=2\,\mathbf i+2\,\mathbf j$ koşullarını sağlayan $\mathbf r(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $\mathbf r(t)=t^2\,\mathbf i-\cos t\,\mathbf j+e^t\,\mathbf k+\mathbf C$.
+
+\textbf{Adım 2.} $t=0$: $-\mathbf j+\mathbf k+\mathbf C=2\mathbf i+2\mathbf j$ $\Rightarrow$ $\mathbf C=2\mathbf i+3\mathbf j-\mathbf k$.
+
+\textbf{Adım 3.} $\boxed{\mathbf r(t)=(t^2+2)\,\mathbf i+(3-\cos t)\,\mathbf j+(e^t-1)\,\mathbf k}$. \
+Kontrol: $\mathbf r(0)=2\mathbf i+2\mathbf j+0\mathbf k$ \checkmark
+\end{cevap}
+
+\begin{soru}[Soru 27 \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0040}]
+$\mathbf F(t)=2t\,\mathbf i+(1+t^2)\,\mathbf j+\sin\pi t\,\mathbf k$ için $\displaystyle\int_0^1\mathbf F(t)\,dt$ nedir?
+\end{soru}
+\begin{cevap}
+\[ \int_0^1\mathbf F\,dt=t^2\Big|_0^1\mathbf i+\Big(t+\frac{t^3}{3}\Big)\Big|_0^1\mathbf j-\frac{\cos\pi t}{\pi}\Big|_0^1\mathbf k
+=\mathbf i+\frac43\,\mathbf j-\frac{-1-1}{\pi}\,\mathbf k=\mathbf i+\frac43\,\mathbf j+\frac2\pi\,\mathbf k . \]
+\end{cevap}
+
+\begin{soru}[Soru 28 \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0040}, \foto{IMG-20261023-WA0058}]
+$\mathbf r(t)=5\cos t\,\mathbf i+5\sin t\,\mathbf j+12t\,\mathbf k$, $0\le t\le2\pi$ helis parçasının uzunluğu nedir?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1.} $\mathbf r'(t)=-5\sin t\,\mathbf i+5\cos t\,\mathbf j+12\,\mathbf k$.
+
+\textbf{Adım 2.} $\|\mathbf r'(t)\|=\sqrt{25\sin^2t+25\cos^2t+144}=\sqrt{169}=13$.
+
+\textbf{Adım 3.} $\ell=\int_0^{2\pi}13\,dt=26\pi$.
+
+\textbf{Sağlama (tahtadaki gibi):} Silindir açılınca helis, kenarları $2\pi\cdot5=10\pi$ ve $12\cdot2\pi=24\pi$ olan dikdörtgenin
+köşegenidir: $\sqrt{(10\pi)^2+(24\pi)^2}=26\pi$ \checkmark
+\end{cevap}
+
+%======================================================================
+\subsection{Çalışma soruları}
+
+Aşağıdaki problemler 15.10 defterinde ve 23.10 tahtasında (\foto{IMG-20261015-WA0039}, \foto{IMG-20261015-WA0040},
+\foto{IMG-20261023-WA0058}) çözümsüz olarak verilmiştir.
+
+\begin{soru}[Problem 1 (derste çalışma sorusu olarak verildi) \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0058}]
+Türevlerini bulunuz:
+(a) $\mathbf F(t)=t\,\mathbf i+t^2\,\mathbf j+t^3\,\mathbf k$; \
+(b) $\mathbf F(t)=(t\ln t-t)\,\mathbf i+e^t\,\mathbf j+e^t\,\mathbf k$; \
+(c) $\mathbf F(t)=\arcsin(4t)\,\mathbf i-3\arctan(2t-1)\,\mathbf j+7\ln(3t^2)\,\mathbf k$.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{(a)} $\mathbf F'(t)=\mathbf i+2t\,\mathbf j+3t^2\,\mathbf k$.
+
+\textbf{(b)} $\frac{d}{dt}(t\ln t-t)=\ln t+t\cdot\frac1t-1=\ln t$ (çarpım kuralı). Böylece $\mathbf F'(t)=\ln t\,\mathbf i+e^t\,\mathbf j+e^t\,\mathbf k$ \ ($t>0$).
+
+\textbf{(c)} $\frac{d}{dt}\arcsin u=\frac{u'}{\sqrt{1-u^2}}$, $\frac{d}{dt}\arctan u=\frac{u'}{1+u^2}$, $\frac{d}{dt}\ln u=\frac{u'}{u}$:
+\[ \mathbf F'(t)=\frac{4}{\sqrt{1-16t^2}}\,\mathbf i-\frac{6}{1+(2t-1)^2}\,\mathbf j+\frac{14}{t}\,\mathbf k\qquad\Big(\tfrac{7\cdot6t}{3t^2}=\tfrac{14}{t}\Big). \]
+\textit{Not:} 15.10 defterinde (b)'nin $\mathbf k$ bileşenindeki üs belirsizdir (``$e^{-t}$'' de olabilir); 23.10 tahtasında açıkça $e^t$
+okunmaktadır. $e^{-t}$ olsaydı türevi $-e^{-t}\,\mathbf k$ olurdu.
+\end{cevap}
+
+\begin{soru}[Problem 2 (derste çalışma sorusu olarak verildi) \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0058}]
+$\mathbf F$ iki kez türevlenebilen bir fonksiyon olsun. $[\mathbf F(t)\times\mathbf F'(t)]'=\mathbf F(t)\times\mathbf F''(t)$ olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+Vektörel çarpımın türev kuralıyla
+\[ [\mathbf F\times\mathbf F']'=\mathbf F'\times\mathbf F'+\mathbf F\times\mathbf F'' . \]
+Bir vektörün kendisiyle vektörel çarpımı sıfırdır ($\sin0=0$): $\mathbf F'\times\mathbf F'=\mathbf 0$. Dolayısıyla
+$[\mathbf F\times\mathbf F']'=\mathbf F\times\mathbf F''$. \hfill$\blacksquare$
+\end{cevap}
+
+\begin{soru}[Problem 3 (derste çalışma sorusu olarak verildi) \foto{IMG-20261015-WA0040}, \foto{IMG-20261023-WA0058}]
+$\mathbf r(t)=e^t\,\mathbf i+e^{-t}\,\mathbf j+\sqrt2\,t\,\mathbf k$ eğrisinin $t=0$ noktasındaki Frenet üçlüsünü hesaplayınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1 ($\mathbf T$).} $\mathbf r'(t)=(e^t,-e^{-t},\sqrt2)$, $\mathbf r'(0)=(1,-1,\sqrt2)$, $\|\mathbf r'(0)\|=\sqrt{1+1+2}=2$.
+\[ \mathbf T(0)=\Big(\frac12,\,-\frac12,\,\frac{\sqrt2}{2}\Big). \]
+\textbf{Adım 2 ($\mathbf B$).} $\mathbf r''(t)=(e^t,e^{-t},0)$, $\mathbf r''(0)=(1,1,0)$.
+\[ \mathbf r'\times\mathbf r''=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&-1&\sqrt2\\1&1&0\end{vmatrix}=(0-\sqrt2)\,\mathbf i-(0-\sqrt2)\,\mathbf j+(1+1)\,\mathbf k=(-\sqrt2,\sqrt2,2), \]
+normu $\sqrt{2+2+4}=2\sqrt2$. \quad $\mathbf B(0)=\Big(-\dfrac12,\,\dfrac12,\,\dfrac{\sqrt2}{2}\Big)$.
+
+\textbf{Adım 3 ($\mathbf N$).} $\mathbf N=\mathbf B\times\mathbf T$:
+\[ \mathbf N(0)=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-\frac12&\frac12&\frac{\sqrt2}2\\\frac12&-\frac12&\frac{\sqrt2}2\end{vmatrix}
+=\Big(\frac{\sqrt2}{4}+\frac{\sqrt2}{4}\Big)\mathbf i-\Big(-\frac{\sqrt2}{4}-\frac{\sqrt2}{4}\Big)\mathbf j+\Big(\frac14-\frac14\Big)\mathbf k=\Big(\frac{\sqrt2}{2},\frac{\sqrt2}{2},0\Big). \]
+\textbf{Sağlama (tanımla).} $\|\mathbf r'(t)\|=\sqrt{e^{2t}+e^{-2t}+2}=e^t+e^{-t}$; bu fonksiyonun $t=0$'daki türevi $0$ olduğundan
+$\mathbf T'(0)=\frac{\mathbf r''(0)}{\|\mathbf r'(0)\|}=\frac12(1,1,0)$ ve $\mathbf N(0)=\frac{(1,1,0)}{\sqrt2}$ \checkmark. Ek olarak
+$\kappa(0)=\frac{2\sqrt2}{2^3}=\frac{\sqrt2}{4}$.
+\end{cevap}
+
+\begin{soru}[Problem 4 (derste çalışma sorusu olarak verildi) \foto{IMG-20261015-WA0040}, \foto{IMG-20261023-WA0058}]
+İntegralleri hesaplayınız:
+(a) $\displaystyle\int_0^1\big[4t^3\,\mathbf i+3\,\mathbf j+2(t+1)\,\mathbf k\big]dt$; \
+(b) $\displaystyle\int_1^2\Big[(6-6t)\,\mathbf i+3\sqrt t\,\mathbf j+\frac4{t^2}\,\mathbf k\Big]dt$; \
+(c) $\displaystyle\int_{-\pi/4}^{\pi/4}\big[\sin t\,\mathbf i+(1+\cos t)\,\mathbf j+\sec^2t\,\mathbf k\big]dt$.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{(a)} $\int_0^14t^3dt=1$; $\int_0^13\,dt=3$; $\int_0^12(t+1)dt=[t^2+2t]_0^1=3$. \ Sonuç: $\mathbf i+3\,\mathbf j+3\,\mathbf k$.
+
+\textbf{(b)} $\int_1^2(6-6t)dt=[6t-3t^2]_1^2=0-3=-3$; \ $\int_1^23\sqrt t\,dt=[2t^{3/2}]_1^2=4\sqrt2-2$; \
+$\int_1^2\frac4{t^2}dt=\big[-\frac4t\big]_1^2=-2+4=2$. \ Sonuç: $-3\,\mathbf i+(4\sqrt2-2)\,\mathbf j+2\,\mathbf k$.
+
+\textbf{(c)} $\sin t$ tek fonksiyon, simetrik aralıkta integrali $0$; \
+$\int_{-\pi/4}^{\pi/4}(1+\cos t)dt=\frac\pi2+[\sin t]_{-\pi/4}^{\pi/4}=\frac\pi2+\sqrt2$; \
+$\int_{-\pi/4}^{\pi/4}\sec^2t\,dt=[\tan t]_{-\pi/4}^{\pi/4}=2$. \ Sonuç: $\big(\frac\pi2+\sqrt2\big)\mathbf j+2\,\mathbf k$.
+\end{cevap}
+
+%======================================================================
+\subsection{Ek alıştırmalar}
+
+\begin{soru}[\ekal Ek alıştırma 1]
+$\mathbf F(t)=\sqrt{t-1}\,\mathbf i+\dfrac{1}{t-3}\,\mathbf j+\ln(5-t)\,\mathbf k$ fonksiyonunun tanım kümesini bulunuz.
+\end{soru}
+\begin{cevap}
+$T_f=[1,\infty)$, $T_g=\mathbb R\setminus\{3\}$, $T_h=(-\infty,5)$. Kesişim: $T_{\mathbf F}=[1,3)\cup(3,5)$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 2]
+$\displaystyle\lim_{t\to0}\Big[\frac{1-\cos t}{t^2}\,\mathbf i+\frac{e^{2t}-1}{t}\,\mathbf j+\frac{\tan t}{t}\,\mathbf k\Big]$ limitini bulunuz.
+\end{soru}
+\begin{cevap}
+Her bileşen $\frac00$ belirsizliğidir; L'Hospital (ya da bilinen limitler):
+$\frac{1-\cos t}{t^2}\to\frac{\sin t}{2t}\to\frac12$; \ $\frac{e^{2t}-1}{t}\to\frac{2e^{2t}}{1}\to2$; \ $\frac{\tan t}{t}\to\frac{\sec^2t}{1}\to1$.
+Limit: $\frac12\,\mathbf i+2\,\mathbf j+\mathbf k$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 3]
+$\mathbf r''(t)=6t\,\mathbf i+2\,\mathbf j+e^t\,\mathbf k$, $\mathbf r'(0)=\mathbf j+\mathbf k$, $\mathbf r(0)=\mathbf i$ ise $\mathbf r(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf r'=3t^2\,\mathbf i+2t\,\mathbf j+e^t\,\mathbf k+\mathbf C_1$; $\mathbf r'(0)=\mathbf k+\mathbf C_1=\mathbf j+\mathbf k\Rightarrow\mathbf C_1=\mathbf j$:
+$\mathbf r'=3t^2\,\mathbf i+(2t+1)\,\mathbf j+e^t\,\mathbf k$.
+
+$\mathbf r=t^3\,\mathbf i+(t^2+t)\,\mathbf j+e^t\,\mathbf k+\mathbf C_2$; $\mathbf r(0)=\mathbf k+\mathbf C_2=\mathbf i\Rightarrow\mathbf C_2=\mathbf i-\mathbf k$:
+\[ \mathbf r(t)=(t^3+1)\,\mathbf i+(t^2+t)\,\mathbf j+(e^t-1)\,\mathbf k . \]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 4]
+$\mathbf r(t)=t^3\,\mathbf i+3t^2\,\mathbf j+6t\,\mathbf k$, $0\le t\le1$ eğrisinin uzunluğunu bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf r'=(3t^2,6t,6)$, $\|\mathbf r'\|^2=9t^4+36t^2+36=9(t^2+2)^2$, $\|\mathbf r'\|=3(t^2+2)$.
+\[ \ell=\int_0^13(t^2+2)\,dt=3\Big(\frac13+2\Big)=7 . \]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 5]
+$\mathbf r(t)=3\cos t\,\mathbf i+3\sin t\,\mathbf j+4t\,\mathbf k$ helisinin $\mathbf T$, $\mathbf N$, $\mathbf B$ vektörlerini, eğriliğini ve burulmasını bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+$\mathbf r'=(-3\sin t,3\cos t,4)$, $\|\mathbf r'\|=5$: \ $\mathbf T=\frac15(-3\sin t,3\cos t,4)$.
+
+$\mathbf T'=\frac15(-3\cos t,-3\sin t,0)$, $\|\mathbf T'\|=\frac35$: \ $\mathbf N=(-\cos t,-\sin t,0)$.
+
+$\mathbf B=\mathbf T\times\mathbf N=\frac15\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-3\sin t&3\cos t&4\\-\cos t&-\sin t&0\end{vmatrix}=\frac15(4\sin t,-4\cos t,3)$.
+
+$\kappa=\dfrac{\|\mathbf T'\|}{\|\mathbf r'\|}=\dfrac{3/5}{5}=\dfrac{3}{25}$ \ (helis formülü $\frac{a}{a^2+b^2}=\frac{3}{25}$ \checkmark). \
+$\tau=\dfrac{b}{a^2+b^2}=\dfrac{4}{25}$ \ (kontrol: $(\mathbf r'\times\mathbf r'')\cdot\mathbf r'''=a^2b=36$, $\|\mathbf r'\times\mathbf r''\|^2=a^2(a^2+b^2)=225$, $36/225=4/25$ \checkmark).
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 6]
+$\mathbf r(t)=t\,\mathbf i+2t\,\mathbf j+t^2\,\mathbf k$ boyunca hareket eden cismin ivmesinin teğet ve normal bileşenlerini bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf v=(1,2,2t)$, $\mathbf a=(0,0,2)$, $\|\mathbf v\|=\sqrt{5+4t^2}$.
+\[ a_T=\frac{\mathbf v\cdot\mathbf a}{\|\mathbf v\|}=\frac{4t}{\sqrt{5+4t^2}},\qquad
+\mathbf v\times\mathbf a=(4,-2,0),\quad a_N=\frac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|}=\frac{2\sqrt5}{\sqrt{5+4t^2}} . \]
+Kontrol: $a_T^2+a_N^2=\frac{16t^2+20}{5+4t^2}=4=\|\mathbf a\|^2$ \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 7]
+$y=\ln x$ eğrisinin eğriliğini bulunuz. Eğrilik hangi noktada en büyüktür?
+\end{soru}
+\begin{cevap}
+$f'=\frac1x$, $f''=-\frac1{x^2}$:
+\[ \kappa(x)=\frac{1/x^2}{(1+1/x^2)^{3/2}}=\frac{x}{(x^2+1)^{3/2}}\quad(x>0). \]
+$\kappa'(x)=\dfrac{(x^2+1)-3x^2}{(x^2+1)^{5/2}}=\dfrac{1-2x^2}{(x^2+1)^{5/2}}=0\Rightarrow x=\dfrac1{\sqrt2}$ (işaret $+$'dan $-$'ye döner: maksimum).
+En büyük eğrilik $\big(\frac1{\sqrt2},-\frac12\ln2\big)$ noktasındadır: $\kappa_{\max}=\dfrac{1/\sqrt2}{(3/2)^{3/2}}=\dfrac{2\sqrt3}{9}$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 8]
+Bir top yerden $v_0=20$ m/s süratle, yatayla $60^\circ$ açıyla atılıyor ($g\approx10$ m/s$^2$). Konum vektörünü, uçuş süresini, menzili ve
+en büyük yüksekliği bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf a=-10\,\mathbf j$, $\mathbf v(0)=20\cos60^\circ\,\mathbf i+20\sin60^\circ\,\mathbf j=10\,\mathbf i+10\sqrt3\,\mathbf j$, $\mathbf r(0)=\mathbf 0$.
+İki kez integral: $\mathbf r(t)=10t\,\mathbf i+(10\sqrt3\,t-5t^2)\,\mathbf j$.
+\begin{itemize}
+\item Uçuş süresi: $10\sqrt3\,t-5t^2=0\Rightarrow t_u=2\sqrt3\approx3{,}46$ s.
+\item Menzil: $x(2\sqrt3)=20\sqrt3\approx34{,}6$ m \ ($\frac{v_0^2\sin120^\circ}{g}=\frac{400\cdot\sqrt3/2}{10}$ \checkmark).
+\item En büyük yükseklik: $y'=10\sqrt3-10t=0\Rightarrow t=\sqrt3$, $H=30-15=15$ m.
+\end{itemize}
+\end{cevap}

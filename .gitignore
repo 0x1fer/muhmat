@@ -1,13 +1,5 @@
-dist/
 tex/*.aux
 tex/*.log
-tex/*.out
 tex/*.toc
-tex/*.pdf
-tex/*.xdv
-assets/figures/*.aux
-assets/figures/*.log
-assets/figures/*.out
-__pycache__/
-*.pyc
-.openai/*.local.json
+tex/*.out
+tex/html_gen/.build/

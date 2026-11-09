@@ -1,0 +1,344 @@
+\section{Konu 1: Üç Boyutlu Koordinat Sistemi, Vektörler, Skaler ve Vektörel Çarpım}
+
+\begin{bilgi}[Bu bölüm hakkında]
+Bu bölümde 09.10 defter notlarında ve 23.10 tahtasında çözülen bütün örnekler, 02.10 tahtasındaki skaler çarpım uygulaması ve derste verilen çalışma soruları, işlenme sırasıyla ve adım adım çözümleriyle toplanmıştır. Aynı soru birden çok fotoğrafta görünüyorsa bütün fotoğraf adları verilmiştir. Bölüm sonunda kaynak kitaplardaki tiplere benzer ek alıştırmalar vardır.
+\end{bilgi}
+
+%==========================================================
+\subsection{Düzlemde vektörler: uzunluk, birim vektör, skaler çarpım}
+
+\begin{soru}[Soru 1 \foto{IMG-20261009-WA0026}]
+$\mathbf u=(3,4)$ vektörünün uzunluğunu ve $\mathbf u$ yönündeki birim vektörü bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Uzunluk.} Düzlemde $\|(a,b)\|=\sqrt{a^2+b^2}$ olduğundan
+\[
+\|\mathbf u\|=\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}=5 .
+\]
+\textbf{2. Birim vektör.} Sıfırdan farklı bir vektörü kendi uzunluğuna bölersek yönü değişmez, uzunluğu 1 olur:
+\[
+\mathbf e=\frac{\mathbf u}{\|\mathbf u\|}=\frac{(3,4)}{5}=\left(\frac35,\ \frac45\right).
+\]
+\textbf{3. Kontrol.} $\|\mathbf e\|=\sqrt{\frac{9}{25}+\frac{16}{25}}=1$ \checkmark. Ayrıca $\mathbf e=(\cos\theta,\sin\theta)$ yazılışından $\mathbf u$'nun $x$-ekseniyle yaptığı açı $\theta=\arccos\frac35\approx53{,}13^\circ$'dir.
+\end{cevap}
+
+\begin{soru}[Soru 2 \foto{IMG-20261009-WA0026}]
+$(1,2)$ ve $(4,-2)$ vektörlerinin dik olup olmadığını belirleyiniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Ölçüt.} Sıfırdan farklı iki vektör ancak ve ancak skaler çarpımları sıfırsa diktir ($\cos90^\circ=0$).
+
+\textbf{2. Hesap.} $(1,2)\cdot(4,-2)=1\cdot4+2\cdot(-2)=4-4=0$.
+
+\textbf{3. Sonuç.} Skaler çarpım sıfır olduğundan vektörler \textbf{diktir}.
+\end{cevap}
+
+\begin{soru}[Soru 3 \foto{IMG-20261009-WA0026}]
+$(1,1)$ ve $(1,0)$ vektörleri dik midir? Aralarındaki açıyı bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Skaler çarpım.} $(1,1)\cdot(1,0)=1\cdot1+1\cdot0=1\neq0$; vektörler dik değildir.
+
+\textbf{2. Uzunluklar.} $\|(1,1)\|=\sqrt2$, \ $\|(1,0)\|=1$.
+
+\textbf{3. Açı.}
+\[
+\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}=\frac{1}{\sqrt2}=\frac{\sqrt2}{2}\ \Rightarrow\ \theta=45^\circ .
+\]
+\end{cevap}
+
+\begin{dikkat}[Defterdeki hata]
+Defterde bu soruda $\cos\theta=\frac12$ yazılmıştır; doğrusu $\cos\theta=\frac{1}{\sqrt2}$'dir. Defterdeki $\theta=45^\circ$ sonucu doğrudur ($\cos\theta=\frac12$ olsaydı açı $60^\circ$ olurdu).
+\end{dikkat}
+
+%==========================================================
+\subsection{Lineer bağımlılık, bağımsızlık ve taban}
+
+\begin{soru}[Soru 4 \foto{IMG-20261009-WA0033}, \foto{IMG-20261023-WA0008}, \foto{IMG-20261023-WA0010}, \foto{IMG-20261023-WA0015}]
+$\mathbf i=(1,0)$, $\mathbf j=(0,1)$ vektörlerinin lineer bağımsız olduğunu gösteriniz; $\mathbf u=(-6,9)$, $\mathbf v=(4,-6)$ vektörlerinin lineer bağımlı olup olmadığını kontrol ediniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Yöntem.} $\alpha\mathbf u+\beta\mathbf v=\mathbf 0$ denklemini kurup çözeriz. Tek çözüm $\alpha=\beta=0$ ise bağımsız, sıfırdan farklı çözüm de varsa bağımlıdır.
+
+\textbf{(a) $\mathbf i,\mathbf j$.} $\alpha(1,0)+\beta(0,1)=(\alpha,\beta)=(0,0)$; buradan doğrudan $\alpha=0$, $\beta=0$. Tek çözüm sıfır çözüm $\Rightarrow$ $\mathbf i,\mathbf j$ \textbf{lineer bağımsız}.
+
+\textbf{(b) $\mathbf u,\mathbf v$.} $\alpha(-6,9)+\beta(4,-6)=(0,0)$:
+\[
+\begin{cases}-6\alpha+4\beta=0 & /\cdot 3\\ \ \ 9\alpha-6\beta=0 & /\cdot 2\end{cases}
+\ \Rightarrow\
+\begin{cases}-18\alpha+12\beta=0\\ \ \ 18\alpha-12\beta=0\end{cases}
+\]
+Toplayınca $0=0$: ikinci denklem yeni bilgi vermez, yalnızca $3\alpha=2\beta$ koşulu kalır. Sonsuz çözüm vardır, örneğin $\alpha=2$, $\beta=3$:
+\[
+2(-6,9)+3(4,-6)=(-12+12,\ 18-18)=(0,0).
+\]
+Sıfır olmayan katsayılarla sıfır vektörü elde edildiğinden $\mathbf u,\mathbf v$ \textbf{lineer bağımlıdır}.
+
+\textbf{Kontrol.} $\begin{vmatrix}-6&9\\4&-6\end{vmatrix}=36-36=0$; ayrıca $\mathbf v=-\frac23\mathbf u$, yani vektörler paraleldir.
+\end{cevap}
+
+\begin{soru}[Soru 5 \foto{IMG-20261009-WA0034}, \foto{IMG-20261023-WA0010}, \foto{IMG-20261023-WA0015}]
+$\mathbf u=(4,-3)$, $\mathbf v=(-3,4)$, $T=\{\mathbf u,\mathbf v\}$ olsun. $T$'nin $\mathbb R^2$'nin bir tabanı olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+Taban olmak için (1) lineer bağımsızlık ve (2) $\mathbb R^2$'yi germe gösterilmelidir.
+
+\textbf{1. Bağımsızlık.} $\alpha(4,-3)+\beta(-3,4)=(0,0)$:
+\[
+\begin{cases}\ \ 4\alpha-3\beta=0 & /\cdot 3\\ -3\alpha+4\beta=0 & /\cdot 4\end{cases}
+\Rightarrow
+\begin{cases}\ \ 12\alpha-9\beta=0\\ -12\alpha+16\beta=0\end{cases}
+\Rightarrow 7\beta=0\Rightarrow\beta=0,\ \alpha=0 .
+\]
+Yalnızca sıfır çözüm var: lineer bağımsız.
+
+\textbf{2. Germe.} Keyfi $(x,y)\in\mathbb R^2$ için $(x,y)=\alpha\mathbf u+\beta\mathbf v$ yazılabilmeli:
+\[
+\begin{cases}\ \ 4\alpha-3\beta=x & /\cdot 3\\ -3\alpha+4\beta=y & /\cdot 4\end{cases}
+\Rightarrow
+\begin{cases}\ \ 12\alpha-9\beta=3x\\ -12\alpha+16\beta=4y\end{cases}
+\Rightarrow 7\beta=3x+4y .
+\]
+\[
+\beta=\frac{3x+4y}{7},\qquad \alpha=\frac{4x+3y}{7}\quad(\text{ilk denklemler } /\cdot4 \text{ ve } /\cdot3 \text{ ile } \beta \text{ yok edilerek}).
+\]
+\textbf{3. Kontrol.} $4\alpha-3\beta=\frac{16x+12y-9x-12y}{7}=x$ \checkmark, \ $-3\alpha+4\beta=\frac{-12x-9y+12x+16y}{7}=y$ \checkmark.
+
+\textbf{4. Sonuç.} Her $(x,y)$ için $\alpha,\beta$ bulunduğundan $T$ gerer; bağımsız ve geren olduğundan $\mathbb R^2$'nin bir \textbf{tabanıdır}. (Kısa yol: $\det\begin{pmatrix}4&-3\\-3&4\end{pmatrix}=7\neq0$.)
+\end{cevap}
+
+\begin{bilgi}[Defterdeki küçük yazım hataları]
+Defterde ``$T$'nin $\mathbb R$'nin bir tabanı'' yazılmıştır; doğrusu $\mathbb R^2$. $12\alpha\ \_\ 9\beta$ satırındaki işaret silik görünmektedir; doğrusu $12\alpha-9\beta=0$.
+\end{bilgi}
+
+%==========================================================
+\subsection{Uzayda koordinatlar ve küre}
+
+\begin{soru}[Soru 6 \foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0013}]
+Denklemi $x^2+y^2+z^2-2x-4y-6z-2=0$ olan kürenin merkezini ve yarıçapını bulunuz. \okunamadi{23.10 tahtasında soru cümlesinin sonu kenardan taşmış; istenen, çözümden anlaşılmaktadır}
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Genel denklemle karşılaştırma.} $(x-a)^2+(y-b)^2+(z-c)^2=r^2$ açılırsa
+$x^2+y^2+z^2-2ax-2by-2cz+(a^2+b^2+c^2-r^2)=0$ elde edilir. Katsayıları eşleyelim:
+\[
+-2a=-2,\quad -2b=-4,\quad -2c=-6\ \Rightarrow\ a=1,\ b=2,\ c=3,\qquad M(1,2,3).
+\]
+\textbf{2. Yarıçap.} Sabit terim: $a^2+b^2+c^2-r^2=-2\Rightarrow 14-r^2=-2\Rightarrow r^2=16\Rightarrow r=4$.
+
+\textbf{3. Kontrol (tam kare).} $(x-1)^2+(y-2)^2+(z-3)^2=2+1+4+9=16$ \checkmark.
+\end{cevap}
+
+%==========================================================
+\subsection{Vektörel çarpım ve karma çarpım}
+
+\begin{soru}[Soru 7 \foto{IMG-20261009-WA0035}, \foto{IMG-20261023-WA0029}, \foto{IMG-20261023-WA0014}]
+$\mathbf u=(1,2,3)$, $\mathbf v=(2,0,1)$ için $\mathbf u\times\mathbf v$'yi bulunuz. Sonucun $\mathbf u$'ya dik olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Determinantı kurma.} İlk satır $\mathbf i,\mathbf j,\mathbf k$; ikinci satır $\mathbf u$; üçüncü satır $\mathbf v$:
+\[
+\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&2&3\\2&0&1\end{vmatrix}.
+\]
+\textbf{2. İlk satıra göre açılım} (işaretler $+,-,+$):
+\[
+=\mathbf i\begin{vmatrix}2&3\\0&1\end{vmatrix}-\mathbf j\begin{vmatrix}1&3\\2&1\end{vmatrix}+\mathbf k\begin{vmatrix}1&2\\2&0\end{vmatrix}
+=\mathbf i\,(2-0)-\mathbf j\,(1-6)+\mathbf k\,(0-4).
+\]
+\textbf{3. Sonuç.} $\mathbf u\times\mathbf v=2\mathbf i+5\mathbf j-4\mathbf k=(2,5,-4)$.
+
+\textbf{4. Diklik.} $\mathbf u\cdot(\mathbf u\times\mathbf v)=(1,2,3)\cdot(2,5,-4)=2+10-12=0$, dolayısıyla $\mathbf u\times\mathbf v\perp\mathbf u$. Benzer biçimde $\mathbf v\cdot(\mathbf u\times\mathbf v)=4+0-4=0$.
+
+\textbf{5. Ek bilgi.} $\|\mathbf u\times\mathbf v\|=\sqrt{4+25+16}=\sqrt{45}=3\sqrt5$; bu sayı $\mathbf u$ ve $\mathbf v$ üzerine kurulan paralelkenarın alanıdır.
+\end{cevap}
+
+\begin{soru}[Soru 8 \foto{IMG-20261009-WA0027}, \foto{IMG-20261023-WA0014}]
+$\mathbf i,\mathbf j,\mathbf k$ vektörlerinin karma çarpımını bulunuz ve geometrik anlamını yorumlayınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Determinant.}
+\[
+\mathbf i\cdot(\mathbf j\times\mathbf k)=\begin{vmatrix}1&0&0\\0&1&0\\0&0&1\end{vmatrix}=1\cdot(1\cdot1-0\cdot0)-0+0=1 .
+\]
+\textbf{2. Doğrudan.} $\mathbf j\times\mathbf k=\mathbf i$ olduğundan $\mathbf i\cdot\mathbf i=1$.
+
+\textbf{3. Yorum.} Teoreme göre $|\mathbf u\cdot(\mathbf v\times\mathbf w)|$, üç vektör üzerine kurulan paralelyüzlünün hacmidir. $\mathbf i,\mathbf j,\mathbf k$ üzerine kurulan paralelyüzlü, kenarları 1 olan \textbf{birim küptür} ve hacmi 1'dir. Sonucun sıfırdan farklı olması üç vektörün aynı düzlemde olmadığını, pozitif olması sağ el sistemi oluşturduklarını gösterir.
+\end{cevap}
+
+%==========================================================
+\subsection{Skaler çarpım uygulaması: iki doğru arasındaki açı}
+
+\begin{soru}[Soru 9 \foto{IMG-20261002-WA0018}]
+$\dfrac{x-1}{1}=\dfrac{y}{-\sqrt2}=\dfrac{z-1}{1}$ ve $\dfrac{x}{-1}=\dfrac{y-1}{\sqrt2}=\dfrac{z+2}{1}$ doğrularının oluşturduğu açıyı bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Doğrultman vektörleri.} $\frac{x-x_0}{a}=\frac{y-y_0}{b}=\frac{z-z_0}{c}$ biçimindeki bir doğrunun doğrultmanı $(a,b,c)$'dir (paydalar):
+\[
+\mathbf v=(1,-\sqrt2,1),\qquad \mathbf u=(-1,\sqrt2,1).
+\]
+\textbf{2. Skaler çarpım ve uzunluklar.}
+$\mathbf u\cdot\mathbf v=-1-2+1=-2$, \ $\|\mathbf u\|=\|\mathbf v\|=\sqrt{1+2+1}=2$.
+
+\textbf{3. Açı.} $\cos\theta=\dfrac{-2}{2\cdot2}=-\dfrac12\Rightarrow\theta=120^\circ$.
+
+\textbf{4. Dar açı.} Kesişen iki doğru $120^\circ$ ve $60^\circ$'lik açılar oluşturur; doğrular arasındaki açı dar olan alınır: $180^\circ-120^\circ=\boxed{60^\circ}$.
+\end{cevap}
+
+%==========================================================
+\subsection{Çalışma soruları}
+
+\begin{soru}[Çalışma sorusu 1 (derste çalışma sorusu olarak verildi) \foto{IMG-20261009-WA0032}, \foto{IMG-20261023-WA0027}]
+$(2,-1,3)$ ile $(1,4,2)$ vektörlerinin dik olup olmadığını bulunuz ve $\cos\theta$'yı hesaplayınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1.} $(2,-1,3)\cdot(1,4,2)=2\cdot1+(-1)\cdot4+3\cdot2=2-4+6=4\neq0$; vektörler \textbf{dik değildir}.
+
+\textbf{2.} $\|(2,-1,3)\|=\sqrt{4+1+9}=\sqrt{14}$, \ $\|(1,4,2)\|=\sqrt{1+16+4}=\sqrt{21}$.
+
+\textbf{3.}
+\[
+\cos\theta=\frac{4}{\sqrt{14}\cdot\sqrt{21}}=\frac{4}{\sqrt{294}}=\frac{4}{7\sqrt6}=\frac{4\sqrt6}{42}=\frac{2\sqrt6}{21}\approx0{,}233,\qquad \theta\approx76{,}5^\circ .
+\]
+Skaler çarpım pozitif olduğu için açı dardır.
+\end{cevap}
+
+\begin{soru}[Çalışma sorusu 2 (derste çalışma sorusu olarak verildi) \foto{IMG-20261009-WA0032}, \foto{IMG-20261023-WA0027}]
+$x^2+y^2+z^2+4x-6y+2z-11=0$ kürenin merkezini ve yarıçapını bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Tam kareye tamamlama.}
+\[
+(x^2+4x+4)+(y^2-6y+9)+(z^2+2z+1)=11+4+9+1 .
+\]
+\textbf{2.} $(x+2)^2+(y-3)^2+(z+1)^2=25$.
+
+\textbf{3. Sonuç.} Merkez $M(-2,3,-1)$, yarıçap $r=5$.
+
+\textbf{Kontrol (formül).} $D=4$, $E=-6$, $F=2$, $G=-11$: $M=\left(-\frac42,\frac62,-\frac22\right)=(-2,3,-1)$, \ $r^2=4+9+1-(-11)=25$ \checkmark.
+\end{cevap}
+
+\begin{soru}[Çalışma sorusu 3 (derste çalışma sorusu olarak verildi) \foto{IMG-20261009-WA0032}, \foto{IMG-20261023-WA0027}]
+$A(0,1,2)$ ve $B(3,1,-1)$ noktalarından geçen doğrunun parametrik ve kartezyen denklemini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+Bu soru, vektörleri Konu 2'deki doğru denklemlerine bağlar.
+
+\textbf{1. Doğrultman.} $\overrightarrow{AB}=(3-0,\ 1-1,\ -1-2)=(3,0,-3)$. Daha sade olarak buna paralel $(1,0,-1)$ de alınabilir.
+
+\textbf{2. Vektörel denklem.} Doğru üzerindeki $P(x,y,z)$ için $\overrightarrow{AP}=t\,\overrightarrow{AB}$, $t\in\mathbb R$:
+$(x,\ y-1,\ z-2)=t\,(3,0,-3)$.
+
+\textbf{3. Parametrik denklem.}
+\[
+x=3t,\qquad y=1,\qquad z=2-3t\qquad(t\in\mathbb R).
+\]
+(Kontrol: $t=0\Rightarrow A$, $t=1\Rightarrow(3,1,-1)=B$ \checkmark.)
+
+\textbf{4. Kartezyen denklem.} Doğrultmanın ikinci bileşeni $b=0$ olduğundan $y$ için kesir yazılamaz; doğru $Oy$ eksenine diktir ve
+\[
+\frac{x}{3}=\frac{z-2}{-3},\qquad y=1
+\]
+olur. Sadeleştirirsek $x+z=2$, $y=1$.
+\end{cevap}
+
+%==========================================================
+\subsection{Ek alıştırmalar}
+
+\begin{soru}[\ekal Ek alıştırma 1]
+Merkezi $M(1,2,-2)$ olan ve orijinden geçen kürenin denklemini yazınız. $Q(3,3,0)$ noktası kürenin içinde mi, üzerinde mi, dışında mı?
+\end{soru}
+\begin{cevap}
+\textbf{1.} Küre orijinden geçtiğinden $r=|MO|=\sqrt{1+4+4}=3$.
+\[
+(x-1)^2+(y-2)^2+(z+2)^2=9\quad\Longleftrightarrow\quad x^2+y^2+z^2-2x-4y+4z=0 .
+\]
+\textbf{2.} $|MQ|^2=(3-1)^2+(3-2)^2+(0+2)^2=4+1+4=9=r^2$. $Q$ küre \textbf{üzerindedir}. (Genel kural: $|MQ|<r$ içte, $|MQ|>r$ dışta.)
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 2]
+$\mathbf u=(x,2,-1)$ ve $\mathbf v=(3,x,4)$ olsun. (a) Hangi $x$ için $\mathbf u\perp\mathbf v$'dir? (b) $\mathbf u\parallel\mathbf v$ olacak bir $x$ var mıdır?
+\end{soru}
+\begin{cevap}
+(a) $\mathbf u\cdot\mathbf v=3x+2x-4=5x-4=0\Rightarrow x=\dfrac45$.
+
+(b) Paralellik için $\mathbf u=\lambda\mathbf v$ olmalı: $x=3\lambda$, $2=\lambda x$, $-1=4\lambda$. Son denklemden $\lambda=-\frac14$, ilkinden $x=-\frac34$; ikinci denklem $2=\left(-\frac14\right)\left(-\frac34\right)=\frac{3}{16}$ olur ki bu yanlıştır. Dolayısıyla hiçbir $x$ için paralel değildir.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 3]
+$\mathbf a=(4,0,-2)$ vektörünün $\mathbf b=(2,1,2)$ üzerine skaler ve vektörel izdüşümünü bulunuz; $\mathbf a$'yı $\mathbf b$'ye paralel ve dik iki vektörün toplamı olarak yazınız.
+\end{soru}
+\begin{cevap}
+\textbf{1.} $\mathbf a\cdot\mathbf b=8+0-4=4$, \ $\|\mathbf b\|=\sqrt{4+1+4}=3$.
+
+\textbf{2.} $\text{comp}_{\mathbf b}\mathbf a=\dfrac{4}{3}$, \quad $\text{proj}_{\mathbf b}\mathbf a=\dfrac{4}{9}(2,1,2)=\left(\dfrac89,\dfrac49,\dfrac89\right)$.
+
+\textbf{3.} Dik bileşen: $\mathbf a-\text{proj}_{\mathbf b}\mathbf a=\left(\dfrac{28}{9},-\dfrac49,-\dfrac{26}{9}\right)$. Kontrol: $\frac{56-4-52}{9}=0$ \checkmark.
+\[
+\mathbf a=\left(\tfrac89,\tfrac49,\tfrac89\right)+\left(\tfrac{28}{9},-\tfrac49,-\tfrac{26}{9}\right).
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 4]
+$\mathbf a=(1,2,-1)$ ve $\mathbf b=(2,0,3)$ üzerine kurulan paralelkenarın ve bu vektörlerin belirttiği üçgenin alanını bulunuz.
+\end{soru}
+\begin{cevap}
+\[
+\mathbf a\times\mathbf b=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&2&-1\\2&0&3\end{vmatrix}
+=\mathbf i\,(6-0)-\mathbf j\,(3+2)+\mathbf k\,(0-4)=(6,-5,-4).
+\]
+Kontrol: $(1,2,-1)\cdot(6,-5,-4)=6-10+4=0$ \checkmark, \ $(2,0,3)\cdot(6,-5,-4)=12-12=0$ \checkmark.
+
+Paralelkenar alanı $=\|(6,-5,-4)\|=\sqrt{36+25+16}=\sqrt{77}$; üçgen alanı $=\dfrac{\sqrt{77}}{2}$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 5]
+$\mathbf a=(1,2,3)$, $\mathbf b=(2,k,1)$, $\mathbf c=(1,1,1)$ vektörlerinin aynı düzlemde olması için $k$ ne olmalıdır?
+\end{soru}
+\begin{cevap}
+Düzlemdeşlik $\iff$ karma çarpım sıfır:
+\[
+\begin{vmatrix}1&2&3\\2&k&1\\1&1&1\end{vmatrix}
+=1\,(k-1)-2\,(2-1)+3\,(2-k)=k-1-2+6-3k=3-2k .
+\]
+$3-2k=0\Rightarrow k=\dfrac32$. Diğer $k$ değerleri için üç vektör bir paralelyüzlü oluşturur; hacmi $|3-2k|$'dir.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 6]
+$\mathbf a=(1,2,3)$, $\mathbf b=(4,5,6)$, $\mathbf c=(7,8,9)$ vektörleri $\mathbb R^3$'ün bir tabanı mıdır? Değilse aralarındaki lineer bağıntıyı bulunuz.
+\end{soru}
+\begin{cevap}
+\[
+\begin{vmatrix}1&2&3\\4&5&6\\7&8&9\end{vmatrix}=1\,(45-48)-2\,(36-42)+3\,(32-35)=-3+12-9=0 .
+\]
+Determinant sıfır: vektörler lineer bağımlıdır, dolayısıyla taban \textbf{değildir} (hepsi aynı düzlemdedir).
+
+Bağıntı: $\alpha\mathbf a+\beta\mathbf b+\gamma\mathbf c=\mathbf 0$ için ilk iki bileşen
+$\alpha+4\beta+7\gamma=0$, $2\alpha+5\beta+8\gamma=0$. İlkinin 2 katını ikinciden çıkarırsak $-3\beta-6\gamma=0\Rightarrow\beta=-2\gamma$; ilkinden $\alpha=-4\beta-7\gamma=\gamma$. $\gamma=1$ alırsak $\alpha=1$, $\beta=-2$:
+\[
+\mathbf a-2\mathbf b+\mathbf c=(1-8+7,\ 2-10+8,\ 3-12+9)=(0,0,0)\ \checkmark
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 7]
+Her $\mathbf u,\mathbf v$ için $\|\mathbf u+\mathbf v\|^2+\|\mathbf u-\mathbf v\|^2=2\left(\|\mathbf u\|^2+\|\mathbf v\|^2\right)$ olduğunu (paralelkenar kuralı) gösteriniz. Geometrik anlamı nedir?
+\end{soru}
+\begin{cevap}
+$\|\mathbf w\|^2=\mathbf w\cdot\mathbf w$ ve skaler çarpımın dağılma özelliğini kullanalım:
+\begin{align*}
+\|\mathbf u+\mathbf v\|^2&=\mathbf u\cdot\mathbf u+2\,\mathbf u\cdot\mathbf v+\mathbf v\cdot\mathbf v,\\
+\|\mathbf u-\mathbf v\|^2&=\mathbf u\cdot\mathbf u-2\,\mathbf u\cdot\mathbf v+\mathbf v\cdot\mathbf v .
+\end{align*}
+Toplarsak $\mathbf u\cdot\mathbf v$ terimleri sadeleşir: $2\|\mathbf u\|^2+2\|\mathbf v\|^2$.
+
+\textbf{Geometrik anlam:} Bir paralelkenarın köşegen uzunluklarının kareleri toplamı, dört kenar uzunluğunun kareleri toplamına eşittir. ($\mathbf u+\mathbf v$ ve $\mathbf u-\mathbf v$ köşegenlerdir.) $\mathbf u\perp\mathbf v$ ise iki köşegen eşit olur; bu dikdörtgen durumudur.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 8]
+$\mathbf u=(1,1,1)$ vektörünün koordinat eksenleriyle yaptığı açıları bulunuz.
+\end{soru}
+\begin{cevap}
+$\|\mathbf u\|=\sqrt3$; $\cos\alpha=\cos\beta=\cos\gamma=\dfrac{1}{\sqrt3}$. Kontrol: $3\cdot\frac13=1$ \checkmark.
+\[
+\alpha=\beta=\gamma=\arccos\frac{1}{\sqrt3}\approx54{,}74^\circ .
+\]
+Bu, bir küpün köşegeninin kenarlarıyla yaptığı açıdır.
+\end{cevap}

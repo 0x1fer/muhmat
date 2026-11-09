@@ -1,0 +1,1199 @@
+\section{Çok Değişkenli Fonksiyonlar, Limit ve Süreklilik}
+
+% =====================================================================
+\subsection{Amaç ve sezgi}
+
+Şimdiye kadar tek değişkenli fonksiyonlarla ($y=f(x)$) ve vektör değerli fonksiyonlarla ($\mathbf r(t)$) çalıştık. Oysa
+mühendislikte karşılaştığımız büyüklüklerin çoğu \textbf{birden fazla değişkene} bağlıdır:
+
+\begin{itemize}
+  \item Bir metal levhanın sıcaklığı levhanın her noktasında farklıdır: $T=T(x,y)$.
+  \item Bir odadaki hava basıncı ya da elektrik potansiyeli uzayın noktasına bağlıdır: $p=p(x,y,z)$, $V=V(x,y,z)$.
+  \item İdeal gaz yasasında basınç hem sıcaklığa hem hacme bağlıdır: $P=nRT/V$.
+\end{itemize}
+
+Bu bölümde şu sorulara cevap arayacağız:
+
+\begin{enumerate}
+  \item Çok değişkenli bir fonksiyon nedir, hangi noktalarda tanımlıdır (\textbf{tanım kümesi}), hangi değerleri alır
+        (\textbf{görüntü kümesi})?
+  \item Böyle bir fonksiyonu nasıl ``görürüz''? (\textbf{grafik}, \textbf{seviye eğrileri}, \textbf{kontur haritası},
+        \textbf{seviye yüzeyleri})
+  \item $(x,y)$ noktası $(a,b)$ noktasına yaklaşırken $f(x,y)$ neye yaklaşır? (\textbf{limit})
+  \item Fonksiyon ne zaman ``kopuksuz'' davranır? (\textbf{süreklilik})
+\end{enumerate}
+
+\begin{bilgi}[Tek değişkenden farkı nerede?]
+Tek değişkende $x\to a$ yaklaşımı yalnızca \emph{iki yönden} (soldan ve sağdan) olabilir. Düzlemde ise $(x,y)$ noktası
+$(a,b)$'ye \textbf{sonsuz çoklukta yoldan} yaklaşabilir: doğrular, paraboller, spiraller\dots{} Limitin var olması için
+\emph{bütün} bu yollarda aynı değere gidilmesi gerekir. Bu yüzden çok değişkenli limitte iki temel beceri öğreneceğiz:
+\begin{itemize}
+  \item limitin \vurg{olmadığını} göstermek (iki farklı yol bulmak yeter),
+  \item limitin \vurg{var olduğunu} göstermek (tüm yolları birden kontrol eden bir eşitsizlik -- sıkıştırma -- gerekir).
+\end{itemize}
+Bu bölümün geri kalanı (kısmi türev, zincir kuralı, gradyan) tamamen bu limit kavramının üzerine kurulur.
+\end{bilgi}
+
+% =====================================================================
+\subsection{Çok değişkenli fonksiyonlar, tanım ve görüntü kümesi}
+
+\begin{tahta}[\foto{IMG-20261015-WA0040}, \foto{IMG-20261023-WA0043}]
+\textbf{Tanım.} $D$ düzlemin bir alt kümesi olsun. $f:D\to\mathbb R$ fonksiyonuna \textbf{iki değişkenli fonksiyon} denir.
+Eğer $D$ uzayın bir alt kümesi ise $f:D\to\mathbb R$ fonksiyonu \textbf{üç değişkenli fonksiyondur}.
+\[
+D\subset\mathbb R^2:\ z=f(x,y), \qquad D\subset\mathbb R^3:\ w=f(x,y,z).
+\]
+\end{tahta}
+
+Yani iki değişkenli bir fonksiyon, düzlemin her $(x,y)$ noktasına \emph{tek} bir reel sayı $z=f(x,y)$ karşılık getiren
+bir kuraldır. $x$ ve $y$'ye \textbf{bağımsız değişkenler}, $z$'ye \textbf{bağımlı değişken} denir.
+
+\begin{tahta}[\foto{IMG-20261015-WA0040}, \foto{IMG-20261023-WA0043}]
+\textbf{Örnekler.}
+\begin{itemize}
+  \item Tabanı $a$, yüksekliği $h$ olan üçgenin alanı: $A(a,h)=\dfrac{a\cdot h}{2}$ \quad (iki değişkenli).
+  \item $A$: anapara, $n$: zaman, $t$: faiz oranı olmak üzere basit faiz: $f(A,n,t)=\dfrac{A\cdot n\cdot t}{100}$
+        \quad (üç değişkenli).
+  \item Dikdörtgenin alanı $f(x,y)=x\cdot y$; kutunun hacmi $f(x,y,h)=x\cdot y\cdot h$.
+\end{itemize}
+\end{tahta}
+
+\begin{tanim}[Tanım kümesi ve görüntü kümesi]
+Çok değişkenli bir fonksiyonun \textbf{tanım kümesi} $T_f$, $f(x,y)$ veya $f(x,y,z)$ ifadesini tanımlı (reel sayı) yapan
+$(x,y)$ veya $(x,y,z)$ noktalarının kümesidir. \textbf{Görüntü (değer) kümesi} ise fonksiyonun aldığı değerlerin kümesidir:
+\[
+G_f=\{\,f(x,y)\;:\;(x,y)\in T_f\,\}.
+\]
+Tanım kümesi açıkça verilmemişse, ifadenin anlamlı olduğu en geniş küme alınır (\foto{IMG-20261015-WA0040},
+\foto{IMG-20261023-WA0042}).
+\end{tanim}
+
+\textbf{Adım adım yöntem (tanım kümesi bulma).} Tek değişkendeki kuralların aynısı geçerlidir:
+\begin{enumerate}
+  \item Kesirli ifadede \textbf{payda $\neq 0$} olmalı.
+  \item Çift kökün ($\sqrt{\ }$, $\sqrt[4]{\ }$, \dots) içi \textbf{$\ge 0$} olmalı.
+  \item Logaritmanın ($\ln$, $\log$) içi \textbf{$>0$} olmalı.
+  \item $\arcsin u$, $\arccos u$ için \textbf{$-1\le u\le 1$} olmalı.
+  \item Bütün koşulları yazıp \textbf{kesişimlerini} alın, sonra bölgeyi $xy$-düzleminde çizin. Sınır eğrisinin dahil olup
+        olmadığını ($\le$ mi $<$ mi) mutlaka belirtin: dahilse sürekli çizgi, değilse kesikli çizgi kullanılır.
+\end{enumerate}
+
+\begin{soru}[Örnek 1 (tahta) \foto{IMG-20261015-WA0041}, \foto{IMG-20261023-WA0042}]
+$f(x,y)=\sqrt{4-x^2-y^2}$ eşitliği ile tanımlanan $f$ reel değerli fonksiyonunun tanım kümesini analitik düzlemde
+gösteriniz.
+\end{soru}
+\begin{cevap}
+Kök içi negatif olamaz:
+\[
+4-x^2-y^2\ge 0 \;\Longrightarrow\; x^2+y^2\le 4 .
+\]
+\[
+T_f=\{(x,y): x^2+y^2\le 4\}
+\]
+Merkezi orijin, yarıçapı $2$ olan çemberin \textbf{içi ve kendisi}; yani \textbf{kapalı disk} (sınır çember dahil),
+aşağıdaki şeklin (a) kısmı.
+
+\emph{Ek olarak görüntü kümesi:} Disk içinde $0\le x^2+y^2\le 4$ olduğundan $0\le 4-x^2-y^2\le 4$ ve
+$0\le f(x,y)\le 2$ bulunur. $f(0,0)=2$ ve çember üzerinde $f=0$; arada her değer alınır. Dolayısıyla $G_f=[0,2]$.
+Geometrik olarak $z=\sqrt{4-x^2-y^2}$ grafiği, yarıçapı $2$ olan kürenin \emph{üst yarısıdır} ($x^2+y^2+z^2=4$, $z\ge 0$).
+\end{cevap}
+
+\begin{soru}[Örnek 2 (tahta) \foto{IMG-20261015-WA0041}, \foto{IMG-20261023-WA0042}]
+$f(x,y)=\arccos(x-y)$ fonksiyonunun tanım ve görüntü kümesini bulunuz.
+\end{soru}
+\begin{cevap}
+Hatırlatma: $\cos:\mathbb R\to[-1,1]$ ve onun (kısıtlanmış) tersi $\arccos:[-1,1]\to[0,\pi]$. O hâlde $\arccos$'un içi
+$[-1,1]$ aralığında olmalıdır:
+\[
+-1\le x-y\le 1 .
+\]
+Bu çift eşitsizliği ikiye ayıralım:
+\[
+x-y\ge -1 \Rightarrow y\le x+1, \qquad x-y\le 1 \Rightarrow y\ge x-1 .
+\]
+\[
+T_f=\{(x,y): x-1\le y\le x+1\}
+\]
+Bu, birbirine paralel $y=x-1$ ve $y=x+1$ doğruları \textbf{arasındaki şerittir}; eşitsizlikler $\le$ olduğundan sınır
+doğruları da dahildir (şeklin (b) kısmı).
+
+\textbf{Görüntü kümesi:} $u=x-y$ dersek, şerit üzerinde $u$ değişkeni $[-1,1]$ aralığının \emph{her} değerini alır
+(örneğin $y=0$, $x=u$ alınabilir). $\arccos u$ ise $[-1,1]$ üzerinde $\pi$'den $0$'a monoton azalır; böylece
+\[
+G_f=[0,\pi].
+\]
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki çizim hakkında]
+Tahtada $\arccos u$ grafiği kabataslak çizilmiş (ortası neredeyse yatay) ve eksen etiketi
+\okunamadi{``arccos4'' gibi okunuyor; büyük olasılıkla ``$\arccos u$''}. Gerçek eğri $(-1,\pi)$ noktasından başlar,
+$(0,\pi/2)$'den geçer ve $(1,0)$'da biter; aşağıdaki şeklin (c) kısmında doğru biçimi çizilmiştir.
+\end{bilgi}
+
+\begin{soru}[Örnek 3 (tahta) \foto{IMG-20261015-WA0042}, \foto{IMG-20261023-WA0044}]
+$f(x,y)=\sqrt{xy}+\log(1-x^2-y^2)$ şeklinde tanımlı $f$ fonksiyonunun tanım kümesini bulunuz.
+\end{soru}
+\begin{cevap}
+İki koşul var ve ikisi \emph{birlikte} sağlanmalı:
+\begin{enumerate}
+  \item Kök: $xy\ge 0 \Rightarrow (x\ge 0 \text{ ve } y\ge 0)$ veya $(x\le 0\text{ ve }y\le 0)$; yani I. ve III. bölgeler
+        (eksenler dahil).
+  \item Logaritma: $1-x^2-y^2>0\Rightarrow x^2+y^2<1$; birim çemberin içi (çember \textbf{hariç}).
+\end{enumerate}
+Kesişim:
+\[
+T_f=\{(x,y):\ xy\ge 0,\ x^2+y^2<1\}.
+\]
+Birim dairenin I. ve III. bölgede kalan çeyrekleri; eksen parçaları dahil, çember hariç (şeklin (d) kısmı; çember
+kesikli çizilmiştir). Logaritmanın tabanı (10 ya da $e$) tanım kümesini etkilemez.
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.62]
+% (a) kapalı disk
+\begin{scope}
+  \fill[ana!15] (0,0) circle (2);
+  \draw[ana,thick] (0,0) circle (2);
+  \draw[eks] (-2.7,0)--(2.9,0) node[below]{$x$};
+  \draw[eks] (0,-2.7)--(0,2.9) node[left]{$y$};
+  \node[below right,font=\small] at (2,0) {$2$};
+  \node[font=\small] at (0,-3.5) {(a) $x^2+y^2\le 4$};
+\end{scope}
+% (b) şerit
+\begin{scope}[xshift=7cm]
+  \begin{scope}
+    \clip (-2.6,-2.6) rectangle (2.6,2.6);
+    \fill[ana!15] (-4,-5)--(4,3)--(4,5)--(-4,-3)--cycle;
+    \draw[ana,thick] (-4,-5)--(4,3);
+    \draw[ana,thick] (-4,-3)--(4,5);
+  \end{scope}
+  \draw[eks] (-2.7,0)--(2.9,0) node[below]{$x$};
+  \draw[eks] (0,-2.7)--(0,2.9) node[left]{$y$};
+  \node[ana,font=\scriptsize,right] at (1.3,2.3) {$y=x+1$};
+  \node[ana,font=\scriptsize,right] at (1.8,0.6) {$y=x-1$};
+  \node[font=\small] at (0,-3.5) {(b) $x-1\le y\le x+1$};
+\end{scope}
+% (c) arccos u
+\begin{scope}[xshift=13.5cm,yshift=-1.6cm]
+  \draw[eks] (-2.6,0)--(2.6,0) node[below]{$u$};
+  \draw[eks] (0,-0.5)--(0,4.4) node[left]{$z$};
+  \draw[dashed,gri] (-1.8,{pi})--(0,{pi}) node[right,black,font=\small]{$\pi$};
+  \draw[dashed,gri] (-1.8,0)--(-1.8,{pi});
+  \draw[vurgu,very thick,domain=-1:1,samples=25,smooth] plot ({1.8*\x},{rad(acos(\x))});
+  \node[below,font=\small] at (-1.8,0) {$-1$};
+  \node[below,font=\small] at (1.8,0) {$1$};
+  \node[vurgu,font=\small] at (1.5,2.3) {$\arccos u$};
+  \node[font=\small] at (0,-1.9) {(c) $G_f=[0,\pi]$};
+\end{scope}
+% (d) çeyrek daireler
+\begin{scope}[xshift=20cm]
+  \fill[ana!15] (0,0)--(2,0) arc (0:90:2)--cycle;
+  \fill[ana!15] (0,0)--(-2,0) arc (180:270:2)--cycle;
+  \draw[ana,thick,dashed] (0,0) circle (2);
+  \draw[ana,very thick] (0,0)--(1.97,0) (0,0)--(0,1.97) (0,0)--(-1.97,0) (0,0)--(0,-1.97);
+  \draw[eks] (-2.7,0)--(2.9,0) node[below]{$x$};
+  \draw[eks] (0,-2.7)--(0,2.9) node[left]{$y$};
+  \node[below right,font=\small] at (2,0) {$1$};
+  \node[font=\small] at (0,-3.5) {(d) $xy\ge0,\ x^2+y^2<1$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{soru}[Örnek 4 (tahta) \foto{IMG-20261022-WA0053}, \foto{IMG-20261108-WA0088}]
+Aşağıdaki fonksiyonların tanım kümelerini bulunuz.
+\begin{description}
+  \item[(a)] $f(x,y)=\ln(x^2+y^2+4)$
+  \item[(b)] $f(x,y)=\sqrt{xy-x^4}+xy$
+  \item[(c)] $f(x,y)=\sqrt{x^2-y}+x^2+y^2+1$
+\end{description}
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Logaritmanın içi pozitif olmalı: $x^2+y^2+4>0$. Bu eşitsizlik her $(x,y)$ için doğrudur (çünkü
+  $x^2+y^2\ge 0$, dolayısıyla $x^2+y^2+4\ge 4>0$). O hâlde $T_f=\mathbb R^2$, yani \textbf{bütün düzlem}.
+  \item[(b)] Kök içi: $xy-x^4\ge 0 \Rightarrow x(y-x^3)\ge 0$. İki çarpanın çarpımı negatif olmamalı, yani çarpanlar aynı
+  işaretli (veya biri sıfır) olmalı:
+  \[
+  \text{(1)}\ (x\ge 0 \text{ ve } y\ge x^3) \qquad \text{veya} \qquad \text{(2)}\ (x\le 0\text{ ve } y\le x^3).
+  \]
+  (1) bölgesi: sağ yarı düzlemde $y=x^3$ eğrisinin \emph{üstü} ($y$ ekseni ile eğri arası);
+  (2) bölgesi: sol yarı düzlemde $y=x^3$ eğrisinin \emph{altı}. Sınırlar ($y$ ekseni ve $y=x^3$ eğrisi) dahildir;
+  özellikle $x=0$ için koşul $0\ge0$ olduğundan $y$ ekseninin tamamı tanım kümesindedir. (Aşağıdaki şeklin sol kısmı.)
+  \item[(c)] Kök içi: $x^2-y\ge 0\Rightarrow y\le x^2$. Diğer terimler ($x^2+y^2+1$) her yerde tanımlıdır.
+  $T_f$: $y=x^2$ \textbf{parabolünün altı ve kendisi} (şeklin sağ kısmı).
+\end{description}
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\begin{scope}
+  \fill[ana!15] (0,0) -- plot[domain=0:1.357,samples=20] (\x,{\x*\x*\x}) -- (0,2.5) -- cycle;
+  \fill[ana!15] (0,0) -- plot[domain=0:-1.357,samples=20] (\x,{\x*\x*\x}) -- (0,-2.5) -- cycle;
+  \draw[ana,very thick,domain=-1.357:1.357,samples=25,smooth] plot (\x,{\x*\x*\x});
+  \draw[ana,very thick] (0,-2.5)--(0,2.5);
+  \draw[eks] (-2,0)--(2.2,0) node[below]{$x$};
+  \draw[eks] (0,-2.7)--(0,2.9) node[left]{$y$};
+  \node[ana,font=\small,right] at (1.36,2.3) {$y=x^3$};
+  \node[font=\small] at (0.45,1.6) {(1)};
+  \node[font=\small] at (-0.45,-1.6) {(2)};
+  \node[font=\small] at (0,-3.2) {(b) $x(y-x^3)\ge 0$};
+\end{scope}
+\begin{scope}[xshift=6.5cm]
+  \fill[ana!15] plot[domain=-1.6:1.6,samples=25] (\x,{\x*\x}) -- (1.6,-1.2) -- (-1.6,-1.2) -- cycle;
+  \draw[ana,very thick,domain=-1.6:1.6,samples=25,smooth] plot (\x,{\x*\x});
+  \draw[eks] (-2,0)--(2.2,0) node[below]{$x$};
+  \draw[eks] (0,-1.4)--(0,2.9) node[left]{$y$};
+  \node[ana,font=\small,right] at (1.5,2.4) {$y=x^2$};
+  \node[font=\small] at (0,-2.0) {(c) $y\le x^2$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{soru}[\ekal Örnek 5 (tanım ve görüntü kümesi)]
+$g(x,y)=\dfrac{\ln(y-x)}{\sqrt{9-x^2-y^2}}$ ve $h(x,y)=e^{-(x^2+y^2)}$ fonksiyonlarının tanım kümelerini, $h$'nin
+ayrıca görüntü kümesini bulunuz.
+\end{soru}
+\begin{cevap}
+$g$ için: logaritma $\Rightarrow y-x>0$, yani $y>x$; kök paydada olduğundan içi \emph{kesin} pozitif olmalı
+$\Rightarrow 9-x^2-y^2>0$, yani $x^2+y^2<9$. Böylece
+\[
+T_g=\{(x,y):\ y>x,\ x^2+y^2<9\},
+\]
+yarıçapı 3 olan açık diskin $y=x$ doğrusunun üst tarafında kalan yarısı (doğru ve çember hariç).
+
+$h$ için: üstel fonksiyon her yerde tanımlı olduğundan $T_h=\mathbb R^2$. $u=x^2+y^2$ değişkeni $[0,\infty)$
+aralığındaki her değeri alır; $e^{-u}$ ise bu aralıkta $1$'den başlayıp $0$'a yaklaşan (ama $0$ olmayan) azalan bir
+fonksiyondur. Dolayısıyla $G_h=(0,1]$.
+\end{cevap}
+
+% =====================================================================
+\subsection{Grafikler, seviye eğrileri ve kontur haritaları}
+
+\begin{tanim}[Grafik]
+$z=f(x,y)$ fonksiyonunun \textbf{grafiği}, uzaydaki
+\[
+\{(x,y,z)\;:\;(x,y)\in T_f,\ z=f(x,y)\}
+\]
+noktalarının kümesidir. Bu küme genellikle uzayda bir \textbf{yüzey} belirtir; tanım kümesi bu yüzeyin $xy$-düzlemi
+üzerine dik izdüşümüdür.
+\end{tanim}
+
+Bir yüzeyi elle çizmek zordur. Bunun yerine haritacıların yaptığını yaparız: yüzeyi $z=c$ yatay düzlemleriyle keser,
+kesit eğrilerini $xy$-düzlemine indiririz.
+
+\begin{tahta}[\foto{IMG-20261015-WA0042}, \foto{IMG-20261023-WA0044}]
+\textbf{İki değişkenli fonksiyonların grafikleri; seviye eğrileri.} $z=f(x,y)$ fonksiyonu verildiğinde $xOy$ düzleminde
+fonksiyonun sabit değerler aldığı noktaların kümesine \textbf{seviye eğrisi} denir:
+\[
+f(x,y)=c .
+\]
+$z=f(x,y)$ uzayda bir yüzey belirtir.
+\end{tahta}
+
+\begin{tanim}[Kontur haritası]
+Farklı $c$ değerleri için çizilen seviye eğrilerinin tek bir $xy$-düzleminde toplanmasına \textbf{kontur haritası}
+(eş yükselti haritası) denir. $c$ değerleri eşit aralıklarla seçildiğinde, eğrilerin \emph{sık} olduğu yerde yüzey
+\emph{dik}, \emph{seyrek} olduğu yerde \emph{yatık}tır.
+\end{tanim}
+
+\begin{bilgi}[Günlük hayatta seviye eğrileri]
+Topografik haritalardaki eş yükselti eğrileri, hava durumu haritalarındaki \emph{izobarlar} (eş basınç) ve
+\emph{izotermler} (eş sıcaklık), elektrostatikteki eş potansiyel eğrileri hep seviye eğrileridir. İki farklı seviye
+eğrisi birbirini kesemez: bir noktada fonksiyon iki farklı değer alamaz.
+\end{bilgi}
+
+\begin{soru}[Örnek 6 (tahta) \foto{IMG-20261015-WA0042}, \foto{IMG-20261015-WA0043}, \foto{IMG-20261023-WA0044}]
+$f(x,y)=x^2+y^2$ fonksiyonunun bazı seviye eğrilerini bulunuz. Bundan yararlanarak fonksiyonun grafiğini çiziniz.
+\end{soru}
+\begin{cevap}
+Seviye eğrileri $x^2+y^2=c$ denklemleridir:
+\begin{itemize}
+  \item $c=1$: $x^2+y^2=1$, $xOy$ düzleminde birim çember;
+  \item $c=4$: $x^2+y^2=4$, yarıçapı $2$ olan çember;
+  \item $c=9$: $x^2+y^2=9$, yarıçapı $3$ olan çember.
+\end{itemize}
+Genel olarak:
+\[
+f(x,y)=c \;\Longleftrightarrow\; x^2+y^2=c \quad\Rightarrow\quad
+\begin{cases}
+c>0: & \text{merkezi orijin, yarıçapı } \sqrt c \text{ olan çember},\\
+c=0: & \text{yalnızca orijin } (0,0),\\
+c<0: & \text{boş küme (fonksiyon negatif değer almaz)}.
+\end{cases}
+\]
+Seviye eğrileri iç içe çemberlerdir ve $c$ büyüdükçe yarıçap $\sqrt c$ kadar, yani giderek \emph{daha yavaş} artar
+(çemberler dışarıya doğru sıklaşır: yüzey dışarıya doğru dikleşir). Yüzeyi $z=c$ yüksekliğindeki yatay düzlemle kesince
+yarıçapı $\sqrt c$ olan bir çember elde edilir; bu çemberleri üst üste dizince orijinden yukarı açılan \textbf{kâse}
+biçimli bir yüzey oluşur. $z=x^2+y^2$ yüzeyine \textbf{(dönel) paraboloid} denir. Ayrıca $yz$-düzlemiyle ($x=0$) kesit
+$z=y^2$ parabolüdür; adı da buradan gelir.
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=6.3cm, height=6.3cm, axis equal image, axis lines=middle,
+  xmin=-3.7, xmax=3.7, ymin=-3.7, ymax=3.7,
+  xlabel={$x$}, ylabel={$y$}, xtick={-3,-2,-1,1,2,3}, ytick={-3,-2,-1,1,2,3},
+  tick label style={font=\scriptsize}, title={\small Seviye eğrileri $x^2+y^2=c$}]
+  \addplot[ana!50, thick, domain=0:360, samples=25, smooth] ({cos(x)},{sin(x)});
+  \addplot[ana!75, thick, domain=0:360, samples=25, smooth] ({2*cos(x)},{2*sin(x)});
+  \addplot[ana, thick, domain=0:360, samples=25, smooth] ({3*cos(x)},{3*sin(x)});
+  \node[font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:0.71,0.71) {$c=1$};
+  \node[font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:1.41,1.41) {$c=4$};
+  \node[font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:2.12,2.12) {$c=9$};
+\end{axis}
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\begin{axis}[
+  width=7.2cm, height=7.2cm, view={35}{22},
+  axis lines=center, xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+  xmin=-3, xmax=3, ymin=-3, ymax=3, zmin=0, zmax=5.6, ticks=none,
+  colormap={mavi}{rgb255=(214,229,244) rgb255=(31,78,121)},
+  title={\small $z=x^2+y^2$ paraboloidi}]
+  \addplot3[surf, opacity=0.85, faceted color=ana!60, domain=0:2.2, y domain=0:360,
+    samples=12, samples y=24, z buffer=sort] ({x*cos(y)},{x*sin(y)},{x^2});
+  \addplot3[vurgu, very thick, domain=0:360, samples=25, samples y=0] ({cos(x)},{sin(x)},{1});
+  \addplot3[vurgu, very thick, domain=0:360, samples=25, samples y=0] ({2*cos(x)},{2*sin(x)},{4});
+  \addplot3[vurgu, dashed, domain=0:360, samples=25, samples y=0] ({cos(x)},{sin(x)},{0});
+  \addplot3[vurgu, dashed, domain=0:360, samples=25, samples y=0] ({2*cos(x)},{2*sin(x)},{0});
+\end{axis}
+\end{tikzpicture}
+\end{center}
+{\small\color{gri} Sağdaki şekilde kırmızı çemberler yüzeyin $z=1$ ve $z=4$ yüksekliğindeki kesitleri; kesikli çemberler
+bunların $xy$-düzlemindeki izdüşümleri, yani $c=1$ ve $c=4$ seviye eğrileridir.}
+
+\begin{bilgi}[Tahtadaki gösterim hakkında]
+Tahtada (\foto{IMG-20261015-WA0042}, \foto{IMG-20261023-WA0044}) ``$c$ reel sayı, $x^2+y^2=c^2$ değeri alındığında
+$xOy$ düzleminde yarıçapı $c$ olan çember'' yazılmıştır. Bu ifade, seviye değeri $c^2$ alındığında doğrudur. Seviye
+eğrisini $f(x,y)=c$ diye tanımladığımızda doğrusu: \emph{$c>0$ için yarıçapı $\sqrt c$ olan çember}. Nitekim şekildeki
+etiketler $c=1,4,9$ (yarıçaplar $1,2,3$) bu ikinci yazımla uyumludur. Ayrıca \foto{IMG-20261015-WA0043}'teki paraboloid
+çizimi düz kenarlı (koni gibi) çizilmiştir; gerçek paraboloidin kenarları eğridir (koni $z=\sqrt{x^2+y^2}$ olurdu).
+\end{bilgi}
+
+\begin{soru}[\ekal Örnek 7 (seviye eğrileri)]
+Aşağıdaki fonksiyonların seviye eğrilerini belirleyip kısaca yorumlayınız:
+(a) $f(x,y)=6-3x-2y$, \quad (b) $g(x,y)=y-x^2$, \quad (c) $h(x,y)=xy$.
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] $6-3x-2y=c\Rightarrow 3x+2y=6-c$. Eğimi $-3/2$ olan \textbf{paralel doğrular}. $c$ değerleri eşit aralıklı
+  seçilirse doğrular da eşit aralıklıdır; grafik $z=6-3x-2y$ bir \textbf{düzlemdir}.
+  \item[(b)] $y-x^2=c\Rightarrow y=x^2+c$. Birbirinin dikey ötelemesi olan \textbf{paraboller}. Grafik, parabolik bir
+  ``oluk'' (parabolik silindir benzeri değil; $z=y-x^2$, $y$ yönünde eğik bir yüzey) belirtir.
+  \item[(c)] $xy=c$. $c\neq0$ için $y=c/x$ \textbf{hiperbolleri} ($c>0$: I. ve III. bölge, $c<0$: II. ve IV. bölge);
+  $c=0$ için iki koordinat ekseni. Grafik $z=xy$ bir \textbf{eyer yüzeyidir} (hiperbolik paraboloid,
+  $45^\circ$ döndürülmüş $z=\tfrac12(u^2-v^2)$).
+\end{description}
+\end{cevap}
+
+\subsubsection{Üç değişkenli fonksiyonlar ve seviye yüzeyleri}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Seviye yüzeyleri ve üç değişkenli fonksiyonların tanım kümeleri tahtada ayrıca işlenmedi; bu alt bölüm Zill \& Wright ve
+Balcı'daki anlatıma göre eklenmiştir.
+\end{bilgi}
+
+$w=f(x,y,z)$ fonksiyonunun grafiği dört boyutlu uzayda olacağından çizilemez. Bunun yerine fonksiyonun sabit değer aldığı
+noktaları inceleriz:
+
+\begin{tanim}[Seviye yüzeyi]
+$w=f(x,y,z)$ fonksiyonu için $f(x,y,z)=c$ denklemini sağlayan noktaların kümesi uzayda (genellikle) bir yüzeydir; buna
+$f$'nin \textbf{seviye yüzeyi} denir.
+\end{tanim}
+
+\begin{soru}[\ekal Örnek 8 (seviye yüzeyleri)]
+(a) $f(x,y,z)=x^2+y^2+z^2$ ve (b) $g(x,y,z)=x^2+y^2-z^2$ fonksiyonlarının seviye yüzeylerini belirleyiniz.
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] $x^2+y^2+z^2=c$: $c>0$ için merkezi orijin, yarıçapı $\sqrt c$ olan \textbf{iç içe küreler}; $c=0$ için
+  yalnızca orijin; $c<0$ için boş küme. (Örneğin $f$ bir noktadaki sıcaklığı gösterseydi, eş sıcaklık yüzeyleri küreler
+  olurdu.)
+  \item[(b)] $x^2+y^2-z^2=c$: $c>0$ için \textbf{tek kanatlı hiperboloid}; $c=0$ için \textbf{koni} $z^2=x^2+y^2$;
+  $c<0$ için \textbf{iki kanatlı hiperboloid}. (Kuadratik yüzeyler konusunda gördüğümüz yüzeyler burada seviye yüzeyi
+  olarak karşımıza çıkar.)
+\end{description}
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 9 (üç değişkenli tanım kümesi)]
+$f(x,y,z)=\sqrt{1-x^2-y^2-z^2}$ ve $g(x,y,z)=\ln(z-x^2-y^2)$ fonksiyonlarının tanım kümelerini tarif ediniz.
+\end{soru}
+\begin{cevap}
+$f$: $1-x^2-y^2-z^2\ge 0\Rightarrow x^2+y^2+z^2\le 1$. Merkezi orijin, yarıçapı $1$ olan \textbf{kapalı küre}
+(küre yüzeyi ve içi). Görüntü kümesi $[0,1]$.
+
+$g$: $z-x^2-y^2>0\Rightarrow z>x^2+y^2$. $z=x^2+y^2$ paraboloidinin \textbf{içi (üst tarafı)}; paraboloidin kendisi
+hariç.
+\end{cevap}
+
+% =====================================================================
+\subsection{Komşuluk, düzlemde kümeler ve limitin tanımı}
+
+\subsubsection{Komşuluk}
+
+\begin{tahta}[\foto{IMG-20261022-WA0051}, \foto{IMG-20261108-WA0095}]
+\textbf{Çok değişkenli fonksiyonlarda limit.} $P(a,b)$ sabit bir nokta, $\varepsilon>0$ olsun.
+\[
+D(P,\varepsilon)=\Big\{(x,y):\sqrt{(x-a)^2+(y-b)^2}<\varepsilon\Big\}=\big\{(x,y):(x-a)^2+(y-b)^2<\varepsilon^2\big\}
+\]
+kümesine $(a,b)$ noktasının \textbf{$\varepsilon$ komşuluğu} denir.
+\end{tahta}
+
+Yani $\varepsilon$ komşuluğu, merkezi $(a,b)$ ve yarıçapı $\varepsilon$ olan \textbf{açık disktir} (sınır çemberi hariç).
+Tek değişkendeki $(a-\varepsilon,a+\varepsilon)$ aralığının düzlemdeki karşılığıdır.
+
+\subsubsection{Açık ve kapalı kümeler, iç nokta, sınır noktası}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Aşağıdaki küme kavramları tahtada işlenmedi; Zill \& Wright ve Kreyszig'e göre kısaca eklenmiştir. Limit ve süreklilik
+tanımlarında ``noktanın etrafında'' demenin kesin anlamını verirler.
+\end{bilgi}
+
+\begin{tanim}[İç nokta, sınır noktası, açık/kapalı/sınırlı küme]
+$R$ düzlemde bir küme olsun.
+\begin{itemize}
+  \item $(a,b)$ noktasının \emph{tamamen $R$ içinde kalan} bir komşuluğu varsa, $(a,b)$ noktasına $R$'nin
+        \textbf{iç noktası} denir.
+  \item $(a,b)$ noktasının \emph{her} komşuluğu hem $R$'ye ait hem de $R$'ye ait olmayan noktalar içeriyorsa, $(a,b)$'ye
+        $R$'nin \textbf{sınır noktası} denir (sınır noktası $R$'ye ait olabilir de olmayabilir de).
+  \item Bütün noktaları iç nokta olan kümeye \textbf{açık küme}, bütün sınır noktalarını içeren kümeye
+        \textbf{kapalı küme} denir.
+  \item Yeterince büyük bir diskin içine sığan kümeye \textbf{sınırlı küme}, sığmayana \textbf{sınırsız küme} denir.
+\end{itemize}
+\end{tanim}
+
+\begin{center}
+\begin{tabular}{l l l}
+\toprule
+Küme & Açık / kapalı & Sınırlı mı? \\
+\midrule
+$\{x^2+y^2<1\}$ (açık disk) & açık & sınırlı \\
+$\{x^2+y^2\le 4\}$ (Örnek 1) & kapalı & sınırlı \\
+$\{1<x^2+y^2\le 4\}$ (halka) & ne açık ne kapalı & sınırlı \\
+$\{x-1\le y\le x+1\}$ (Örnek 2) & kapalı & sınırsız \\
+$\{y>x^2\}$ & açık & sınırsız \\
+$\mathbb R^2$ (Örnek 4a) & hem açık hem kapalı & sınırsız \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Pratik kural: kesin eşitsizliklerle ($<$, $>$) ve sürekli fonksiyonlarla verilen kümeler açık, $\le$, $\ge$, $=$ ile
+verilenler kapalıdır.
+
+\subsubsection{Limitin \texorpdfstring{$\varepsilon$--$\delta$}{epsilon-delta} tanımı}
+
+\begin{tahta}[\foto{IMG-20261022-WA0051}, \foto{IMG-20261108-WA0095}]
+\textbf{Tanım.} $f(x,y)$ düzlemde bir fonksiyon olsun.
+\[
+\lim_{(x,y)\to(a,b)} f(x,y)=L
+\]
+olması için gerek ve yeter koşul: her $\varepsilon>0$ için öyle bir $\delta>0$ vardır ki
+\[
+0<\sqrt{(x-a)^2+(y-b)^2}<\delta \quad\text{iken}\quad |f(x,y)-L|<\varepsilon
+\]
+olur.
+\end{tahta}
+
+\textbf{Tanımı okumak.} ``$f(x,y)$'yi $L$'ye istediğim kadar ($\varepsilon$ kadar) yakın yapabilmek için, $(x,y)$'yi
+$(a,b)$'ye yeterince ($\delta$ kadar) yakın almam yeter.'' Burada:
+\begin{itemize}
+  \item $0<\sqrt{\cdots}$ koşulu $(a,b)$ noktasının \emph{kendisini} dışarıda bırakır: limit, fonksiyonun $(a,b)$'deki
+        değeriyle ilgilenmez; $f$ orada tanımlı bile olmayabilir.
+  \item $\sqrt{(x-a)^2+(y-b)^2}<\delta$, $(x,y)$'nin $(a,b)$'nin $\delta$ komşuluğunda olması demektir. Bu komşuluk bir
+        \emph{disk} olduğundan $(x,y)$ bu diske \emph{her yönden} girebilir.
+  \item (Teknik not, Zill \& Wright) $(a,b)$'nin her komşuluğunda $T_f$'ye ait noktalar bulunmalıdır; aksi halde limitten
+        söz edilmez. Tanım kümesinin dışındaki noktalar limit hesabında hesaba katılmaz.
+\end{itemize}
+
+\begin{tahta}[\foto{IMG-20261022-WA0051}, \foto{IMG-20261108-WA0094}]
+Limiti varsa $(a,b)$'ye \textbf{her yoldan} yaklaşıldığında aynı değere ulaşılır. Sık kullanılan yollar:
+\[
+y=mx, \qquad y=ax^2, \qquad x=r\cos\theta,\ y=r\sin\theta\ \ (r\to 0).
+\]
+\textbf{Sonuç:} İki farklı yoldan farklı değer çıkarsa limit yoktur.
+\end{tahta}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\begin{scope}
+  \draw[eks] (-0.3,0)--(4.4,0) node[below]{$x$};
+  \draw[eks] (0,-0.3)--(0,3.6) node[left]{$y$};
+  \coordinate (P) at (2.2,1.8);
+  \fill[ana!10] (P) circle (1.3);
+  \draw[ana,thick,dashed] (P) circle (1.3);
+  \draw[gri,->] (P) -- ++(35:1.3);
+  \node[gri,font=\small] at ($(P)+(35:0.75)+(-0.1,0.25)$) {$\delta$};
+  \fill[vurgu] (P) circle (1.8pt) node[below left,font=\small]{$(a,b)$};
+  \fill (2.75,1.15) circle (1.5pt) node[right,font=\small]{$(x,y)$};
+  \node[font=\small,align=center] at (2.2,-0.75) {$(a,b)$'nin $\delta$ komşuluğu (sınır hariç)};
+\end{scope}
+\begin{scope}[xshift=8.3cm,yshift=1.7cm]
+  \draw[eks] (-2.1,0)--(2.2,0) node[below]{$x$};
+  \draw[eks] (0,-1.8)--(0,1.9) node[left]{$y$};
+  \foreach \a in {25,60,125,160} \draw[ana,thick] (\a:1.7)--(\a+180:1.7);
+  \draw[vurgu,thick,domain=-1.25:1.25,samples=21,smooth] plot (\x,{\x*\x});
+  \draw[vurgu,thick,domain=-1.25:1.25,samples=21,smooth] plot (\x,{-\x*\x});
+  \fill (0,0) circle (1.8pt);
+  \node[ana,font=\small] at (1.85,1.15) {$y=mx$};
+  \node[vurgu,font=\small] at (-1.75,1.5) {$y=ax^2$};
+  \node[font=\small] at (0,-2.45) {Orijine farklı yollardan yaklaşma};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{soru}[\ekal Örnek 10 (tanımla ispat)]
+$\varepsilon$--$\delta$ tanımını kullanarak $\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2y}{x^2+y^2}=0$ olduğunu
+gösteriniz.
+\end{soru}
+\begin{cevap}
+$\varepsilon>0$ verilsin. $(x,y)\neq(0,0)$ için $x^2\le x^2+y^2$ olduğundan $\dfrac{x^2}{x^2+y^2}\le 1$ ve
+$|y|\le\sqrt{x^2+y^2}$. Buna göre
+\[
+\left|\frac{3x^2y}{x^2+y^2}-0\right| = 3|y|\cdot\frac{x^2}{x^2+y^2}\le 3|y|\le 3\sqrt{x^2+y^2}.
+\]
+$\delta=\varepsilon/3$ seçelim. $0<\sqrt{x^2+y^2}<\delta$ ise
+$\left|\dfrac{3x^2y}{x^2+y^2}\right|\le 3\sqrt{x^2+y^2}<3\delta=\varepsilon$ olur. Tanım sağlandığından limit $0$'dır.
+\end{cevap}
+
+% =====================================================================
+\subsection{Limit kuralları ve limit hesabı}
+
+Tanımla her limiti hesaplamak zahmetlidir. Tek değişkendeki gibi, temel limitlerden yola çıkıp kurallarla ilerleriz.
+
+\begin{tahta}[\foto{IMG-20261022-WA0058}, \foto{IMG-20261108-WA0094}]
+\textbf{Limit kuralları -- Teorem.} $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=L_1$ ve
+$\displaystyle\lim_{(x,y)\to(a,b)}g(x,y)=L_2$ olsun. Hepsinde $(x,y)\to(a,b)$ olmak üzere:
+\begin{enumerate}
+  \item $\lim\big(f(x,y)\mp g(x,y)\big)=L_1\mp L_2$
+  \item $\lim\big(f(x,y)\cdot g(x,y)\big)=L_1\cdot L_2$
+  \item $\lim\big(c\cdot f(x,y)\big)=c\cdot L_1$ \quad ($c$ sabit)
+  \item $\lim\dfrac{f(x,y)}{g(x,y)}=\dfrac{L_1}{L_2}$ \quad ($L_2\neq 0$)
+\end{enumerate}
+\end{tahta}
+
+{\small\color{gri} Not: \foto{IMG-20261108-WA0094}'te teoremin başındaki limit yazısı ``$(x,y)\to(a,0)$'' gibi
+görünüyor; \foto{IMG-20261022-WA0058}'e göre doğrusu $(x,y)\to(a,b)$'dir.}
+
+Bunlara ek olarak (kaynaklardan) iki temel limit ve bir kural daha kullanırız:
+\[
+\lim_{(x,y)\to(a,b)}x=a,\qquad \lim_{(x,y)\to(a,b)}y=b,\qquad \lim_{(x,y)\to(a,b)}c=c,
+\]
+\[
+\lim_{(x,y)\to(a,b)}\big(f(x,y)\big)^{p/q}=L_1^{\,p/q}\quad(\text{kökün tanımlı olması koşuluyla}).
+\]
+
+\begin{tahta}[\foto{IMG-20261022-WA0058}]
+\textbf{Örnek.} $m,n\in\mathbb N$ olsun.
+\[
+\lim_{(x,y)\to(a,b)}x^m y^n=\lim_{x\to a}x^m\cdot\lim_{y\to b}y^n=a^m b^n .
+\]
+Bu şekildeki terimlerin toplamı olan $P(x,y)$ iki değişkenli bir \textbf{polinom} ise
+\[
+\lim_{(x,y)\to(a,b)}P(x,y)=P(a,b)
+\]
+olur.
+\end{tahta}
+
+\textbf{Gerekçe.} $\lim x=a$ ve $\lim y=b$ temel limitlerine çarpım kuralını tekrar tekrar uygularsak $x^m\to a^m$,
+$y^n\to b^n$ ve $x^my^n\to a^mb^n$ bulunur. Toplam ve sabitle çarpım kuralları ile her polinomda ``\textbf{doğrudan
+yerine koyma}'' geçerli olur. Aynı şekilde $P,Q$ polinom ve $Q(a,b)\neq0$ ise bölüm kuralından
+\[
+\lim_{(x,y)\to(a,b)}\frac{P(x,y)}{Q(x,y)}=\frac{P(a,b)}{Q(a,b)} .
+\]
+
+\begin{soru}[Örnek 11 (tahta) \foto{IMG-20261022-WA0053}]
+$P(x,y)=5x^2y^2+4xy^3-8xy^2+3$ polinomu için $\displaystyle\lim_{(x,y)\to(1,2)}P(x,y)$ limitini hesaplayınız.
+\end{soru}
+\begin{cevap}
+Polinomda doğrudan yerine koyma geçerlidir:
+\[
+\lim_{(x,y)\to(1,2)}P(x,y)=5\cdot1^2\cdot2^2+4\cdot1\cdot2^3-8\cdot1\cdot2^2+3=20+32-32+3=\boxed{23}.
+\]
+\end{cevap}
+
+\subsubsection{Adım adım limit hesabı}
+
+\begin{enumerate}
+  \item \textbf{Önce doğrudan yerine koyun.} Sonuç tanımlı bir sayıysa (payda $\neq0$ vb.) ve fonksiyon o noktanın
+        etrafında polinom, rasyonel, üstel, trigonometrik vb. ``iyi'' fonksiyonlardan oluşuyorsa, limit odur.
+  \item \textbf{$\frac00$ belirsizliği çıkarsa} cebirsel düzenleme yapın: çarpanlara ayırma, sadeleştirme, \emph{eşlenik}
+        ile çarpma; ya da bilinen bir tek değişkenli limite indirgeme (ör. $\frac{\sin u}{u}\to1$, $u=xy$ gibi).
+  \item Düzenleme işe yaramıyorsa limitin \textbf{var olup olmadığını} sorgulayın: farklı yollar deneyin (bkz. iki yol
+        testi) ya da sıkıştırma ile varlığını gösterin.
+\end{enumerate}
+
+\begin{soru}[Örnek 12 (tahta) \foto{IMG-20261022-WA0053}, \foto{IMG-20261022-WA0056}, \foto{IMG-20261108-WA0088}, \foto{IMG-20261108-WA0089}]
+Aşağıdaki limitleri hesaplayınız.
+\begin{description}
+  \item[(a)] $\displaystyle\lim_{(x,y)\to(0,0)}\frac{2x^2+y^2+1}{x^2+y^2+3}$
+  \item[(b)] $\displaystyle\lim_{(x,y)\to(0,0)}\frac{2-\sqrt{xy+4}}{xy}$
+  \item[(c)] $\displaystyle\lim_{(x,y)\to(0,0)}\frac{\sin(xy)}{x}$
+  \item[(d)] $\displaystyle\lim_{(x,y)\to(0,\ln 2)}e^{x-y}$
+  \item[(e)] $\displaystyle\lim_{(x,y)\to(1,0)}\frac{x\sin y}{x^2+1}$
+  \item[(f)] $\displaystyle\lim_{(x,y)\to(0,0)}\frac{e^y\sin x}{x}$
+\end{description}
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Payda $(0,0)$'da $3\neq0$; rasyonel fonksiyonda doğrudan yerine koyma:
+  \[
+  \lim_{(x,y)\to(0,0)}\frac{2x^2+y^2+1}{x^2+y^2+3}=\frac{0+0+1}{0+0+3}=\frac13 .
+  \]
+  \item[(b)] Yerine koyunca $\frac{2-2}{0}=\frac00$ belirsizliği. Payı ve paydayı payın eşleniği $2+\sqrt{xy+4}$ ile
+  çarpalım ($xy\neq0$ olan noktalarda, yani tanım kümesinde çalışıyoruz):
+  \begin{align*}
+  \lim\frac{2-\sqrt{xy+4}}{xy}
+  &=\lim\frac{(2-\sqrt{xy+4})(2+\sqrt{xy+4})}{xy\,(2+\sqrt{xy+4})}
+   =\lim\frac{4-(xy+4)}{xy\,(2+\sqrt{xy+4})}\\
+  &=\lim\frac{-xy}{xy\,(2+\sqrt{xy+4})}
+   =\lim_{(x,y)\to(0,0)}\frac{-1}{2+\sqrt{xy+4}}=\frac{-1}{2+2}=-\frac14 .
+  \end{align*}
+  \item[(c)] Payı ve paydayı $y$ ile çarpıp $u=xy\to0$ kullanılır:
+  \[
+  \lim\frac{\sin(xy)}{x}=\lim\frac{y\,\sin(xy)}{xy}
+  =\lim_{(x,y)\to(0,0)}\frac{\sin(xy)}{xy}\cdot\lim_{(x,y)\to(0,0)}y=1\cdot0=0 .
+  \]
+  \emph{Titizlik notu:} $\frac{\sin(xy)}{xy}$ çarpanı $y=0$ olan noktalarda tanımsızdır (orada $f=0$ zaten). Hiçbir
+  noktayı dışarıda bırakmayan temiz yol $|\sin u|\le|u|$ eşitsizliğidir:
+  $\left|\dfrac{\sin(xy)}{x}\right|\le\dfrac{|xy|}{|x|}=|y|\to0$; sıkıştırma ile limit $0$.
+  \item[(d)] $e^{x-y}=e^x\cdot e^{-y}$ ve her çarpan tek bir değişkene bağlı, sürekli fonksiyonlardır:
+  \[
+  \lim_{(x,y)\to(0,\ln2)}e^{x-y}=\lim_{x\to0}e^x\cdot\lim_{y\to\ln2}e^{-y}=1\cdot e^{-\ln2}=1\cdot\frac12=\frac12 .
+  \]
+  (Daha kısası: $e^{x-y}$ sürekli olduğundan doğrudan yerine koyma $e^{0-\ln2}=\tfrac12$.)
+  \item[(e)] Payda $x^2+1\neq0$; değişkenlere ayrılabilir:
+  \[
+  \lim_{(x,y)\to(1,0)}\frac{x\sin y}{x^2+1}=\lim_{x\to1}\frac{x}{x^2+1}\cdot\lim_{y\to0}\sin y=\frac12\cdot0=0 .
+  \]
+  \item[(f)] $\frac{\sin x}{x}$ yalnız $x$'e, $e^y$ yalnız $y$'ye bağlı:
+  \[
+  \lim_{(x,y)\to(0,0)}\frac{e^y\sin x}{x}=\lim_{x\to0}\frac{\sin x}{x}\cdot\lim_{y\to0}e^y=1\cdot1=1 .
+  \]
+\end{description}
+\end{cevap}
+
+\begin{dikkat}[Tahtadaki düzeltmeler (Örnek 12)]
+\begin{itemize}
+  \item (d) şıkkında 22.10 defter notunda (\foto{IMG-20261022-WA0056}) ikinci çarpan ``$\lim_{y\to\ln2}e^{y}$'' diye
+        yazılmıştır. $e^{x-y}=e^x\cdot e^{-y}$ olduğundan doğrusu $\lim_{y\to\ln2}e^{-y}=e^{-\ln2}=\tfrac12$'dir (yazıldığı
+        gibi hesaplansa $2$ çıkardı). Sonuç olarak yazılan $\tfrac12$ doğrudur; 08.11 tahtasında
+        (\foto{IMG-20261108-WA0089}) da doğru biçimi ($e^{-y}$) yazılmıştır.
+  \item (f) şıkkının çözümü 22.10 defterinde yarım kalmıştır; tam çözüm 08.11 tahtasından (\foto{IMG-20261108-WA0089})
+        alınmıştır.
+\end{itemize}
+\end{dikkat}
+
+\begin{bilgi}[Değişkenlere ayırma ne zaman meşru?]
+(d), (e), (f)'de kullanılan $\lim_{(x,y)\to(a,b)}g(x)h(y)=\lim_{x\to a}g(x)\cdot\lim_{y\to b}h(y)$ adımı, \emph{iki
+tek değişkenli limit de varsa} çarpım kuralından gelir: $(x,y)\to(a,b)$ iken $x\to a$ olduğundan
+$\lim_{(x,y)\to(a,b)}g(x)=\lim_{x\to a}g(x)$'tir. Limitlerden biri yoksa bu ayırma yapılamaz.
+\end{bilgi}
+
+\begin{soru}[\ekal Örnek 13 (çarpanlara ayırma ve eşlenik)]
+(a) $\displaystyle\lim_{(x,y)\to(1,1)}\frac{x^2-y^2}{x-y}$ \qquad
+(b) $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-xy}{\sqrt x-\sqrt y}$ \qquad
+(c) $\displaystyle\lim_{(x,y)\to(2,-1)}\frac{x^2y+xy^2}{x+y+1}$
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Tanım kümesi $x\neq y$; $\frac00$ belirsizliği. $x^2-y^2=(x-y)(x+y)$ çarpanlarına ayrılır:
+  \[
+  \lim_{(x,y)\to(1,1)}\frac{(x-y)(x+y)}{x-y}=\lim_{(x,y)\to(1,1)}(x+y)=2 .
+  \]
+  \item[(b)] Tanım kümesi $x\ge0$, $y\ge0$, $x\neq y$. $x^2-xy=x(x-y)$ ve $x-y=(\sqrt x-\sqrt y)(\sqrt x+\sqrt y)$:
+  \[
+  \lim\frac{x(\sqrt x-\sqrt y)(\sqrt x+\sqrt y)}{\sqrt x-\sqrt y}=\lim_{(x,y)\to(0,0)}x(\sqrt x+\sqrt y)=0\cdot0=0 .
+  \]
+  \item[(c)] Payda $2-1+1=2\neq0$, doğrudan yerine koyma:
+  $\dfrac{4\cdot(-1)+2\cdot1}{2}=\dfrac{-2}{2}=-1$.
+\end{description}
+\end{cevap}
+
+% =====================================================================
+\subsection{Limitin olmadığını gösterme: iki yol testi}
+
+\begin{teorem}[İki yol testi]
+$(x,y)$, $(a,b)$'ye $C_1$ eğrisi boyunca yaklaşırken $f(x,y)\to L_1$, $C_2$ eğrisi boyunca yaklaşırken
+$f(x,y)\to L_2$ ve $L_1\neq L_2$ ise $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)$ \textbf{yoktur}. Bir yol boyunca limit
+hiç yoksa da (ör. $\pm\infty$'a gidiyorsa) iki değişkenli limit yoktur.
+\end{teorem}
+
+\textbf{Adım adım yöntem ($(0,0)$ noktasında).}
+\begin{enumerate}
+  \item Önce eksenleri deneyin: $y=0$ (yani $x$ ekseni) ve $x=0$ ($y$ ekseni). Farklı değer çıkarsa iş biter.
+  \item Doğrular $y=mx$: sonuç $m$'ye bağlıysa limit yoktur (iki farklı $m$ değeri seçip sayısal olarak gösterin).
+  \item Pay ve paydadaki kuvvetler ``dengeli'' değilse (ör. $x^4$ ile $y^2$, $x^2$ ile $y$) eğri yollar deneyin:
+        $y=kx^2$, $x=ky^2$, $y=kx^3$\dots{} Uygun yol, paydadaki terimleri \emph{aynı dereceye} getiren yoldur.
+  \item Kutupsal koordinat: $x=r\cos\theta$, $y=r\sin\theta$. $r\to0$ limiti $\theta$'ya bağlı çıkarsa limit yoktur
+        (her $\theta$ bir doğru yoludur).
+\end{enumerate}
+
+\begin{soru}[Örnek 14 (tahta) \foto{IMG-20261022-WA0058}, \foto{IMG-20261108-WA0094}]
+$\displaystyle\lim_{(x,y)\to(0,0)}\frac{2xy}{x^2+y^2}$ limitini inceleyiniz.
+\end{soru}
+\begin{cevap}
+\textbf{Kutupsal koordinatlarla:} $x=r\cos\theta$, $y=r\sin\theta$, $(x,y)\to(0,0)\Leftrightarrow r\to0$:
+\[
+\lim_{r\to0}\frac{2r^2\cos\theta\sin\theta}{r^2\underbrace{(\cos^2\theta+\sin^2\theta)}_{1}}=2\cos\theta\sin\theta=\sin2\theta .
+\]
+$\theta$'nın aldığı farklı değerler için limit değeri değişeceğinden (ör. $\theta=0$'da $0$, $\theta=\pi/4$'te $1$)
+\textbf{limit yoktur}.
+
+\textbf{Doğrularla doğrulama:} $y=mx$ ($x\neq0$):
+\[
+\frac{2x\cdot mx}{x^2+m^2x^2}=\frac{2m}{1+m^2};\qquad m=0\Rightarrow 0,\qquad m=1\Rightarrow 1 .
+\]
+Farklı sonuçlar; limit yoktur. Aşağıdaki şekilde yüzeyin orijin yakınındaki davranışı görülüyor: her doğrultu boyunca
+yüzey \emph{farklı bir yükseklikte} ($\sin2\theta$) orijine ``yaklaşır''.
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=7.6cm, height=6.4cm, view={25}{30},
+  axis lines=center, xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+  xmin=-1.3, xmax=1.3, ymin=-1.3, ymax=1.3, zmin=-1.3, zmax=1.5,
+  ticks=none, colormap={mavi}{rgb255=(192,0,0) rgb255=(238,243,248) rgb255=(31,78,121)},
+  title={\small $z=\dfrac{2xy}{x^2+y^2}=\sin2\theta$}]
+  \addplot3[surf, faceted color=gri!60, domain=-1:1, y domain=-1:1, samples=24, z buffer=sort]
+    {2*x*y/(x^2+y^2)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+{\small\color{gri} Yüzey orijine yaklaşırken $-1$ ile $1$ arasındaki bütün yükseklikleri ``dolaşır''. Seviye eğrileri
+($\sin2\theta=c$) orijinden çıkan ışınlardır; farklı seviyelerin hepsi orijinde buluştuğu için orada limit olamaz.}
+
+\begin{soru}[Örnek 15 (tahta) \foto{IMG-20261022-WA0056}, \foto{IMG-20261022-WA0054}, \foto{IMG-20261108-WA0089}]
+Aşağıdaki fonksiyonların $(0,0)$ noktasında limite sahip olmadığını gösteriniz.
+\begin{description}
+  \item[(a)] $f(x,y)=\dfrac{x^4-y^2}{x^4+y^2}$ \qquad (b) $f(x,y)=\dfrac{x-y}{x+y}$
+  \item[(c)] $f(x,y)=\dfrac{x}{\sqrt{x^2+y^2}}$ \qquad (d) $f(x,y)=\dfrac{x^2+y^2}{y^2}$
+\end{description}
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Paydada $x^4$ ile $y^2$ var; ikisini aynı mertebeye getiren yol $y=ax^2$ parabolüdür. Bu eğri boyunca
+  $(0,0)$'a yaklaşılırsa:
+  \[
+  \lim_{x\to0}\frac{x^4-a^2x^4}{x^4+a^2x^4}=\lim_{x\to0}\frac{x^4(1-a^2)}{x^4(1+a^2)}=\frac{1-a^2}{1+a^2}.
+  \]
+  $a$'nın farklı değerleri için limit farklı: $a=0\Rightarrow1$, $a=1\Rightarrow0$. Limit yoktur. (Eksenler de yeterdi:
+  $y=0$ boyunca $1$, $x=0$ boyunca $\frac{-y^2}{y^2}=-1$.)
+  \item[(b)] $y=mx$ doğrusu boyunca ($m\neq-1$; $y=-x$ üzerinde $f$ tanımsızdır):
+  \[
+  \lim_{x\to0}\frac{x-mx}{x+mx}=\frac{1-m}{1+m}.
+  \]
+  Sonuç $m$'ye bağlı ($m=0\Rightarrow1$, $m=1\Rightarrow0$); limit yoktur.
+  \item[(c)] Kutupsal koordinatlar $x=r\cos\theta$, $y=r\sin\theta$ ($r>0$, dolayısıyla $\sqrt{r^2}=r$):
+  \[
+  \lim_{r\to0}\frac{r\cos\theta}{\sqrt{r^2(\cos^2\theta+\sin^2\theta)}}=\lim_{r\to0}\frac{r\cos\theta}{r}=\cos\theta .
+  \]
+  $\theta$'ya bağlı (ör. pozitif $x$ ekseni $\theta=0$ boyunca $1$, negatif $x$ ekseni $\theta=\pi$ boyunca $-1$);
+  limit yoktur.
+  \item[(d)] $x\to0$, $y\to0$ iken pay ve payda $0$'a gider ($\frac00$ belirsizliği). $y=mx$ ($m\neq0$; $y=0$ üzerinde
+  $f$ tanımsız):
+  \[
+  \lim_{x\to0}\frac{x^2+m^2x^2}{m^2x^2}=\frac{x^2(1+m^2)}{x^2m^2}=\frac{1+m^2}{m^2};\qquad
+  m=1\Rightarrow 2,\qquad m=2\Rightarrow\frac54 .
+  \]
+  Limit yoktur. (Aslında $f=1+\frac{x^2}{y^2}$ olduğundan, $y=x^2$ gibi yollarda $f\to\infty$ bile olur.)
+\end{description}
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 16 (doğrular yetmez!)]
+$\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2y}{x^4+y^2}$ limitini inceleyiniz.
+\end{soru}
+\begin{cevap}
+\textbf{Eksenler:} $y=0$: $\frac{0}{x^4}=0$; $x=0$: $\frac0{y^2}=0$.
+
+\textbf{Bütün doğrular} $y=mx$ ($m\neq0$):
+\[
+\frac{x^2\cdot mx}{x^4+m^2x^2}=\frac{mx}{x^2+m^2}\xrightarrow[x\to0]{}\frac{0}{m^2}=0 .
+\]
+Orijinden geçen \emph{her} doğru boyunca limit $0$! Buna rağmen limitin $0$ olduğu sonucunu çıkaramayız.
+
+\textbf{Parabol} $y=x^2$: $\dfrac{x^2\cdot x^2}{x^4+x^4}=\dfrac{x^4}{2x^4}=\dfrac12$.
+
+Doğrular boyunca $0$, parabol boyunca $\frac12$ elde edildi; \textbf{limit yoktur}. Genel olarak $y=kx^2$ boyunca
+$\dfrac{k}{1+k^2}$ bulunur.
+\end{cevap}
+
+\begin{dikkat}[Dikkat: yol testinin mantığı]
+Yol testi \textbf{tek yönlü} çalışır. İki yolda farklı değer $\Rightarrow$ limit yok. Ama birkaç yolda (hatta bütün
+doğrularda!) aynı değer çıkması limitin \emph{varlığını kanıtlamaz} (Örnek 16). Varlığı göstermek için bir sonraki
+alt bölümdeki sıkıştırma yöntemine ihtiyaç vardır.
+\end{dikkat}
+
+% =====================================================================
+\subsection{Limitin var olduğunu gösterme: sıkıştırma ve kutupsal koordinatlar}
+
+\begin{teorem}[Sıkıştırma (sandviç) teoremi]
+$(a,b)$'nin bir komşuluğunda ($(a,b)$ hariç olabilir)
+\[
+|f(x,y)-L|\le g(x,y)\qquad\text{ve}\qquad \lim_{(x,y)\to(a,b)}g(x,y)=0
+\]
+ise $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=L$ olur. Daha genel biçimi: $h\le f\le g$ ve $h,g\to L$ ise $f\to L$.
+\end{teorem}
+
+İşimize yarayan temel eşitsizlikler ($r=\sqrt{x^2+y^2}$):
+\[
+|x|\le r,\qquad |y|\le r,\qquad |xy|\le\frac{x^2+y^2}{2},\qquad \frac{x^2}{x^2+y^2}\le1,\qquad |\sin u|\le|u| .
+\]
+
+\begin{teorem}[Kutupsal koordinat ölçütü]
+$x=a+r\cos\theta$, $y=b+r\sin\theta$ yazalım. $\theta$'dan \textbf{bağımsız} bir $g(r)$ fonksiyonu için
+\[
+|f(a+r\cos\theta,\,b+r\sin\theta)-L|\le g(r)\qquad\text{ve}\qquad\lim_{r\to0^+}g(r)=0
+\]
+ise $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=L$'dir.
+\end{teorem}
+
+\begin{dikkat}[Kutupsal koordinatta ince nokta]
+Kutupsal yazdıktan sonra ``$r\to0$ iken limit $\theta$'ya bağlı değil, o hâlde limit var'' demek \textbf{yetmez}; sınırın
+$\theta$'dan bağımsız olması ($|\dots|\le g(r)$) gerekir. Örnek 16'daki fonksiyon için kutupsal yazılım
+\[
+\frac{r\cos^2\theta\sin\theta}{r^2\cos^4\theta+\sin^2\theta}
+\]
+olur; her sabit $\theta$ için $r\to0$ iken $0$'a gider, ama limit yoktur. Bunun nedeni, $\sin\theta\approx r\cos^2\theta$
+olan (parabol boyunca) doğrultularda ifadenin $\frac12$ civarında kalmasıdır; yani yakınsama $\theta$'ya göre
+düzgün değildir.
+\end{dikkat}
+
+\begin{soru}[\ekal Örnek 17 (kutupsal koordinat ve sıkıştırma)]
+Aşağıdaki limitlerin var olduğunu gösterip değerlerini bulunuz.
+\begin{description}
+  \item[(a)] $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2y^2}{x^2+y^2}$ \qquad
+  (b) $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^3-y^3}{x^2+y^2}$ \qquad
+  (c) $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy}{\sqrt{x^2+y^2}}$
+\end{description}
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Kutupsal: $\dfrac{r^4\cos^2\theta\sin^2\theta}{r^2}=r^2\cos^2\theta\sin^2\theta$ ve
+  $|r^2\cos^2\theta\sin^2\theta|\le r^2\to0$. Limit $0$.
+  \item[(b)] Kutupsal: $\dfrac{r^3(\cos^3\theta-\sin^3\theta)}{r^2}=r(\cos^3\theta-\sin^3\theta)$.
+  $|\cos^3\theta-\sin^3\theta|\le|\cos\theta|^3+|\sin\theta|^3\le2$ olduğundan $|f|\le2r\to0$. Limit $0$.
+  \item[(c)] $|xy|\le\frac{x^2+y^2}{2}$ eşitsizliğinden
+  $\left|\dfrac{xy}{\sqrt{x^2+y^2}}\right|\le\dfrac{x^2+y^2}{2\sqrt{x^2+y^2}}=\dfrac{\sqrt{x^2+y^2}}{2}\to0$.
+  Sıkıştırma ile limit $0$.
+\end{description}
+\end{cevap}
+
+\begin{bilgi}[Pratik ipucu: derece karşılaştırması]
+$(0,0)$'da $\dfrac{P(x,y)}{(x^2+y^2)^k}$ tipindeki kesirlerde, pay $\deg=n$ homojen bir polinomsa kutupsal yazınca
+$r^{n-2k}\cdot(\theta\text{'ya bağlı sınırlı ifade})$ elde edilir:
+\begin{itemize}
+  \item $n>2k$ ise limit $0$ (Örnek 17, Örnek 10);
+  \item $n=2k$ ise genellikle $\theta$'ya bağlı bir değer çıkar, limit yoktur (Örnek 14);
+  \item $n<2k$ ise genellikle ifade sınırsızdır, limit yoktur.
+\end{itemize}
+Payda $x^4+y^2$ gibi \emph{homojen olmayan} ise bu kural geçerli değildir; eğri yollar deneyin (Örnek 16).
+\end{bilgi}
+
+% =====================================================================
+\subsection{Süreklilik}
+
+\begin{tahta}[\foto{IMG-20261022-WA0053}, \foto{IMG-20261108-WA0088}]
+\textbf{Süreklilik -- Tanım.} $f(x,y)$ düzlemin fonksiyonu, $(a,b)$ noktasında tanımlı olsun. Eğer
+\[
+\lim_{(x,y)\to(a,b)}f(x,y)=f(a,b)
+\]
+ise $f$'ye $(a,b)$ noktasında \textbf{süreklidir} denir.
+\end{tahta}
+
+{\small\color{gri} Not: 22.10 defter notunda (\foto{IMG-20261022-WA0053}) ``$(a,b)$ aralığında süreklidir'' yazılmış;
+doğrusu (08.11 tahtasındaki gibi) ``$(a,b)$ \emph{noktasında} süreklidir''.}
+
+Tanım aslında \textbf{üç koşul} içerir:
+\begin{enumerate}
+  \item $f(a,b)$ tanımlı,
+  \item $\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)$ var,
+  \item bu limit $f(a,b)$'ye eşit.
+\end{enumerate}
+Bir $R$ kümesinin her noktasında sürekli olan fonksiyona $R$ üzerinde sürekli denir. Sezgisel olarak sürekli bir
+fonksiyonun grafiği ``yırtığı, deliği, ani sıçraması olmayan'' bir yüzeydir.
+
+\begin{teorem}[Sürekli fonksiyonların özellikleri]
+\begin{enumerate}
+  \item $f$ ve $g$, $(a,b)$'de sürekli ise $f\pm g$, $f\cdot g$, $c\,f$ ve ($g(a,b)\neq0$ ise) $f/g$ de $(a,b)$'de
+        süreklidir. (Limit kurallarının doğrudan sonucu.)
+  \item \textbf{Polinomlar} bütün düzlemde süreklidir.
+  \item \textbf{Rasyonel fonksiyonlar} $P/Q$, paydanın sıfır olmadığı her noktada süreklidir.
+  \item \textbf{Bileşke:} $g(x,y)$, $(a,b)$'de sürekli ve $h(u)$ tek değişkenli fonksiyonu $u_0=g(a,b)$'de sürekli ise
+        $h\big(g(x,y)\big)$ de $(a,b)$'de süreklidir.
+\end{enumerate}
+\end{teorem}
+
+Bileşke kuralı sayesinde $e^{xy}$, $\sin(x^2+y^2)$, $\cos(x-3y)$, $\ln(1+x^2+y^2)$ gibi fonksiyonlar bütün düzlemde;
+$\arccos(x-y)$ (Örnek 2) tanım kümesi olan şerit üzerinde; $\sqrt{4-x^2-y^2}$ (Örnek 1) kapalı disk üzerinde süreklidir.
+
+\begin{bilgi}[Bileşke kuralının limit hesabındaki kullanımı]
+$h$ sürekli ve $\lim_{(x,y)\to(a,b)}g(x,y)=u_0$ ise $\lim h(g(x,y))=h(u_0)$. Belirsiz durumlarda da $u=g(x,y)$
+dönüşümüyle tek değişkenli limite geçilebilir: örneğin $u=x^2+y^2\to0^+$ alınarak
+$\displaystyle\lim_{(x,y)\to(0,0)}\frac{\sin(x^2+y^2)}{x^2+y^2}=\lim_{u\to0^+}\frac{\sin u}{u}=1$.
+\end{bilgi}
+
+\begin{soru}[Örnek 18 (tahta) \foto{IMG-20261022-WA0054}, \foto{IMG-20261108-WA0090}]
+\[
+f(x,y)=\begin{cases}\dfrac{\sin(xy^2)}{x^2+y^2}, & (x,y)\neq(0,0)\\[6pt] 0, & (x,y)=(0,0)\end{cases}
+\]
+fonksiyonunun her yerde sürekli olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+\textbf{1) $(x,y)\neq(0,0)$ noktaları.} Pay $\sin(xy^2)$ sürekli (polinomun sinüsü, bileşke), payda $x^2+y^2$ polinom
+ve bu noktalarda \textbf{sıfır değil}. Sürekli fonksiyonların bölümü olduğundan $f$ bu noktaların hepsinde süreklidir.
+
+\textbf{2) $(0,0)$ noktası.} $f(0,0)=0$ tanımlı. Limitin $0$ olduğunu göstermeliyiz. Tahtadaki düşünce:
+\[
+\lim_{(x,y)\to(0,0)}\frac{\sin(xy^2)}{x^2+y^2}=\lim_{(x,y)\to(0,0)}\frac{\sin(xy^2)}{xy^2}\cdot
+\lim_{(x,y)\to(0,0)}\frac{xy^2}{x^2+y^2}.
+\]
+Birinci çarpan $u=xy^2\to0$ ile $\frac{\sin u}{u}\to1$. İkinci çarpan için:
+\begin{itemize}
+  \item[(1)] $y=mx$: $\displaystyle\lim_{x\to0}\frac{x\cdot m^2x^2}{x^2+m^2x^2}=\lim_{x\to0}\frac{m^2x}{1+m^2}=0$.
+  \item[(2)] $x=r\cos\theta$, $y=r\sin\theta$:
+  \[
+  \lim_{r\to0}\frac{r\cos\theta\cdot r^2\sin^2\theta}{r^2}=\lim_{r\to0}r\cos\theta\sin^2\theta=0,
+  \quad\text{çünkü}\quad \boxed{|r\cos\theta\sin^2\theta|\le r} .
+  \]
+\end{itemize}
+Böylece limit $1\cdot0=0=f(0,0)$; $f$, $(0,0)$'da da süreklidir. Sonuç: $f$ \textbf{her yerde süreklidir}.
+\end{cevap}
+
+\begin{dikkat}[Örnek 18'deki çözümün titizleştirilmesi]
+\begin{itemize}
+  \item (1) adımı ($y=mx$ yolu) tek başına limitin varlığını \textbf{kanıtlamaz} (bkz. Örnek 16). Kanıtı
+        tamamlayan, (2) adımındaki $\theta$'dan bağımsız $|r\cos\theta\sin^2\theta|\le r$ sınırıdır (kutupsal koordinat
+        ölçütü).
+  \item $\frac{\sin(xy^2)}{xy^2}$ çarpanı eksenler üzerinde ($xy^2=0$) tanımsızdır. Hiç bölme yapmadan, $|\sin u|\le|u|$
+        ile doğrudan sıkıştırmak daha temizdir:
+        \[
+        |f(x,y)|=\frac{|\sin(xy^2)|}{x^2+y^2}\le\frac{|x|\,y^2}{x^2+y^2}\le|x|\le\sqrt{x^2+y^2}\to0 .
+        \]
+\end{itemize}
+Tahtadaki sonuç doğrudur; bu not yalnızca gerekçeyi sağlamlaştırır.
+\end{dikkat}
+
+\subsubsection{Süreksizliği kaldırılabilir yapma}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Kaldırılabilir süreksizlik kavramı tahtada ayrıca işlenmedi; Balcı ve Zill \& Wright'a göre eklenmiştir.
+\end{bilgi}
+
+\begin{tanim}[Kaldırılabilir süreksizlik]
+$\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)=L$ \textbf{var} fakat $f(a,b)$ tanımsız ya da $f(a,b)\neq L$ ise, $(a,b)$'ye
+$f$'nin \textbf{kaldırılabilir süreksizlik} noktası denir. $f(a,b)=L$ olarak (yeniden) tanımlanırsa fonksiyon o noktada
+sürekli hâle gelir. Limit \textbf{yoksa} süreksizlik kaldırılamaz.
+\end{tanim}
+
+\begin{soru}[\ekal Örnek 19 (kaldırılabilir mi?)]
+Aşağıdaki fonksiyonlar $(0,0)$'da tanımsızdır. $f(0,0)$ uygun tanımlanarak sürekli yapılabilir mi?
+\begin{description}
+  \item[(a)] $f(x,y)=\dfrac{\sin(x^2+y^2)}{x^2+y^2}$ \qquad
+  (b) $g(x,y)=\dfrac{x^4-y^4}{x^2+y^2}$ \qquad
+  (c) $h(x,y)=\dfrac{xy}{x^2+y^2}$
+\end{description}
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] $u=x^2+y^2\to0^+$: $\lim\frac{\sin u}{u}=1$. Limit var; $f(0,0)=1$ tanımlanırsa $f$ her yerde sürekli olur.
+  \item[(b)] $x^4-y^4=(x^2-y^2)(x^2+y^2)$ olduğundan $(x,y)\neq(0,0)$ için $g=x^2-y^2\to0$. $g(0,0)=0$ tanımlanırsa
+  $g$ her yerde sürekli olur (aslında $g=x^2-y^2$ polinomuna dönüşür).
+  \item[(c)] $y=mx$ boyunca $\dfrac{m}{1+m^2}$: $m=0\Rightarrow0$, $m=1\Rightarrow\frac12$. Limit yok; $h(0,0)$ nasıl
+  tanımlanırsa tanımlansın $h$ orijinde \textbf{sürekli yapılamaz}.
+\end{description}
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 20 (süreklilik bölgesi)]
+Aşağıdaki fonksiyonların sürekli olduğu en geniş kümeyi bulunuz.
+(a) $f(x,y)=\dfrac{x^2+y^2}{x^2-y^2}$ \quad (b) $g(x,y)=\ln(x+y-1)$ \quad (c) $h(x,y)=e^{x}\cos\!\big(\sqrt{x^2+y^2}\big)$
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Rasyonel fonksiyon; paydanın sıfır olduğu yerler hariç her yerde sürekli: $x^2-y^2=0\Leftrightarrow y=\pm x$.
+  Süreklilik kümesi: $y=x$ ve $y=-x$ doğruları dışındaki bütün düzlem.
+  \item[(b)] $\ln u$, $u>0$ için sürekli; $u=x+y-1$ polinom. Bileşke kuralı: $x+y>1$ yarı düzleminde (açık küme) sürekli.
+  \item[(c)] $\sqrt{x^2+y^2}$ her yerde sürekli (polinomun karekökü, içi $\ge0$), $\cos$ ve $e^x$ her yerde sürekli;
+  çarpım ve bileşke ile $h$ bütün düzlemde süreklidir.
+\end{description}
+\end{cevap}
+
+% =====================================================================
+\subsection{Üç değişkenli fonksiyonlarda limit ve süreklilik}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Tahtada limit ve süreklilik iki değişken için işlendi. Aşağıdaki genelleme Zill \& Wright ve Kreyszig'e göre eklenmiştir;
+yöntemlerin hepsi aynen taşınır.
+\end{bilgi}
+
+\begin{tanim}[Üç değişkenli limit ve süreklilik]
+$\displaystyle\lim_{(x,y,z)\to(a,b,c)}f(x,y,z)=L$ olması için: her $\varepsilon>0$ için öyle bir $\delta>0$ vardır ki
+\[
+0<\sqrt{(x-a)^2+(y-b)^2+(z-c)^2}<\delta\quad\text{iken}\quad|f(x,y,z)-L|<\varepsilon .
+\]
+Burada komşuluk bir \textbf{açık küredir} (top). $\lim_{(x,y,z)\to(a,b,c)}f(x,y,z)=f(a,b,c)$ ise $f$, $(a,b,c)$'de
+süreklidir.
+\end{tanim}
+
+\begin{itemize}
+  \item Limit kuralları, polinom ve rasyonel fonksiyonların sürekliliği, bileşke kuralı aynen geçerlidir.
+  \item Limitin yokluğu için yine iki yol: eksenler, $x=y=z$ doğrusu, $y=mx,\ z=nx$ doğruları, eğriler\dots
+  \item Varlık için sıkıştırma; kutupsal yerine \textbf{küresel koordinatlar} kullanılır:
+        \[x=\rho\sin\varphi\cos\theta,\quad y=\rho\sin\varphi\sin\theta,\quad z=\rho\cos\varphi,\qquad \rho\to0 .\]
+        Kullanışlı eşitsizlik: $|x|,|y|,|z|\le\rho=\sqrt{x^2+y^2+z^2}$.
+\end{itemize}
+
+\begin{soru}[\ekal Örnek 21 (üç değişkenli limitler)]
+\begin{description}
+  \item[(a)] $\displaystyle\lim_{(x,y,z)\to(1,-1,2)}\frac{x^2+yz}{x+y+z}$
+  \item[(b)] $\displaystyle\lim_{(x,y,z)\to(0,0,0)}\frac{xy+yz+zx}{x^2+y^2+z^2}$
+  \item[(c)] $\displaystyle\lim_{(x,y,z)\to(0,0,0)}\frac{xyz}{x^2+y^2+z^2}$
+\end{description}
+\end{soru}
+\begin{cevap}
+\begin{description}
+  \item[(a)] Payda $1-1+2=2\neq0$; rasyonel fonksiyon, doğrudan yerine koyma:
+  $\dfrac{1+(-1)(2)}{2}=\dfrac{-1}{2}=-\dfrac12$.
+  \item[(b)] $x$ ekseni boyunca ($y=z=0$): $\frac{0}{x^2}=0$. $x=y=z=t$ doğrusu boyunca:
+  $\dfrac{3t^2}{3t^2}=1$. Farklı değerler; \textbf{limit yoktur}.
+  \item[(c)] $|x|,|y|\le\rho$ ve $|z|\le\rho$ olduğundan $|xyz|\le\rho^3$; böylece
+  $\left|\dfrac{xyz}{\rho^2}\right|\le\dfrac{\rho^3}{\rho^2}=\rho\to0$. Sıkıştırma ile limit $0$.
+\end{description}
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 22 (üç değişkenli süreklilik)]
+$F(x,y,z)=\dfrac{1}{x^2+y^2+z^2-1}$ ve $G(x,y,z)=\sqrt{z-x^2-y^2}$ nerede süreklidir?
+\end{soru}
+\begin{cevap}
+$F$ rasyoneldir; payda $x^2+y^2+z^2=1$ \textbf{birim küre yüzeyinde} sıfırdır. $F$, birim küre yüzeyi dışındaki her
+noktada süreklidir.
+
+$G$: kök içi $z-x^2-y^2\ge0$ olmalı; $G$, $z\ge x^2+y^2$ kümesinde (paraboloid ve içi) süreklidir (polinomun karekökü,
+bileşke).
+\end{cevap}
+
+% =====================================================================
+\subsection{Kaynak kitaplardan ek örnekler}
+
+Bu bölümdeki örnekler Zill \& Wright, Balcı ve Kreyszig'deki tipik alıştırmalara benzer şekilde hazırlanmıştır ve konunun
+farklı yöntemlerini bir araya getirir.
+
+\begin{soru}[\ekal Örnek 23 (uygun eğri yolunu seçme)]
+$\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^3y}{x^6+y^2}$ limitini inceleyiniz.
+\end{soru}
+\begin{cevap}
+Doğrular $y=mx$: $\dfrac{mx^4}{x^6+m^2x^2}=\dfrac{mx^2}{x^4+m^2}\to0$ ($m\neq0$); eksenlerde de $0$.
+Paydadaki $x^6$ ve $y^2$'yi aynı dereceye getiren yol $y=kx^3$'tür:
+\[
+\frac{x^3\cdot kx^3}{x^6+k^2x^6}=\frac{k}{1+k^2}.
+\]
+$k=0\Rightarrow0$, $k=1\Rightarrow\frac12$. Limit \textbf{yoktur}.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 24 (tek değişkene indirgeme)]
+$\displaystyle\lim_{(x,y)\to(0,0)}(x^2+y^2)\ln(x^2+y^2)$ limitini hesaplayınız.
+\end{soru}
+\begin{cevap}
+$u=x^2+y^2\to0^+$ dönüşümüyle tek değişkenli limite geçeriz ($0\cdot(-\infty)$ belirsizliği):
+\[
+\lim_{u\to0^+}u\ln u=\lim_{u\to0^+}\frac{\ln u}{1/u}\overset{\text{L'H}}{=}\lim_{u\to0^+}\frac{1/u}{-1/u^2}
+=\lim_{u\to0^+}(-u)=0 .
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 25 (mutlak değerli ifade)]
+$\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy}{|x|+|y|}$ limitini hesaplayınız.
+\end{soru}
+\begin{cevap}
+$(x,y)\neq(0,0)$ için $\dfrac{|x|}{|x|+|y|}\le1$ olduğundan
+\[
+\left|\frac{xy}{|x|+|y|}\right|=|y|\cdot\frac{|x|}{|x|+|y|}\le|y|\to0 .
+\]
+Sıkıştırma teoremiyle limit $0$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 26 (parametreli süreklilik)]
+\[
+f(x,y)=\begin{cases}\dfrac{3x^2y}{x^2+y^2}+k, & (x,y)\neq(0,0)\\[6pt] 2k-1, & (x,y)=(0,0)\end{cases}
+\]
+fonksiyonu $(0,0)$'da sürekli olacak şekilde $k$'yı bulunuz.
+\end{soru}
+\begin{cevap}
+Örnek 10'dan $\lim\frac{3x^2y}{x^2+y^2}=0$; dolayısıyla $\lim_{(x,y)\to(0,0)}f(x,y)=0+k=k$. Süreklilik için
+$k=f(0,0)=2k-1$ olmalı; buradan $\boxed{k=1}$.
+\end{cevap}
+
+% =====================================================================
+\subsection{Sık yapılan hatalar}
+
+\begin{dikkat}
+\begin{enumerate}
+  \item \textbf{``Birkaç yolda aynı değer çıktı, o hâlde limit var.''} Yanlış! Yol testi yalnızca limitin
+        \emph{olmadığını} gösterebilir. Bütün doğrularda $0$ çıkıp parabolde $\frac12$ çıkan örnekler vardır
+        (Örnek 16, 23). Varlık için sıkıştırma ya da $\theta$'dan bağımsız kutupsal sınır gerekir.
+  \item \textbf{Kutupsal yazıp $\theta$'yı sabit sanmak.} $r\to0$ iken her sabit $\theta$ için aynı değerin çıkması da
+        yetmez; $|f-L|\le g(r)$ biçiminde $\theta$'dan bağımsız bir sınır bulunmalı.
+  \item \textbf{Seviye eğrisinde yarıçapı yanlış yazmak.} $x^2+y^2=c$ çemberinin yarıçapı $c$ değil $\sqrt c$'dir;
+        $c<0$ için seviye eğrisi boştur.
+  \item \textbf{Tanım kümesinde sınırı karıştırmak.} $\sqrt{\ }$ içi $\ge0$ (sınır dahil), $\ln$ içi $>0$ (sınır hariç),
+        paydadaki kök içi $>0$. Çizimde dahil olan sınır sürekli, hariç olan kesikli çizilir.
+  \item \textbf{Çarpanlara ayırırken yeni bölme yaratmak.} $\frac{\sin(xy)}{x}=y\cdot\frac{\sin(xy)}{xy}$ yazımı
+        $y=0$ noktalarında tanımsızdır; $|\sin u|\le|u|$ eşitsizliği daha güvenlidir.
+  \item \textbf{Değişkenlere ayırmayı her yerde kullanmak.} $\lim g(x)h(y)=\lim g\cdot\lim h$ ancak iki tek değişkenli
+        limit de varsa geçerlidir. $\frac{2xy}{x^2+y^2}$ gibi ifadeler değişkenlerine ayrılamaz.
+  \item \textbf{İşaret hatası.} $e^{x-y}=e^x\cdot e^{-y}$; $e^x\cdot e^y$ değil (bkz. Örnek 12d düzeltmesi).
+  \item \textbf{Sürekliliği limitle karıştırmak.} Limitin var olması yetmez; $f(a,b)$ tanımlı ve limite eşit olmalı.
+        ``Süreklidir'' bir \emph{noktada} söylenir, ``aralıkta'' değil.
+  \item \textbf{$\sqrt{r^2}=r$ yazarken} $r\ge0$ alındığını unutmamak; kutupsal koordinatlarda $r>0$, $\theta\in[0,2\pi)$.
+\end{enumerate}
+\end{dikkat}
+
+% =====================================================================
+\subsection{Özet ve formül kutusu}
+
+\begin{ozet}
+\textbf{Fonksiyon ve tanım kümesi.} $z=f(x,y)$, $D\subset\mathbb R^2$; $w=f(x,y,z)$, $D\subset\mathbb R^3$.
+Payda $\neq0$, çift kök içi $\ge0$, $\ln$ içi $>0$, $\arccos/\arcsin$ içi $[-1,1]$; koşulların kesişimi.
+
+\textbf{Grafik ve seviye kümeleri.} Grafik: $z=f(x,y)$ yüzeyi. Seviye eğrisi: $f(x,y)=c$ ($xy$-düzleminde).
+Kontur haritası: seviye eğrilerinin toplamı. Seviye yüzeyi: $f(x,y,z)=c$.
+
+\begin{center}
+\begin{tabular}{l l}
+\toprule
+Fonksiyon & Seviye kümeleri \\
+\midrule
+$x^2+y^2$ & çemberler, yarıçap $\sqrt c$ \\
+$ax+by$ & paralel doğrular \\
+$y-x^2$ & paraboller $y=x^2+c$ \\
+$xy$ & hiperboller $y=c/x$ \\
+$\frac{2xy}{x^2+y^2}$ & orijinden çıkan ışınlar \\
+$x^2+y^2+z^2$ & küreler, yarıçap $\sqrt c$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Limit tanımı.} $\forall\varepsilon>0\ \exists\delta>0$:
+$0<\sqrt{(x-a)^2+(y-b)^2}<\delta\Rightarrow|f(x,y)-L|<\varepsilon$.
+
+\textbf{Limit kuralları.} Toplam, fark, çarpım, sabitle çarpım, bölüm ($L_2\neq0$). Polinomda ve paydası sıfır olmayan
+rasyonel fonksiyonda doğrudan yerine koyma: $\lim P(x,y)=P(a,b)$.
+
+\textbf{$\frac00$ belirsizliği.} Çarpanlara ayır, eşlenikle çarp, $u=g(x,y)$ ile tek değişkene in
+($\frac{\sin u}{u}\to1$, $u\ln u\to0$).
+
+\textbf{Limit yok.} İki yol, iki farklı değer:
+\[
+y=0,\quad x=0,\quad y=mx,\quad y=kx^2,\quad x=ky^2,\quad x=r\cos\theta,\ y=r\sin\theta .
+\]
+
+\textbf{Limit var.} $|f-L|\le g\to0$ (sıkıştırma). Kutupsal: $|f-L|\le g(r)\to0$, $g$ $\theta$'dan bağımsız.
+Eşitsizlikler: $|x|,|y|\le r$, $|xy|\le\frac{r^2}{2}$, $|\sin u|\le|u|$.
+
+\textbf{Süreklilik.} $\lim_{(x,y)\to(a,b)}f(x,y)=f(a,b)$. Polinomlar her yerde, rasyoneller payda $\neq0$ olan yerde
+sürekli; toplam, çarpım, bölüm, bileşke sürekliliği korur. Limit var ama $\neq f(a,b)$ ya da $f(a,b)$ tanımsız
+$\Rightarrow$ kaldırılabilir süreksizlik.
+
+\textbf{Üç değişken.} Aynı tanımlar, komşuluk = açık küre; küresel koordinat, $|x|,|y|,|z|\le\rho$.
+\end{ozet}

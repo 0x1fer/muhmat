@@ -1,0 +1,381 @@
+\section{Konu 5: Kısmi Türevler, Teğet Düzlemler ve Lineer Yaklaşımlar}
+
+Bu bölümde 22.10 (defter notu), 05.11 ve 08.11 derslerinde tahtada çözülen tüm sorular derste işlenme sırasıyla ve adım
+adım çözülmüştür. 08.11 dersinde 22.10 konuları (kısmi türev, Schwarz teoremi, lineerleştirme) ve 05.11 problemleri
+tahtada yeniden yazıldığı için aynı soru birden fazla fotoğrafta görünüyorsa tüm fotoğraflar birlikte verilmiştir.
+Bu konuya ait tahtada sorusu yazılıp çözülmeden bırakılmış bir çalışma sorusu yoktur; ``Problemler'' başlığıyla verilen
+soruların hepsi derste çözülmüştür. Sonda kaynak kitaplardaki tipik alıştırmalara benzer ek alıştırmalar vardır.
+
+%-------------------------------------------------------------------------------------------
+\subsection{Kısmi türevler ve yüksek mertebeden kısmi türevler (22.10 dersi)}
+
+\begin{soru}[Soru 1 \foto{IMG-20261022-WA0055}, \foto{IMG-20261108-WA0090}]
+$f(x,y)=x^2y^3+3x$ fonksiyonunun $f_x$ ve $f_y$ kısmi türevlerini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Kural:} Bir değişkene göre kısmi türev alırken diğer değişken sabit (bir sayı gibi) kabul edilir.
+
+\textbf{$f_x$ ($y$ sabit):}
+\begin{itemize}
+  \item $x^2y^3$: $y^3$ sabit katsayıdır, $\dfrac{d}{dx}(x^2)=2x$ $\Rightarrow$ $2xy^3$.
+  \item $3x$: türevi $3$.
+\end{itemize}
+\[ f_x=2xy^3+3 . \]
+\textbf{$f_y$ ($x$ sabit):}
+\begin{itemize}
+  \item $x^2y^3$: $x^2$ sabit katsayıdır, $\dfrac{d}{dy}(y^3)=3y^2$ $\Rightarrow$ $3x^2y^2$.
+  \item $3x$: $y$ içermediği için $y$'ye göre sabittir; türevi $0$.
+\end{itemize}
+\[ f_y=3x^2y^2 . \]
+\textbf{Ek kontrol (Schwarz teoremi):} $f_{xy}=(2xy^3+3)_y=6xy^2$, $f_{yx}=(3x^2y^2)_x=6xy^2$; karma türevler eşittir
+(fonksiyon simetrik olmadığı hâlde).
+\end{cevap}
+
+\begin{soru}[Soru 2 \foto{IMG-20261022-WA0055}, \foto{IMG-20261022-WA0059}, \foto{IMG-20261108-WA0091}, \foto{IMG-20261108-WA0092}]
+$f(x,y)=\dfrac{xy}{x^2+y^2}$ fonksiyonunun 2. mertebeden kısmi türevlerini hesaplayınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+Fonksiyon $(x,y)\ne(0,0)$ için tanımlıdır; tüm hesaplar bu noktalarda geçerlidir. Bölüm kuralı:
+$\left(\dfrac uv\right)'=\dfrac{u'v-uv'}{v^2}$.
+
+\textbf{Adım 1 -- $f_x$.} $y$ sabit: $u=xy\Rightarrow u_x=y$; $v=x^2+y^2\Rightarrow v_x=2x$.
+\[
+f_x=\frac{y(x^2+y^2)-2x\cdot xy}{(x^2+y^2)^2}=\frac{yx^2+y^3-2x^2y}{(x^2+y^2)^2}=\frac{y^3-x^2y}{(x^2+y^2)^2}.
+\]
+\textbf{Adım 2 -- $f_{xx}$.} $f_x$'i $x$'e göre türevle: $u=y^3-x^2y\Rightarrow u_x=-2xy$;
+$v=(x^2+y^2)^2\Rightarrow v_x=2(x^2+y^2)\cdot2x$.
+\[
+f_{xx}=\frac{-2xy(x^2+y^2)^2-2(x^2+y^2)\cdot2x\,(y^3-x^2y)}{(x^2+y^2)^4}.
+\]
+Pay ve payda $(x^2+y^2)$ ile sadeleşir:
+\[
+f_{xx}=\frac{-2xy(x^2+y^2)-4x(y^3-x^2y)}{(x^2+y^2)^3}=\frac{-2x^3y-2xy^3-4xy^3+4x^3y}{(x^2+y^2)^3}
+=\frac{2x^3y-6xy^3}{(x^2+y^2)^3}.
+\]
+\textbf{Adım 3 -- $f_{xy}$.} $f_x$'i $y$'ye göre türevle: $u=y^3-x^2y\Rightarrow u_y=3y^2-x^2$;
+$v_y=2(x^2+y^2)\cdot2y$.
+\begin{align*}
+f_{xy}&=\frac{(3y^2-x^2)(x^2+y^2)^2-2(x^2+y^2)\cdot2y\,(y^3-x^2y)}{(x^2+y^2)^4}
+=\frac{(3y^2-x^2)(x^2+y^2)-4y(y^3-x^2y)}{(x^2+y^2)^3}\\
+&=\frac{3x^2y^2+3y^4-x^4-x^2y^2-4y^4+4x^2y^2}{(x^2+y^2)^3}
+=\boxed{\frac{-x^4-y^4+6x^2y^2}{(x^2+y^2)^3}} .
+\end{align*}
+\textbf{Adım 4 -- $f_y$.} $x$ sabit: $u_y=x$, $v_y=2y$.
+\[
+f_y=\frac{x(x^2+y^2)-2y\cdot xy}{(x^2+y^2)^2}=\frac{x^3-xy^2}{(x^2+y^2)^2}.
+\]
+\textbf{Adım 5 -- $f_{yx}$.} $f_y$'yi $x$'e göre türevle: $u=x^3-xy^2\Rightarrow u_x=3x^2-y^2$; $v_x=2(x^2+y^2)\cdot2x$.
+\begin{align*}
+f_{yx}&=\frac{(3x^2-y^2)(x^2+y^2)^2-2(x^2+y^2)\cdot2x\,(x^3-xy^2)}{(x^2+y^2)^4}
+=\frac{(3x^2-y^2)(x^2+y^2)-4x(x^3-xy^2)}{(x^2+y^2)^3}\\
+&=\frac{3x^4+3x^2y^2-x^2y^2-y^4-4x^4+4x^2y^2}{(x^2+y^2)^3}
+=\boxed{\frac{-x^4-y^4+6x^2y^2}{(x^2+y^2)^3}} .
+\end{align*}
+\textbf{Adım 6 -- $f_{yy}$.} $f_y$'yi $y$'ye göre türevle: $u_y=-2xy$, $v_y=2(x^2+y^2)\cdot2y$.
+\[
+f_{yy}=\frac{-2xy(x^2+y^2)-4y(x^3-xy^2)}{(x^2+y^2)^3}=\frac{-2x^3y-2xy^3-4x^3y+4xy^3}{(x^2+y^2)^3}
+=\frac{2xy^3-6x^3y}{(x^2+y^2)^3}.
+\]
+\textbf{Sonuç:} $f_{xy}(x,y)=f_{yx}(x,y)$. Bu eşitlik, karma türevler $(0,0)$ dışında sürekli olduğu için
+\textbf{Schwarz (Clairaut) teoreminin} beklediği sonuçtur: \emph{$f_x$, $f_y$ türevlenebilir ve karma türevler sürekli
+ise $f_{xy}=f_{yx}$}.
+\end{cevap}
+
+\begin{dikkat}[Tahtadaki notlarla ilgili düzeltmeler]
+\begin{itemize}
+  \item $f_{xy}$'nin ara satırında ``$-4y^2$'' yazılmıştı (\foto{IMG-20261022-WA0055}, \foto{IMG-20261108-WA0091});
+        doğrusu $-4y\cdot y^3=-4y^4$'tür. Defter notundaki $f_{xx}$ ara satırının ilk terimi de ``$2x^3y$'' olarak
+        görünüyor; doğrusu $-2x^3y$ (\foto{IMG-20261108-WA0091}'de doğru). Kutulanan sonuçlar doğrudur.
+  \item Defter notunda (\foto{IMG-20261022-WA0059}) ``$f_{xy}=f_{yx}$, eğer $f(x,y)=f(y,x)$ ise geçerlidir'' yazılmıştı.
+        Bu yanlıştır: karma türevlerin eşitliği simetriye değil, karma türevlerin \textbf{sürekliliğine} bağlıdır
+        (Soru 1'deki simetrik olmayan fonksiyonda da $f_{xy}=f_{yx}$).
+\end{itemize}
+\end{dikkat}
+
+%-------------------------------------------------------------------------------------------
+\subsection{Lineerleştirme ve hata sınırı (22.10 dersi)}
+
+\begin{soru}[Soru 3 \foto{IMG-20261022-WA0060}, \foto{IMG-20261108-WA0093}]
+$f(x,y)=x^2+3xy+2y^2+4$ fonksiyonunun $(2,1)$ noktasındaki lineerleştirmesini bulunuz.
+$B=\{(x,y):|x-2|\le0{,}01,\ |y-1|\le0{,}01\}$ dikdörtgensel bölgesi üzerindeki hatanın bir üst sınırını hesaplayınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Kullanılan formüller:}
+$L(x,y)=f(x_0,y_0)+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$ ve
+$|E(x,y)|\le\dfrac12M\big(|x-x_0|+|y-y_0|\big)^2$, burada $M$, $B$ üzerinde $|f_{xx}|,|f_{xy}|,|f_{yy}|$'nin üst sınırı.
+
+\textbf{Adım 1 -- Fonksiyon değeri:} $f(2,1)=2^2+3\cdot2\cdot1+2\cdot1^2+4=4+6+2+4=16$.
+
+\textbf{Adım 2 -- Birinci kısmi türevler:}
+$f_x=2x+3y\Rightarrow f_x(2,1)=4+3=7$;\quad $f_y=3x+4y\Rightarrow f_y(2,1)=6+4=10$.
+
+\textbf{Adım 3 -- Lineerleştirme:}
+\[ L(x,y)=16+7(x-2)+10(y-1)=16+7x-14+10y-10=7x+10y-8 . \]
+\textbf{Adım 4 -- İkinci türevler ve $M$:} $f_{xx}=2$, $f_{xy}=3$, $f_{yy}=4$. Sabit oldukları için $B$'nin her yerinde
+aynıdır; $M=\max\{2,3,4\}=4$.
+
+\textbf{Adım 5 -- Hata sınırı:} $B$'de $|x-2|\le0{,}01$ ve $|y-1|\le0{,}01$:
+\[
+|E(x,y)|\le\frac12\cdot4\,\big(|x-2|+|y-1|\big)^2\le2\,(0{,}01+0{,}01)^2=2\cdot0{,}0004=0{,}0008 .
+\]
+\textbf{Yorum:} $B$ içinde $f$ yerine $7x+10y-8$ kullanılırsa hata en fazla $0{,}0008$ olur. (Bu $f$ ikinci derece polinom
+olduğundan hatanın tam ifadesi $E=(x-2)^2+3(x-2)(y-1)+2(y-1)^2$'dir; $B$'deki en büyük değeri $0{,}0006$'dır, yani bulunan
+sınır geçerlidir.)
+\end{cevap}
+
+%-------------------------------------------------------------------------------------------
+\subsection{Tam diferansiyel ve diferansiyelle yaklaşık hesap -- Problemler (05.11 dersi)}
+
+\begin{soru}[Soru 4 \foto{IMG-20261105-WA0034}, \foto{IMG-20261108-WA0082} (Problem 1a)]
+$f(x,y)=x^3+5xy^2+3xy+4x-3y+5$ fonksiyonunun birinci ve ikinci mertebeden tam diferansiyellerini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Formüller:} $df=f_x\,dx+f_y\,dy$,\quad $d^2f=f_{xx}\,dx^2+2f_{xy}\,dx\,dy+f_{yy}\,dy^2$.
+
+\textbf{Birinci türevler:} $f_x=3x^2+5y^2+3y+4$ ($-3y$ ve $5$'in $x$'e göre türevi $0$),\quad
+$f_y=10xy+3x-3$ ($x^3$, $4x$, $5$'in $y$'ye göre türevi $0$).
+\[ df=(3x^2+5y^2+3y+4)\,dx+(10xy+3x-3)\,dy . \]
+\textbf{İkinci türevler:} $f_{xx}=6x$,\quad $f_{xy}=(f_x)_y=10y+3$ \ (kontrol: $f_{yx}=(10xy+3x-3)_x=10y+3$ $\checkmark$),\quad
+$f_{yy}=10x$.
+\[ d^2f=6x\,dx^2+2(10y+3)\,dx\,dy+10x\,dy^2 . \]
+\end{cevap}
+
+\begin{soru}[Soru 5 \foto{IMG-20261105-WA0034}, \foto{IMG-20261105-WA0035}, \foto{IMG-20261108-WA0082}, \foto{IMG-20261108-WA0083} (Problem 1b)]
+$w=f(x,y,z)=3x^2yz^2-3xy+2yz^2+xyz$ fonksiyonunun birinci ve ikinci mertebeden tam diferansiyellerini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Formüller (üç değişken):} $dw=w_x\,dx+w_y\,dy+w_z\,dz$,
+\[ d^2w=w_{xx}dx^2+w_{yy}dy^2+w_{zz}dz^2+2w_{xy}dx\,dy+2w_{xz}dx\,dz+2w_{yz}dy\,dz . \]
+\textbf{Birinci türevler} (her seferinde diğer iki değişken sabit):
+\begin{align*}
+w_x&=6xyz^2-3y+yz, & w_y&=3x^2z^2-3x+2z^2+xz, & w_z&=6x^2yz+4yz+xy .
+\end{align*}
+\[ dw=(6xyz^2-3y+yz)\,dx+(3x^2z^2-3x+2z^2+xz)\,dy+(6x^2yz+4yz+xy)\,dz . \]
+\textbf{İkinci türevler:}
+\begin{align*}
+w_{xx}&=(w_x)_x=6yz^2, & w_{yy}&=(w_y)_y=0, & w_{zz}&=(w_z)_z=6x^2y+4y,\\
+w_{xy}&=(w_x)_y=6xz^2-3+z, & w_{xz}&=(w_x)_z=12xyz+y, & w_{yz}&=(w_y)_z=6x^2z+4z+x .
+\end{align*}
+(Kontrol: $(w_y)_x=6xz^2-3+z=w_{xy}$, $(w_z)_x=12xyz+y=w_{xz}$, $(w_z)_y=6x^2z+4z+x=w_{yz}$ $\checkmark$.)
+
+$w_{yy}=0$ olduğundan $dy^2$ terimi yoktur:
+\begin{align*}
+d^2w={}&6yz^2\,dx^2+(6x^2y+4y)\,dz^2+2(6xz^2+z-3)\,dx\,dy\\
+&+2(12xyz+y)\,dx\,dz+2(6x^2z+x+4z)\,dy\,dz .
+\end{align*}
+\end{cevap}
+
+\begin{soru}[Soru 6 \foto{IMG-20261105-WA0035}, \foto{IMG-20261108-WA0083}, \foto{IMG-20261108-WA0084} (Problem 2)]
+Bir dik dairesel silindirin yarıçapı 10 cm'den 9,9 cm'ye azalıyor, yüksekliği 30 cm'den 30,3 cm'ye çıkıyor. Hacimdeki
+değişimi diferansiyel ile yaklaşık olarak hesaplayınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1 -- Fonksiyon:} $V=\pi r^2h$.
+
+\textbf{Adım 2 -- Tam diferansiyel:} $V_r=2\pi rh$, $V_h=\pi r^2$ $\Rightarrow$ $dV=2\pi rh\,dr+\pi r^2\,dh$.
+
+\textbf{Adım 3 -- Değerler:} $r=10$, $h=30$; $dr=9{,}9-10=-0{,}1$ (azalma, negatif), $dh=30{,}3-30=0{,}3$.
+
+\textbf{Adım 4 -- Hesap:}
+\[
+dV=2\pi\cdot10\cdot30\cdot(-0{,}1)+\pi\cdot100\cdot0{,}3=-60\pi+30\pi=-30\pi\ \text{cm}^3\approx-94{,}25\ \text{cm}^3 .
+\]
+\textbf{Adım 5 -- Yeni hacim:} $V=\pi\cdot100\cdot30=3000\pi$ $\Rightarrow$ yeni hacim $\cong3000\pi-30\pi=2970\pi$ cm$^3$.
+
+Hacim yaklaşık $30\pi$ cm$^3$ azalır. (Kontrol: gerçek yeni hacim $\pi\cdot9{,}9^2\cdot30{,}3\approx2969{,}70\pi$ cm$^3$,
+gerçek değişim $\approx-30{,}30\pi$ cm$^3$.)
+\end{cevap}
+
+\begin{soru}[Soru 7 \foto{IMG-20261105-WA0036}, \foto{IMG-20261108-WA0085} (Problem 3)]
+Yarıçapı $r=1$, yüksekliği $h=5$ olan bir silindirin yarıçapı $0{,}03$ arttırılıp, yüksekliği $0{,}1$ azaltılırsa
+hacimdeki yaklaşık değişim ve yüzde değişim nedir?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1:} $dV=2\pi rh\,dr+\pi r^2\,dh$; $r=1$, $h=5$, $dr=0{,}03$, $dh=-0{,}1$.
+
+\textbf{Adım 2:} $dV=2\pi\cdot1\cdot5\cdot0{,}03+\pi\cdot1\cdot(-0{,}1)=0{,}3\pi-0{,}1\pi=0{,}2\pi\approx0{,}63$.
+
+\textbf{Adım 3 -- Bağıl ve yüzde değişim:} Başlangıç hacmi $V=\pi\cdot1^2\cdot5=5\pi$.
+\[ \frac{dV}{V}=\frac{0{,}2\pi}{5\pi}=0{,}04\quad\Rightarrow\quad\text{hacim yaklaşık \%4 artar.} \]
+\textbf{Alternatif (logaritmik diferansiyel):} $\ln V=\ln\pi+2\ln r+\ln h$ $\Rightarrow$
+$\dfrac{dV}{V}=2\dfrac{dr}{r}+\dfrac{dh}{h}=2(0{,}03)+\dfrac{-0{,}1}{5}=0{,}06-0{,}02=0{,}04$.
+
+(Kontrol: gerçek değişim $\pi(1{,}03^2\cdot4{,}9-5)\approx0{,}198\pi$, yani yaklaşık \%3,97.)
+\end{cevap}
+Not: \foto{IMG-20261108-WA0085}'in sol kenarında bu sorunun yalnızca kesik bir parçası görünür; soru metni ve çözüm
+\foto{IMG-20261105-WA0036}'dan alınmıştır.
+
+%-------------------------------------------------------------------------------------------
+\subsection{Lineerleştirme ve hata sınırı -- Problemler (05.11 dersi)}
+
+\begin{soru}[Soru 8 \foto{IMG-20261105-WA0037}, \foto{IMG-20261108-WA0085} (Problem 4)]
+$f(x,y)=e^{2y-x}$ fonksiyonunun $P(0,0)$ ve $Q(1,2)$ noktalarındaki lineerleştirmelerini bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Kısmi türevler} (zincir kuralı; iç fonksiyon $u=2y-x$, $u_x=-1$, $u_y=2$):
+$f_x=-e^{2y-x}$,\quad $f_y=2e^{2y-x}$.
+
+\textbf{$P(0,0)$'da:} $2y-x=0$; $f=e^0=1$, $f_x=-1$, $f_y=2$.
+\[ L(x,y)=1+(-1)(x-0)+2(y-0)=1-x+2y . \]
+\textbf{$Q(1,2)$'de:} $2y-x=3$; $f=e^3$, $f_x=-e^3$, $f_y=2e^3$.
+\[ L(x,y)=e^3-e^3(x-1)+2e^3(y-2)=e^3\big(1-x+1+2y-4\big)=e^3(2y-x-2). \]
+\end{cevap}
+
+\begin{soru}[Soru 9 \foto{IMG-20261105-WA0038}, \foto{IMG-20261105-WA0039}, \foto{IMG-20261108-WA0085}, \foto{IMG-20261108-WA0086} (Problem 5a)]
+$f(x,y)=x^2-3xy+y^2$ fonksiyonunun $P(1,2)$ noktasındaki $L(x,y)$ lineerleştirmesini ve
+$B=\{(x,y):|x-1|\le0{,}1,\ |y-2|\le0{,}1\}$ bölgesindeki hatanın bir üst sınırını bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1:} $f(1,2)=1-6+4=-1$.
+
+\textbf{Adım 2:} $f_x=2x-3y\Rightarrow f_x(1,2)=2-6=-4$;\quad $f_y=-3x+2y\Rightarrow f_y(1,2)=-3+4=1$.
+
+\textbf{Adım 3:} $L(x,y)=-1-4(x-1)+1\cdot(y-2)=-1-4x+4+y-2=-4x+y+1$.
+
+\textbf{Adım 4:} $f_{xx}=2$, $f_{xy}=-3$, $f_{yy}=2$. $M$ mutlak değerlerden seçilir:
+$M=\max\{|2|,|-3|,|2|\}=3$.
+
+\textbf{Adım 5:}
+\[ |E(x,y)|\le\frac12\cdot3\,(0{,}1+0{,}1)^2=1{,}5\cdot0{,}04=0{,}06 . \]
+(Tahtada ``$f_x=2x-3y=f_x(1,2)=-4$'' biçiminde ``$\Rightarrow$'' yerine ``$=$'' yazılmıştı; anlamı
+$f_x(1,2)=-4$'tür.)
+\end{cevap}
+
+\begin{soru}[Soru 10 \foto{IMG-20261105-WA0040}, \foto{IMG-20261108-WA0086} (Problem 5b)]
+$f(x,y)=1+y+x\cos y$ fonksiyonunun $P(0,0)$ noktasındaki lineerleştirmesini ve
+$B=\{(x,y):|x|\le0{,}2,\ |y|\le0{,}2\}$ bölgesindeki hatanın bir üst sınırını bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1:} $f(0,0)=1+0+0=1$.
+
+\textbf{Adım 2:} $f_x=\cos y\Rightarrow f_x(0,0)=1$;\quad $f_y=1-x\sin y\Rightarrow f_y(0,0)=1$.
+
+\textbf{Adım 3:} $L(x,y)=1+1\cdot x+1\cdot y=1+x+y$.
+
+\textbf{Adım 4 -- İkinci türevler:} $f_{xx}=0$, $f_{xy}=(\cos y)_y=-\sin y$, $f_{yy}=(1-x\sin y)_y=-x\cos y$.
+
+\textbf{Adım 5 -- $B$ üzerinde üst sınır:} $|\sin y|\le|y|$ ve $|\cos y|\le1$ eşitsizlikleriyle
+\[
+|f_{xy}|=|\sin y|\le|y|\le0{,}2,\qquad |f_{yy}|=|x|\,|\cos y|\le0{,}2\cdot1=0{,}2,\qquad |f_{xx}|=0
+\ \Rightarrow\ M=0{,}2 .
+\]
+\textbf{Adım 6:}
+\[ |E(x,y)|\le\frac12\cdot0{,}2\,(0{,}2+0{,}2)^2=0{,}1\cdot0{,}16=0{,}016 . \]
+\textbf{Dikkat:} İkinci türevler yalnızca $P(0,0)$'da hesaplansaydı hepsi $0$ olurdu; $M$, $B$'nin \emph{tamamındaki}
+üst sınır olmalıdır.
+\end{cevap}
+
+%-------------------------------------------------------------------------------------------
+\subsection{Tam diferansiyel ve yüksek mertebeden diferansiyeller (08.11 dersi)}
+
+\begin{soru}[Soru 11 \foto{IMG-20261108-WA0065}, \foto{IMG-20261108-WA0066}, \foto{IMG-20261108-WA0067}]
+Yarıçapı $r=3$ cm, yüksekliği $h=10$ cm olan bir dik dairesel silindirin yarıçapı $0{,}01$ cm arttırılıp yüksekliği
+$0{,}1$ cm azaltılırsa hacmindeki değişim nedir?
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Adım 1:} $V=\pi r^2h\Rightarrow dV=V_r\,dr+V_h\,dh=2\pi rh\,dr+\pi r^2\,dh$.
+
+\textbf{Adım 2:} $r=3$, $h=10$, $dr=0{,}01$, $dh=-0{,}1$.
+
+\textbf{Adım 3:}
+\[
+dV=2\pi\cdot3\cdot10\,(0{,}01)+\pi\cdot9\,(-0{,}1)=0{,}6\pi-0{,}9\pi=-0{,}3\pi\ \text{cm}^3\approx-0{,}94\ \text{cm}^3 .
+\]
+\textbf{Adım 4:} $V=\pi\cdot9\cdot10=90\pi$ $\Rightarrow$ yeni hacim $\approx90\pi-0{,}3\pi=89{,}7\pi$ cm$^3\approx281{,}8$ cm$^3$.
+
+(Kontrol: gerçek değer $\pi\cdot3{,}01^2\cdot9{,}9\approx89{,}695\pi$ cm$^3$.)
+\end{cevap}
+\begin{dikkat}[Tahtada düzeltilen hata]
+Tahtada son satır ``$90\pi-0{,}3\pi=89{,}7$ cm$^3$'' olarak yazılmıştı; $\pi$ düşmüştür. Doğrusu $89{,}7\pi$ cm$^3$
+($\approx281{,}8$ cm$^3$).
+\end{dikkat}
+
+\begin{soru}[Soru 12 \foto{IMG-20261108-WA0068}, \foto{IMG-20261108-WA0069}]
+$z=x^2y$ fonksiyonunun ikinci mertebeden diferansiyelini ($d^2z$) bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{Formül:} $dx$, $dy$ sabit artımlar kabul edilerek $d^2z=d(dz)=z_{xx}\,dx^2+2z_{xy}\,dx\,dy+z_{yy}\,dy^2$
+(ikinci türevler sürekli olduğundan $z_{xy}=z_{yx}$).
+
+\textbf{Türevler:} $z_x=2xy$, $z_y=x^2$; $z_{xx}=2y$, $z_{xy}=2x$, $z_{yy}=0$.
+\[ d^2z=2y\,dx^2+2\cdot2x\,dx\,dy+0=2y\,dx^2+4x\,dx\,dy . \]
+\end{cevap}
+
+%-------------------------------------------------------------------------------------------
+\subsection{Ek alıştırmalar}
+
+\begin{soru}[\ekal Ek alıştırma 1 (tanımla kısmi türev)]
+$f(x,y)=xy^2-x^3$ için $f_x(1,-1)$'i limit tanımıyla hesaplayınız ve kuralla doğrulayınız.
+\end{soru}
+\begin{cevap}
+$f(1,-1)=1-1=0$; $f(1+h,-1)=(1+h)-(1+h)^3=1+h-1-3h-3h^2-h^3=-2h-3h^2-h^3$.
+\[ f_x(1,-1)=\lim_{h\to0}\frac{-2h-3h^2-h^3}{h}=\lim_{h\to0}(-2-3h-h^2)=-2 . \]
+Kuralla: $f_x=y^2-3x^2\Rightarrow f_x(1,-1)=1-3=-2$ $\checkmark$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 2 (ikinci mertebe ve Clairaut)]
+$f(x,y)=x\,e^{y}+y\ln x$ $(x>0)$ fonksiyonunun tüm ikinci mertebe kısmi türevlerini bulunuz; $f_{xy}=f_{yx}$
+olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+$f_x=e^y+\dfrac yx$, \quad $f_y=xe^y+\ln x$.
+\[
+f_{xx}=-\frac{y}{x^2},\qquad f_{xy}=e^y+\frac1x,\qquad f_{yx}=e^y+\frac1x,\qquad f_{yy}=xe^y .
+\]
+$f_{xy}=f_{yx}$; karma türevler $x>0$ bölgesinde sürekli olduğundan bu Schwarz teoremiyle uyumludur.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 3 (teğet düzlem ve normal doğru)]
+$z=3x^2-xy+y^2$ yüzeyinin $(1,2,5)$ noktasındaki teğet düzleminin ve normal doğrusunun denklemlerini bulunuz.
+\end{soru}
+\begin{cevap}
+$f(1,2)=3-2+4=5$ (nokta yüzey üzerinde). $f_x=6x-y\Rightarrow f_x(1,2)=4$; $f_y=-x+2y\Rightarrow f_y(1,2)=3$.
+\[ z-5=4(x-1)+3(y-2)\quad\Longrightarrow\quad z=4x+3y-5 . \]
+Normal doğru (doğrultu $\langle4,3,-1\rangle$): $x=1+4t$, $y=2+3t$, $z=5-t$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 4 (lineerleştirme ve hata sınırı)]
+$f(x,y)=\ln x+\ln y$ fonksiyonunun $(1,1)$'deki lineerleştirmesini ve $B:\ |x-1|\le0{,}2,\ |y-1|\le0{,}2$ üzerindeki
+hata sınırını bulunuz.
+\end{soru}
+\begin{cevap}
+$f(1,1)=0$, $f_x=\dfrac1x\Rightarrow1$, $f_y=\dfrac1y\Rightarrow1$: \ $L(x,y)=(x-1)+(y-1)=x+y-2$.\\
+$f_{xx}=-\dfrac1{x^2}$, $f_{yy}=-\dfrac1{y^2}$, $f_{xy}=0$. $B$'de $x,y\ge0{,}8$ olduğundan
+$|f_{xx}|,|f_{yy}|\le\dfrac1{0{,}64}=1{,}5625=M$ (en büyük değer kutunun $0{,}8$ kenarında alınır).
+\[ |E|\le\frac{1{,}5625}{2}\,(0{,}2+0{,}2)^2=0{,}78125\cdot0{,}16=0{,}125 . \]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 5 (birinci ve ikinci diferansiyel)]
+$z=x\sin y$ için $dz$ ve $d^2z$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$z_x=\sin y$, $z_y=x\cos y$ $\Rightarrow$ $dz=\sin y\,dx+x\cos y\,dy$.\\
+$z_{xx}=0$, $z_{xy}=\cos y$, $z_{yy}=-x\sin y$ $\Rightarrow$ $d^2z=2\cos y\,dx\,dy-x\sin y\,dy^2$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 6 (diferansiyelle yaklaşık değer)]
+$(1{,}02)^{3{,}01}$ sayısını diferansiyel yardımıyla yaklaşık hesaplayınız.
+\end{soru}
+\begin{cevap}
+$f(x,y)=x^y$, $(x_0,y_0)=(1,3)$, $dx=0{,}02$, $dy=0{,}01$. $f(1,3)=1$;
+$f_x=y\,x^{y-1}\Rightarrow3$; $f_y=x^y\ln x\Rightarrow1\cdot\ln1=0$.
+\[ df=3(0{,}02)+0(0{,}01)=0{,}06\quad\Rightarrow\quad(1{,}02)^{3{,}01}\approx1{,}06 . \]
+(Hesap makinesi: $\approx1{,}0614$.)
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 7 (yüzde değişim)]
+Bir dirençte harcanan güç $P=\dfrac{V^2}{R}$'dir. Gerilim \%2, direnç \%1 artarsa güç yaklaşık yüzde kaç değişir?
+\end{soru}
+\begin{cevap}
+$\ln P=2\ln V-\ln R\Rightarrow\dfrac{dP}{P}=2\dfrac{dV}{V}-\dfrac{dR}{R}=2(0{,}02)-0{,}01=0{,}03$.
+Güç yaklaşık \textbf{\%3 artar}.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 8 (üç değişkenli ikinci diferansiyel)]
+$w=xyz$ için $dw$ ve $d^2w$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$w_x=yz$, $w_y=xz$, $w_z=xy$ $\Rightarrow$ $dw=yz\,dx+xz\,dy+xy\,dz$.\\
+$w_{xx}=w_{yy}=w_{zz}=0$; $w_{xy}=z$, $w_{xz}=y$, $w_{yz}=x$ $\Rightarrow$
+$d^2w=2z\,dx\,dy+2y\,dx\,dz+2x\,dy\,dz$.
+\end{cevap}

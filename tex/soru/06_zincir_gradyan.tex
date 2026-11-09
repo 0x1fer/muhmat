@@ -1,0 +1,301 @@
+\section{Konu 6: Zincir Kuralı, Yönlü Türevler ve Gradyan Vektörü}
+
+Bu bölümde derste (5 ve 8 Kasım 2026) tahtada çözülen tüm sorular, işlenme sırasıyla ve adım adım çözümleriyle yer alıyor.
+Yönlü türev, gradyan ve teğet düzlem konuları derste tahtada işlenmediği için bunlara ait sorular sondaki ek
+alıştırmalarda verilmiştir.
+
+\begin{bilgi}[Kullanılan temel formüller]
+\begin{itemize}
+  \item $z=f(x,y)$, $x(t),y(t)$: $\dfrac{dz}{dt}=z_x\dfrac{dx}{dt}+z_y\dfrac{dy}{dt}$.
+  \item $z=f(x,y)$, $x(u,v),y(u,v)$: $z_u=z_xx_u+z_yy_u$, $z_v=z_xx_v+z_yy_v$ (ağaçta $u$'ya inen tüm yollar).
+  \item Kapalı türev: $F(x,y)=0\Rightarrow y'=-F_x/F_y$; $F(x,y,z)=0\Rightarrow z_x=-F_x/F_z$, $z_y=-F_y/F_z$.
+  \item $D_{\mathbf u}f=\nabla f\cdot\mathbf u$ ($|\mathbf u|=1$); en büyük yönlü türev $|\nabla f|$, $\nabla f$ yönünde.
+\end{itemize}
+\end{bilgi}
+
+\subsection{5 Kasım dersi: zincir kuralı problemleri}
+
+\begin{soru}[Soru 1 (tahtada Problem 6) \foto{IMG-20261105-WA0041}, \foto{IMG-20261108-WA0087}]
+$\dfrac{dz}{dt}$'yi (i) zincir kuralıyla, (ii) $z$'yi $t$ cinsinden yazıp doğrudan türev alarak bulunuz.\\
+\textbf{a)} $z=x^2+y^2,\quad x=\cos t+\sin t,\quad y=\cos t-\sin t$\\
+\textbf{b)} $z=\arctan\dfrac{y}{x},\quad x=\cos t,\quad y=\sin t$
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{a) (i) Zincir kuralı.} $z$, $x$ ve $y$ üzerinden yalnızca $t$'ye bağlı olduğundan Durum 1 uygulanır:
+$\frac{dz}{dt}=z_x\frac{dx}{dt}+z_y\frac{dy}{dt}$.
+\begin{itemize}
+  \item Dış türevler: $z_x=2x$, $z_y=2y$.
+  \item İç türevler: $x'=-\sin t+\cos t$, $y'=-\sin t-\cos t$.
+\end{itemize}
+\begin{align*}
+\frac{dz}{dt}&=2(\cos t+\sin t)(\cos t-\sin t)+2(\cos t-\sin t)(-\sin t-\cos t)\\
+&=2(\cos^2t-\sin^2t)-2(\cos t-\sin t)(\cos t+\sin t)\\
+&=2(\cos^2t-\sin^2t)-2(\cos^2t-\sin^2t)=\boxed{0}.
+\end{align*}
+\textbf{(ii) Doğrudan.} $(\cos t\pm\sin t)^2=1\pm2\sin t\cos t$ olduğundan $z=(1+2\sin t\cos t)+(1-2\sin t\cos t)=2$.
+Sabit fonksiyonun türevi $0$'dır: $dz/dt=0$. İki yol uyuşuyor.
+
+\textbf{b) (i) Zincir kuralı.} $\dfrac{d}{dw}\arctan w=\dfrac{1}{1+w^2}$ ve $w=y/x$ ile:
+\[
+z_x=\frac{1}{1+\frac{y^2}{x^2}}\cdot\left(-\frac{y}{x^2}\right)=-\frac{y}{x^2+y^2},\qquad
+z_y=\frac{1}{1+\frac{y^2}{x^2}}\cdot\frac{1}{x}=\frac{x}{x^2+y^2}.
+\]
+$x=\cos t$, $y=\sin t$ için $x^2+y^2=1$, $x'=-\sin t$, $y'=\cos t$:
+\[
+\frac{dz}{dt}=\underbrace{(-\sin t)}_{z_x}\underbrace{(-\sin t)}_{x'}+\underbrace{\cos t}_{z_y}\underbrace{\cos t}_{y'}
+=\sin^2t+\cos^2t=\boxed{1}.
+\]
+\textbf{(ii) Doğrudan.} $z=\arctan\dfrac{\sin t}{\cos t}=\arctan(\tan t)=t$ ($-\frac\pi2<t<\frac\pi2$), dolayısıyla
+$dz/dt=1$. (Tahtada b şıkkının (ii) yolu yazılmamıştı; kaynaklara göre tamamlandı.)
+\end{cevap}
+
+\begin{soru}[Soru 2 (tahtada Problem 7) \foto{IMG-20261105-WA0042}]
+$x=e^t$ dönüşümü ile $x^2\dfrac{d^2y}{dx^2}+x\dfrac{dy}{dx}+y=0$ denklemini $t$ değişkenine göre yazınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Dönüşümün türevi.} $x=e^t\iff t=\ln x$ ($x>0$); $\dfrac{dt}{dx}=\dfrac1x=e^{-t}$.
+
+\textbf{2. Birinci türev (zincir kuralı).} $y$, $t$ üzerinden $x$'e bağlıdır:
+$\dfrac{dy}{dx}=\dfrac{dy}{dt}\cdot\dfrac{dt}{dx}=e^{-t}\dfrac{dy}{dt}$.
+
+\textbf{3. İkinci türev.} $\frac{dy}{dx}=e^{-t}\frac{dy}{dt}$ bir $t$ fonksiyonudur; $x$'e göre türevi için önce $t$'ye göre
+türevleyip (çarpım kuralı) $\frac{dt}{dx}$ ile çarparız:
+\begin{align*}
+\frac{d^2y}{dx^2}&=\frac{d}{dt}\left(e^{-t}\frac{dy}{dt}\right)\cdot\frac{dt}{dx}
+=\left(-e^{-t}\frac{dy}{dt}+e^{-t}\frac{d^2y}{dt^2}\right)e^{-t}
+=e^{-2t}\left(\frac{d^2y}{dt^2}-\frac{dy}{dt}\right).
+\end{align*}
+\textbf{4. Katsayılarla çarpım.} $x^2=e^{2t}$, $x=e^t$:
+\[
+x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt},\qquad x\frac{dy}{dx}=\frac{dy}{dt}.
+\]
+\textbf{5. Denklem.}
+$\dfrac{d^2y}{dt^2}-\dfrac{dy}{dt}+\dfrac{dy}{dt}+y=0\ \Longrightarrow\ \boxed{\dfrac{d^2y}{dt^2}+y=0}$.
+
+Bu sabit katsayılı denklemin genel çözümü $y=c_1\cos t+c_2\sin t$, yani $y=c_1\cos(\ln x)+c_2\sin(\ln x)$'tir.
+
+\textbf{Not:} Tahtada son satırda ``$x\cdot\frac{dx}{dy}$'' yazılmıştı; doğrusu $x\cdot\frac{dy}{dx}$'tir. Sonuç denklemi
+fotoğrafta kadraj dışında kaldı \okunamadi{sağ kenardaki kutulu sonuç}; kaynaklara göre doğrusu $\frac{d^2y}{dt^2}+y=0$'dır.
+\end{cevap}
+
+\begin{soru}[Soru 3 (tahtada Problem 8, kısmen görünüyor) \foto{IMG-20261105-WA0042}]
+\okunamadi{sorunun metni ve çözümü fotoğrafın sağ kenarında kesik; yalnızca ``8) a, \dots'', ``$x-a\dots$'',
+``oldu\dots'', ``$F(x\dots$'', ``$F_x$'', ``$\partial z/\partial x$'', ``$\frac{a}{a-b\dots}$'' parçaları seçilebiliyor}.
+Görünen parçalar kaynaklarda yaygın olan şu soruyla uyumludur (\textbf{tahmini metin}):
+$a,b$ sabit, $\varphi$ türevlenebilir bir fonksiyon ve $x-az=\varphi(y-bz)$ ise $a\dfrac{\partial z}{\partial x}+b\dfrac{\partial z}{\partial y}=1$
+olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Kapalı biçim.} $F(x,y,z)=x-az-\varphi(y-bz)=0$. Burada $\varphi'$, $w=y-bz$ noktasında hesaplanır.
+
+\textbf{2. Kısmi türevler} (Durum 4: $\varphi$ tek değişkenli, $w$ iki değişkenli):
+\[
+F_x=1,\qquad F_y=-\varphi'(w)\cdot w_y=-\varphi',\qquad F_z=-a-\varphi'(w)\cdot w_z=-a+b\varphi'=-(a-b\varphi').
+\]
+\textbf{3. Kapalı türev formülleri} ($a-b\varphi'\ne0$):
+\[
+\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=\frac{1}{a-b\varphi'},\qquad
+\frac{\partial z}{\partial y}=-\frac{F_y}{F_z}=-\frac{\varphi'}{a-b\varphi'}.
+\]
+\textbf{4. İstenen ifade.}
+\[
+a\frac{\partial z}{\partial x}+b\frac{\partial z}{\partial y}=\frac{a}{a-b\varphi'}-\frac{b\varphi'}{a-b\varphi'}=\frac{a-b\varphi'}{a-b\varphi'}=1 .
+\]
+Tahtada görünen ``$\frac{a}{a-b\dots}$'' parçası, $a\,\partial z/\partial x$ teriminin bu biçimine karşılık geliyor.
+\end{cevap}
+
+\subsection{8 Kasım dersi: zincir kuralı durumları ve kapalı türev}
+
+\begin{soru}[Soru 4 \foto{IMG-20261108-WA0072}, \foto{IMG-20261108-WA0073}, \foto{IMG-20261108-WA0074}]
+$z=\ln(x^2+y^2)$, $x=e^{v}\cos u$, $y=e^{v}\sin u$ ise $\dfrac{\partial z}{\partial u}$ ve $\dfrac{\partial z}{\partial v}$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Ağaç.} $z\to x,y$; $x\to u,v$; $y\to u,v$. Formüller:
+$z_u=z_xx_u+z_yy_u$, $\ z_v=z_xx_v+z_yy_v$.
+
+\textbf{2. Dış türevler.} $z_x=\dfrac{2x}{x^2+y^2}$, $z_y=\dfrac{2y}{x^2+y^2}$; ayrıca $x^2+y^2=e^{2v}(\cos^2u+\sin^2u)=e^{2v}$.
+
+\textbf{3. İç türevler.} $x_u=-e^{v}\sin u$, $x_v=e^{v}\cos u$, $y_u=e^{v}\cos u$, $y_v=e^{v}\sin u$.
+
+\textbf{4. Hesap.}
+\begin{align*}
+\frac{\partial z}{\partial u}&=\frac{2e^{v}\cos u\,(-e^{v}\sin u)+2e^{v}\sin u\;e^{v}\cos u}{e^{2v}}=\frac{-2e^{2v}\sin u\cos u+2e^{2v}\sin u\cos u}{e^{2v}}=\boxed{0},\\[4pt]
+\frac{\partial z}{\partial v}&=\frac{2e^{v}\cos u\;e^{v}\cos u+2e^{v}\sin u\;e^{v}\sin u}{e^{2v}}=\frac{2e^{2v}(\cos^2u+\sin^2u)}{e^{2v}}=\boxed{2}.
+\end{align*}
+\textbf{5. Kontrol.} $z=\ln(e^{2v})=2v$ $\Rightarrow$ $z_u=0$, $z_v=2$. \checkmark
+(Tahtadaki kutuda üs ``$e^{2u}$'' gibi okunuyor; doğrusu $e^{2v}$.)
+\end{cevap}
+
+\begin{soru}[Soru 5 \foto{IMG-20261108-WA0075}]
+$z=\dfrac{1}{x^2+y^2}$, $x=\cos2t$, $y=\sin2t$ ise $\dfrac{dz}{dt}$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1.} $x^2+y^2=\cos^22t+\sin^22t=1$.
+
+\textbf{2. Kısmi türevler.} $z=(x^2+y^2)^{-1}$ olduğundan
+$z_x=-(x^2+y^2)^{-2}\cdot2x=\dfrac{-2x}{(x^2+y^2)^2}$, $z_y=\dfrac{-2y}{(x^2+y^2)^2}$.
+
+\textbf{3. İç türevler.} $x'=-2\sin2t$, $y'=2\cos2t$ (içteki $2t$'nin türevi $2$ unutulmamalı).
+
+\textbf{4. Durum 1.}
+\[
+\frac{dz}{dt}=(-2\cos2t)(-2\sin2t)+(-2\sin2t)(2\cos2t)=4\sin2t\cos2t-4\sin2t\cos2t=\boxed{0}.
+\]
+\textbf{5. Kontrol.} $z=\dfrac{1}{\cos^22t+\sin^22t}=1\Rightarrow dz/dt=0$. (Tahtada ``$z=$'' yazılıp bırakılmıştı.)
+\end{cevap}
+
+\begin{soru}[Soru 6 \foto{IMG-20261108-WA0077}, \foto{IMG-20261108-WA0078}]
+$s=\ln(x^2+y^2+z^2)$, $x=u-v$, $y=u+v$, $z=2\sqrt{uv}$ ise $\dfrac{\partial s}{\partial u}$ ve $\dfrac{\partial s}{\partial v}$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Ağaç (Durum 3).} $s\to x,y,z$; her biri $\to u,v$. Her türevde üç terim:
+$s_u=s_xx_u+s_yy_u+s_zz_u$, $\ s_v=s_xx_v+s_yy_v+s_zz_v$.
+
+\textbf{2. Dış türevler.} $s_x=\dfrac{2x}{N}$, $s_y=\dfrac{2y}{N}$, $s_z=\dfrac{2z}{N}$, burada
+$N=x^2+y^2+z^2=(u-v)^2+(u+v)^2+4uv=2u^2+2v^2+4uv=2(u+v)^2$.
+
+\textbf{3. İç türevler.} $x_u=1,\ x_v=-1,\ y_u=1,\ y_v=1,\ z_u=\dfrac{v}{\sqrt{uv}},\ z_v=\dfrac{u}{\sqrt{uv}}$
+($z=2\sqrt{uv}$ için $z_u=2\cdot\frac{v}{2\sqrt{uv}}$).
+
+\textbf{4. Hesap.} $2z\,z_u=2\cdot2\sqrt{uv}\cdot\frac{v}{\sqrt{uv}}=4v$ ve $2z\,z_v=4u$ olduğundan
+\begin{align*}
+\frac{\partial s}{\partial u}&=\frac{2(u-v)+2(u+v)+4v}{2(u+v)^2}=\frac{4u+4v}{2(u+v)^2}=\boxed{\frac{2}{u+v}},\\
+\frac{\partial s}{\partial v}&=\frac{-2(u-v)+2(u+v)+4u}{2(u+v)^2}=\frac{4u+4v}{2(u+v)^2}=\boxed{\frac{2}{u+v}}.
+\end{align*}
+\textbf{5. Kontrol.} $s=\ln\big(2(u+v)^2\big)=\ln2+2\ln(u+v)\Rightarrow s_u=s_v=\dfrac{2}{u+v}$. \checkmark
+\end{cevap}
+
+\begin{soru}[Soru 7 \foto{IMG-20261108-WA0079}]
+$y=\sin x$, $x=u^2v$ ise $y_u$ ve $y_v$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Ağaç (Durum 4).} $y\to x$ (adi türev $dy/dx$), $x\to u,v$ (kısmi türevler).
+
+\textbf{2.} $\dfrac{dy}{dx}=\cos x=\cos(u^2v)$; $x_u=2uv$, $x_v=u^2$.
+
+\textbf{3.} $y_u=\dfrac{dy}{dx}x_u=\boxed{2uv\cos(u^2v)}$,\qquad $y_v=\dfrac{dy}{dx}x_v=\boxed{u^2\cos(u^2v)}$.
+\end{cevap}
+
+\begin{soru}[Soru 8 \foto{IMG-20261108-WA0080}, \foto{IMG-20261108-WA0081}]
+$2x^4z^3+3xy^2+4xz+3y+5x-23=0$ denklemi $z=z(x,y)$ fonksiyonunu tanımlıyor. $(1,2)$ noktasında $z_x$ ve $z_y$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Formül (WA0080).} $F(x,y,z)=0$'ın $x$'e göre türevi: $F_x\cdot1+F_y\cdot0+F_zz_x=0\Rightarrow z_x=-F_x/F_z$;
+benzer şekilde $z_y=-F_y/F_z$ ($F_z\ne0$).
+
+\textbf{2. Noktayı tamamla.} $x=1,\ y=2$: $2z^3+12+4z+6+5-23=0\Rightarrow2z^3+4z=0\Rightarrow2z(z^2+2)=0$.
+$z^2+2>0$ olduğundan tek reel çözüm $z=0$; nokta $(1,2,0)$.
+
+\textbf{3. Kısmi türevler} (değişkenler bağımsızmış gibi):
+$F_x=8x^3z^3+3y^2+4z+5$, $F_y=6xy+3$, $F_z=6x^4z^2+4x$.
+
+\textbf{4. Noktada:} $F_x=17$, $F_y=15$, $F_z=4\ne0$.
+
+\textbf{5. Sonuç:} $z_x=\boxed{-\dfrac{17}{4}}$, $\quad z_y=\boxed{-\dfrac{15}{4}}$.
+\end{cevap}
+
+\subsection{Ek alıştırmalar}
+
+\begin{soru}[\ekal Ek alıştırma 1 (Durum 2)]
+$w=xy+z$, $x=\cos t$, $y=\sin t$, $z=t$ ise $dw/dt$'yi bulunuz ve $t=0$'daki değerini hesaplayınız.
+\end{soru}
+\begin{cevap}
+$w_x=y,\ w_y=x,\ w_z=1$; $x'=-\sin t,\ y'=\cos t,\ z'=1$.
+\[
+\frac{dw}{dt}=\sin t(-\sin t)+\cos t\cos t+1=\cos^2t-\sin^2t+1=\cos2t+1 .
+\]
+$t=0$'da $dw/dt=2$. Kontrol: $w=\sin t\cos t+t=\frac12\sin2t+t$, $w'=\cos2t+1$. \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 2 (kutupsal koordinatlar)]
+$z=x^2+xy$, $x=r\cos\theta$, $y=r\sin\theta$ ise $z_r$ ve $z_\theta$'yı zincir kuralıyla bulunuz.
+\end{soru}
+\begin{cevap}
+$z_x=2x+y$, $z_y=x$; $x_r=\cos\theta$, $y_r=\sin\theta$, $x_\theta=-r\sin\theta$, $y_\theta=r\cos\theta$.
+\begin{align*}
+z_r&=(2x+y)\cos\theta+x\sin\theta=(2r\cos\theta+r\sin\theta)\cos\theta+r\cos\theta\sin\theta
+=2r\cos^2\theta+r\sin2\theta,\\
+z_\theta&=-(2x+y)\,r\sin\theta+x\,r\cos\theta=-2r^2\sin\theta\cos\theta-r^2\sin^2\theta+r^2\cos^2\theta
+=r^2(\cos2\theta-\sin2\theta).
+\end{align*}
+Kontrol: $z=r^2\cos^2\theta+r^2\sin\theta\cos\theta=r^2\left(\cos^2\theta+\tfrac12\sin2\theta\right)$; doğrudan türevler
+aynı sonucu verir. \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 3 (Durum 4, keyfi fonksiyon)]
+$f$ türevlenebilir ve $z=f(x^2-y^2)$ ise $y\,z_x+x\,z_y=0$ olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+$w=x^2-y^2$ dersek $z=f(w)$ (Durum 4): $z_x=f'(w)\,w_x=2x\,f'(w)$, $z_y=f'(w)\,w_y=-2y\,f'(w)$. Buna göre
+$y\,z_x+x\,z_y=2xy\,f'-2xy\,f'=0$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 4 (kapalı türev)]
+$x^3+y^3+z^3+6xyz=1$ denklemi $z=z(x,y)$'yi tanımlıyorsa $z_x$ ve $z_y$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$F=x^3+y^3+z^3+6xyz-1$; $F_x=3x^2+6yz$, $F_y=3y^2+6xz$, $F_z=3z^2+6xy$. $F_z\ne0$ iken
+\[
+z_x=-\frac{3x^2+6yz}{3z^2+6xy}=-\frac{x^2+2yz}{z^2+2xy},\qquad z_y=-\frac{y^2+2xz}{z^2+2xy}.
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 5 (Euler--Cauchy)]
+$x=e^t$ dönüşümüyle $x^2y''+3xy'+y=0$ denklemini $t$'ye göre yazınız ve çözünüz.
+\end{soru}
+\begin{cevap}
+$x^2y''=\ddot y-\dot y$ ve $xy'=\dot y$ (nokta $t$'ye göre türev) kullanılırsa
+\[
+\ddot y-\dot y+3\dot y+y=0\ \Longrightarrow\ \ddot y+2\dot y+y=0 .
+\]
+Karakteristik denklem $m^2+2m+1=(m+1)^2=0$, çift kök $m=-1$: $y=(c_1+c_2t)e^{-t}$. $t=\ln x$ ile
+$y=\dfrac{c_1+c_2\ln x}{x}$. (Kontrol: $y=1/x$ için $x^2\cdot\frac{2}{x^3}+3x\cdot\left(-\frac{1}{x^2}\right)+\frac1x=0$.)
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 6 (yönlü türev)]
+$f(x,y)=x^2y^3-4y$ fonksiyonunun $(2,-1)$ noktasında $\mathbf v=2\mathbf i+5\mathbf j$ yönündeki yönlü türevini bulunuz.
+\end{soru}
+\begin{cevap}
+$f_x=2xy^3$, $f_y=3x^2y^2-4$; $(2,-1)$'de $f_x=2\cdot2\cdot(-1)=-4$, $f_y=3\cdot4\cdot1-4=8$; $\nabla f=\langle-4,8\rangle$.
+$\mathbf v$ birim değil: $|\mathbf v|=\sqrt{29}$, $\mathbf u=\frac{1}{\sqrt{29}}\langle2,5\rangle$.
+\[
+D_{\mathbf u}f(2,-1)=\frac{-4\cdot2+8\cdot5}{\sqrt{29}}=\boxed{\frac{32}{\sqrt{29}}}\approx5{,}94 .
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 7 (en hızlı artış, verilen noktaya doğru yön)]
+$f(x,y)=x\,e^{y}$ ve $P(2,0)$ olsun. (a) $P$'den $Q(\frac12,2)$'ye doğru yöndeki yönlü türevi bulunuz. (b) $f$ en hızlı
+hangi yönde artar, en büyük artış hızı nedir? (c) Hangi yönlerde değişim hızı sıfırdır?
+\end{soru}
+\begin{cevap}
+$\nabla f=\langle e^{y},\ x e^{y}\rangle$, $\nabla f(2,0)=\langle1,2\rangle$.
+
+\textbf{(a)} $\overrightarrow{PQ}=\langle-\frac32,2\rangle$, $|\overrightarrow{PQ}|=\frac52$, $\mathbf u=\langle-\frac35,\frac45\rangle$;
+$D_{\mathbf u}f=-\frac35+\frac85=\boxed{1}$.
+
+\textbf{(b)} $\nabla f(2,0)=\langle1,2\rangle$ yönünde (birim: $\frac{1}{\sqrt5}\langle1,2\rangle$); en büyük hız $|\nabla f|=\sqrt5$.
+
+\textbf{(c)} $\mathbf u\perp\langle1,2\rangle$: $\mathbf u=\pm\frac{1}{\sqrt5}\langle2,-1\rangle$.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 8 (üç değişken)]
+$f(x,y,z)=xy+yz+zx$ için $P(1,-1,2)$ noktasında (a) $Q(2,1,4)$'e doğru yönlü türevi, (b) maksimum yönlü türevi bulunuz.
+\end{soru}
+\begin{cevap}
+$\nabla f=\langle y+z,\ x+z,\ x+y\rangle$, $\nabla f(P)=\langle1,3,0\rangle$.
+
+\textbf{(a)} $\overrightarrow{PQ}=\langle1,2,2\rangle$, uzunluğu $3$; $D_{\mathbf u}f=\frac{1\cdot1+3\cdot2+0\cdot2}{3}=\boxed{\frac73}$.
+
+\textbf{(b)} $\max D_{\mathbf u}f=|\nabla f(P)|=\sqrt{1+9+0}=\boxed{\sqrt{10}}$, $\langle1,3,0\rangle$ yönünde.
+\end{cevap}
+
+\begin{soru}[\ekal Ek alıştırma 9 (teğet düzlem ve normal doğru)]
+$x^2+y^2-z^2=4$ tek kanatlı hiperboloidinin $(2,1,1)$ noktasındaki teğet düzlemini ve normal doğrusunu bulunuz.
+\end{soru}
+\begin{cevap}
+Kontrol: $4+1-1=4$ \checkmark. $F=x^2+y^2-z^2$, $\nabla F=\langle2x,2y,-2z\rangle$, $\nabla F(2,1,1)=\langle4,2,-2\rangle\parallel\langle2,1,-1\rangle$.
+
+Teğet düzlem: $2(x-2)+(y-1)-(z-1)=0\iff\boxed{2x+y-z=4}$.
+
+Normal doğru: $x=2+2t,\quad y=1+t,\quad z=1-t$ \ (simetrik: $\frac{x-2}{2}=\frac{y-1}{1}=\frac{z-1}{-1}$).
+\end{cevap}

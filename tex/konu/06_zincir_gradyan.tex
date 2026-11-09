@@ -1,0 +1,1115 @@
+\section{Zincir Kuralı, Yönlü Türevler ve Gradyan Vektörü}
+
+\subsection{Amaç ve sezgi}
+
+Tek değişkenli analizde $y=f(x)$ ve $x=g(t)$ ise $y$ dolaylı olarak $t$'ye bağlıdır ve
+\[
+\frac{dy}{dt}=\frac{dy}{dx}\cdot\frac{dx}{dt}
+\]
+olur. Bu kural ``değişim oranları çarpılarak aktarılır'' der: $t$ biraz değişince $x$ değişir, $x$ değişince de $y$
+değişir. Çok değişkenli fonksiyonlarda durum aynıdır, yalnızca \textbf{değişimin aktığı birden fazla yol} vardır. Örneğin bir
+metal levhanın sıcaklığı $T=T(x,y)$ ise ve levha üzerinde hareket eden bir karıncanın konumu $x=x(t),\ y=y(t)$ ise,
+karıncanın hissettiği sıcaklığın zamana göre değişimi hem $x$ yönündeki hem de $y$ yönündeki hareketten gelir:
+\[
+\frac{dT}{dt}=\underbrace{\frac{\partial T}{\partial x}\frac{dx}{dt}}_{x\text{ yolundan katkı}}
++\underbrace{\frac{\partial T}{\partial y}\frac{dy}{dt}}_{y\text{ yolundan katkı}} .
+\]
+Bu bölümde şu soruların cevabını arayacağız:
+\begin{itemize}
+  \item Ara değişkenler başka değişkenlere bağlıysa bileşke fonksiyonun (kısmi) türevleri nasıl hesaplanır? (\textbf{zincir kuralı}, \textbf{ağaç diyagramı})
+  \item Bir denklemle ``gizlice'' tanımlanmış $y=y(x)$ ya da $z=z(x,y)$ fonksiyonlarının türevleri, denklemi çözmeden nasıl bulunur? (\textbf{kapalı türev})
+  \item Diferansiyel denklemlerde değişken değiştirmek (ör. $x=e^t$, kutupsal koordinatlar) türevleri nasıl dönüştürür?
+  \item Bir fonksiyonun $x$ ve $y$ eksenleri dışındaki \textbf{herhangi bir yöndeki} değişim hızı nedir? (\textbf{yönlü türev})
+  \item Fonksiyon en hızlı hangi yönde artar, bu en büyük artış hızı nedir? (\textbf{gradyan vektörü})
+  \item Gradyan, seviye eğrileri ve seviye yüzeyleriyle nasıl ilişkilidir; bir seviye yüzeyinin teğet düzlemi ve normal doğrusu nasıl yazılır?
+\end{itemize}
+
+\begin{bilgi}[Bu konunun kaynakları hakkında]
+Zincir kuralı (giriş, ağaç diyagramı, Durum 1--4), kapalı fonksiyonların türevi ve $x=e^t$ değişken dönüşümü derste
+tahtada işlendi (5 ve 8 Kasım 2026 fotoğrafları). \textbf{Yönlü türev, gradyan vektörü, en hızlı artış yönü, seviye
+eğrilerine/yüzeylerine diklik, seviye yüzeyine teğet düzlem ve normal doğru} konuları derste tahtada görülmedi;
+bu kısımlar kaynaklardan (Kreyszig, Zill \& Wright, Balcı) eklendi. Kutupsal dönüşüm, genel durum ve yüksek
+mertebeden türevler de kaynaklardan eklenmiştir.
+\end{bilgi}
+
+\subsection{Hazırlık: tam diferansiyel ve zincir kuralı}
+
+Konu 5'te $z=f(x,y)$ türevlenebilir bir fonksiyonun \textbf{tam diferansiyelini}
+\[
+dz=\frac{\partial z}{\partial x}\,dx+\frac{\partial z}{\partial y}\,dy
+\]
+olarak tanımlamıştık. Zincir kuralının en kısa ``türetilişi'' buradan gelir: $x$ ve $y$ bir $t$ parametresine bağlıysa
+$dx=x'(t)\,dt$, $dy=y'(t)\,dt$ yazıp yerine koyarsak
+\[
+dz=\left(\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}\right)dt
+\quad\Longrightarrow\quad
+\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}.
+\]
+Benzer şekilde $x=x(u,v)$, $y=y(u,v)$ ise $dx=x_u\,du+x_v\,dv$, $dy=y_u\,du+y_v\,dv$ yerine konup $du$ ve $dv$'nin
+katsayıları toplanırsa
+\[
+dz=\big(z_x x_u+z_y y_u\big)\,du+\big(z_x x_v+z_y y_v\big)\,dv
+\]
+bulunur; $du$ ve $dv$'nin katsayıları tam olarak $\partial z/\partial u$ ve $\partial z/\partial v$'dir. Yani
+\textbf{birinci diferansiyelin biçimi, değişkenler bağımsız da olsa başka değişkenlere bağlı da olsa aynı kalır}
+(birinci diferansiyelin değişmezliği).
+
+\begin{tahta}[\foto{IMG-20261108-WA0069}]
+Zincir kuralına geçmeden hemen önce aynı tahtada Konu 5'in son örneği yazıldı:
+$z=x^2y$ için $z_{xx}=2y,\ z_{xy}=2x,\ z_{yy}=0$ ve
+\[
+d^2z=z_{xx}\,dx^2+2z_{xy}\,dx\,dy+z_{yy}\,dy^2=2y\,dx^2+4x\,dx\,dy .
+\]
+(Tam ve yüksek mertebeden diferansiyeller Konu 5'te ayrıntılı anlatılıyor.)
+\end{tahta}
+
+\begin{dikkat}[Dikkat: ikinci diferansiyel değişmez değildir]
+$d^2z=z_{xx}dx^2+2z_{xy}dx\,dy+z_{yy}dy^2$ formülü yalnızca $x$ ve $y$ \textbf{bağımsız} değişkenler olduğunda
+($d^2x=d^2y=0$) geçerlidir. $x,y$ başka değişkenlere bağlıysa iki terim daha eklenir:
+\[
+d^2z=z_{xx}\,dx^2+2z_{xy}\,dx\,dy+z_{yy}\,dy^2+z_x\,d^2x+z_y\,d^2y .
+\]
+Bu yüzden ikinci mertebe türevleri zincir kuralıyla hesaplarken $z_x$, $z_y$'nin de $x,y$ üzerinden $u,v$'ye bağlı
+olduğunu unutmamak gerekir (bkz. Bölüm ``Yüksek mertebeden türevler ve kutupsal koordinatlar'').
+\end{dikkat}
+
+\subsection{Zincir kuralı: tek parametre (Durum 1 ve Durum 2)}
+
+\begin{teorem}[Zincir kuralı -- Durum 1]
+$z=f(x,y)$ türevlenebilir, $x=x(t)$ ve $y=y(t)$ türevlenebilir olsun. O halde $z=f\big(x(t),y(t)\big)$ yalnızca $t$'ye
+bağlıdır ve
+\[
+\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}.
+\]
+\end{teorem}
+
+\textbf{Neden doğru? (ispat fikri).} $f$ türevlenebilir olduğundan (Konu 5)
+\[
+\Delta z=f_x\,\Delta x+f_y\,\Delta y+\varepsilon_1\Delta x+\varepsilon_2\Delta y,\qquad
+(\Delta x,\Delta y)\to(0,0)\ \text{iken}\ \varepsilon_1,\varepsilon_2\to0 .
+\]
+Her iki tarafı $\Delta t$'ye bölüp $\Delta t\to0$ alırsak $\Delta x/\Delta t\to x'(t)$, $\Delta y/\Delta t\to y'(t)$ ve
+$\varepsilon_1,\varepsilon_2\to0$ olur (çünkü $x(t),y(t)$ sürekli, dolayısıyla $\Delta x,\Delta y\to0$). Geriye
+$dz/dt=f_x x'+f_y y'$ kalır. İspatta $f$'nin yalnızca kısmi türevlerinin var olması değil, \textbf{türevlenebilir} olması
+kullanıldı; bu koşul önemlidir (bkz. Sık yapılan hatalar).
+
+\begin{teorem}[Zincir kuralı -- Durum 2]
+$u=f(x,y,z)$ türevlenebilir ve $x=x(t),\ y=y(t),\ z=z(t)$ türevlenebilir ise
+\[
+\frac{du}{dt}=\frac{\partial u}{\partial x}\frac{dx}{dt}+\frac{\partial u}{\partial y}\frac{dy}{dt}+\frac{\partial u}{\partial z}\frac{dz}{dt}.
+\]
+\end{teorem}
+
+\textbf{Ağaç diyagramı.} Bağımlılıkları bir ağaç olarak çizeriz: en üstte bağımlı değişken, ortada ara değişkenler, en
+altta bağımsız değişken(ler). Her dala, alttaki değişkene göre üsttekinin türevini yazarız. Aranan türev,
+\textbf{tepeden ilgili bağımsız değişkene inen tüm yollar} boyunca dal etiketlerinin çarpılıp bu çarpımların
+toplanmasıyla elde edilir.
+
+\begin{center}
+\begin{tikzpicture}[every node/.style={font=\small}, level distance=1.6cm]
+  % Durum 1
+  \node (z) at (0,0) {$z$};
+  \node (x) at (-1.3,-1.6) {$x$};
+  \node (y) at (1.3,-1.6) {$y$};
+  \node (t1) at (-1.3,-3.2) {$t$};
+  \node (t2) at (1.3,-3.2) {$t$};
+  \draw (z) -- node[left,pos=0.45]{$\frac{\partial z}{\partial x}$} (x);
+  \draw (z) -- node[right,pos=0.45]{$\frac{\partial z}{\partial y}$} (y);
+  \draw (x) -- node[left]{$\frac{dx}{dt}$} (t1);
+  \draw (y) -- node[right]{$\frac{dy}{dt}$} (t2);
+  \node[gri] at (0,-4.0) {Durum 1};
+  % Durum 2
+  \node (u) at (6,0) {$u$};
+  \node (a) at (4.5,-1.6) {$x$};
+  \node (b) at (6,-1.6) {$y$};
+  \node (c) at (7.5,-1.6) {$z$};
+  \node (ta) at (4.5,-3.2) {$t$};
+  \node (tb) at (6,-3.2) {$t$};
+  \node (tc) at (7.5,-3.2) {$t$};
+  \draw (u) -- node[left]{$u_x$} (a);
+  \draw (u) -- node[right,pos=0.6]{$u_y$} (b);
+  \draw (u) -- node[right]{$u_z$} (c);
+  \draw (a) -- node[left]{$x'$} (ta);
+  \draw (b) -- node[right]{$y'$} (tb);
+  \draw (c) -- node[right]{$z'$} (tc);
+  \node[gri] at (6,-4.0) {Durum 2};
+\end{tikzpicture}
+\end{center}
+
+\begin{tahta}[\foto{IMG-20261108-WA0075}, \foto{IMG-20261108-WA0076}]
+``Zincir Kuralı Durumları'' başlığı altında:
+\begin{itemize}
+  \item Durum 1: $z=f(x,y),\ x=x(t),\ y=y(t)\Rightarrow z$ yalnız $t$'ye bağlı ve
+        $\dfrac{dz}{dt}=\dfrac{\partial z}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial z}{\partial y}\dfrac{dy}{dt}$.
+  \item Durum 2: $u=f(x,y,z),\ x=x(t),\ y=y(t),\ z=z(t)\Rightarrow
+        \dfrac{du}{dt}=\dfrac{\partial u}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial u}{\partial y}\dfrac{dy}{dt}+\dfrac{\partial u}{\partial z}\dfrac{dz}{dt}$.
+\end{itemize}
+Her iki durum için ağaç diyagramı çizildi (yukarıdaki şekil).
+\end{tahta}
+
+\textbf{Adım adım yöntem (tek parametre).}
+\begin{enumerate}
+  \item Ağacı çiz; ara değişkenleri ve bağımsız değişkeni belirle.
+  \item Dış fonksiyonun kısmi türevlerini ($z_x$, $z_y$, \dots) hesapla.
+  \item İç fonksiyonların $t$'ye göre türevlerini ($x'(t)$, $y'(t)$, \dots) hesapla.
+  \item Formülde yerine koy; sonucu yalnızca $t$ cinsinden yaz (ara değişkenleri $t$ cinsinden yerine koy).
+  \item Mümkünse kontrol et: $z$'yi doğrudan $t$ cinsinden yazıp türev al.
+\end{enumerate}
+
+\begin{soru}[Örnek 1 \foto{IMG-20261108-WA0075}]
+$z=\dfrac{1}{x^2+y^2}$, $x=\cos2t$, $y=\sin2t$ ise $\dfrac{dz}{dt}$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+Önce $x^2+y^2=\cos^22t+\sin^22t=1$ olduğuna dikkat edelim. Kısmi türevler ve iç türevler:
+\[
+\frac{\partial z}{\partial x}=\frac{-2x}{(x^2+y^2)^2},\qquad
+\frac{\partial z}{\partial y}=\frac{-2y}{(x^2+y^2)^2},\qquad
+\frac{dx}{dt}=-2\sin2t,\qquad \frac{dy}{dt}=2\cos2t .
+\]
+Durum 1 formülü ve $x^2+y^2=1$ ile
+\begin{align*}
+\frac{dz}{dt}&=\frac{-2x}{1}\,(-2\sin2t)+\frac{-2y}{1}\,(2\cos2t)
+=4\cos2t\sin2t-4\sin2t\cos2t=\boxed{0}.
+\end{align*}
+\textbf{Kontrol (doğrudan yol).} Tahtada ``$z=$'' yazılıp bırakılmıştı; tamamlarsak
+$z=\dfrac{1}{\cos^22t+\sin^22t}=1$ sabit olduğundan $dz/dt=0$. Geometrik olarak: nokta birim çember üzerinde dolaşıyor,
+$z$ ise yalnızca orijine uzaklığa bağlı; uzaklık değişmediği için $z$ de değişmez.
+\end{cevap}
+
+\begin{soru}[Örnek 2 (tahtada Problem 6) \foto{IMG-20261105-WA0041}, \foto{IMG-20261108-WA0087}]
+$\dfrac{dz}{dt}$'yi (i) zincir kuralıyla, (ii) $z$'yi $t$ cinsinden yazıp doğrudan türev alarak bulunuz.\\
+\textbf{a)} $z=x^2+y^2,\quad x=\cos t+\sin t,\quad y=\cos t-\sin t$\\
+\textbf{b)} $z=\arctan\dfrac{y}{x},\quad x=\cos t,\quad y=\sin t$
+\end{soru}
+\begin{cevap}
+\textbf{a) (i) Zincir kuralı.} $z_x=2x$, $z_y=2y$; $x'=-\sin t+\cos t$, $y'=-\sin t-\cos t$. O halde
+\begin{align*}
+\frac{dz}{dt}&=2x\,x'+2y\,y'\\
+&=2(\cos t+\sin t)(\cos t-\sin t)+2(\cos t-\sin t)(-\sin t-\cos t)\\
+&=2(\cos^2t-\sin^2t)-2(\cos^2t-\sin^2t)=\boxed{0}.
+\end{align*}
+\textbf{(ii) Doğrudan.} $z=(\cos t+\sin t)^2+(\cos t-\sin t)^2=(1+2\sin t\cos t)+(1-2\sin t\cos t)=2$, dolayısıyla
+$dz/dt=0$. İki yol aynı sonucu verdi.
+
+\textbf{b) (i) Zincir kuralı.} $\arctan$'ın türevi $\dfrac{1}{1+w^2}$ olduğundan
+\[
+z_x=\frac{1}{1+y^2/x^2}\cdot\left(-\frac{y}{x^2}\right)=-\frac{y}{x^2+y^2},\qquad
+z_y=\frac{1}{1+y^2/x^2}\cdot\frac{1}{x}=\frac{x}{x^2+y^2}.
+\]
+$x=\cos t,\ y=\sin t$ için $x^2+y^2=1$; $x'=-\sin t$, $y'=\cos t$. Böylece
+\[
+\frac{dz}{dt}=z_x x'+z_y y'=(-\sin t)(-\sin t)+(\cos t)(\cos t)=\sin^2t+\cos^2t=\boxed{1}.
+\]
+\textbf{(ii) Doğrudan.} $z=\arctan\dfrac{\sin t}{\cos t}=\arctan(\tan t)=t$ ($-\pi/2<t<\pi/2$ için), dolayısıyla
+$dz/dt=1$. (Tahtada b şıkkının (ii) yolu yazılmamıştı; kaynaklara göre tamamlandı. $\arctan(\tan t)=t$ eşitliği
+yalnızca $(-\pi/2,\pi/2)$'de geçerlidir, ancak $\cos t\ne0$ olan her aralıkta $z=t+k\pi$ olduğundan türev her yerde 1'dir.)
+Geometrik anlam: $z=\arctan(y/x)$ kutupsal açıdır; nokta birim çember üzerinde birim hızla döndüğü için açı da birim
+hızla artar.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 3 (Durum 2)]
+$w=x^2+y^2+z^2$, $x=\cos t$, $y=\sin t$, $z=t$ (helis) ise $dw/dt$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$w_x=2x,\ w_y=2y,\ w_z=2z$; $x'=-\sin t,\ y'=\cos t,\ z'=1$. Durum 2:
+\[
+\frac{dw}{dt}=2\cos t(-\sin t)+2\sin t\cos t+2t\cdot1=2t .
+\]
+Kontrol: $w=\cos^2t+\sin^2t+t^2=1+t^2\Rightarrow dw/dt=2t$. \checkmark
+\end{cevap}
+
+\subsection{Zincir kuralı: iki bağımsız değişken (Durum 3 ve Durum 4)}
+
+Şimdi ara değişkenler birden fazla bağımsız değişkene bağlı olsun. $z=f(x,y)$ ve $x=x(u,v)$, $y=y(u,v)$ ise $z$ dolaylı
+olarak $u$ ve $v$'nin fonksiyonudur. $\partial z/\partial u$ hesaplanırken $v$ sabit tutulur; böylece ağaçta yalnızca
+$u$ ile biten yollar izlenir.
+
+\begin{center}
+\begin{tikzpicture}[every node/.style={font=\small}]
+  \node (z) at (0,0) {$z$};
+  \node (x) at (-2.2,-1.7) {$x$};
+  \node (y) at (2.2,-1.7) {$y$};
+  \node[vurgu] (u1) at (-3.3,-3.5) {$\underline{u}$};
+  \node (v1) at (-1.1,-3.5) {$v$};
+  \node[vurgu] (u2) at (1.1,-3.5) {$\underline{u}$};
+  \node (v2) at (3.3,-3.5) {$v$};
+  \draw[vurgu,thick] (z) -- node[above left]{$\frac{\partial z}{\partial x}$} (x);
+  \draw[vurgu,thick] (z) -- node[above right]{$\frac{\partial z}{\partial y}$} (y);
+  \draw[vurgu,thick] (x) -- node[left]{$\frac{\partial x}{\partial u}$} (u1);
+  \draw (x) -- node[right]{$\frac{\partial x}{\partial v}$} (v1);
+  \draw[vurgu,thick] (y) -- node[left]{$\frac{\partial y}{\partial u}$} (u2);
+  \draw (y) -- node[right]{$\frac{\partial y}{\partial v}$} (v2);
+\end{tikzpicture}
+\end{center}
+Kırmızı yollar ($z\to x\to u$ ve $z\to y\to u$) $\partial z/\partial u$'yu verir.
+
+\begin{teorem}[İki ara, iki bağımsız değişken]
+$z=f(x,y)$ türevlenebilir; $x=x(u,v)$, $y=y(u,v)$'nin birinci kısmi türevleri var ise
+\[
+\frac{\partial z}{\partial u}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial u},
+\qquad
+\frac{\partial z}{\partial v}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial v}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial v}.
+\]
+\end{teorem}
+Neden: $\partial z/\partial u$ hesaplanırken $v$ sabittir; o zaman $x$ ve $y$ yalnızca $u$'ya bağlıdır ve Durum 1, $t$
+yerine $u$ yazılarak uygulanır.
+
+\begin{tahta}[\foto{IMG-20261108-WA0069}, \foto{IMG-20261108-WA0070}, \foto{IMG-20261108-WA0071}]
+\textbf{Zincir Kuralı.} Tek değişkende: $y=f(x),\ x=g(t)\Rightarrow \dfrac{dy}{dt}=\dfrac{dy}{dx}\cdot\dfrac{dx}{dt}$.
+$z=f(x,y)$ ve $x=x(u,v),\ y=y(u,v)$ olsun; bu durumda $z$, $u$ ve $v$'nin fonksiyonudur. Ağaç diyagramı çizildi ve $u$ ile
+biten iki yaprağın altı çizildi:
+\[
+\frac{\partial z}{\partial u}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial u},\qquad
+\frac{\partial z}{\partial v}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial v}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial v}.
+\]
+\end{tahta}
+
+\begin{bilgi}[Tahtadaki küçük yazım kayması]
+Tahtada (WA0069) ``$y=(u,v)$'' yazılmıştı; doğrusu $y=y(u,v)$'dir (harf düşmüş). Ağaçtaki sağ alt dal etiketi el
+yazısında ``$\partial y/\partial y$'' gibi görünüyor; doğrusu $\partial y/\partial v$'dir.
+\end{bilgi}
+
+\begin{soru}[Örnek 4 \foto{IMG-20261108-WA0072}, \foto{IMG-20261108-WA0073}, \foto{IMG-20261108-WA0074}]
+$z=\ln(x^2+y^2)$, $x=e^{v}\cos u$, $y=e^{v}\sin u$ ise $\dfrac{\partial z}{\partial u}$ ve $\dfrac{\partial z}{\partial v}$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Dış türevler:}
+$\dfrac{\partial z}{\partial x}=\dfrac{2x}{x^2+y^2},\quad \dfrac{\partial z}{\partial y}=\dfrac{2y}{x^2+y^2}$.
+
+\textbf{2. Sadeleştirici gözlem:} $x^2+y^2=e^{2v}\cos^2u+e^{2v}\sin^2u=e^{2v}$.
+
+\textbf{3. İç türevler:}
+$\dfrac{\partial x}{\partial u}=-e^{v}\sin u,\quad \dfrac{\partial x}{\partial v}=e^{v}\cos u,\quad
+\dfrac{\partial y}{\partial u}=e^{v}\cos u,\quad \dfrac{\partial y}{\partial v}=e^{v}\sin u$.
+
+\textbf{4. $\partial z/\partial u$:}
+\begin{align*}
+\frac{\partial z}{\partial u}&=\frac{2x}{x^2+y^2}\,(-e^{v}\sin u)+\frac{2y}{x^2+y^2}\,e^{v}\cos u\\
+&=\frac{2e^{v}\cos u\,(-e^{v}\sin u)+2e^{v}\sin u\,e^{v}\cos u}{e^{2v}}=\boxed{0}.
+\end{align*}
+\textbf{5. $\partial z/\partial v$:}
+\begin{align*}
+\frac{\partial z}{\partial v}&=\frac{2x}{x^2+y^2}\,e^{v}\cos u+\frac{2y}{x^2+y^2}\,e^{v}\sin u
+=\frac{2e^{2v}\cos^2u+2e^{2v}\sin^2u}{e^{2v}}=2\cdot\frac{e^{2v}}{e^{2v}}=\boxed{2}.
+\end{align*}
+\textbf{6. Kontrol (tahtada kutu içinde):} $z=\ln(x^2+y^2)=\ln(e^{2v})=2v$, dolayısıyla $\partial z/\partial u=0$,
+$\partial z/\partial v=2$. \checkmark
+
+Not: Tahtadaki kutuda üs el yazısında ``$e^{2u}$'' gibi okunuyor; hesaptan ($x^2+y^2=e^{2v}$) doğrusunun $e^{2v}$ olduğu
+açıktır.
+\end{cevap}
+
+\subsubsection{Durum 3: üç ara, iki bağımsız değişken}
+$s=f(x,y,z)$ ve $x,y,z$'nin her biri $u$ ve $v$'nin fonksiyonu ise ağaçta $s$'den üç dal ($x,y,z$), her birinden de iki
+dal ($u,v$) çıkar. $u$ ile biten üç yol vardır:
+\[
+\frac{\partial s}{\partial u}=\frac{\partial s}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial s}{\partial y}\frac{\partial y}{\partial u}+\frac{\partial s}{\partial z}\frac{\partial z}{\partial u},\qquad
+\frac{\partial s}{\partial v}=\frac{\partial s}{\partial x}\frac{\partial x}{\partial v}+\frac{\partial s}{\partial y}\frac{\partial y}{\partial v}+\frac{\partial s}{\partial z}\frac{\partial z}{\partial v}.
+\]
+(Tahtada WA0077'nin sol kenarında bu formüllerin son terimleri, $\frac{\partial s}{\partial z}\cdot\frac{\partial z}{\partial u}$
+ve $\frac{\partial s}{\partial z}\cdot\frac{\partial z}{\partial v}$, görünüyor; baş kısımları kadraj dışında.)
+
+\begin{soru}[Örnek 5 \foto{IMG-20261108-WA0077}, \foto{IMG-20261108-WA0078}]
+$s=\ln(x^2+y^2+z^2)$, $x=u-v$, $y=u+v$, $z=2\sqrt{uv}$ ise $\dfrac{\partial s}{\partial u}$ ve $\dfrac{\partial s}{\partial v}$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. Dış türevler:}
+$s_x=\dfrac{2x}{x^2+y^2+z^2},\quad s_y=\dfrac{2y}{x^2+y^2+z^2},\quad s_z=\dfrac{2z}{x^2+y^2+z^2}$.
+
+\textbf{2. Payda:}
+$x^2+y^2+z^2=(u-v)^2+(u+v)^2+4uv=2u^2+2v^2+4uv=2(u+v)^2$.
+
+\textbf{3. İç türevler:} $x_u=1,\ x_v=-1,\ y_u=1,\ y_v=1$,
+$\ z_u=2\cdot\dfrac{v}{2\sqrt{uv}}=\dfrac{v}{\sqrt{uv}},\ z_v=\dfrac{u}{\sqrt{uv}}$.
+
+\textbf{4. Zincir kuralı (Durum 3):}
+\begin{align*}
+\frac{\partial s}{\partial u}&=\frac{2(u-v)\cdot1+2(u+v)\cdot1+2\cdot2\sqrt{uv}\cdot\dfrac{v}{\sqrt{uv}}}{2(u+v)^2}
+=\frac{4u+4v}{2(u+v)^2}=\boxed{\frac{2}{u+v}},\\[4pt]
+\frac{\partial s}{\partial v}&=\frac{2(u-v)\cdot(-1)+2(u+v)\cdot1+2\cdot2\sqrt{uv}\cdot\dfrac{u}{\sqrt{uv}}}{2(u+v)^2}
+=\frac{4v+4u}{2(u+v)^2}=\boxed{\frac{2}{u+v}}.
+\end{align*}
+\textbf{5. Kontrol (tahtada sağda):} $s=\ln\big(2(u+v)^2\big)=\ln2+2\ln(u+v)$ ($u+v>0$ için), dolayısıyla
+$s_u=s_v=\dfrac{2}{u+v}$. \checkmark
+
+(Not: $z=2\sqrt{uv}$'nin tanımlı ve türevlenebilir olması için $uv>0$ olmalıdır.)
+\end{cevap}
+
+\subsubsection{Durum 4: tek ara, iki bağımsız değişken}
+$y=f(x)$ tek değişkenli, fakat $x=g(u,v)$ iki değişkenli ise ağaçta $y$'den tek dal ($x$), $x$'ten iki dal ($u$, $v$)
+çıkar. Üstteki dal \textbf{adi türev} ($dy/dx$), alttakiler \textbf{kısmi türev}dir:
+\[
+\frac{\partial y}{\partial u}=\frac{dy}{dx}\cdot\frac{\partial x}{\partial u},\qquad
+\frac{\partial y}{\partial v}=\frac{dy}{dx}\cdot\frac{\partial x}{\partial v}.
+\]
+
+\begin{center}
+\begin{tikzpicture}[every node/.style={font=\small}]
+  % Durum 3
+  \node (s) at (0,0) {$s$};
+  \node (x) at (-2,-1.5) {$x$};
+  \node (y) at (0,-1.5) {$y$};
+  \node (z) at (2,-1.5) {$z$};
+  \foreach \n/\px in {x/-2,y/0,z/2}{
+    \node (\n u) at (\px-0.5,-3) {$u$};
+    \node (\n v) at (\px+0.5,-3) {$v$};
+    \draw (\n) -- (\n u); \draw (\n) -- (\n v);}
+  \draw (s) -- node[above left]{$s_x$} (x);
+  \draw (s) -- node[right,pos=0.55]{$s_y$} (y);
+  \draw (s) -- node[above right]{$s_z$} (z);
+  \node[gri] at (0,-3.8) {Durum 3};
+  % Durum 4
+  \node (Y) at (6,0) {$y$};
+  \node (X) at (6,-1.5) {$x$};
+  \node (U) at (5.2,-3) {$u$};
+  \node (V) at (6.8,-3) {$v$};
+  \draw (Y) -- node[right]{$\frac{dy}{dx}$} (X);
+  \draw (X) -- node[left]{$\frac{\partial x}{\partial u}$} (U);
+  \draw (X) -- node[right]{$\frac{\partial x}{\partial v}$} (V);
+  \node[gri] at (6,-3.8) {Durum 4};
+\end{tikzpicture}
+\end{center}
+
+\begin{tahta}[\foto{IMG-20261108-WA0079}]
+Durum 4: $y=f(x)$, $x=g(u,v)$. Ağaç: $y\to x$ (etiket $\frac{dy}{dx}$), $x\to u$ ve $x\to v$ (etiketler
+$\frac{\partial x}{\partial u}$, $\frac{\partial x}{\partial v}$).
+$\dfrac{\partial y}{\partial u}=\dfrac{dy}{dx}\cdot\dfrac{\partial x}{\partial u}$,\quad
+$\dfrac{\partial y}{\partial v}=\dfrac{dy}{dx}\cdot\dfrac{\partial x}{\partial v}$.
+(Tahtada $y\to x$ dalının etiketi ``$\frac{dv}{dx}$'' gibi görünüyor; doğrusu $\frac{dy}{dx}$.)
+\end{tahta}
+
+\begin{soru}[Örnek 6 \foto{IMG-20261108-WA0079}]
+$y=\sin x$, $x=u^2v$ ise $y_u$ ve $y_v$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$\dfrac{dy}{dx}=\cos x=\cos(u^2v)$, $\ x_u=2uv$, $\ x_v=u^2$. Durum 4 ile
+\[
+y_u=\cos(u^2v)\cdot2uv=\boxed{2uv\cos(u^2v)},\qquad y_v=\cos(u^2v)\cdot u^2=\boxed{u^2\cos(u^2v)}.
+\]
+Kontrol: $y=\sin(u^2v)$'nin $u$'ya ve $v$'ye göre doğrudan türevleri aynıdır.
+\end{cevap}
+
+\subsection{Genel durum ve ağaç diyagramı kuralı}
+
+\begin{teorem}[Zincir kuralı -- genel durum]
+$w=f(x_1,x_2,\dots,x_n)$ türevlenebilir ve her $x_i=x_i(t_1,\dots,t_m)$'nin birinci kısmi türevleri var ise her
+$j=1,\dots,m$ için
+\[
+\frac{\partial w}{\partial t_j}=\frac{\partial w}{\partial x_1}\frac{\partial x_1}{\partial t_j}
++\frac{\partial w}{\partial x_2}\frac{\partial x_2}{\partial t_j}+\cdots
++\frac{\partial w}{\partial x_n}\frac{\partial x_n}{\partial t_j}
+=\sum_{i=1}^{n}\frac{\partial w}{\partial x_i}\frac{\partial x_i}{\partial t_j}.
+\]
+\end{teorem}
+
+\textbf{Kural:} $\partial w/\partial t_j$'deki terim sayısı = ara değişken sayısı $n$ = ağaçta tepeden $t_j$'ye inen yol
+sayısı. Her terim, o yol üzerindeki türevlerin çarpımıdır.
+
+\begin{bilgi}[Matris (Jacobi) gösterimi]
+Kreyszig ve ileri kitaplarda genel zincir kuralı matris çarpımı olarak yazılır. Durum 3 için:
+\[
+\begin{pmatrix} s_u & s_v \end{pmatrix}
+=\begin{pmatrix} s_x & s_y & s_z \end{pmatrix}
+\begin{pmatrix} x_u & x_v\\ y_u & y_v\\ z_u & z_v \end{pmatrix}.
+\]
+Sağdaki matrise iç dönüşümün \textbf{Jacobi matrisi} denir. Tek değişkendeki ``türevlerin çarpımı'', çok değişkende
+``Jacobi matrislerinin çarpımı'' olur.
+\end{bilgi}
+
+\begin{soru}[\ekal Örnek 7 (Durum 3, sayısal)]
+$w=xy^2+z^3$, $x=uv$, $y=u+v$, $z=u-v$ ise $(u,v)=(1,1)$ noktasında $\partial w/\partial u$ ve $\partial w/\partial v$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$(u,v)=(1,1)$ için $x=1,\ y=2,\ z=0$. Dış türevler: $w_x=y^2=4$, $w_y=2xy=4$, $w_z=3z^2=0$.
+İç türevler: $x_u=v=1,\ y_u=1,\ z_u=1$; $x_v=u=1,\ y_v=1,\ z_v=-1$.
+\[
+\frac{\partial w}{\partial u}=4\cdot1+4\cdot1+0\cdot1=\boxed{8},\qquad
+\frac{\partial w}{\partial v}=4\cdot1+4\cdot1+0\cdot(-1)=\boxed{8}.
+\]
+Kontrol: $w=uv(u+v)^2+(u-v)^3$; $w_u=v(u+v)^2+2uv(u+v)+3(u-v)^2$ ifadesi $(1,1)$'de $4+4+0=8$ verir. \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 8 (keyfi fonksiyon içeren ifade)]
+$f$ türevlenebilir bir fonksiyon ve $w=f(x-y,\ y-z,\ z-x)$ ise $w_x+w_y+w_z=0$ olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+Ara değişkenler: $r=x-y$, $s=y-z$, $q=z-x$; $w=f(r,s,q)$. Her bağımsız değişken için üç yol vardır:
+\begin{align*}
+w_x&=f_r\,r_x+f_s\,s_x+f_q\,q_x=f_r\cdot1+f_s\cdot0+f_q\cdot(-1)=f_r-f_q,\\
+w_y&=f_r\cdot(-1)+f_s\cdot1+f_q\cdot0=-f_r+f_s,\\
+w_z&=f_r\cdot0+f_s\cdot(-1)+f_q\cdot1=-f_s+f_q.
+\end{align*}
+Toplarsak $w_x+w_y+w_z=0$. Bu tür sorularda $f$'nin açık formülü bilinmez; yalnızca zincir kuralının yapısı kullanılır.
+\end{cevap}
+
+\subsection{Yüksek mertebeden türevler ve kutupsal koordinatlar}
+
+İkinci mertebe türevlerde en önemli nokta şudur: $\partial z/\partial x$ ve $\partial z/\partial y$ de \textbf{$x$ ve
+$y$'nin fonksiyonlarıdır}, dolayısıyla onları $u$'ya (veya $r$'ye) göre türevlerken yine zincir kuralı uygulanır.
+
+\textbf{Kutupsal koordinatlar.} $x=r\cos\theta$, $y=r\sin\theta$ ve $z=f(x,y)$ olsun.
+$x_r=\cos\theta,\ y_r=\sin\theta,\ x_\theta=-r\sin\theta,\ y_\theta=r\cos\theta$ olduğundan
+\[
+z_r=z_x\cos\theta+z_y\sin\theta,\qquad z_\theta=-z_x\,r\sin\theta+z_y\,r\cos\theta .
+\]
+
+\begin{soru}[\ekal Örnek 9 (kutupsal dönüşüm)]
+$z=f(x,y)$, $x=r\cos\theta$, $y=r\sin\theta$ ise
+\[
+\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2
+=\left(\frac{\partial z}{\partial r}\right)^2+\frac{1}{r^2}\left(\frac{\partial z}{\partial \theta}\right)^2
+\]
+olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+Yukarıdaki ifadelerden
+\begin{align*}
+z_r^2&=z_x^2\cos^2\theta+2z_xz_y\sin\theta\cos\theta+z_y^2\sin^2\theta,\\
+\frac{1}{r^2}z_\theta^2&=z_x^2\sin^2\theta-2z_xz_y\sin\theta\cos\theta+z_y^2\cos^2\theta .
+\end{align*}
+Toplarken karma terimler birbirini götürür ve $\sin^2\theta+\cos^2\theta=1$ kullanılırsa
+$z_r^2+\frac{1}{r^2}z_\theta^2=z_x^2+z_y^2$ bulunur. (Bu ifade ileride $|\nabla f|^2$ olarak karşımıza çıkacak.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 10 (ikinci mertebe)]
+Aynı dönüşüm için ($f$'nin ikinci kısmi türevleri sürekli) $z_{rr}$'yi $z_{xx},z_{xy},z_{yy}$ cinsinden yazınız.
+\end{soru}
+\begin{cevap}
+$z_r=z_x\cos\theta+z_y\sin\theta$. $r$'ye göre türev alırken $\theta$ sabittir, ama $z_x$ ve $z_y$ hâlâ $x,y$ üzerinden
+$r$'ye bağlıdır:
+\[
+\frac{\partial}{\partial r}(z_x)=z_{xx}x_r+z_{xy}y_r=z_{xx}\cos\theta+z_{xy}\sin\theta,\qquad
+\frac{\partial}{\partial r}(z_y)=z_{yx}\cos\theta+z_{yy}\sin\theta .
+\]
+Buna göre (Schwarz teoremiyle $z_{xy}=z_{yx}$)
+\begin{align*}
+z_{rr}&=(z_{xx}\cos\theta+z_{xy}\sin\theta)\cos\theta+(z_{yx}\cos\theta+z_{yy}\sin\theta)\sin\theta\\
+&=z_{xx}\cos^2\theta+2z_{xy}\sin\theta\cos\theta+z_{yy}\sin^2\theta .
+\end{align*}
+Benzer (biraz daha uzun) bir hesapla Laplace operatörünün kutupsal biçimi
+$z_{xx}+z_{yy}=z_{rr}+\frac1r z_r+\frac{1}{r^2}z_{\theta\theta}$ elde edilir.
+\end{cevap}
+
+\subsection{Değişken dönüşümü: Euler--Cauchy denklemi}
+
+Zincir kuralının mühendislikte en sık kullanıldığı yerlerden biri diferansiyel denklemlerde \textbf{değişken
+dönüşümüdür}. Bağımsız değişkeni $x=\varphi(t)$ ile değiştirdiğimizde
+\[
+\frac{dy}{dx}=\frac{dy}{dt}\cdot\frac{dt}{dx},\qquad
+\frac{d^2y}{dx^2}=\frac{d}{dx}\left(\frac{dy}{dx}\right)=\frac{d}{dt}\left(\frac{dy}{dx}\right)\cdot\frac{dt}{dx}
+\]
+yazılır. İkinci formüldeki kritik nokta: $\frac{dy}{dx}$ ifadesi $t$ cinsinden yazıldığı için onu $x$'e göre türevlemek
+için önce $t$'ye göre türevleyip $\frac{dt}{dx}$ ile çarparız.
+
+\begin{soru}[Örnek 11 (tahtada Problem 7) \foto{IMG-20261105-WA0042}]
+$x=e^t$ dönüşümü ile $x^2\dfrac{d^2y}{dx^2}+x\dfrac{dy}{dx}+y=0$ denklemini $t$ değişkenine göre yazınız.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1.} $x=e^t\iff t=\ln x$ ($x>0$), dolayısıyla $\dfrac{dt}{dx}=\dfrac1x=e^{-t}$.
+
+\textbf{2. Birinci türev:} $\dfrac{dy}{dx}=\dfrac{dy}{dt}\cdot\dfrac{dt}{dx}=e^{-t}\dfrac{dy}{dt}$.
+
+\textbf{3. İkinci türev:} çarpım kuralı ve zincir kuralıyla
+\begin{align*}
+\frac{d^2y}{dx^2}&=\frac{d}{dx}\left(e^{-t}\frac{dy}{dt}\right)=\frac{d}{dt}\left(e^{-t}\frac{dy}{dt}\right)\cdot\frac{dt}{dx}
+=\left(-e^{-t}\frac{dy}{dt}+e^{-t}\frac{d^2y}{dt^2}\right)e^{-t}\\
+&=e^{-2t}\left(\frac{d^2y}{dt^2}-\frac{dy}{dt}\right).
+\end{align*}
+\textbf{4. Katsayılarla çarp:} $x^2=e^{2t}$, $x=e^{t}$ olduğundan
+\[
+x^2\frac{d^2y}{dx^2}=e^{2t}e^{-2t}\left(\frac{d^2y}{dt^2}-\frac{dy}{dt}\right)=\frac{d^2y}{dt^2}-\frac{dy}{dt},\qquad
+x\frac{dy}{dx}=e^{t}e^{-t}\frac{dy}{dt}=\frac{dy}{dt}.
+\]
+\textbf{5. Yerine koy:}
+\[
+\frac{d^2y}{dt^2}-\frac{dy}{dt}+\frac{dy}{dt}+y=0\quad\Longrightarrow\quad\boxed{\frac{d^2y}{dt^2}+y=0}.
+\]
+Değişken katsayılı denklem, sabit katsayılı bir denkleme dönüştü. Bunun çözümü $y=c_1\cos t+c_2\sin t$ olduğundan
+özgün denklemin çözümü $y=c_1\cos(\ln x)+c_2\sin(\ln x)$, $x>0$ olur. (Kontrol: $y=\cos(\ln x)$ için
+$y'=-\sin(\ln x)/x$, $y''=\big(\sin(\ln x)-\cos(\ln x)\big)/x^2$ ve $x^2y''+xy'+y=0$ sağlanır.)
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki yazım hatası ve eksik kısım]
+Tahtada son satır ``$x\cdot\frac{dx}{dy}=\dots$'' diye yazılmıştı; doğrusu $x\cdot\frac{dy}{dx}=\frac{dy}{dt}$'dir.
+Sonuç denklemi fotoğrafın sağ kenarında kutu içinde, kadraj dışında kalmıştır
+\okunamadi{sağ kenardaki kutulu sonuç denklemi}; kaynaklara göre doğrusu yukarıdaki $\frac{d^2y}{dt^2}+y=0$'dır.
+\end{bilgi}
+
+\begin{teorem}[Genel Euler--Cauchy denklemi]
+$x=e^t$ dönüşümü ile her zaman
+$x\dfrac{dy}{dx}=\dfrac{dy}{dt}$ ve $x^2\dfrac{d^2y}{dx^2}=\dfrac{d^2y}{dt^2}-\dfrac{dy}{dt}$ olur. Bu yüzden
+\[
+x^2y''+a\,xy'+b\,y=0\quad\xrightarrow{\;x=e^t\;}\quad \frac{d^2y}{dt^2}+(a-1)\frac{dy}{dt}+b\,y=0 .
+\]
+\end{teorem}
+
+\subsection{Kapalı fonksiyonların türevi}
+
+Bazı fonksiyonlar açık bir formülle ($y=\dots$) değil, bir denklemle verilir: $x^2+y^2=1$ ya da
+$2x^4z^3+3xy^2+4xz+\dots=0$ gibi. Denklemi çözmek zor ya da imkânsız olabilir; ama türevi \textbf{zincir kuralıyla
+denklemi çözmeden} bulabiliriz.
+
+\textbf{Fikir.} $F(x,y,z)=0$ denklemi $z=z(x,y)$ fonksiyonunu tanımlasın. O zaman $F\big(x,y,z(x,y)\big)=0$ özdeşliği
+her $(x,y)$ için doğrudur. Bu özdeşliğin $x$'e göre türevini ($y$ sabit) zincir kuralıyla alırız: ağaçta $F$'den
+$x,y,z$'ye dallar, $z$'den de $x$ ve $y$'ye dallar vardır; $x$ bağımsız değişkendir.
+
+\begin{tahta}[\foto{IMG-20261108-WA0080}]
+\textbf{Kapalı Fonksiyonların Türevi.} $F(x,y,z)=0$ denklemi $z=z(x,y)$ fonksiyonunu tanımlasın. $x$'e göre türev ($y$ sabit):
+\[
+F_x\frac{\partial x}{\partial x}+F_y\frac{\partial y}{\partial x}+F_z\frac{\partial z}{\partial x}=0
+\;\Rightarrow\;F_x\cdot1+F_y\cdot0+F_z\,z_x=0
+\;\Rightarrow\;\boxed{z_x=\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}}
+\]
+$y$ için: $F_y+F_z\,z_y=0\Rightarrow\boxed{\dfrac{\partial z}{\partial y}=-\dfrac{F_y}{F_z}}$.\quad
+İki değişkende: $F(x,y)=0$, $y=y(x)\Rightarrow\dfrac{dy}{dx}=-\dfrac{F_x}{F_y}$.
+\end{tahta}
+
+\begin{teorem}[Kapalı fonksiyon teoremi ve türev formülleri]
+\textbf{(a)} $F(x,y)$ ve kısmi türevleri $(a,b)$ civarında sürekli, $F(a,b)=0$ ve $F_y(a,b)\ne0$ ise $a$'nın bir
+komşuluğunda $F\big(x,y(x)\big)=0$ ve $y(a)=b$ olacak şekilde tek bir türevlenebilir $y=y(x)$ fonksiyonu vardır ve
+\[
+\frac{dy}{dx}=-\frac{F_x}{F_y}.
+\]
+\textbf{(b)} $F(x,y,z)$ ve kısmi türevleri $(a,b,c)$ civarında sürekli, $F(a,b,c)=0$ ve $F_z(a,b,c)\ne0$ ise $(a,b)$
+civarında $z=z(x,y)$ fonksiyonu tanımlıdır ve
+\[
+\frac{\partial z}{\partial x}=-\frac{F_x}{F_z},\qquad \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}.
+\]
+\end{teorem}
+
+\begin{bilgi}[Koşul tahtada yazılmadı]
+Tahtada $F_z\ne0$ (iki değişkende $F_y\ne0$) koşulu yazılmamıştı; kaynaklara göre formüllerin geçerli olması için bu
+koşul gereklidir. Örneğin $x^2+y^2-1=0$ çemberinde $(1,0)$ noktasında $F_y=2y=0$'dır; orada teğet dikeydir ve $y$,
+$x$'in türevlenebilir bir fonksiyonu olarak yazılamaz.
+\end{bilgi}
+
+\textbf{Adım adım yöntem.}
+\begin{enumerate}
+  \item Denklemi $F(\dots)=0$ biçimine getir (tüm terimleri bir tarafa topla).
+  \item Gerekiyorsa noktanın eksik koordinatını denklemden bul.
+  \item $F_x$, $F_y$, $F_z$'yi \textbf{tüm değişkenler bağımsızmış gibi} hesapla.
+  \item Noktada değerlendir, $F_z\ne0$ olduğunu kontrol et ve $z_x=-F_x/F_z$, $z_y=-F_y/F_z$ formüllerini uygula.
+\end{enumerate}
+
+\begin{soru}[Örnek 12 \foto{IMG-20261108-WA0081}]
+$2x^4z^3+3xy^2+4xz+3y+5x-23=0$ denklemi $z=z(x,y)$ fonksiyonunu tanımlıyor. $(1,2)$ noktasında $z_x$ ve $z_y$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (adım adım)]
+\textbf{1. $z$ değerini bul:} $x=1,\ y=2$ için
+\[
+2z^3+12+4z+6+5-23=0\;\Rightarrow\;2z^3+4z=0\;\Rightarrow\;2z(z^2+2)=0 .
+\]
+$z^2+2=0$'ın reel kökü olmadığından $z=0$; nokta $(1,2,0)$.
+
+\textbf{2. Kısmi türevler:}
+$F_x=8x^3z^3+3y^2+4z+5,\quad F_y=6xy+3,\quad F_z=6x^4z^2+4x$.
+
+\textbf{3. Noktada değerler:} $F_x(1,2,0)=0+12+0+5=17$, $F_y(1,2,0)=12+3=15$, $F_z(1,2,0)=0+4=4\ne0$.
+
+\textbf{4. Sonuç:}
+\[
+z_x=-\frac{F_x}{F_z}=\boxed{-\frac{17}{4}},\qquad z_y=-\frac{F_y}{F_z}=\boxed{-\frac{15}{4}}.
+\]
+\end{cevap}
+
+\begin{soru}[Örnek 13 (tahtada Problem 8, kısmen görünüyor) \foto{IMG-20261105-WA0042}]
+\okunamadi{8. sorunun metni ve çözümü fotoğrafın sağ kenarında kadraj dışında kalmış; yalnızca ``8) a, \dots'',
+``$x-a\dots$'', ``oldu\dots'', ``$F(x\dots$'', ``$F_x$'', ``$\partial z/\partial x$'' ve ``$\frac{a}{a-b\dots}$'' parçaları
+seçilebiliyor}. Bu parçalar kaynaklarda sık geçen şu kapalı türev sorusuna işaret ediyor (\textbf{tahmindir}):
+$a,b$ sabit, $\varphi$ türevlenebilir ve $x-az=\varphi(y-bz)$ olduğuna göre $a\,z_x+b\,z_y=1$ olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+$F(x,y,z)=x-az-\varphi(y-bz)=0$ diyelim; $\varphi'$ türevi $y-bz$ noktasında alınır. Zincir kuralıyla
+\[
+F_x=1,\qquad F_y=-\varphi',\qquad F_z=-a-\varphi'\cdot(-b)=-(a-b\varphi').
+\]
+$a-b\varphi'\ne0$ varsayımıyla
+\[
+z_x=-\frac{F_x}{F_z}=\frac{1}{a-b\varphi'},\qquad z_y=-\frac{F_y}{F_z}=\frac{-\varphi'}{a-b\varphi'} .
+\]
+Böylece $a\,z_x+b\,z_y=\dfrac{a}{a-b\varphi'}-\dfrac{b\varphi'}{a-b\varphi'}=\dfrac{a-b\varphi'}{a-b\varphi'}=1$.
+(Tahtadaki ``$\frac{a}{a-b\dots}$'' parçası tam olarak $a\,z_x$ ifadesine karşılık geliyor.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 14 (iki değişkenli kapalı türev)]
+$x^3+y^3=6xy$ eğrisi (Descartes yaprağı) için $dy/dx$'i bulunuz ve $(3,3)$ noktasındaki teğetin eğimini hesaplayınız.
+\end{soru}
+\begin{cevap}
+$F(x,y)=x^3+y^3-6xy$; $F_x=3x^2-6y$, $F_y=3y^2-6x$.
+\[
+\frac{dy}{dx}=-\frac{3x^2-6y}{3y^2-6x}=\frac{2y-x^2}{y^2-2x}.
+\]
+$(3,3)$ eğri üzerindedir ($27+27=54=6\cdot9$). Eğim: $\dfrac{6-9}{9-6}=\boxed{-1}$; teğet doğru $y-3=-(x-3)$, yani $x+y=6$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 15 (üç değişkenli kapalı türev)]
+$e^{z}=xyz$ denklemi $z=z(x,y)$'yi tanımlıyorsa $z_x$ ve $z_y$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$F=xyz-e^{z}$; $F_x=yz$, $F_y=xz$, $F_z=xy-e^{z}$. $F_z\ne0$ olan noktalarda
+\[
+z_x=-\frac{yz}{xy-e^{z}}=\frac{yz}{e^{z}-xy},\qquad z_y=\frac{xz}{e^{z}-xy}.
+\]
+İstenirse $e^{z}=xyz$ yerine konarak $z_x=\dfrac{yz}{xyz-xy}=\dfrac{z}{x(z-1)}$ biçimine de getirilebilir.
+\end{cevap}
+
+\subsection{Yönlü türev}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Bu ve sonraki iki alt bölüm (yönlü türev, gradyan vektörü, teğet düzlem ve normal doğru) derste tahtada işlenmedi;
+müfredatın gereği olarak Kreyszig, Zill \& Wright ve Balcı'ya göre eksiksiz anlatılmıştır.
+\end{bilgi}
+
+Kısmi türevler $f_x$ ve $f_y$, fonksiyonun yalnızca $x$ ekseni ve $y$ ekseni doğrultusundaki değişim hızını verir. Peki
+$(x_0,y_0)$ noktasından kuzeydoğuya ya da herhangi bir yöne doğru yürürsek $f$ ne hızla değişir? Yönü bir
+\textbf{birim vektör} $\mathbf u=\langle a,b\rangle$ ($a^2+b^2=1$) ile belirtiriz. Noktadan $\mathbf u$ yönünde $h$
+kadar gidince $(x_0+ha,\ y_0+hb)$ noktasına varırız.
+
+\begin{tanim}[Yönlü türev]
+$f$'nin $(x_0,y_0)$ noktasında $\mathbf u=\langle a,b\rangle$ birim vektörü yönündeki yönlü türevi
+\[
+D_{\mathbf u}f(x_0,y_0)=\lim_{h\to0}\frac{f(x_0+ha,\ y_0+hb)-f(x_0,y_0)}{h}
+\]
+limitidir (varsa). Üç değişkende $\mathbf u=\langle a,b,c\rangle$ ile aynı tanım geçerlidir.
+\end{tanim}
+
+\textbf{Geometrik anlam.} $z=f(x,y)$ yüzeyini, $(x_0,y_0)$'dan geçen ve $\mathbf u$'ya paralel düşey düzlemle
+kestiğimizde bir eğri elde ederiz. $D_{\mathbf u}f(x_0,y_0)$ bu eğrinin $P$ noktasındaki teğetinin eğimidir; yani
+$\mathbf u$ yönünde \textbf{birim uzaklık başına} $f$'nin değişim hızıdır. Özel olarak $\mathbf u=\mathbf i$ için
+$D_{\mathbf i}f=f_x$, $\mathbf u=\mathbf j$ için $D_{\mathbf j}f=f_y$'dir.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[view={125}{30}, width=9cm, height=7cm, xlabel=$x$, ylabel=$y$, zlabel=$z$,
+  xmin=-0.5, xmax=2, ymin=-0.5, ymax=2, zmin=0, zmax=4.5, ticks=none, axis lines=center]
+  \addplot3[surf, opacity=0.45, faceted color=gri!60, colormap/cool, domain=-0.3:1.9, y domain=-0.3:1.6, samples=15]
+     {max(0.2, 4-x^2-0.8*y^2)};
+  \addplot3[vurgu, very thick, domain=-0.9:0.7, samples=20, samples y=0]
+     ({0.5+0.6*x},{0.5+0.8*x},{4-(0.5+0.6*x)^2-0.8*(0.5+0.8*x)^2});
+  \addplot3[ana, thick, dashed, domain=-0.9:0.7, samples=2, samples y=0] ({0.5+0.6*x},{0.5+0.8*x},0);
+  \addplot3[ana, -{Stealth[length=2.4mm]}, very thick] coordinates {(0.5,0.5,0) (0.98,1.14,0)};
+  \node[ana, anchor=north west] at (axis cs:0.98,1.14,0) {$\mathbf u$};
+  \addplot3[only marks, mark=*, mark size=1.5pt] coordinates {(0.5,0.5,0) (0.5,0.5,3.55)};
+  \addplot3[gri, dotted] coordinates {(0.5,0.5,0) (0.5,0.5,3.55)};
+  \node[anchor=north east, font=\small] at (axis cs:0.5,0.5,0) {$(x_0,y_0)$};
+  \node[vurgu, anchor=west] at (axis cs:0.5,0.62,3.55) {$P$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+{\small Şekil: $(x_0,y_0)$'dan $\mathbf u$ yönünde giden doğru (kesikli) ve yüzeyin bu doğru üzerindeki kesit eğrisi
+(kırmızı). Yönlü türev, kırmızı eğrinin $P$'deki eğimidir.}
+
+\subsubsection{Yönlü türevin gradyanla hesaplanması}
+
+Tanımdaki limiti her seferinde hesaplamak zahmetlidir. Zincir kuralı bize çok daha kolay bir formül verir.
+
+\begin{teorem}[Yönlü türev formülü]
+$f$, $(x_0,y_0)$'da türevlenebilir ise her $\mathbf u=\langle a,b\rangle$ birim vektörü için
+\[
+D_{\mathbf u}f(x_0,y_0)=f_x(x_0,y_0)\,a+f_y(x_0,y_0)\,b .
+\]
+Üç değişkende: $D_{\mathbf u}f=f_x\,a+f_y\,b+f_z\,c$.
+\end{teorem}
+\textbf{İspat (zincir kuralıyla).} $g(h)=f(x_0+ha,\ y_0+hb)$ tanımlayalım. Tanım gereği $D_{\mathbf u}f(x_0,y_0)=g'(0)$'dır.
+Öte yandan $x=x_0+ha$, $y=y_0+hb$ ara değişkenleriyle Durum 1'i ($t$ yerine $h$) uygularsak
+\[
+g'(h)=f_x\frac{dx}{dh}+f_y\frac{dy}{dh}=f_x\,a+f_y\,b,
+\]
+$h=0$ koyunca formül çıkar. $\blacksquare$
+
+\textbf{Açı ile verilen yön.} $\mathbf u$, pozitif $x$ ekseniyle $\theta$ açısı yapıyorsa $\mathbf u=\langle\cos\theta,\sin\theta\rangle$
+ve $D_{\mathbf u}f=f_x\cos\theta+f_y\sin\theta$ olur.
+
+\textbf{Birim olmayan vektör.} Yön $\mathbf v$ gibi birim olmayan bir vektörle verilirse \vurg{önce birim vektöre
+çevrilir}: $\mathbf u=\mathbf v/|\mathbf v|$.
+
+\begin{soru}[\ekal Örnek 16 (tanımdan ve formülden)]
+$f(x,y)=x^2+xy$ için $(1,2)$ noktasında $\mathbf u=\langle\frac35,\frac45\rangle$ yönündeki yönlü türevi (a) tanımdan,
+(b) formülden hesaplayınız.
+\end{soru}
+\begin{cevap}
+\textbf{(a)} $f(1+\tfrac35h,\ 2+\tfrac45h)=(1+0{,}6h)^2+(1+0{,}6h)(2+0{,}8h)=3+3{,}2h+0{,}84h^2$ ve $f(1,2)=3$. Buna göre
+\[
+D_{\mathbf u}f(1,2)=\lim_{h\to0}\frac{3{,}2h+0{,}84h^2}{h}=\lim_{h\to0}(3{,}2+0{,}84h)=3{,}2=\frac{16}{5}.
+\]
+\textbf{(b)} $f_x=2x+y=4$, $f_y=x=1$; $D_{\mathbf u}f=4\cdot\frac35+1\cdot\frac45=\frac{16}{5}$. \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 17 (açı ile verilen yön)]
+$f(x,y)=x^2y-3y$ için $(2,1)$ noktasında, pozitif $x$ ekseniyle $\theta=\pi/3$ açısı yapan yöndeki yönlü türevi bulunuz.
+\end{soru}
+\begin{cevap}
+$f_x=2xy=4$, $f_y=x^2-3=1$; $\mathbf u=\langle\cos\frac\pi3,\sin\frac\pi3\rangle=\langle\frac12,\frac{\sqrt3}{2}\rangle$.
+\[
+D_{\mathbf u}f(2,1)=4\cdot\frac12+1\cdot\frac{\sqrt3}{2}=\boxed{2+\frac{\sqrt3}{2}}\approx2{,}87 .
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 18 (üç değişken, birim olmayan yön)]
+$f(x,y,z)=x\,e^{yz}+y$ için $P(1,0,2)$ noktasında $\mathbf v=\langle2,-1,2\rangle$ yönündeki yönlü türevi bulunuz.
+\end{soru}
+\begin{cevap}
+$f_x=e^{yz}$, $f_y=xz\,e^{yz}+1$, $f_z=xy\,e^{yz}$. $P$'de: $f_x=1$, $f_y=2+1=3$, $f_z=0$.
+$|\mathbf v|=\sqrt{4+1+4}=3$, $\mathbf u=\langle\frac23,-\frac13,\frac23\rangle$.
+\[
+D_{\mathbf u}f(P)=1\cdot\frac23+3\cdot\left(-\frac13\right)+0\cdot\frac23=\boxed{-\frac13}.
+\]
+Negatif işaret, bu yönde ilerlerken $f$'nin azaldığını gösterir.
+\end{cevap}
+
+\subsection{Gradyan vektörü}
+
+Yönlü türev formülü $f_x a+f_y b$ bir \textbf{skaler çarpım} biçimindedir: $\langle f_x,f_y\rangle\cdot\langle a,b\rangle$.
+Birinci vektör yalnızca $f$'ye ve noktaya bağlıdır, yöne bağlı değildir. Bu vektöre özel bir ad verilir.
+
+\begin{tanim}[Gradyan]
+$f(x,y)$'nin gradyanı
+\[
+\nabla f(x,y)=\operatorname{grad}f=\langle f_x,\ f_y\rangle=f_x\,\mathbf i+f_y\,\mathbf j ,
+\]
+$f(x,y,z)$'nin gradyanı $\nabla f=\langle f_x,\ f_y,\ f_z\rangle=f_x\mathbf i+f_y\mathbf j+f_z\mathbf k$ vektörüdür.
+$\nabla$ (``nabla'' ya da ``del'') sembolü $\nabla=\mathbf i\frac{\partial}{\partial x}+\mathbf j\frac{\partial}{\partial y}+\mathbf k\frac{\partial}{\partial z}$
+türev operatörünü gösterir.
+\end{tanim}
+
+Bu gösterimle yönlü türev formülü çok kısa yazılır:
+\[
+\boxed{D_{\mathbf u}f=\nabla f\cdot\mathbf u}
+\]
+
+\begin{teorem}[Gradyanın cebirsel özellikleri]
+$f,g$ türevlenebilir, $\alpha,\beta$ sabit ve $h$ tek değişkenli türevlenebilir bir fonksiyon olsun:
+\begin{itemize}
+  \item $\nabla(\alpha f+\beta g)=\alpha\nabla f+\beta\nabla g$ \quad (doğrusallık)
+  \item $\nabla(fg)=f\,\nabla g+g\,\nabla f$, \qquad $\nabla\left(\dfrac fg\right)=\dfrac{g\nabla f-f\nabla g}{g^2}$ \ ($g\ne0$)
+  \item $\nabla\big(h(f)\big)=h'(f)\,\nabla f$ \quad (zincir kuralı, Durum 4'ün gradyan biçimi)
+\end{itemize}
+\end{teorem}
+Örneğin $r=\sqrt{x^2+y^2+z^2}$ için $\nabla r=\dfrac{\langle x,y,z\rangle}{r}=\dfrac{\mathbf r}{r}$ (birim radyal vektör) ve
+$\nabla\left(\dfrac1r\right)=-\dfrac{1}{r^2}\nabla r=-\dfrac{\mathbf r}{r^3}$ bulunur; bu sonuncusu, fizikteki ters kare
+kuvvet alanlarının (yerçekimi, Coulomb) potansiyelden elde edilişidir.
+
+\subsubsection{En hızlı artış yönü ve maksimum yönlü türev}
+
+Skaler çarpımın geometrik anlamını kullanalım: $\theta$, $\nabla f$ ile $\mathbf u$ arasındaki açı ise ($|\mathbf u|=1$)
+\[
+D_{\mathbf u}f=\nabla f\cdot\mathbf u=|\nabla f|\,|\mathbf u|\cos\theta=|\nabla f|\cos\theta .
+\]
+$\cos\theta$, $-1$ ile $1$ arasında değiştiğinden şu önemli sonuç çıkar:
+
+\begin{teorem}[Maksimum yönlü türev]
+$f$ türevlenebilir ve $\nabla f(P)\ne\mathbf 0$ olsun.
+\begin{itemize}
+  \item $f$, $P$'de en hızlı \textbf{$\nabla f(P)$ yönünde} artar ($\theta=0$); bu en büyük artış hızı
+        $\max D_{\mathbf u}f(P)=|\nabla f(P)|$'dir.
+  \item $f$, en hızlı \textbf{$-\nabla f(P)$ yönünde} azalır ($\theta=\pi$); en küçük yönlü türev $-|\nabla f(P)|$'dir.
+  \item $\mathbf u\perp\nabla f(P)$ ise ($\theta=\pi/2$) $D_{\mathbf u}f(P)=0$: bu yönde $f$ (birinci mertebeden) değişmez.
+\end{itemize}
+$\nabla f(P)=\mathbf 0$ ise her yöndeki yönlü türev sıfırdır.
+\end{teorem}
+
+\begin{bilgi}[Fiziksel yorum (Kreyszig)]
+Gradyan bir \textbf{vektör alanıdır}: her noktaya bir vektör karşılık getirir. Sıcaklık alanı $T(x,y,z)$ için $\nabla T$,
+sıcaklığın en hızlı arttığı yönü gösterir; ısı ise en hızlı soğuma yönünde, yani $-\nabla T$ yönünde akar
+(Fourier yasası: $\mathbf q=-k\nabla T$). Bir dağın yükseklik fonksiyonunda $\nabla h$ en dik tırmanış yönüdür; yağmur
+suyu $-\nabla h$ yönünde akar. Elektrostatikte elektrik alanı $\mathbf E=-\nabla V$'dir.
+\end{bilgi}
+
+\subsubsection{Gradyan seviye eğrilerine ve seviye yüzeylerine diktir}
+
+\begin{teorem}[Diklik]
+\textbf{(a)} $f(x,y)$ türevlenebilir ve $\nabla f(x_0,y_0)\ne\mathbf 0$ ise $\nabla f(x_0,y_0)$, $f$'nin
+$(x_0,y_0)$'dan geçen $f(x,y)=k$ seviye eğrisine diktir.\\
+\textbf{(b)} $F(x,y,z)$ için $\nabla F(P)\ne\mathbf 0$ ise $\nabla F(P)$, $P$'den geçen $F(x,y,z)=k$ seviye yüzeyine
+diktir (yüzey üzerindeki ve $P$'den geçen her eğrinin teğetine diktir).
+\end{teorem}
+\textbf{İspat (yine zincir kuralı).} $\mathbf r(t)=\langle x(t),y(t)\rangle$, seviye eğrisi üzerinde, $\mathbf r(t_0)=(x_0,y_0)$
+olan türevlenebilir bir eğri olsun. Eğri üzerinde $f\big(x(t),y(t)\big)=k$ sabittir. Her iki tarafın $t$'ye göre türevi
+(Durum 1):
+\[
+f_x\,x'(t)+f_y\,y'(t)=0\quad\Longleftrightarrow\quad \nabla f\cdot\mathbf r'(t)=0 .
+\]
+$\mathbf r'(t_0)$ eğrinin teğet vektörüdür (Konu 3); demek ki $\nabla f$ teğete diktir. Üç boyutta aynı hesap, yüzey
+üzerindeki her eğri için yapılır. $\blacksquare$
+
+Sezgisel olarak: seviye eğrisi boyunca $f$ değişmez ($D_{\mathbf u}f=0$), en hızlı değişim ise buna dik yöndedir.
+Topoğrafik haritalarda en dik yol, eş yükselti eğrilerini dik açıyla keser.
+
+\begin{soru}[\ekal Örnek 19 (en hızlı artış ve seviye eğrisi)]
+$f(x,y)=4-x^2-2y^2$ (bir tepenin yüksekliği) ve $P(1,1)$ olsun.
+(a) $P$'de $f$ en hızlı hangi yönde artar, en büyük artış hızı nedir?
+(b) Hangi yönlerde $f$'nin değişim hızı sıfırdır?
+(c) $P$'den geçen seviye eğrisinin $P$'deki teğet doğrusunu yazınız.
+\end{soru}
+\begin{cevap}
+$\nabla f=\langle-2x,\ -4y\rangle$, $\nabla f(1,1)=\langle-2,-4\rangle$.
+
+\textbf{(a)} En hızlı artış yönü $\nabla f$ yönü: $\mathbf u=\dfrac{\langle-2,-4\rangle}{\sqrt{20}}=\left\langle-\dfrac{1}{\sqrt5},-\dfrac{2}{\sqrt5}\right\rangle$
+(tepenin zirvesi olan orijine doğru). En büyük artış hızı $|\nabla f(1,1)|=\sqrt{4+16}=2\sqrt5\approx4{,}47$.
+
+\textbf{(b)} $\mathbf u\perp\langle-2,-4\rangle$ olmalı: $\mathbf u=\pm\left\langle\dfrac{2}{\sqrt5},-\dfrac{1}{\sqrt5}\right\rangle$.
+
+\textbf{(c)} $f(1,1)=1$; seviye eğrisi $4-x^2-2y^2=1$, yani $x^2+2y^2=3$ elipsidir. Teğet doğru, normali $\nabla f(1,1)$ olan
+doğrudur: $-2(x-1)-4(y-1)=0\iff x+2y=3$. (Kontrol: kapalı türevle $dy/dx=-x/(2y)=-\frac12$, eğim aynı.)
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+  \draw[eks] (-2.7,0) -- (2.8,0) node[below]{$x$};
+  \draw[eks] (0,-1.9) -- (0,2.0) node[left]{$y$};
+  \foreach \c/\col in {1/gri,3/ana,6/gri}{
+    \draw[\col, thick] (0,0) ellipse ({sqrt(\c)} and {sqrt(\c/2)});}
+  \node[gri,font=\scriptsize] at (-0.45,0.25) {$f=3$};
+  \node[ana,font=\small] at (-1.45,-1.15) {$f=1$};
+  \node[gri,font=\scriptsize] at (2.1,-1.55) {$f=-2$};
+  \draw[turuncu, thick] (-0.3,1.65) -- (2.6,0.2);
+  \node[turuncu,anchor=west,font=\small] at (2.45,0.65) {teğet: $x+2y=3$};
+  \fill (1,1) circle (1.4pt) node[above right]{$P(1,1)$};
+  \draw[vek, vurgu] (1,1) -- (0.55,0.1) node[below left]{$\nabla f$};
+  \draw[vek, yesil] (1,1) -- (1.45,1.9) node[right]{$-\nabla f$};
+\end{tikzpicture}
+\end{center}
+{\small Şekil: $f=4-x^2-2y^2$'nin seviye eğrileri $x^2+2y^2=4-f$ (elipsler). $\nabla f(1,1)$ (kırmızı, ölçekli) seviye
+eğrisine diktir ve zirveye doğru bakar; $-\nabla f$ (yeşil) en dik iniş yönüdür.}
+
+\begin{soru}[\ekal Örnek 20 (sıcaklık alanı)]
+Uzayda sıcaklık $T(x,y,z)=\dfrac{80}{1+x^2+2y^2+3z^2}$ ile veriliyor. $(1,1,-2)$ noktasında sıcaklık en hızlı hangi yönde
+artar ve bu en büyük artış hızı nedir?
+\end{soru}
+\begin{cevap}
+$N=1+x^2+2y^2+3z^2$ diyelim; $(1,1,-2)$'de $N=1+1+2+12=16$. $\nabla T=-\dfrac{80}{N^2}\nabla N=-\dfrac{80}{N^2}\langle2x,4y,6z\rangle$
+(gradyanın zincir kuralı özelliği). Noktada
+\[
+\nabla T=-\frac{80}{256}\langle2,4,-12\rangle=-\frac{5}{16}\langle2,4,-12\rangle=\frac58\langle-1,-2,6\rangle .
+\]
+En hızlı artış yönü $\langle-1,-2,6\rangle$ (birim vektör olarak $\frac{1}{\sqrt{41}}\langle-1,-2,6\rangle$), en büyük
+artış hızı $|\nabla T|=\frac58\sqrt{1+4+36}=\dfrac{5\sqrt{41}}{8}\approx4{,}00$ (derece/birim uzunluk).
+\end{cevap}
+
+\subsection{Seviye yüzeyine teğet düzlem ve normal doğru}
+
+$S$ yüzeyi $F(x,y,z)=k$ denklemiyle verilsin ve $P(x_0,y_0,z_0)\in S$, $\nabla F(P)\ne\mathbf 0$ olsun. Diklik teoremine
+göre $\nabla F(P)$, $S$ üzerinde $P$'den geçen her eğrinin teğetine diktir. Bu teğetlerin hepsi bir düzlemde yatar.
+
+\begin{tanim}[Teğet düzlem ve normal doğru]
+$F(x,y,z)=k$ seviye yüzeyinin $P(x_0,y_0,z_0)$ noktasındaki \textbf{teğet düzlemi}, $P$'den geçen ve normal vektörü
+$\nabla F(P)$ olan düzlemdir:
+\[
+F_x(P)(x-x_0)+F_y(P)(y-y_0)+F_z(P)(z-z_0)=0 .
+\]
+$P$'den geçen ve $\nabla F(P)$'ye paralel olan doğruya \textbf{normal doğru} denir:
+\[
+x=x_0+F_x(P)\,t,\quad y=y_0+F_y(P)\,t,\quad z=z_0+F_z(P)\,t
+\qquad\text{veya}\qquad
+\frac{x-x_0}{F_x(P)}=\frac{y-y_0}{F_y(P)}=\frac{z-z_0}{F_z(P)}
+\]
+(simetrik biçim, paydalar sıfırdan farklıysa). İki boyutta $F(x,y)=k$ seviye eğrisinin teğet doğrusu
+$F_x(x-x_0)+F_y(y-y_0)=0$'dır.
+\end{tanim}
+
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.4cm)},y={(1cm,0cm)},z={(0cm,1cm)}]
+  \draw[eks] (0,0,0) -- (3.2,0,0) node[below left]{$x$};
+  \draw[eks] (0,0,0) -- (0,3.4,0) node[right]{$y$};
+  \draw[eks] (0,0,0) -- (0,0,3.3) node[above]{$z$};
+  % küre (yaklaşık izdüşüm)
+  \draw[ana, thick] (0,0,0) circle (2cm);
+  \draw[ana, dashed] (0,0,0) ellipse (2cm and 0.6cm);
+  % P=(0,1,sqrt3) küre üzerinde; teğet düzlem vektörleri (1,0,0) ve (0,0.866,-0.5)
+  \coordinate (P) at (0,1,1.732);
+  \coordinate (A) at ($(P)+(1.1,0.95,-0.55)$);
+  \coordinate (B) at ($(P)+(1.1,-0.95,0.55)$);
+  \coordinate (C) at ($(P)+(-1.1,-0.95,0.55)$);
+  \coordinate (D) at ($(P)+(-1.1,0.95,-0.55)$);
+  \fill[turuncu, opacity=0.25] (A) -- (B) -- (C) -- (D) -- cycle;
+  \draw[turuncu, thick] (A) -- (B) -- (C) -- (D) -- cycle;
+  \draw[vurgu, dashed] ($(P)+(0,-0.5,-0.866)$) -- (P);
+  \draw[vek, vurgu] (P) -- ($(P)+(0,0.6,1.04)$) node[above right]{$\nabla F(P)$};
+  \fill (P) circle (1.5pt) node[below right]{$P$};
+  \node[turuncu, anchor=west] at (D) {teğet düzlem};
+  \node[ana] at (0,-2.4,1.6) {$F=k$};
+\end{tikzpicture}
+\end{center}
+{\small Şekil: Seviye yüzeyi $F(x,y,z)=k$ (burada bir küre), $P$'deki teğet düzlem ve normal doğru (kırmızı; yönü $\nabla F(P)$).}
+
+\begin{teorem}[Özel durum: $z=f(x,y)$ grafiği]
+$z=f(x,y)$ yüzeyi, $F(x,y,z)=f(x,y)-z=0$ seviye yüzeyi olarak düşünülebilir. $\nabla F=\langle f_x,f_y,-1\rangle$
+olduğundan teğet düzlem
+\[
+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)-(z-z_0)=0\iff z-z_0=f_x(x-x_0)+f_y(y-y_0)
+\]
+olur; bu, Konu 5'teki teğet düzlem formülünün aynısıdır.
+\end{teorem}
+
+\begin{bilgi}[Kapalı türevle bağlantı]
+$F(x,y,z)=k$ yüzeyinde $F_z\ne0$ ise yüzey yerel olarak $z=z(x,y)$ grafiğidir ve $z_x=-F_x/F_z$, $z_y=-F_y/F_z$'dir
+(kapalı türev). Bunları $z-z_0=z_x(x-x_0)+z_y(y-y_0)$'da yerine koyup $-F_z$ ile çarparsak tam olarak
+$F_x(x-x_0)+F_y(y-y_0)+F_z(z-z_0)=0$ elde edilir. Yani iki yaklaşım aynı düzlemi verir; gradyan yöntemi ise
+$F_z=0$ olduğunda da çalışır.
+\end{bilgi}
+
+\textbf{Adım adım yöntem.}
+\begin{enumerate}
+  \item Yüzeyi $F(x,y,z)=k$ biçiminde yaz (gerekirse tüm terimleri bir tarafa topla).
+  \item Noktanın yüzey üzerinde olduğunu kontrol et.
+  \item $\nabla F=\langle F_x,F_y,F_z\rangle$'yi hesapla ve $P$'de değerlendir (gerekirse ortak çarpanla sadeleştir).
+  \item Teğet düzlem: $\nabla F(P)\cdot\langle x-x_0,\ y-y_0,\ z-z_0\rangle=0$; normal doğru: $P+t\,\nabla F(P)$.
+\end{enumerate}
+
+\begin{soru}[\ekal Örnek 21 (elipsoid)]
+$\dfrac{x^2}{4}+y^2+\dfrac{z^2}{9}=3$ elipsoidinin $P(-2,1,-3)$ noktasındaki teğet düzlemini ve normal doğrusunu bulunuz.
+\end{soru}
+\begin{cevap}
+Kontrol: $\frac44+1+\frac99=3$ \checkmark. $F=\frac{x^2}{4}+y^2+\frac{z^2}{9}$; $\nabla F=\left\langle\frac x2,\ 2y,\ \frac{2z}{9}\right\rangle$,
+$\nabla F(P)=\left\langle-1,\ 2,\ -\frac23\right\rangle$. Kesirden kurtulmak için $-3$ ile çarpılmış paralel normal
+$\mathbf n=\langle3,-6,2\rangle$ kullanılabilir.
+
+Teğet düzlem: $3(x+2)-6(y-1)+2(z+3)=0\iff\boxed{3x-6y+2z+18=0}$. (Kontrol: $P$ için $-6-6-6+18=0$.)
+
+Normal doğru: $x=-2+3t,\quad y=1-6t,\quad z=-3+2t$, ya da $\dfrac{x+2}{3}=\dfrac{y-1}{-6}=\dfrac{z+3}{2}$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 22 (grafik olarak verilen yüzey)]
+$z=x^2+y^2$ paraboloidinin $(1,1,2)$ noktasındaki teğet düzlemini iki yolla bulunuz.
+\end{soru}
+\begin{cevap}
+\textbf{Gradyan yolu:} $F=x^2+y^2-z=0$, $\nabla F=\langle2x,2y,-1\rangle$, $\nabla F(1,1,2)=\langle2,2,-1\rangle$.
+Teğet düzlem: $2(x-1)+2(y-1)-(z-2)=0\iff z=2x+2y-2$.
+
+\textbf{Konu 5 formülü:} $f_x=2x=2$, $f_y=2y=2$; $z-2=2(x-1)+2(y-1)\iff z=2x+2y-2$. Aynı düzlem. \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 23 (iki yüzeyin arakesit eğrisinin teğeti)]
+$x^2+y^2+z^2=6$ küresi ile $z=x^2+y^2$ paraboloidinin arakesit eğrisinin $(1,1,2)$ noktasındaki teğet doğrusunu bulunuz.
+\end{soru}
+\begin{cevap}
+Arakesit eğrisi her iki yüzeyde de bulunduğundan teğeti her iki normale de diktir; bu yüzden teğet yönü iki gradyanın
+vektörel çarpımıdır. $(1,1,2)$ her iki yüzeydedir ($1+1+4=6$, $2=1+1$).
+$F=x^2+y^2+z^2$: $\nabla F=\langle2,2,4\rangle$; $\ G=x^2+y^2-z$: $\nabla G=\langle2,2,-1\rangle$.
+\[
+\nabla F\times\nabla G=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\ 2&2&4\\ 2&2&-1\end{vmatrix}
+=\langle-2-8,\ 8+2,\ 4-4\rangle=\langle-10,10,0\rangle\parallel\langle-1,1,0\rangle .
+\]
+Teğet doğru: $x=1-t,\ y=1+t,\ z=2$. (Gerçekten arakesit, $z=2$ düzlemindeki $x^2+y^2=2$ çemberidir ve $(1,1)$'deki
+teğeti $\langle-1,1\rangle$ yönündedir.)
+\end{cevap}
+
+\subsection{Kaynak kitaplardan ek örnekler}
+
+\begin{soru}[\ekal Örnek 24 (zincir kuralı + yönlü türev bir arada)]
+Bir böcek $\mathbf r(t)=\langle t^2,\ 3t\rangle$ yolu boyunca hareket ediyor; düzlemdeki sıcaklık $T(x,y)=x^2y-xy^2$ ile
+veriliyor. (a) $t=1$ anında böceğin hissettiği sıcaklığın değişim hızını bulunuz. (b) Aynı anda sıcaklığın en hızlı
+arttığı yön ve en büyük artış hızı nedir?
+\end{soru}
+\begin{cevap}
+$t=1$'de konum $(1,3)$, hız $\mathbf r'(1)=\langle2t,3\rangle=\langle2,3\rangle$.
+$T_x=2xy-y^2=6-9=-3$, $T_y=x^2-2xy=1-6=-5$, yani $\nabla T(1,3)=\langle-3,-5\rangle$.
+
+\textbf{(a)} Durum 1: $\dfrac{dT}{dt}=T_x x'+T_y y'=\nabla T\cdot\mathbf r'(1)=(-3)(2)+(-5)(3)=\boxed{-21}$ (derece/zaman birimi).
+Kontrol: $T\big(t^2,3t\big)=3t^5-9t^4$, türevi $15t^4-36t^3$, $t=1$'de $-21$. \checkmark
+
+\textbf{(b)} En hızlı artış yönü $\nabla T(1,3)=\langle-3,-5\rangle$, en büyük artış hızı $|\nabla T|=\sqrt{34}$.
+
+Not: $\dfrac{dT}{dt}=\nabla T\cdot\mathbf r'=|\mathbf r'|\,D_{\mathbf u}T$ ($\mathbf u=\mathbf r'/|\mathbf r'|$): zamana göre
+değişim, ``hız $\times$ yönlü türev''dir.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 25 (verilen yönlü türevlerden gradyanı bulma)]
+$f$ türevlenebilir ve $P$ noktasında $\mathbf u_1=\langle\frac35,\frac45\rangle$ yönündeki yönlü türev $2$,
+$\mathbf u_2=\langle0,1\rangle$ yönündeki yönlü türev $-1$ ise $\nabla f(P)$'yi ve $\mathbf u=\langle1,0\rangle$
+yönündeki yönlü türevi bulunuz.
+\end{soru}
+\begin{cevap}
+$\nabla f(P)=\langle p,q\rangle$ diyelim. $D_{\mathbf u_2}f=q=-1$ ve $D_{\mathbf u_1}f=\frac35p+\frac45q=2$
+$\Rightarrow\frac35p=2+\frac45=\frac{14}{5}\Rightarrow p=\frac{14}{3}$. Böylece $\nabla f(P)=\left\langle\frac{14}{3},-1\right\rangle$
+ve $D_{\mathbf i}f(P)=f_x(P)=\frac{14}{3}$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 26 (iki yüzeyin teğet olması)]
+$x^2+y^2+z^2=3$ küresi ile $xyz=1$ yüzeyinin $(1,1,1)$ noktasında teğet olduğunu (ortak teğet düzleme sahip
+olduğunu) gösteriniz.
+\end{soru}
+\begin{cevap}
+Nokta her iki yüzeyde: $1+1+1=3$, $1\cdot1\cdot1=1$. $\nabla(x^2+y^2+z^2)=\langle2x,2y,2z\rangle=\langle2,2,2\rangle$,
+$\nabla(xyz)=\langle yz,xz,xy\rangle=\langle1,1,1\rangle$. Normaller paralel olduğundan teğet düzlemler aynıdır:
+$(x-1)+(y-1)+(z-1)=0\iff x+y+z=3$.
+\end{cevap}
+
+\subsection{Sık yapılan hatalar}
+
+\begin{dikkat}
+\begin{itemize}
+  \item \textbf{Yol unutmak.} $\partial z/\partial u$'da ağaçta $u$ ile biten \emph{tüm} yolların katkısı toplanmalı.
+        $z=f(x,y)$, $x,y$ ikisi de $u$'ya bağlıyken yalnızca $z_xx_u$ yazmak yanlıştır.
+  \item \textbf{Adi ve kısmi türevi karıştırmak.} Tek değişkene bağlı fonksiyonlar için $d$, çok değişkenliler için
+        $\partial$ yazılır: Durum 1'de $\frac{dz}{dt}$, $\frac{dx}{dt}$; Durum 4'te $\frac{dy}{dx}$ ama $\frac{\partial x}{\partial u}$.
+  \item \textbf{Sonucu karışık değişkenlerle bırakmak.} Cevap bağımsız değişkenler ($t$ ya da $u,v$) cinsinden yazılmalıdır;
+        $x,y$ yerine iç fonksiyonları koymayı unutmayın.
+  \item \textbf{İkinci türevde $z_x$'in de bağımlı olduğunu unutmak.} $\frac{\partial}{\partial r}(z_x)\ne z_{xx}$;
+        doğrusu $z_{xx}x_r+z_{xy}y_r$'dir. Benzer şekilde $\frac{d}{dx}\big(e^{-t}\frac{dy}{dt}\big)$ hesaplanırken
+        $\frac{dt}{dx}$ çarpanı unutulmamalıdır.
+  \item \textbf{Kapalı türevde işaret ve payda.} $z_x=-F_x/F_z$ (eksi işaretli; paydada $F_z$). $F_x$ hesaplanırken $z$
+        sabit gibi davranılır; $z$'yi $x$'e bağlı sanıp $F_x$'e $z_x$ terimi eklemek çift sayımdır. Ayrıca $F_z\ne0$
+        koşulu kontrol edilmelidir.
+  \item \textbf{Kapalı türevde denklemi $F=0$ biçimine getirmemek.} $e^z=xyz$ için $F=e^z$ alınamaz; $F=xyz-e^z$ alınmalıdır.
+  \item \textbf{Birim vektör kullanmamak.} $D_{\mathbf u}f=\nabla f\cdot\mathbf u$ formülünde $\mathbf u$ \vurg{birim}
+        olmalıdır. $\mathbf v=\langle2,-1,2\rangle$ ise önce $|\mathbf v|=3$'e bölünür.
+  \item \textbf{Yönlü türevle gradyanı karıştırmak.} $D_{\mathbf u}f$ bir \emph{sayıdır}; $\nabla f$ bir \emph{vektördür}.
+        ``Maksimum yönlü türev'' sorusunun cevabı bir sayı ($|\nabla f|$), ``hangi yönde'' sorusunun cevabı bir vektördür.
+  \item \textbf{Teğet düzlemde $z=f(x,y)$ formülünü yanlış yerde kullanmak.} Yüzey kapalı verilmişse ($F(x,y,z)=k$)
+        doğrudan $\nabla F$ kullanmak en güvenli yoldur.
+\end{itemize}
+\end{dikkat}
+
+\begin{dikkat}[Dikkat: türevlenebilirlik koşulu]
+Zincir kuralı ve $D_{\mathbf u}f=\nabla f\cdot\mathbf u$ formülü $f$'nin \textbf{türevlenebilir} olmasını gerektirir;
+kısmi türevlerin var olması yetmez. Örnek:
+\[
+f(x,y)=\begin{cases}\dfrac{x^2y}{x^2+y^2}, & (x,y)\ne(0,0)\\[4pt] 0, & (x,y)=(0,0)\end{cases}
+\]
+fonksiyonu süreklidir ve $f_x(0,0)=f_y(0,0)=0$'dır (çünkü $f(h,0)=f(0,h)=0$), yani $\nabla f(0,0)=\mathbf 0$. Fakat
+$\mathbf u=\langle a,b\rangle$ için $f(ha,hb)=h\,a^2b$ olduğundan $D_{\mathbf u}f(0,0)=a^2b$'dir; örneğin
+$\mathbf u=\langle\frac{1}{\sqrt2},\frac{1}{\sqrt2}\rangle$ için $\frac{1}{2\sqrt2}\ne0=\nabla f\cdot\mathbf u$. Benzer şekilde
+$x=t,\ y=t$ için $f=t/2$ ve $df/dt=\frac12$ iken zincir kuralı formülü $0$ verir. Sebep: $f$ orijinde türevlenebilir değildir.
+\end{dikkat}
+
+\subsection{Özet ve formül kutusu}
+
+\begin{ozet}
+\textbf{Zincir kuralı} (ağaç diyagramı: tepeden bağımsız değişkene inen her yol bir terim; yol boyunca çarp, yolları topla)
+\begin{center}
+\begin{tabular}{l l}
+\toprule
+Durum & Formül\\
+\midrule
+1: $z=f(x,y)$, $x(t),y(t)$ & $\dfrac{dz}{dt}=z_x\dfrac{dx}{dt}+z_y\dfrac{dy}{dt}$\\[8pt]
+2: $u=f(x,y,z)$, $x(t),y(t),z(t)$ & $\dfrac{du}{dt}=u_x x'+u_y y'+u_z z'$\\[6pt]
+$z=f(x,y)$, $x(u,v),y(u,v)$ & $z_u=z_xx_u+z_yy_u,\quad z_v=z_xx_v+z_yy_v$\\[4pt]
+3: $s=f(x,y,z)$, $x,y,z$ $(u,v)$'ye bağlı & $s_u=s_xx_u+s_yy_u+s_zz_u$ (benzer $s_v$)\\[4pt]
+4: $y=f(x)$, $x=g(u,v)$ & $y_u=\dfrac{dy}{dx}\,x_u,\quad y_v=\dfrac{dy}{dx}\,x_v$\\[6pt]
+Genel & $\dfrac{\partial w}{\partial t_j}=\sum_i \dfrac{\partial w}{\partial x_i}\dfrac{\partial x_i}{\partial t_j}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Kapalı türev:} $F(x,y)=0\Rightarrow \dfrac{dy}{dx}=-\dfrac{F_x}{F_y}$ ($F_y\ne0$);\quad
+$F(x,y,z)=0\Rightarrow z_x=-\dfrac{F_x}{F_z},\ z_y=-\dfrac{F_y}{F_z}$ ($F_z\ne0$).
+
+\textbf{Değişken dönüşümü:} $x=e^t$: $x\,y'=\dfrac{dy}{dt}$, $x^2y''=\dfrac{d^2y}{dt^2}-\dfrac{dy}{dt}$;
+kutupsal: $z_r=z_x\cos\theta+z_y\sin\theta$, $z_\theta=-z_x r\sin\theta+z_y r\cos\theta$.
+
+\textbf{Yönlü türev ve gradyan:}
+\[
+\nabla f=\langle f_x,f_y,f_z\rangle,\qquad D_{\mathbf u}f=\nabla f\cdot\mathbf u=|\nabla f|\cos\theta\quad(|\mathbf u|=1)
+\]
+\begin{itemize}
+  \item En hızlı artış: $\nabla f$ yönünde, hız $|\nabla f|$; en hızlı azalış: $-\nabla f$ yönünde, hız $-|\nabla f|$;
+        $\mathbf u\perp\nabla f\Rightarrow D_{\mathbf u}f=0$.
+  \item $\nabla f$ seviye eğrilerine / seviye yüzeylerine diktir.
+\end{itemize}
+\textbf{Seviye yüzeyi $F(x,y,z)=k$, $P(x_0,y_0,z_0)$:}
+\begin{align*}
+&\text{Teğet düzlem: } F_x(P)(x-x_0)+F_y(P)(y-y_0)+F_z(P)(z-z_0)=0,\\
+&\text{Normal doğru: } \mathbf r(t)=\langle x_0,y_0,z_0\rangle+t\,\nabla F(P).
+\end{align*}
+$z=f(x,y)$ için: $z-z_0=f_x(x-x_0)+f_y(y-y_0)$.
+\end{ozet}

@@ -1,0 +1,1143 @@
+\section{Üç Boyutlu Koordinat Sistemi, Vektörler, Skaler ve Vektörel Çarpım}
+
+\begin{bilgi}[Bu bölümün kaynakları]
+Bu konu, 02.10 tarihli tahtadaki hatırlatma notları, 09.10 tarihli defter sayfaları ve 23.10 tarihli tahta fotoğraflarından derlenmiştir. Aynı içerik birden çok fotoğrafta tekrarlandığında bir kez yazılmış, bütün fotoğraf adları köşeli parantez içinde verilmiştir. Tahtada işlenmeyen alt konular Kreyszig (\emph{Advanced Engineering Mathematics}), Zill \& Wright (\emph{Calculus}, çev. İ.N. Cangül) ve Balcı (\emph{Genel Matematik II}) kitaplarına göre eklenmiş ve her seferinde ayrıca belirtilmiştir.
+\end{bilgi}
+
+%==========================================================
+\subsection{Amaç ve sezgi}
+
+Tek değişkenli analizde her şey bir sayı doğrusu ya da $xy$ düzlemi üzerinde olur. Mühendislikte ise hız, kuvvet, elektrik alanı, akış gibi büyüklüklerin hem \textbf{büyüklüğü} hem de \textbf{yönü} vardır ve bunlar üç boyutlu uzayda yaşar. Bu nedenle çok değişkenli analize geçmeden önce iki temel araca ihtiyacımız var:
+
+\begin{itemize}
+\item \textbf{Üç boyutlu koordinat sistemi:} Uzaydaki her noktayı üç sayıyla, $(x,y,z)$ ile adlandırmamızı sağlar. Böylece geometrik nesneler (küre, düzlem, doğru, yüzey) denklemlerle ifade edilebilir.
+\item \textbf{Vektörler:} Yönlü büyüklükleri temsil eder. Vektörlerle toplama, skalerle çarpma, \emph{skaler çarpım} ve \emph{vektörel çarpım} işlemleri; açı, uzunluk, diklik, alan, hacim gibi geometrik soruları basit cebirsel hesaplara dönüştürür.
+\end{itemize}
+
+Bu konunun ana fikirleri şöyle özetlenebilir:
+\begin{itemize}
+\item Uzaklık $=$ Pisagor teoreminin iki kez uygulanması; küre $=$ sabit bir noktaya uzaklığı sabit olan noktalar.
+\item Skaler çarpım $\mathbf u\cdot\mathbf v$ bir \textbf{sayıdır}; iki vektör arasındaki açıyı ve izdüşümü verir. $\mathbf u\cdot\mathbf v=0$ diklik demektir.
+\item Vektörel çarpım $\mathbf u\times\mathbf v$ bir \textbf{vektördür}; her iki vektöre de diktir, uzunluğu $\mathbf u$ ve $\mathbf v$ üzerine kurulan paralelkenarın alanına eşittir.
+\item Karma çarpım $\mathbf u\cdot(\mathbf v\times\mathbf w)$ bir \textbf{sayıdır}; mutlak değeri üç vektörün oluşturduğu paralelyüzlünün hacmidir, sıfır olması düzlemdeşlik demektir.
+\end{itemize}
+
+Sonraki konularda (doğru ve düzlem denklemleri, uzay eğrileri, gradyan) bu araçları sürekli kullanacağız; örneğin bir düzlemin normal vektörü vektörel çarpımla, iki doğru arasındaki açı skaler çarpımla bulunur.
+
+%==========================================================
+\subsection{Üç boyutlu dik koordinat sistemi}
+
+\subsubsection{Eksenler ve koordinat düzlemleri}
+
+\begin{tahta}[\foto{IMG-20261009-WA0034}, \foto{IMG-20261023-WA0009}]
+\textbf{Uzayda Vektörler.} Uzayda birbirini orijinde dik kesen $xy$, $yz$, $xz$ düzlemlerinin oluşturduğu bölgenin başlangıç noktası orijin ($O$) olmak üzere $Ox$, $Oy$, $Oz$ doğrularına \textbf{eksenler} denir.
+
+$P(x,y,z)$ noktasının $xy$ düzlemine izdüşümü olan $(x,y,0)$ noktasının koordinatlarında $x$'e \textbf{apsis}, $y$'ye \textbf{ordinat} denir. $z$ sayısına da $P$'nin \textbf{kotu} denir.
+\end{tahta}
+
+Uzayda $O$ noktasında birbirine dik üç sayı doğrusu alalım. Bunlara $x$-ekseni, $y$-ekseni ve $z$-ekseni denir. Her eksen çifti bir \textbf{koordinat düzlemi} belirtir:
+\begin{itemize}
+\item $xy$-düzlemi: $z=0$ olan noktalar (``yer'' düzlemi),
+\item $yz$-düzlemi: $x=0$ olan noktalar,
+\item $xz$-düzlemi: $y=0$ olan noktalar.
+\end{itemize}
+
+Bir $P$ noktasından üç koordinat düzlemine dikmeler indirilirse, $P$'nin $yz$, $xz$ ve $xy$ düzlemlerine olan \emph{işaretli} uzaklıkları sırasıyla $x$, $y$, $z$ olur. Bu üç sayıya $P$'nin \textbf{koordinatları} denir ve $P(x,y,z)$ yazılır. Böylece uzaydaki noktalar ile sıralı üçlüler kümesi
+\[
+\mathbb{R}^3=\{(x,y,z)\;:\;x,y,z\in\mathbb{R}\}
+\]
+arasında birebir eşleme kurulmuş olur.
+
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.4cm)},y={(1cm,0cm)},z={(0cm,1cm)},scale=1.1]
+\fill[ana!8] (0,0,0)--(3.6,0,0)--(3.6,4.2,0)--(0,4.2,0)--cycle;
+\draw[eks] (0,0,0)--(4.2,0,0) node[below left]{$x$};
+\draw[eks] (0,0,0)--(0,4.8,0) node[right]{$y$};
+\draw[eks] (0,0,0)--(0,0,3.6) node[above]{$z$};
+\node[below left] at (0,0,0) {$O$};
+\coordinate (P) at (2.5,3,2.4);
+\coordinate (Q) at (2.5,3,0);
+\draw[dashed,gri] (2.5,0,0)--(Q)--(0,3,0);
+\draw[dashed,vurgu] (Q)--(P);
+\draw[dashed,gri] (0,0,2.4)--(0,3,2.4)--(P);
+\draw[dashed,gri] (0,3,0)--(0,3,2.4);
+\draw[vek,ana] (0,0,0)--(P);
+\fill[vurgu] (P) circle (1.6pt) node[right=3pt]{$P(x,y,z)$};
+\fill (Q) circle (1.3pt) node[below right]{$(x,y,0)$};
+\node[left] at (2.5,0,0) {$x$ (apsis)};
+\node[below] at (0,3,0) {$y$ (ordinat)};
+\node[left] at (0,0,2.4) {$z$ (kot)};
+\end{tikzpicture}
+
+{\small Şekil 1. $P(x,y,z)$ noktası, $xy$-düzlemindeki (gölgeli bölge) izdüşümü $(x,y,0)$ ve koordinatlar.}
+\end{center}
+
+\begin{bilgi}[Kot hakkında bir not]
+Tahtada ve defterde kot için ``$xz$ düzlemine izdüşümdeki $z$ sayısı'' ifadesi kullanılmıştır \foto{IMG-20261009-WA0031}, \foto{IMG-20261023-WA0009}. Kaynaklara göre daha açık ifade şudur: \textbf{kot}, $P$ noktasının $z$ koordinatıdır; yani $P$'nin $xy$-düzlemine olan işaretli uzaklığıdır ($xy$ düzleminin üstündeyse pozitif, altındaysa negatif). Şekil 1'de $P$ ile $(x,y,0)$ arasındaki kırmızı kesikli doğru parçasının (işaretli) uzunluğu kottur.
+\end{bilgi}
+
+\subsubsection{Sağ el sistemi ve oktantlar}
+
+\begin{bilgi}[Kaynaklardan eklendi]
+Bu alt başlık (sağ el sistemi, oktantlar ve basit denklemlerin uzaydaki anlamı) derste tahtada görülmedi, kaynaklardan eklendi.
+\end{bilgi}
+
+Eksenlerin yönleri keyfi seçilmez: Standart olarak \textbf{sağ el sistemi} kullanılır. Sağ elinizin dört parmağı pozitif $x$-ekseninden pozitif $y$-eksenine doğru kıvrıldığında, başparmak pozitif $z$-eksenini gösterir. Kitaplardaki çizimlerde genellikle $z$ yukarı, $y$ sağa, $x$ ise ``bize doğru'' (sol-aşağı) çizilir; Şekil 1 de böyledir.
+
+\begin{dikkat}[Dikkat: eksen etiketleri]
+Defterdeki bir çizimde birim vektörlerin etiketleri alışılmışın dışında (dikey eksende $i$, sol-altta $k$, sağ-altta $j$) yazılmıştır \foto{IMG-20261009-WA0028}. Sağ el sisteminde $\mathbf i$, $x$-ekseni üzerinde (bize doğru), $\mathbf j$ $y$-ekseni üzerinde (sağa), $\mathbf k$ ise $z$-ekseni üzerinde (yukarı) çizilmelidir. Etiketleri karıştırmak, ileride vektörel çarpımın yönünü yanlış bulmanıza yol açar.
+\end{dikkat}
+
+Üç koordinat düzlemi uzayı sekiz parçaya böler; bunlara \textbf{oktant} denir. Üç koordinatın da pozitif olduğu bölgeye \textbf{birinci oktant} denir. Diğer oktantlar için standart bir numaralandırma yoktur; işaretlerle tarif edilirler, örneğin ``$x<0$, $y>0$, $z<0$ olan oktant''.
+
+\begin{center}
+\begin{tabular}{l l}
+\toprule
+Küme & Uzaydaki anlamı \\
+\midrule
+$(x,0,0)$ biçimindeki noktalar & $x$-ekseni \\
+$(x,y,0)$ biçimindeki noktalar & $xy$-düzlemi ($z=0$) \\
+$z=3$ & $xy$-düzlemine paralel, 3 birim yukarıdaki düzlem \\
+$y=-2$ & $xz$-düzlemine paralel düzlem \\
+$x=y$ & $z$-eksenini içeren, $x=y$ doğrusundan geçen düşey düzlem \\
+$x^2+y^2=4$ & $z$-ekseni etrafında yarıçapı 2 olan dairesel silindir \\
+$x>0,\ y>0,\ z>0$ & birinci oktant \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{dikkat}[Dikkat: aynı denklem, farklı boyut]
+$x^2+y^2=4$ denklemi düzlemde ($\mathbb{R}^2$) bir \emph{çemberdir}; uzayda ($\mathbb{R}^3$) ise $z$ serbest kaldığı için bir \emph{silindirdir}. Bir denklemi yorumlarken hangi uzayda çalıştığınızı mutlaka belirtin.
+\end{dikkat}
+
+%==========================================================
+\subsection{İki nokta arasındaki uzaklık ve küre denklemi}
+
+\subsubsection{Uzaklık formülü}
+
+\begin{tahta}[\foto{IMG-20261009-WA0031}, \foto{IMG-20261023-WA0009}]
+$A=(x_1,y_1,z_1)$ ve $B=(x_2,y_2,z_2)$ noktaları için
+\[
+\overrightarrow{AB}=(x_2-x_1,\ y_2-y_1,\ z_2-z_1),\qquad
+d(A,B)=\|\overrightarrow{AB}\|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}.
+\]
+\end{tahta}
+
+\begin{teorem}[İki nokta arasındaki uzaklık]
+$A(x_1,y_1,z_1)$ ve $B(x_2,y_2,z_2)$ noktaları arasındaki uzaklık
+\[
+|AB|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}
+\]
+dir.
+\end{teorem}
+
+\textbf{Neden?} $A$ ve $B$'yi köşegen kabul eden, yüzleri koordinat düzlemlerine paralel bir dikdörtgenler prizması düşünün. $A$'dan $C(x_2,y_2,z_1)$ noktasına olan uzaklık, $xy$-düzlemine paralel bir düzlemde ölçüldüğü için düzlemdeki Pisagor bağıntısıyla $|AC|^2=(x_2-x_1)^2+(y_2-y_1)^2$ olur. $ACB$ üçgeni $C$'de dik olduğundan (çünkü $CB$ düşeydir) yine Pisagor ile
+\[
+|AB|^2=|AC|^2+|CB|^2=(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2
+\]
+bulunur. Yani uzay uzaklığı, Pisagor teoreminin iki kez uygulanmasıdır.
+
+\begin{bilgi}[Kaynaklardan eklendi: orta nokta]
+Orta nokta formülü derste tahtada görülmedi, kaynaklardan eklendi. $[AB]$ doğru parçasının orta noktası, koordinatların aritmetik ortalamasıdır:
+\[
+M\left(\frac{x_1+x_2}{2},\ \frac{y_1+y_2}{2},\ \frac{z_1+z_2}{2}\right).
+\]
+\end{bilgi}
+
+\subsubsection{Küre}
+
+\begin{tahta}[\foto{IMG-20261009-WA0031}, \foto{IMG-20261023-WA0009}, \foto{IMG-20261023-WA0013}]
+Uzayda sabit bir $M(a,b,c)$ noktasına sabit $r$ uzaklığındaki noktaların geometrik yerine \textbf{küre} denir. $P(x,y,z)$ küre üzerinde ise $|MP|=r$:
+\begin{align*}
+|MP|^2&=(x-a)^2+(y-b)^2+(z-c)^2=r^2\\
+&\Rightarrow x^2-2ax+a^2+y^2-2by+b^2+z^2-2cz+c^2=r^2\\
+&\Rightarrow x^2+y^2+z^2\underbrace{-2a}_{D}\,x\underbrace{-2b}_{E}\,y\underbrace{-2c}_{F}\,z+\underbrace{a^2+b^2+c^2-r^2}_{G}=0 .
+\end{align*}
+\[
+\boxed{x^2+y^2+z^2+Dx+Ey+Fz+G=0}\quad\text{(Kürenin genel denklemi)}
+\]
+$D=-2a$, $E=-2b$, $F=-2c$, $G=a^2+b^2+c^2-r^2$. Merkez orijinde ise $x^2+y^2+z^2=r^2$.
+\end{tahta}
+
+\begin{bilgi}[Tahtadaki küçük yazım farkları]
+Defterde ve tahtada tanım ``sabit $r$ \emph{uzunluğundaki} noktaların geometrik yeri'' diye yazılmıştır; doğrusu ``sabit $r$ \emph{uzaklığındaki}'' olmalıdır (yukarıda düzeltilmiş hâli verildi). Ayrıca defterdeki sayfada \foto{IMG-20261009-WA0031} son satır ``$\ldots+\underbrace{a^2+b^2+c^2}_{G}=r^2$'' biçiminde yazılmış, ardından $G=a^2+b^2+c^2-r^2$ tanımlanmıştır; tutarlı yazım, 23.10 tahtasındaki gibi $r^2$'yi sola atıp $G=a^2+b^2+c^2-r^2$ almaktır.
+\end{bilgi}
+
+\begin{teorem}[Genel denklemden merkez ve yarıçap]
+$x^2+y^2+z^2+Dx+Ey+Fz+G=0$ denklemi için
+\[
+M\left(-\frac D2,\ -\frac E2,\ -\frac F2\right),\qquad
+r^2=\frac{D^2+E^2+F^2-4G}{4}.
+\]
+\begin{itemize}
+\item $D^2+E^2+F^2-4G>0$ ise denklem gerçek bir küredir,
+\item $D^2+E^2+F^2-4G=0$ ise yalnızca tek bir nokta ($M$) belirtir,
+\item $D^2+E^2+F^2-4G<0$ ise hiçbir nokta bu denklemi sağlamaz (boş küme).
+\end{itemize}
+\end{teorem}
+
+\textbf{Adım adım yöntem (genel denklemden merkez/yarıçap):}
+\begin{enumerate}
+\item $x^2$, $y^2$, $z^2$ katsayılarının 1 olduğundan emin olun (değilse ortak katsayıya bölün; katsayılar eşit değilse denklem küre değildir).
+\item $D,E,F,G$ değerlerini okuyun; $a=-D/2$, $b=-E/2$, $c=-F/2$.
+\item $r^2=a^2+b^2+c^2-G$ hesaplayın ve işaretini kontrol edin.
+\item Alternatif olarak her değişken için \textbf{tam kareye tamamlama} yapın: $x^2+Dx=(x+\tfrac D2)^2-\tfrac{D^2}{4}$.
+\end{enumerate}
+
+\begin{soru}[Örnek 1 (tahta) \foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0013}]
+Denklemi $x^2+y^2+z^2-2x-4y-6z-2=0$ olan kürenin merkezini ve yarıçapını bulunuz. \okunamadi{23.10 tahtasında soru cümlesinin sonu tahtanın kenarından taşmış; çözümden merkez ve yarıçapın istendiği anlaşılıyor}
+\end{soru}
+\begin{cevap}
+Genel denklemle karşılaştırırsak $D=-2a=-2$, $E=-2b=-4$, $F=-2c=-6$ olduğundan
+\[
+a=1,\quad b=2,\quad c=3\quad\Rightarrow\quad M(1,2,3).
+\]
+Sabit terim $G=a^2+b^2+c^2-r^2=-2$ olmalıdır:
+\[
+1+4+9-r^2=-2\ \Rightarrow\ 14-r^2=-2\ \Rightarrow\ r^2=16\ \Rightarrow\ \boxed{r=4}.
+\]
+\textbf{Kontrol (tam kareye tamamlama):}
+$(x-1)^2-1+(y-2)^2-4+(z-3)^2-9-2=0\Rightarrow (x-1)^2+(y-2)^2+(z-3)^2=16$. Sonuç aynıdır.
+\end{cevap}
+
+\begin{soru}[Örnek 2 (derste çalışma sorusu) \foto{IMG-20261009-WA0032}, \foto{IMG-20261023-WA0027}]
+$x^2+y^2+z^2+4x-6y+2z-11=0$ kürenin merkez ve yarıçapını bulunuz.
+\end{soru}
+\begin{cevap}
+Tam kareye tamamlayalım:
+\[
+(x^2+4x+4)+(y^2-6y+9)+(z^2+2z+1)=11+4+9+1
+\ \Rightarrow\ (x+2)^2+(y-3)^2+(z+1)^2=25.
+\]
+Merkez $M(-2,3,-1)$, yarıçap $r=5$. (Formülle: $r^2=\frac{16+36+4+44}{4}=\frac{100}{4}=25$.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 3]
+$A(2,-1,4)$ ve $B(4,3,0)$ noktaları veriliyor. (a) $|AB|$ uzaklığını, (b) $[AB]$'nin orta noktasını, (c) $[AB]$'yi çap kabul eden kürenin denklemini bulunuz.
+\end{soru}
+\begin{cevap}
+(a) $\overrightarrow{AB}=(2,4,-4)$, $|AB|=\sqrt{4+16+16}=\sqrt{36}=6$.
+
+(b) Orta nokta $M\left(\frac{2+4}{2},\frac{-1+3}{2},\frac{4+0}{2}\right)=(3,1,2)$.
+
+(c) Çapın orta noktası kürenin merkezidir, yarıçap çapın yarısıdır: $r=3$.
+\[
+(x-3)^2+(y-1)^2+(z-2)^2=9 .
+\]
+Açarsak: $x^2+y^2+z^2-6x-2y-4z+5=0$. (Kontrol: $A$ noktası için $4+1+16-12+2-16+5=0$ \checkmark.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 4]
+$x^2+y^2+z^2+2x-4y+6z+20=0$ denklemi bir küre belirtir mi?
+\end{soru}
+\begin{cevap}
+Tam kareye tamamlarsak
+\[
+(x+1)^2+(y-2)^2+(z+3)^2=-20+1+4+9=-6 .
+\]
+Sol taraf kareler toplamı olduğundan hiçbir zaman negatif olamaz; denklemi sağlayan nokta yoktur. Yani bu denklem bir küre \textbf{değildir} (boş küme). Formülle: $D^2+E^2+F^2-4G=4+16+36-80=-24<0$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 5]
+Merkezi $M(2,-3,1)$ olan ve $xy$-düzlemine teğet olan kürenin denklemini yazınız.
+\end{soru}
+\begin{cevap}
+Küre $xy$-düzlemine ($z=0$) teğet ise yarıçap, merkezin bu düzleme uzaklığına, yani merkezin kotunun mutlak değerine eşittir: $r=|1|=1$.
+\[
+(x-2)^2+(y+3)^2+(z-1)^2=1 .
+\]
+\end{cevap}
+
+%==========================================================
+\subsection{Vektör kavramı, bileşenler ve vektör işlemleri}
+
+\subsubsection{Tanım, bileşenler, eşitlik}
+
+\begin{tahta}[\foto{IMG-20261009-WA0029}]
+$xy$ düzleminde $A(x_1,y_1)$'den $B(x_2,y_2)$'ye çizilen yönlü doğru parçası $\overrightarrow{AB}$; orijinden çizilen $\mathbf u=(a,b)$ vektörünün bileşenleri $a$ ve $b$ ($a,b\in\mathbb R$).
+
+$\mathbf u(a_1,b_1)$, $\mathbf v(a_2,b_2)$ olmak üzere
+\[
+\mathbf u=\mathbf v\iff(a_1,b_1)=(a_2,b_2)\iff a_1=a_2\ \wedge\ b_1=b_2 .
+\]
+\end{tahta}
+
+\begin{tanim}[Vektör]
+Hem büyüklüğü hem yönü olan niceliğe \textbf{vektör} denir. Geometrik olarak bir \textbf{yönlü doğru parçası} (ok) ile gösterilir: $A$ başlangıç, $B$ bitiş noktası olmak üzere $\overrightarrow{AB}$. Aynı uzunlukta ve aynı yönde olan bütün oklar \emph{aynı vektörü} temsil eder; yani bir vektör, yerinden bağımsızdır (serbest vektör).
+\end{tanim}
+
+Bu sayede her vektörü başlangıcı orijinde olacak şekilde taşıyabiliriz. Başlangıcı orijinde olan vektöre \textbf{yer (konum) vektörü} denir; bitiş noktasının koordinatları vektörün \textbf{bileşenleri}dir:
+\[
+\mathbb R^2:\ \mathbf u=(a,b)=\langle a,b\rangle,\qquad \mathbb R^3:\ \mathbf u=(u_1,u_2,u_3)=\langle u_1,u_2,u_3\rangle .
+\]
+$A(x_1,y_1,z_1)$ ile $B(x_2,y_2,z_2)$ verildiğinde \textbf{bitiş eksi başlangıç} kuralı geçerlidir:
+\[
+\overrightarrow{AB}=(x_2-x_1,\ y_2-y_1,\ z_2-z_1).
+\]
+İki vektör ancak ve ancak karşılıklı bileşenleri eşitse eşittir. Bütün bileşenleri sıfır olan vektöre \textbf{sıfır vektörü} denir: $\mathbf 0=(0,0,0)$; yönü tanımsızdır.
+
+\subsubsection{Toplama, skalerle çarpma, fark}
+
+\begin{tahta}[\foto{IMG-20261009-WA0029}, \foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0011}]
+Düzlemde: $\lambda\mathbf u=\lambda(a,b)=(\lambda a,\lambda b)$, \ $-\mathbf u=(-a,-b)$, \
+$\mathbf u+\mathbf v=(a_1+a_2,\ b_1+b_2)$, \ $\mathbf u-\mathbf v=(a_1-a_2,\ b_1-b_2)$.
+
+Uzayda: $\mathbf u=(u_1,u_2,u_3)$, $\mathbf v=(v_1,v_2,v_3)$ için
+\[
+\mathbf u\pm\mathbf v=(u_1\pm v_1,\ u_2\pm v_2,\ u_3\pm v_3),\qquad \lambda\mathbf u=(\lambda u_1,\lambda u_2,\lambda u_3).
+\]
+(Çizim: $\mathbf u$, $\mathbf v$ ve paralelkenar kuralıyla $\mathbf u+\mathbf v$.)
+\end{tahta}
+
+Geometrik olarak:
+\begin{itemize}
+\item \textbf{Toplama (paralelkenar / üçgen kuralı):} $\mathbf v$'nin başlangıcını $\mathbf u$'nun ucuna koyarsak, $\mathbf u$'nun başından $\mathbf v$'nin ucuna giden ok $\mathbf u+\mathbf v$'dir. Aynı başlangıçlı çizildiklerinde $\mathbf u+\mathbf v$, üzerlerine kurulan paralelkenarın köşegenidir.
+\item \textbf{Skalerle çarpma:} $\lambda>0$ ise $\lambda\mathbf u$ aynı yönde, uzunluğu $|\lambda|$ katıdır; $\lambda<0$ ise yön ters döner.
+\item \textbf{Fark:} $\mathbf u-\mathbf v=\mathbf u+(-\mathbf v)$; aynı başlangıçlı çizildiğinde $\mathbf v$'nin ucundan $\mathbf u$'nun ucuna giden diğer köşegendir.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\fill[ana!7] (0,0)--(3,0.8)--(4,2.8)--(1,2)--cycle;
+\draw[eks] (-0.4,0)--(5,0) node[right]{$x$};
+\draw[eks] (0,-0.4)--(0,3.4) node[above]{$y$};
+\draw[vek,ana] (0,0)--(3,0.8) node[midway,below right]{$\mathbf u$};
+\draw[vek,yesil] (0,0)--(1,2) node[midway,left]{$\mathbf v$};
+\draw[dashed,gri] (3,0.8)--(4,2.8);
+\draw[dashed,gri] (1,2)--(4,2.8);
+\draw[vek,vurgu] (0,0)--(4,2.8) node[above right]{$\mathbf u+\mathbf v$};
+\draw[vek,mor] (1,2)--(3,0.8) node[pos=0.78,above right]{$\mathbf u-\mathbf v$};
+\end{tikzpicture}
+
+{\small Şekil 2. Paralelkenar kuralı: köşegenlerden biri $\mathbf u+\mathbf v$, diğeri $\mathbf u-\mathbf v$.}
+\end{center}
+
+\begin{teorem}[Vektör işlemlerinin özellikleri]
+$\mathbf u,\mathbf v,\mathbf w$ vektörler, $\lambda,\mu$ skalerler olmak üzere:
+\begin{center}
+\begin{tabular}{l l}
+\toprule
+$\mathbf u+\mathbf v=\mathbf v+\mathbf u$ & değişme \\
+$(\mathbf u+\mathbf v)+\mathbf w=\mathbf u+(\mathbf v+\mathbf w)$ & birleşme \\
+$\mathbf u+\mathbf 0=\mathbf u$, \quad $\mathbf u+(-\mathbf u)=\mathbf 0$ & etkisiz ve ters eleman \\
+$\lambda(\mathbf u+\mathbf v)=\lambda\mathbf u+\lambda\mathbf v$ & dağılma \\
+$(\lambda+\mu)\mathbf u=\lambda\mathbf u+\mu\mathbf u$ & dağılma \\
+$(\lambda\mu)\mathbf u=\lambda(\mu\mathbf u)$, \quad $1\cdot\mathbf u=\mathbf u$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+Bu sekiz özelliği sağlayan kümelere (Kreyszig'in diliyle) \textbf{vektör uzayı} denir; $\mathbb R^2$ ve $\mathbb R^3$ en temel örneklerdir.
+\end{teorem}
+
+\subsubsection{Uzunluk (norm) ve birim vektör}
+
+\begin{tahta}[\foto{IMG-20261009-WA0029}, \foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0011}]
+$\mathbf u=(a,b)$: $\|\mathbf u\|=\sqrt{a^2+b^2}$; \quad $\mathbf u=(a,b,c)$: $\|\mathbf u\|=\sqrt{a^2+b^2+c^2}$.
+
+Uzunluğu 1 olan vektöre \textbf{birim vektör} denir ($\|\mathbf e\|=1$).
+\[
+\mathbf e=\frac{\mathbf u}{\|\mathbf u\|}=\left(\frac{a}{\sqrt{a^2+b^2}},\ \frac{b}{\sqrt{a^2+b^2}}\right).
+\]
+\end{tahta}
+
+\begin{teorem}[Normun özellikleri]
+\begin{itemize}
+\item $\|\mathbf u\|\ge 0$ ve $\|\mathbf u\|=0\iff\mathbf u=\mathbf 0$,
+\item $\|\lambda\mathbf u\|=|\lambda|\,\|\mathbf u\|$,
+\item $\|\mathbf u+\mathbf v\|\le\|\mathbf u\|+\|\mathbf v\|$ \quad (üçgen eşitsizliği).
+\end{itemize}
+Sıfırdan farklı $\mathbf u$ için $\mathbf e=\dfrac{\mathbf u}{\|\mathbf u\|}$, $\mathbf u$ ile aynı yönlü birim vektördür (\emph{normalleştirme}). $\mathbf u$ yönünde uzunluğu $L$ olan vektör $L\,\dfrac{\mathbf u}{\|\mathbf u\|}$'dir.
+\end{teorem}
+
+\begin{soru}[Örnek 6 (tahta) \foto{IMG-20261009-WA0026}]
+$\mathbf u=(3,4)$ vektörünün uzunluğunu ve $\mathbf u$ yönündeki birim vektörü bulunuz.
+\end{soru}
+\begin{cevap}
+$\|\mathbf u\|=\sqrt{3^2+4^2}=\sqrt{25}=5$. Birim vektör
+\[
+\mathbf e=\frac{\mathbf u}{\|\mathbf u\|}=\left(\frac35,\ \frac45\right).
+\]
+Kontrol: $\|\mathbf e\|^2=\frac{9}{25}+\frac{16}{25}=1$ \checkmark.
+\end{cevap}
+
+\subsubsection{Düzlemde bir vektörün doğrultusu}
+
+\begin{tahta}[\foto{IMG-20261009-WA0029}]
+\textbf{Doğrultu:} $\mathbf u=(a,b)\neq(0,0)$ ise $\cos\theta=\dfrac{a}{\|\mathbf u\|}$, $\sin\theta=\dfrac{b}{\|\mathbf u\|}$; \ $a=\|\mathbf u\|\cos\theta$, $b=\|\mathbf u\|\sin\theta$:
+\[
+\mathbf u=(\|\mathbf u\|\cos\theta,\ \|\mathbf u\|\sin\theta).
+\]
+\end{tahta}
+
+Burada $\theta$, $\mathbf u$'nun pozitif $x$-ekseniyle yaptığı açıdır. Bu yazım, ``büyüklüğü $F$ olan ve yatayla $\theta$ açısı yapan kuvvet'' gibi fizik problemlerinde vektörü bileşenlerine ayırmanın standart yoludur. Örneğin $\mathbf u=(3,4)$ için $\cos\theta=\frac35$, $\sin\theta=\frac45$, $\theta\approx 53{,}13^\circ$. Uzaydaki karşılığı, aşağıda göreceğimiz \emph{doğrultu kosinüsleri}dir.
+
+\subsubsection{Standart taban vektörleri $\mathbf i,\mathbf j,\mathbf k$}
+
+\begin{tahta}[\foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0011}]
+(Çizim: eksenler üzerinde uzunluğu 1 olan kırmızı $\mathbf i,\mathbf j,\mathbf k$ vektörleri.)
+\[
+\mathbf i=(1,0,0),\quad \mathbf j=(0,1,0),\quad \mathbf k=(0,0,1)\quad\to\quad \mathbb R^3\text{'ün taban (standart) vektörleri.}
+\]
+\end{tahta}
+
+Her $\mathbf u=(u_1,u_2,u_3)$ vektörü tek bir biçimde
+\[
+\mathbf u=u_1\mathbf i+u_2\mathbf j+u_3\mathbf k
+\]
+olarak yazılır. Örneğin $(2,-1,5)=2\mathbf i-\mathbf j+5\mathbf k$. Düzlemde ise $\mathbf i=(1,0)$, $\mathbf j=(0,1)$ ve $(a,b)=a\mathbf i+b\mathbf j$ olur. Bu yazım, vektörel çarpımın determinantla hesaplanmasında doğrudan kullanılır.
+
+\begin{soru}[\ekal Örnek 7]
+$P(1,-2,3)$ ve $Q(3,-3,5)$ noktaları veriliyor. $\overrightarrow{PQ}$'yu $\mathbf i,\mathbf j,\mathbf k$ cinsinden yazınız; $\overrightarrow{PQ}$ yönündeki birim vektörü ve bu yönde uzunluğu 6 olan vektörü bulunuz.
+\end{soru}
+\begin{cevap}
+Bitiş eksi başlangıç: $\overrightarrow{PQ}=(3-1,\,-3+2,\,5-3)=(2,-1,2)=2\mathbf i-\mathbf j+2\mathbf k$.
+
+Uzunluk: $\|\overrightarrow{PQ}\|=\sqrt{4+1+4}=3$. Birim vektör: $\mathbf e=\frac13(2,-1,2)=\left(\frac23,-\frac13,\frac23\right)$.
+
+Uzunluğu 6 olan vektör: $6\,\mathbf e=(4,-2,4)$.
+\end{cevap}
+
+%==========================================================
+\subsection{Lineer bileşim, germe, lineer bağımsızlık ve taban}
+
+\begin{tahta}[\foto{IMG-20261009-WA0033}, \foto{IMG-20261023-WA0008}, \foto{IMG-20261023-WA0010}]
+\textbf{Lineer bağımsızlık:} $\alpha\mathbf u+\beta\mathbf v=\mathbf 0$ eşitliği ancak $\alpha=\beta=0$ ise sağlanıyorsa $\mathbf u,\mathbf v$ \textbf{lineer bağımsız}, aksi halde \textbf{lineer bağımlıdır}. $\alpha\mathbf u+\beta\mathbf v$ toplamına $\mathbf u$ ve $\mathbf v$ vektörlerinin \textbf{lineer bileşimi} denir.
+
+Düzlemdeki vektörlerin $V$ kümesinin her elemanı $\mathbf u,\mathbf v$ vektörlerinin lineer bileşimi olarak yazılabiliyorsa $\{\mathbf u,\mathbf v\}$ kümesi $V$'yi \textbf{oluşturur (gerer)}: $\mathbf x\in V\Rightarrow\mathbf x=\lambda\mathbf u+\mu\mathbf v$ olacak şekilde $\lambda,\mu$ skalerleri vardır.
+
+$\{\mathbf u,\mathbf v\}$ lineer bağımsız \textbf{ve} $V$'yi oluşturuyorsa $\{\mathbf u,\mathbf v\}$ kümesine $V$'nin bir \textbf{tabanı} denir.
+\end{tahta}
+
+\begin{bilgi}[Fotoğraf notu]
+23.10 tahtasında bu tanımların bir kısmı tahtanın sağ kenarında kadraj dışında kalmıştır \okunamadi{\foto{IMG-20261023-WA0010} sağ kenardaki tanım metni}; aynı tanımlar 09.10 defter sayfasında \foto{IMG-20261009-WA0033} tam olarak bulunduğu için yukarıda oradan aktarılmıştır.
+\end{bilgi}
+
+\subsubsection{Tanımların genel hâli ve geometrik anlamı}
+
+\begin{tanim}[Lineer bileşim, germe, bağımsızlık, taban]
+$\mathbf v_1,\dots,\mathbf v_n$ vektörleri ve $c_1,\dots,c_n$ skalerleri için $c_1\mathbf v_1+\dots+c_n\mathbf v_n$ ifadesine bir \textbf{lineer bileşim} denir.
+\begin{itemize}
+\item Tüm lineer bileşimlerin kümesine $\{\mathbf v_1,\dots,\mathbf v_n\}$'nin \textbf{gerdiği (oluşturduğu) küme} denir.
+\item $c_1\mathbf v_1+\dots+c_n\mathbf v_n=\mathbf 0$ yalnızca $c_1=\dots=c_n=0$ için sağlanıyorsa vektörler \textbf{lineer bağımsızdır}; sıfır olmayan bir katsayı takımıyla da sağlanıyorsa \textbf{lineer bağımlıdır}.
+\item Lineer bağımsız ve uzayı geren kümeye \textbf{taban} denir. $\mathbb R^2$'nin her tabanında 2, $\mathbb R^3$'ün her tabanında 3 vektör vardır (\emph{boyut}).
+\end{itemize}
+\end{tanim}
+
+\textbf{Geometrik anlam:}
+\begin{itemize}
+\item İki vektör lineer bağımlı $\iff$ biri diğerinin skaler katıdır $\iff$ \textbf{paraleldirler} (aynı doğru üzerindedirler).
+\item Uzayda üç vektör lineer bağımlı $\iff$ \textbf{aynı düzlemdedirler} (düzlemdeş). Bunu karma çarpım bölümünde determinantla test edeceğiz.
+\end{itemize}
+
+\begin{soru}[Örnek 8 (tahta) \foto{IMG-20261009-WA0033}, \foto{IMG-20261023-WA0008}, \foto{IMG-20261023-WA0010}, \foto{IMG-20261023-WA0015}]
+$\mathbf i=(1,0)$, $\mathbf j=(0,1)$ vektörlerinin lineer bağımsız olduğunu gösteriniz; $\mathbf u=(-6,9)$, $\mathbf v=(4,-6)$ vektörlerinin lineer bağımlı olup olmadığını kontrol ediniz.
+\end{soru}
+\begin{cevap}
+\textbf{$\mathbf i,\mathbf j$ için:} $\alpha\mathbf i+\beta\mathbf j=\mathbf 0$ olsun:
+\[
+\alpha(1,0)+\beta(0,1)=(0,0)\ \Rightarrow\ (\alpha,\beta)=(0,0).
+\]
+Tek çözüm $\alpha=\beta=0$ olduğundan $\mathbf i,\mathbf j$ \textbf{lineer bağımsızdır}.
+
+\textbf{$\mathbf u,\mathbf v$ için:} $\alpha(-6,9)+\beta(4,-6)=(0,0)$ bileşen bileşen yazılırsa
+\[
+\begin{cases}-6\alpha+4\beta=0 & /\cdot 3\\ \ \ 9\alpha-6\beta=0 & /\cdot 2\end{cases}
+\ \Rightarrow\
+\begin{cases}-18\alpha+12\beta=0\\ \ \ 18\alpha-12\beta=0\end{cases}
+\]
+Taraf tarafa toplanınca $0=0$ elde edilir: iki denklem aslında aynı denklemdir ($3\alpha=2\beta$). Sonsuz çözüm vardır; örneğin $\alpha=2$, $\beta=3$ için $2(-6,9)+3(4,-6)=(0,0)$. Sıfır olmayan katsayılarla sıfır vektörü elde edildiğinden $\mathbf u,\mathbf v$ \textbf{lineer bağımlıdır}.
+
+\textbf{Yorum:} $\mathbf v=-\frac23\mathbf u$ olduğundan iki vektör paraleldir (zıt yönlü). Oran testi: $\frac{-6}{4}=\frac{9}{-6}=-\frac32$.
+\end{cevap}
+
+\begin{soru}[Örnek 9 (tahta) \foto{IMG-20261009-WA0034}, \foto{IMG-20261023-WA0010}, \foto{IMG-20261023-WA0015}]
+$\mathbf u=(4,-3)$, $\mathbf v=(-3,4)$ ve $T=\{\mathbf u,\mathbf v\}$ olsun. $T$'nin $\mathbb R^2$'nin bir tabanı olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+Taban için iki şey gösterilmelidir: (1) lineer bağımsızlık, (2) $\mathbb R^2$'yi germe.
+
+\textbf{(1) Lineer bağımsızlık.} $\alpha,\beta\in\mathbb R$ için $\alpha(4,-3)+\beta(-3,4)=(0,0)$:
+\[
+\begin{cases}\ \ 4\alpha-3\beta=0 & /\cdot 3\\ -3\alpha+4\beta=0 & /\cdot 4\end{cases}
+\ \Rightarrow\
+\begin{cases}\ \ 12\alpha-9\beta=0\\ -12\alpha+16\beta=0\end{cases}
+\ \Rightarrow\ 7\beta=0 .
+\]
+Buradan $\beta=0$, ilk denklemden $\alpha=0$. Tek çözüm sıfır çözüm olduğundan $\mathbf u,\mathbf v$ lineer bağımsızdır.
+
+\textbf{(2) Germe.} Her $(x,y)\in\mathbb R^2$ için $(x,y)=\alpha\mathbf u+\beta\mathbf v$ yazılabilmeli:
+\[
+\begin{cases}\ \ 4\alpha-3\beta=x & /\cdot 3\\ -3\alpha+4\beta=y & /\cdot 4\end{cases}
+\ \Rightarrow\
+\begin{cases}\ \ 12\alpha-9\beta=3x\\ -12\alpha+16\beta=4y\end{cases}
+\ \Rightarrow\ 7\beta=3x+4y .
+\]
+\[
+\beta=\frac{3x+4y}{7},\qquad \alpha=\frac{4x+3y}{7}.
+\]
+Kontrol: $4\alpha-3\beta=\frac{16x+12y-9x-12y}{7}=x$ \checkmark, \ $-3\alpha+4\beta=\frac{-12x-9y+12x+16y}{7}=y$ \checkmark.
+
+Her $(x,y)$ için uygun $\alpha,\beta$ bulunduğundan $T$, $\mathbb R^2$'yi gerer. Lineer bağımsız ve geren küme olduğu için $T$, $\mathbb R^2$'nin bir \textbf{tabanıdır}. Örneğin $(1,0)=\frac47\mathbf u+\frac37\mathbf v$.
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki küçük notlar]
+Defter sayfasında \foto{IMG-20261009-WA0034} ``$T$'nin $\mathbb R$'nin bir tabanı'' yazılmıştır; doğrusu $\mathbb R^2$'dir. Aynı sayfadaki $12\alpha\ \_\ 9\beta$ satırında işaret silik görünmektedir; doğrusu $12\alpha-9\beta=0$'dır. 23.10 tahtasının ilk fotoğrafında \foto{IMG-20261023-WA0010} yalnızca bağımsızlık gösterilmiş, germe kısmı bir sonraki fotoğrafta \foto{IMG-20261023-WA0015} tamamlanmıştır.
+\end{bilgi}
+
+\subsubsection{Determinant ölçütü ($\mathbb R^2$ ve $\mathbb R^3$)}
+
+\begin{bilgi}[Kaynaklardan eklendi]
+Determinant ölçütü ve $\mathbb R^3$'teki taban örneği derste tahtada görülmedi, kaynaklardan eklendi.
+\end{bilgi}
+
+\begin{teorem}[Bağımsızlık için determinant testi]
+\begin{itemize}
+\item $\mathbf u=(a_1,b_1)$, $\mathbf v=(a_2,b_2)$ lineer bağımsızdır $\iff \begin{vmatrix}a_1&b_1\\a_2&b_2\end{vmatrix}=a_1b_2-a_2b_1\neq 0$.
+\item $\mathbf u,\mathbf v,\mathbf w\in\mathbb R^3$ lineer bağımsızdır $\iff \begin{vmatrix}u_1&u_2&u_3\\v_1&v_2&v_3\\w_1&w_2&w_3\end{vmatrix}\neq 0$.
+\item $\mathbb R^2$'de lineer bağımsız \textbf{iki} vektör, $\mathbb R^3$'te lineer bağımsız \textbf{üç} vektör otomatik olarak uzayı gerer, dolayısıyla bir taban oluşturur.
+\end{itemize}
+\end{teorem}
+
+Örnek 9 için: $\begin{vmatrix}4&-3\\-3&4\end{vmatrix}=16-9=7\neq0$; bağımsız, dolayısıyla taban. Dikkat ederseniz germe kısmındaki paydada da bu $7$ çıkmıştır. Örnek 8'de ise $\begin{vmatrix}-6&9\\4&-6\end{vmatrix}=36-36=0$; bağımlı.
+
+\begin{soru}[\ekal Örnek 10]
+$\mathbf a=(1,1,0)$, $\mathbf b=(0,1,1)$, $\mathbf c=(1,0,1)$ vektörlerinin $\mathbb R^3$'ün bir tabanı olduğunu gösteriniz ve $\mathbf x=(2,3,5)$ vektörünü bu taban cinsinden yazınız.
+\end{soru}
+\begin{cevap}
+\[
+\begin{vmatrix}1&1&0\\0&1&1\\1&0&1\end{vmatrix}
+=1\,(1\cdot1-1\cdot0)-1\,(0\cdot1-1\cdot1)+0=1+1=2\neq0 .
+\]
+Üç vektör lineer bağımsızdır; $\mathbb R^3$'te üç bağımsız vektör taban oluşturur.
+
+$\mathbf x=\alpha\mathbf a+\beta\mathbf b+\gamma\mathbf c=(\alpha+\gamma,\ \alpha+\beta,\ \beta+\gamma)=(2,3,5)$:
+\[
+\alpha+\gamma=2,\qquad \alpha+\beta=3,\qquad \beta+\gamma=5 .
+\]
+Üçünü toplarsak $2(\alpha+\beta+\gamma)=10$, yani $\alpha+\beta+\gamma=5$. Buradan $\gamma=5-3=2$, $\alpha=5-5=0$, $\beta=5-2=3$.
+\[
+\mathbf x=0\cdot\mathbf a+3\mathbf b+2\mathbf c .
+\]
+Kontrol: $3(0,1,1)+2(1,0,1)=(2,3,5)$ \checkmark.
+\end{cevap}
+
+%==========================================================
+\subsection{Skaler (iç) çarpım}
+
+\begin{tahta}[\foto{IMG-20261009-WA0026}, \foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0011}, \foto{IMG-20261002-WA0018}]
+Düzlemde $\mathbf u\cdot\mathbf v=a_1a_2+b_1b_2$; uzayda
+\[
+\boxed{\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2+u_3v_3}\ \to\ \text{sayı},\qquad
+\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta,\qquad
+\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}.
+\]
+$\theta=\pi/2\Rightarrow\cos 90^\circ=0\Rightarrow\mathbf u\cdot\mathbf v=0$: \ $\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0$.
+
+\textbf{Paralel vektörler:} $\mathbf u\parallel\mathbf v\Rightarrow\theta=0^\circ$ veya $180^\circ$; $\mathbf u=k\mathbf v$, yani $\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}=k$; uzayda $\dfrac{u_1}{v_1}=\dfrac{u_2}{v_2}=\dfrac{u_3}{v_3}$.
+\end{tahta}
+
+\subsubsection{Tanım ve geometrik anlam}
+
+\begin{tanim}[Skaler (iç, nokta) çarpım]
+$\mathbf u=(u_1,u_2,u_3)$ ve $\mathbf v=(v_1,v_2,v_3)$ için
+\[
+\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2+u_3v_3
+\]
+sayısına $\mathbf u$ ile $\mathbf v$'nin \textbf{skaler çarpımı} denir. Sonuç bir \textbf{vektör değil, sayıdır}.
+\end{tanim}
+
+\begin{teorem}[Skaler çarpımın geometrik biçimi]
+$\theta\in[0,\pi]$, sıfırdan farklı $\mathbf u$ ve $\mathbf v$ arasındaki açı olmak üzere
+\[
+\mathbf u\cdot\mathbf v=\|\mathbf u\|\,\|\mathbf v\|\cos\theta,
+\qquad\text{dolayısıyla}\qquad
+\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}.
+\]
+\end{teorem}
+
+\textbf{Kanıt fikri (kosinüs teoremi).} $\mathbf u$, $\mathbf v$ ve $\mathbf u-\mathbf v$ bir üçgenin kenarlarıdır. Kosinüs teoremine göre
+$\|\mathbf u-\mathbf v\|^2=\|\mathbf u\|^2+\|\mathbf v\|^2-2\|\mathbf u\|\|\mathbf v\|\cos\theta$. Öte yandan bileşenlerle
+$\|\mathbf u-\mathbf v\|^2=\sum(u_i-v_i)^2=\|\mathbf u\|^2+\|\mathbf v\|^2-2(u_1v_1+u_2v_2+u_3v_3)$. İki ifade karşılaştırılırsa $u_1v_1+u_2v_2+u_3v_3=\|\mathbf u\|\|\mathbf v\|\cos\theta$ çıkar.
+
+\textbf{İşaretin anlamı:} $\mathbf u\cdot\mathbf v>0$ ise açı dar, $\mathbf u\cdot\mathbf v<0$ ise açı geniş, $\mathbf u\cdot\mathbf v=0$ ise açı diktir.
+
+\begin{teorem}[Skaler çarpımın özellikleri]
+\begin{itemize}
+\item $\mathbf u\cdot\mathbf v=\mathbf v\cdot\mathbf u$ \quad (değişme)
+\item $\mathbf u\cdot(\mathbf v+\mathbf w)=\mathbf u\cdot\mathbf v+\mathbf u\cdot\mathbf w$ \quad (dağılma)
+\item $(\lambda\mathbf u)\cdot\mathbf v=\lambda(\mathbf u\cdot\mathbf v)=\mathbf u\cdot(\lambda\mathbf v)$
+\item $\mathbf u\cdot\mathbf u=\|\mathbf u\|^2\ge0$, \quad $\mathbf 0\cdot\mathbf u=0$
+\item $\mathbf i\cdot\mathbf i=\mathbf j\cdot\mathbf j=\mathbf k\cdot\mathbf k=1$, \quad $\mathbf i\cdot\mathbf j=\mathbf j\cdot\mathbf k=\mathbf k\cdot\mathbf i=0$
+\item \textbf{Cauchy--Schwarz eşitsizliği:} $|\mathbf u\cdot\mathbf v|\le\|\mathbf u\|\,\|\mathbf v\|$ \ (kaynaklardan; $|\cos\theta|\le1$ olmasının sonucudur)
+\end{itemize}
+\end{teorem}
+
+\begin{teorem}[Diklik ve paralellik]
+Sıfırdan farklı $\mathbf u$, $\mathbf v$ için:
+\begin{itemize}
+\item $\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0$ (dik / ortogonal),
+\item $\mathbf u\parallel\mathbf v\iff\mathbf u=\lambda\mathbf v$ (bir $\lambda\neq0$ için) $\iff\theta=0^\circ$ veya $180^\circ$ $\iff |\mathbf u\cdot\mathbf v|=\|\mathbf u\|\|\mathbf v\|$.
+\end{itemize}
+Bileşenlerin hepsi sıfırdan farklıysa paralellik oran ile kontrol edilebilir: $\dfrac{u_1}{v_1}=\dfrac{u_2}{v_2}=\dfrac{u_3}{v_3}$.
+\end{teorem}
+
+\begin{dikkat}[Dikkat: oran testi ve yazım]
+Tahtada diklik ``$\mathbf u\perp\mathbf v=\mathbf u\cdot\mathbf v=0$'' biçiminde yazılmıştır \foto{IMG-20261023-WA0011}; doğru gösterim ``$\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0$'' şeklindedir (diklik bir önermedir, bir sayıya eşit olamaz).
+Paralellik oranında payda sıfır olamaz. Örneğin $(2,0,4)\parallel(1,0,2)$'dir ama $\frac{0}{0}$ yazılamaz. Böyle durumlarda $\mathbf u=\lambda\mathbf v$ biçiminde kontrol edin (sıfır bileşenlerin yerleri aynı olmalı, diğerlerinin oranları eşit olmalı) ya da ileride göreceğimiz $\mathbf u\times\mathbf v=\mathbf 0$ testini kullanın.
+\end{dikkat}
+
+\subsubsection{Tahtada çözülen örnekler}
+
+\begin{soru}[Örnek 11 (tahta) \foto{IMG-20261009-WA0026}]
+$(1,2)$ ve $(4,-2)$ vektörleri dik midir?
+\end{soru}
+\begin{cevap}
+$(1,2)\cdot(4,-2)=1\cdot4+2\cdot(-2)=4-4=0$. Skaler çarpım sıfır olduğundan vektörler \textbf{diktir}.
+\end{cevap}
+
+\begin{soru}[Örnek 12 (tahta) \foto{IMG-20261009-WA0026}]
+$(1,1)$ ve $(1,0)$ vektörleri arasındaki açıyı bulunuz.
+\end{soru}
+\begin{cevap}
+$(1,1)\cdot(1,0)=1\neq0$; dik değildir. $\|(1,1)\|=\sqrt2$, $\|(1,0)\|=1$:
+\[
+\cos\theta=\frac{1}{\sqrt2\cdot1}=\frac{1}{\sqrt2}=\frac{\sqrt2}{2}\ \Rightarrow\ \theta=45^\circ .
+\]
+\end{cevap}
+
+\begin{dikkat}[Defterdeki hata]
+Defterde \foto{IMG-20261009-WA0026} bu örnekte ``$\cos\theta=\frac12$'' yazılmıştır; doğrusu $\cos\theta=\frac{1}{\sqrt2}=\frac{\sqrt2}{2}$'dir. Defterdeki $\theta=45^\circ$ sonucu doğrudur ($\cos\theta=\frac12$ olsaydı açı $60^\circ$ olurdu). Geometrik kontrol: $(1,1)$ birinci açıortay üzerindedir ve $x$-ekseniyle $45^\circ$ yapar.
+\end{dikkat}
+
+\begin{soru}[Örnek 13 (derste çalışma sorusu) \foto{IMG-20261009-WA0032}, \foto{IMG-20261023-WA0027}]
+$(2,-1,3)$ ile $(1,4,2)$ vektörlerinin dik olup olmadığını bulunuz ve aralarındaki açının kosinüsünü hesaplayınız.
+\end{soru}
+\begin{cevap}
+$(2,-1,3)\cdot(1,4,2)=2-4+6=4\neq0$; vektörler \textbf{dik değildir}. Uzunluklar $\sqrt{4+1+9}=\sqrt{14}$ ve $\sqrt{1+16+4}=\sqrt{21}$:
+\[
+\cos\theta=\frac{4}{\sqrt{14}\sqrt{21}}=\frac{4}{\sqrt{294}}=\frac{4}{7\sqrt6}=\frac{2\sqrt6}{21}\approx0{,}233,\qquad\theta\approx76{,}5^\circ .
+\]
+($\sqrt{294}=\sqrt{49\cdot6}=7\sqrt6$.) Skaler çarpım pozitif olduğundan açı dardır.
+\end{cevap}
+
+\subsubsection{Uygulama: iki doğru arasındaki açı}
+
+Uzayda bir doğrunun yönü, \textbf{doğrultman vektörü} ile belirlenir (ayrıntısı Konu 2'de). İki doğru arasındaki açı, doğrultman vektörleri arasındaki açıdır; bu yüzden skaler çarpımın en sık kullanıldığı yerlerden biridir.
+
+\begin{tahta}[\foto{IMG-20261002-WA0018}]
+\textbf{Hatırlatma:} $\overrightarrow{AP}=t\,\mathbf v$, doğrultman $\mathbf v=(a,b,c)$, $\dfrac{x-x_0}{a}=\dfrac{y-y_0}{b}=\dfrac{z-z_0}{c}$; \
+$\mathbf u\cdot\mathbf v=\|\mathbf u\|\|\mathbf v\|\cos\theta$; \
+$\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix}$; \
+$\|\mathbf u\times\mathbf v\|=\|\mathbf u\|\|\mathbf v\|\sin\theta$.
+
+\textbf{İki doğru arasındaki açı:} $d_1:\ \dfrac{x-x_0}{a}=\dfrac{y-y_0}{b}=\dfrac{z-z_0}{c}$, \ $d_2:\ \dfrac{x-x_1}{p}=\dfrac{y-y_1}{q}=\dfrac{z-z_1}{r}$; doğrultmanlar $\mathbf v=(a,b,c)$, $\mathbf u=(p,q,r)$:
+\[
+\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\,\|\mathbf v\|}=\frac{ap+bq+cr}{\sqrt{a^2+b^2+c^2}\,\sqrt{p^2+q^2+r^2}} .
+\]
+\end{tahta}
+
+\begin{soru}[Örnek 14 (tahta) \foto{IMG-20261002-WA0018}]
+$\dfrac{x-1}{1}=\dfrac{y}{-\sqrt2}=\dfrac{z-1}{1}$ ve $\dfrac{x}{-1}=\dfrac{y-1}{\sqrt2}=\dfrac{z+2}{1}$ doğrularının oluşturduğu açıyı bulunuz.
+\end{soru}
+\begin{cevap}
+Kartezyen denklemde paydalar doğrultman vektörünü verir:
+$\mathbf v=(1,-\sqrt2,1)$, \ $\mathbf u=(-1,\sqrt2,1)$.
+\[
+\mathbf u\cdot\mathbf v=(1)(-1)+(-\sqrt2)(\sqrt2)+(1)(1)=-1-2+1=-2,
+\qquad \|\mathbf u\|=\|\mathbf v\|=\sqrt{1+2+1}=2 .
+\]
+\[
+\cos\theta=\frac{-2}{2\cdot2}=-\frac12\ \Rightarrow\ \theta=120^\circ .
+\]
+İki doğru kesiştiğinde biri $120^\circ$, diğeri $180^\circ-120^\circ=60^\circ$ olan iki açı oluşur. Doğrular arasındaki açı olarak genellikle \textbf{dar açı} verilir: $\boxed{60^\circ}$. (Kısa yol: $\cos\theta=\dfrac{|\mathbf u\cdot\mathbf v|}{\|\mathbf u\|\|\mathbf v\|}=\frac12$.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 15]
+$A(1,2,3)$, $B(3,4,4)$, $C(2,0,5)$ köşeli üçgenin dik üçgen olduğunu gösteriniz ve $A$ açısını bulunuz.
+\end{soru}
+\begin{cevap}
+$\overrightarrow{AB}=(2,2,1)$, $\overrightarrow{AC}=(1,-2,2)$. $\overrightarrow{AB}\cdot\overrightarrow{AC}=2-4+2=0$; dolayısıyla $A$ açısı $90^\circ$'dir ve üçgen $A$'da diktir. Ayrıca $\|\overrightarrow{AB}\|=\|\overrightarrow{AC}\|=3$ olduğundan üçgen ikizkenar dik üçgendir; alanı $\frac12\cdot3\cdot3=\frac92$.
+\end{cevap}
+
+%==========================================================
+\subsection{Doğrultu açıları ve doğrultu kosinüsleri}
+
+\begin{tahta}[\foto{IMG-20261009-WA0028}, \foto{IMG-20261023-WA0011}, \foto{IMG-20261023-WA0012}]
+$\mathbf u$'nun $\mathbf i,\mathbf j,\mathbf k$ vektörleri ile yapmış olduğu açılar $\alpha,\beta,\gamma$:
+\[
+\cos\alpha=\frac{\mathbf u\cdot\mathbf i}{\|\mathbf u\|\,\|\mathbf i\|}=\frac{\mathbf u\cdot\mathbf i}{\|\mathbf u\|}=\frac{u_1}{\|\mathbf u\|}\ \ (\|\mathbf i\|=1),\qquad
+\cos\beta=\frac{\mathbf u\cdot\mathbf j}{\|\mathbf u\|}=\frac{u_2}{\|\mathbf u\|},\qquad
+\cos\gamma=\frac{u_3}{\|\mathbf u\|},
+\]
+\[
+\cos^2\alpha+\cos^2\beta+\cos^2\gamma=1 .
+\]
+\end{tahta}
+
+\begin{tanim}[Doğrultu açıları ve kosinüsleri]
+Sıfırdan farklı $\mathbf u$ vektörünün pozitif $x$, $y$, $z$ eksenleriyle yaptığı $\alpha,\beta,\gamma\in[0,\pi]$ açılarına \textbf{doğrultu açıları}, bunların kosinüslerine \textbf{doğrultu kosinüsleri} denir.
+\end{tanim}
+
+\textbf{Neden kareler toplamı 1?}
+\[
+\cos^2\alpha+\cos^2\beta+\cos^2\gamma=\frac{u_1^2+u_2^2+u_3^2}{\|\mathbf u\|^2}=\frac{\|\mathbf u\|^2}{\|\mathbf u\|^2}=1 .
+\]
+Daha da önemlisi, doğrultu kosinüsleri tam olarak \textbf{birim vektörün bileşenleridir}:
+\[
+\frac{\mathbf u}{\|\mathbf u\|}=(\cos\alpha,\ \cos\beta,\ \cos\gamma),\qquad
+\mathbf u=\|\mathbf u\|(\cos\alpha,\cos\beta,\cos\gamma).
+\]
+Bu, düzlemdeki $\mathbf u=\|\mathbf u\|(\cos\theta,\sin\theta)$ yazılışının uzaydaki karşılığıdır (düzlemde $\beta=90^\circ-\theta$ olduğundan $\cos\beta=\sin\theta$).
+
+\begin{soru}[\ekal Örnek 16]
+$\mathbf u=(2,-1,2)$ vektörünün doğrultu kosinüslerini ve doğrultu açılarını bulunuz.
+\end{soru}
+\begin{cevap}
+$\|\mathbf u\|=\sqrt{4+1+4}=3$.
+\[
+\cos\alpha=\frac23,\qquad \cos\beta=-\frac13,\qquad \cos\gamma=\frac23 .
+\]
+Kontrol: $\frac49+\frac19+\frac49=1$ \checkmark. Açılar: $\alpha=\gamma=\arccos\frac23\approx48{,}19^\circ$, \ $\beta=\arccos\left(-\frac13\right)\approx109{,}47^\circ$ ($\cos\beta<0$ olduğundan $\beta$ geniş açıdır; $\mathbf u$'nun $y$ bileşeni negatiftir).
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 17]
+Bir vektör $x$-ekseniyle $60^\circ$, $y$-ekseniyle $45^\circ$ açı yapmaktadır. $z$-ekseniyle yaptığı açı dar açı ise bu açıyı ve uzunluğu 4 olan böyle bir vektörü bulunuz.
+\end{soru}
+\begin{cevap}
+$\cos^2\gamma=1-\cos^260^\circ-\cos^245^\circ=1-\frac14-\frac12=\frac14$, \ $\cos\gamma=\pm\frac12$. Dar açı istendiği için $\cos\gamma=\frac12$, $\gamma=60^\circ$.
+\[
+\mathbf u=4\left(\tfrac12,\ \tfrac{\sqrt2}{2},\ \tfrac12\right)=(2,\ 2\sqrt2,\ 2).
+\]
+\end{cevap}
+
+%==========================================================
+\subsection{İzdüşüm ve iş}
+
+\begin{bilgi}[Kaynaklardan eklendi]
+Skaler ve vektörel izdüşüm ile iş uygulaması derste tahtada görülmedi, kaynaklardan (Zill--Wright, Kreyszig) eklendi. Konu 2'deki ``noktanın doğruya/düzleme uzaklığı'' formülleri aslında bu izdüşüm fikrinin uygulamasıdır.
+\end{bilgi}
+
+Bir $\mathbf a$ vektörünü, verilen bir $\mathbf b$ doğrultusuna ``paralel'' ve ``dik'' iki parçaya ayırmak istiyoruz. $\mathbf a$'nın ucundan $\mathbf b$ doğrultusuna dik inersek, $\mathbf b$ üzerinde kalan parça $\mathbf a$'nın $\mathbf b$ üzerine \textbf{izdüşümüdür}.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\draw[vek,yesil] (0,0)--(5,0) node[below right]{$\mathbf b$};
+\draw[vek,ana] (0,0)--(3,2.2) node[above]{$\mathbf a$};
+\draw[dashed,gri] (3,2.2)--(3,0);
+\draw[gri] (2.8,0)--(2.8,0.2)--(3,0.2);
+\draw[vek,vurgu] (0,0.0)--(3,0.0);
+\node[below,vurgu] at (1.6,0) {$\text{proj}_{\mathbf b}\mathbf a$};
+\draw[vek,mor] (3,0)--(3,2.2);
+\node[right,mor] at (3,1.1) {$\mathbf a-\text{proj}_{\mathbf b}\mathbf a$};
+\draw (0.8,0) arc (0:36:0.8);
+\node at (1.05,0.3) {$\theta$};
+\end{tikzpicture}
+
+{\small Şekil 3. $\mathbf a$'nın $\mathbf b$ üzerine vektörel izdüşümü ve dik bileşeni.}
+\end{center}
+
+\begin{teorem}[Skaler ve vektörel izdüşüm]
+$\mathbf b\neq\mathbf 0$ olmak üzere:
+\[
+\text{Skaler izdüşüm (bileşen):}\quad \text{comp}_{\mathbf b}\mathbf a=\|\mathbf a\|\cos\theta=\frac{\mathbf a\cdot\mathbf b}{\|\mathbf b\|},
+\]
+\[
+\text{Vektörel izdüşüm:}\quad \text{proj}_{\mathbf b}\mathbf a=\left(\frac{\mathbf a\cdot\mathbf b}{\|\mathbf b\|}\right)\frac{\mathbf b}{\|\mathbf b\|}=\frac{\mathbf a\cdot\mathbf b}{\|\mathbf b\|^2}\,\mathbf b .
+\]
+$\mathbf a=\text{proj}_{\mathbf b}\mathbf a+(\mathbf a-\text{proj}_{\mathbf b}\mathbf a)$ ayrışımında ikinci terim $\mathbf b$'ye diktir (\textbf{ortogonal ayrışım}).
+\end{teorem}
+
+Skaler izdüşüm bir \emph{sayıdır} ve işaretlidir: açı geniş ise negatiftir. Vektörel izdüşüm ise $\mathbf b$'ye paralel bir \emph{vektördür}. Doğrultu kosinüsleri de aslında izdüşümdür: $u_1=\text{comp}_{\mathbf i}\mathbf u=\|\mathbf u\|\cos\alpha$.
+
+\textbf{Adım adım:} (1) $\mathbf a\cdot\mathbf b$'yi hesapla; (2) $\|\mathbf b\|$ (veya $\|\mathbf b\|^2$) hesapla; (3) skaler izdüşüm için böl, vektörel izdüşüm için $\frac{\mathbf a\cdot\mathbf b}{\|\mathbf b\|^2}$ ile $\mathbf b$'yi çarp; (4) kontrol: $(\mathbf a-\text{proj}_{\mathbf b}\mathbf a)\cdot\mathbf b=0$ olmalı.
+
+\begin{soru}[\ekal Örnek 18]
+$\mathbf a=(3,-1,2)$ ve $\mathbf b=(1,2,2)$ için $\text{comp}_{\mathbf b}\mathbf a$ ve $\text{proj}_{\mathbf b}\mathbf a$'yı bulunuz; $\mathbf a$'yı $\mathbf b$'ye paralel ve dik iki vektörün toplamı olarak yazınız.
+\end{soru}
+\begin{cevap}
+$\mathbf a\cdot\mathbf b=3-2+4=5$, $\|\mathbf b\|=\sqrt{1+4+4}=3$.
+\[
+\text{comp}_{\mathbf b}\mathbf a=\frac53,\qquad
+\text{proj}_{\mathbf b}\mathbf a=\frac{5}{9}(1,2,2)=\left(\frac59,\frac{10}{9},\frac{10}{9}\right).
+\]
+Dik bileşen: $\mathbf a-\text{proj}_{\mathbf b}\mathbf a=\left(\frac{22}{9},-\frac{19}{9},\frac{8}{9}\right)$.
+Kontrol: $\frac{22-38+16}{9}=0$ \checkmark. Böylece
+$\mathbf a=\left(\frac59,\frac{10}{9},\frac{10}{9}\right)+\left(\frac{22}{9},-\frac{19}{9},\frac{8}{9}\right)$.
+\end{cevap}
+
+\begin{teorem}[İş]
+Sabit bir $\mathbf F$ kuvveti bir cismi $\mathbf D=\overrightarrow{PQ}$ yer değiştirme vektörü boyunca hareket ettirirse yapılan iş
+\[
+W=\mathbf F\cdot\mathbf D=\|\mathbf F\|\,\|\mathbf D\|\cos\theta
+\]
+dir. Yani işi yalnızca kuvvetin hareket doğrultusundaki bileşeni ($\text{comp}_{\mathbf D}\mathbf F$) yapar; harekete dik bileşen iş yapmaz.
+\end{teorem}
+
+\begin{soru}[\ekal Örnek 19]
+(a) $\mathbf F=3\mathbf i+4\mathbf j+5\mathbf k$ (newton) kuvveti bir cismi $P(2,1,0)$'dan $Q(4,6,2)$'ye (metre) götürüyor. Yapılan işi bulunuz.
+(b) Yatayla $30^\circ$ açı yapan 50 N'luk sabit bir kuvvetle bir kızak yatay zeminde 10 m çekiliyor. Yapılan iş nedir?
+\end{soru}
+\begin{cevap}
+(a) $\mathbf D=\overrightarrow{PQ}=(2,5,2)$. $W=\mathbf F\cdot\mathbf D=6+20+10=36$ J.
+
+(b) $W=\|\mathbf F\|\|\mathbf D\|\cos\theta=50\cdot10\cdot\cos30^\circ=500\cdot\frac{\sqrt3}{2}=250\sqrt3\approx433$ J.
+\end{cevap}
+
+%==========================================================
+\subsection{Vektörel çarpım}
+
+\subsubsection{Tanım ve determinantla hesap}
+
+\begin{tahta}[\foto{IMG-20261009-WA0035}, \foto{IMG-20261023-WA0012}, \foto{IMG-20261002-WA0018}]
+\textbf{Vektörel Çarpım}
+\[
+\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix}
+=\mathbf i\,(u_2v_3-u_3v_2)-\mathbf j\,(u_1v_3-v_1u_3)+\mathbf k\,(u_1v_2-v_1u_2).
+\]
+(Çizim: aynı başlangıçtan $\mathbf u$ ve $\mathbf v$, aralarında $\theta$; $\mathbf u$ ve $\mathbf v$ üzerine kurulu taralı paralelkenar ve her ikisine dik, yukarı doğru $\mathbf u\times\mathbf v$.) \quad $\|\mathbf u\times\mathbf v\|=\|\mathbf u\|\|\mathbf v\|\sin\theta$.
+\end{tahta}
+
+\begin{tanim}[Vektörel (çapraz) çarpım]
+$\mathbf u=(u_1,u_2,u_3)$, $\mathbf v=(v_1,v_2,v_3)$ için
+\[
+\mathbf u\times\mathbf v=(u_2v_3-u_3v_2,\ \ u_3v_1-u_1v_3,\ \ u_1v_2-u_2v_1)
+\]
+vektörüne $\mathbf u$ ile $\mathbf v$'nin \textbf{vektörel çarpımı} denir. Yalnızca $\mathbb R^3$'te tanımlıdır ve sonucu bir \textbf{vektördür}.
+\end{tanim}
+
+\textbf{Determinant hatırlatması.} $2\times2$ determinant: $\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$. $3\times3$ determinant ilk satıra göre açılır; işaretler $+,-,+$ sırasıyla gelir:
+\[
+\begin{vmatrix}a_1&a_2&a_3\\b_1&b_2&b_3\\c_1&c_2&c_3\end{vmatrix}
+=a_1\begin{vmatrix}b_2&b_3\\c_2&c_3\end{vmatrix}
+-a_2\begin{vmatrix}b_1&b_3\\c_1&c_3\end{vmatrix}
++a_3\begin{vmatrix}b_1&b_2\\c_1&c_2\end{vmatrix}.
+\]
+Vektörel çarpımda ilk satıra sayılar yerine $\mathbf i,\mathbf j,\mathbf k$ yazılır; bu bir ``hafıza tekniği''dir. Ortadaki $\mathbf j$ teriminin önündeki \vurg{eksi işaretini} unutmayın.
+
+\textbf{Adım adım yöntem:}
+\begin{enumerate}
+\item Determinantın ilk satırına $\mathbf i,\mathbf j,\mathbf k$, ikinci satıra $\mathbf u$'nun, üçüncü satıra $\mathbf v$'nin bileşenlerini yazın (sıra önemli!).
+\item $\mathbf i$'nin satır ve sütununu kapatın, kalan $2\times2$ determinantı hesaplayın; $\mathbf j$ ve $\mathbf k$ için de aynısını yapın.
+\item İşaretleri $+\,\mathbf i$, $-\,\mathbf j$, $+\,\mathbf k$ olarak yerleştirin.
+\item \textbf{Kontrol:} Sonuç hem $\mathbf u$'ya hem $\mathbf v$'ye dik olmalı: $\mathbf u\cdot(\mathbf u\times\mathbf v)=0$ ve $\mathbf v\cdot(\mathbf u\times\mathbf v)=0$.
+\end{enumerate}
+
+\begin{soru}[Örnek 20 (tahta) \foto{IMG-20261009-WA0035}, \foto{IMG-20261023-WA0029}, \foto{IMG-20261023-WA0014}]
+$\mathbf u=(1,2,3)$, $\mathbf v=(2,0,1)$ için $\mathbf u\times\mathbf v$'yi bulunuz ve sonucun $\mathbf u$'ya dik olduğunu doğrulayınız.
+\end{soru}
+\begin{cevap}
+\[
+\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&2&3\\2&0&1\end{vmatrix}
+=\mathbf i\,(2\cdot1-3\cdot0)-\mathbf j\,(1\cdot1-3\cdot2)+\mathbf k\,(1\cdot0-2\cdot2)
+\]
+\[
+=\mathbf i\,(2-0)-\mathbf j\,(1-6)+\mathbf k\,(0-4)=2\mathbf i+5\mathbf j-4\mathbf k=\boxed{(2,5,-4)} .
+\]
+\textbf{Diklik kontrolü:} $\mathbf u\times\mathbf v$, $\mathbf u$'ya dik ise $\mathbf u\cdot(\mathbf u\times\mathbf v)=0$ olmalı:
+\[
+(1,2,3)\cdot(2,5,-4)=2+10-12=0 \ \checkmark
+\]
+Ayrıca $\mathbf v\cdot(\mathbf u\times\mathbf v)=(2,0,1)\cdot(2,5,-4)=4+0-4=0$ \checkmark; sonuç $\mathbf v$'ye de diktir.
+\end{cevap}
+
+\begin{bilgi}[Fotoğraf notu]
+23.10 tahtasında bu örneğin sonu (``$\ldots\mathbf k(0-4)$'' ve ``$\times\mathbf v$'') karma çarpım fotoğrafının sol kenarında kesik olarak görünür \foto{IMG-20261023-WA0014}; örneğin tamamı \foto{IMG-20261023-WA0029} fotoğrafındadır.
+\end{bilgi}
+
+\subsubsection{Özellikler}
+
+\begin{bilgi}[Kaynaklardan eklendi]
+Aşağıdaki cebirsel özellikler, sağ el kuralı, Lagrange özdeşliği, alan ve tork uygulamaları derste tahtada ayrıntılı görülmedi (tahtada yalnızca tanım, diklik kontrolü, paralelkenar çizimi ve $\|\mathbf u\times\mathbf v\|=\|\mathbf u\|\|\mathbf v\|\sin\theta$ hatırlatması var); kaynaklardan eklendi.
+\end{bilgi}
+
+\begin{teorem}[Vektörel çarpımın cebirsel özellikleri]
+\begin{itemize}
+\item $\mathbf u\times\mathbf v=-(\mathbf v\times\mathbf u)$ \quad (\textbf{değişme özelliği yoktur}, ters değişmeli)
+\item $\mathbf u\times\mathbf u=\mathbf 0$; \ genel olarak $\mathbf u\parallel\mathbf v\iff\mathbf u\times\mathbf v=\mathbf 0$
+\item $\mathbf u\times(\mathbf v+\mathbf w)=\mathbf u\times\mathbf v+\mathbf u\times\mathbf w$, \quad $(\lambda\mathbf u)\times\mathbf v=\lambda(\mathbf u\times\mathbf v)=\mathbf u\times(\lambda\mathbf v)$
+\item $\mathbf i\times\mathbf j=\mathbf k$, \ $\mathbf j\times\mathbf k=\mathbf i$, \ $\mathbf k\times\mathbf i=\mathbf j$; \ ters sırada eksi: $\mathbf j\times\mathbf i=-\mathbf k$, \ldots
+\item \textbf{Birleşme özelliği yoktur:} örneğin $(\mathbf i\times\mathbf i)\times\mathbf j=\mathbf 0$ ama $\mathbf i\times(\mathbf i\times\mathbf j)=\mathbf i\times\mathbf k=-\mathbf j$.
+\item $\mathbf u\times\mathbf v$, hem $\mathbf u$'ya hem $\mathbf v$'ye diktir.
+\end{itemize}
+\end{teorem}
+
+$\mathbf i\to\mathbf j\to\mathbf k\to\mathbf i$ döngüsünü bir çember üzerinde düşünün: döngü yönünde ardışık iki vektörün çarpımı üçüncüyü, ters yönde ise üçüncünün negatifini verir.
+
+\subsubsection{Geometrik anlam: yön, uzunluk, alan}
+
+\begin{teorem}[Vektörel çarpımın geometrisi]
+$\theta\in[0,\pi]$, $\mathbf u$ ile $\mathbf v$ arasındaki açı olsun.
+\begin{itemize}
+\item \textbf{Yön (sağ el kuralı):} Sağ elin dört parmağı $\mathbf u$'dan $\mathbf v$'ye doğru (küçük açı yönünde) kıvrıldığında başparmak $\mathbf u\times\mathbf v$'nin yönünü gösterir.
+\item \textbf{Uzunluk:} $\|\mathbf u\times\mathbf v\|=\|\mathbf u\|\,\|\mathbf v\|\sin\theta$.
+\item \textbf{Alan:} $\mathbf u$ ve $\mathbf v$ üzerine kurulan paralelkenarın alanı $A=\|\mathbf u\times\mathbf v\|$; bu iki vektörün oluşturduğu üçgenin alanı $\dfrac12\|\mathbf u\times\mathbf v\|$.
+\item \textbf{Lagrange özdeşliği:} $\|\mathbf u\times\mathbf v\|^2=\|\mathbf u\|^2\|\mathbf v\|^2-(\mathbf u\cdot\mathbf v)^2$.
+\end{itemize}
+\end{teorem}
+
+\textbf{Neden alan?} Paralelkenarın tabanı $\|\mathbf u\|$, yüksekliği $h=\|\mathbf v\|\sin\theta$'dır; alan $=$ taban $\times$ yükseklik $=\|\mathbf u\|\|\mathbf v\|\sin\theta=\|\mathbf u\times\mathbf v\|$. Lagrange özdeşliği ise $\sin^2\theta=1-\cos^2\theta$ bağıntısının vektör dilindeki karşılığıdır.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\fill[ana!10] (0,0)--(3.6,-0.4)--(4.8,0.9)--(1.2,1.3)--cycle;
+\draw[dashed,gri] (3.6,-0.4)--(4.8,0.9)--(1.2,1.3);
+\draw[vek,ana] (0,0)--(3.6,-0.4) node[below]{$\mathbf u$};
+\draw[vek,yesil] (0,0)--(1.2,1.3) node[left]{$\mathbf v$};
+\draw[dashed,mor] (1.2,1.3)--(1.043,-0.116);
+\node[mor,right] at (1.1,0.55) {\small $h=\|\mathbf v\|\sin\theta$};
+\draw (0.6,-0.067) arc (-6:47:0.6);
+\node at (0.55,0.3) {\small $\theta$};
+\draw[vek,vurgu] (0,0)--(0,3) node[above]{$\mathbf u\times\mathbf v$};
+\node[gri,right] at (4.8,0.9) {\small alan $=\|\mathbf u\times\mathbf v\|$};
+\draw[vek,vurgu!50] (0,0)--(0,-1.6) node[below]{$\mathbf v\times\mathbf u=-\mathbf u\times\mathbf v$};
+\end{tikzpicture}
+
+{\small Şekil 4. $\mathbf u\times\mathbf v$ paralelkenarın düzlemine diktir; uzunluğu paralelkenarın alanıdır.}
+\end{center}
+
+\begin{soru}[\ekal Örnek 21]
+Örnek 20'deki $\mathbf u=(1,2,3)$, $\mathbf v=(2,0,1)$ için Lagrange özdeşliğini doğrulayınız ve bu vektörler üzerine kurulan paralelkenarın alanını ve $\sin\theta$'yı bulunuz.
+\end{soru}
+\begin{cevap}
+$\|\mathbf u\|^2=14$, $\|\mathbf v\|^2=5$, $\mathbf u\cdot\mathbf v=2+0+3=5$. Sağ taraf: $14\cdot5-25=45$. Sol taraf: $\|(2,5,-4)\|^2=4+25+16=45$ \checkmark.
+
+Alan $=\sqrt{45}=3\sqrt5$. \ $\sin\theta=\dfrac{\|\mathbf u\times\mathbf v\|}{\|\mathbf u\|\|\mathbf v\|}=\dfrac{3\sqrt5}{\sqrt{70}}=\dfrac{3}{\sqrt{14}}\approx0{,}802$.
+(Kontrol: $\cos\theta=\frac{5}{\sqrt{70}}$, $\cos^2\theta+\sin^2\theta=\frac{25}{70}+\frac{45}{70}=1$ \checkmark.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 22]
+$P(1,0,0)$, $Q(0,2,0)$, $R(0,0,3)$ noktalarından geçen düzleme dik bir vektör bulunuz ve $PQR$ üçgeninin alanını hesaplayınız.
+\end{soru}
+\begin{cevap}
+$\overrightarrow{PQ}=(-1,2,0)$, $\overrightarrow{PR}=(-1,0,3)$.
+\[
+\overrightarrow{PQ}\times\overrightarrow{PR}=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-1&2&0\\-1&0&3\end{vmatrix}
+=\mathbf i\,(6-0)-\mathbf j\,(-3-0)+\mathbf k\,(0+2)=(6,3,2).
+\]
+$(6,3,2)$ hem $\overrightarrow{PQ}$'ya hem $\overrightarrow{PR}$'ye dik olduğundan düzleme diktir (düzlemin \emph{normal vektörü}; Konu 2'de kullanılacak). Kontrol: $(-1,2,0)\cdot(6,3,2)=0$, $(-1,0,3)\cdot(6,3,2)=0$ \checkmark.
+\[
+\text{Alan}(PQR)=\frac12\|(6,3,2)\|=\frac12\sqrt{36+9+4}=\frac72 .
+\]
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 23]
+$\mathbf a=(1,1,0)$ ve $\mathbf b=(0,1,1)$ vektörlerinin her ikisine de dik olan birim vektörleri bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf a\times\mathbf b=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&1&0\\0&1&1\end{vmatrix}=\mathbf i(1-0)-\mathbf j(1-0)+\mathbf k(1-0)=(1,-1,1)$, \ $\|\mathbf a\times\mathbf b\|=\sqrt3$.
+İki çözüm vardır (zıt yönlü): $\pm\dfrac{1}{\sqrt3}(1,-1,1)$.
+\end{cevap}
+
+\subsubsection{Fiziksel uygulama: tork (moment)}
+
+Bir cisme, dönme ekseninden $\mathbf r$ yer vektörü ile belirlenen noktada $\mathbf F$ kuvveti uygulanırsa, cismi döndürme etkisi \textbf{tork} vektörüdür:
+\[
+\boldsymbol\tau=\mathbf r\times\mathbf F,\qquad \|\boldsymbol\tau\|=\|\mathbf r\|\,\|\mathbf F\|\sin\theta .
+\]
+Torkun yönü dönme eksenini (sağ el kuralıyla), büyüklüğü dönme etkisinin şiddetini verir. Kuvvet $\mathbf r$'ye dik uygulandığında ($\theta=90^\circ$) tork en büyüktür; $\mathbf r$ doğrultusunda uygulanırsa tork sıfırdır (kapıyı menteşeye doğru itmek onu döndürmez).
+
+\begin{soru}[\ekal Örnek 24]
+Bir civata, 0,25 m uzunluğundaki bir anahtarın ucuna, anahtarla $75^\circ$ açı yapan 40 N'luk kuvvet uygulanarak sıkılıyor. Torkun büyüklüğünü bulunuz.
+\end{soru}
+\begin{cevap}
+$\|\boldsymbol\tau\|=\|\mathbf r\|\|\mathbf F\|\sin\theta=0{,}25\cdot40\cdot\sin75^\circ=10\cdot0{,}9659\approx9{,}66$ N$\cdot$m.
+\end{cevap}
+
+%==========================================================
+\subsection{Karma (üçlü skaler) çarpım}
+
+\begin{tahta}[\foto{IMG-20261009-WA0035}, \foto{IMG-20261023-WA0014}, \foto{IMG-20261009-WA0027}]
+\textbf{Karma Çarpım}
+\[
+\mathbf u\cdot(\mathbf v\times\mathbf w)=\begin{vmatrix}u_1&u_2&u_3\\v_1&v_2&v_3\\w_1&w_2&w_3\end{vmatrix}.
+\]
+\textbf{Teorem:} $\mathbf u,\mathbf v,\mathbf w$ üzerine kurulan paralelyüzlünün hacmi, bunların karma çarpımının mutlak değerine eşittir: $V=|\mathbf u\cdot(\mathbf v\times\mathbf w)|$. Karma çarpımın sonucu $0$ ise vektörler aynı düzlemdedir.
+
+$\mathbf i,\mathbf j,\mathbf k\ \Rightarrow\ (\det=1)\ \to$ \textbf{birim küp}.
+\end{tahta}
+
+\begin{tanim}[Karma çarpım]
+$\mathbf u\cdot(\mathbf v\times\mathbf w)$ sayısına $\mathbf u,\mathbf v,\mathbf w$ vektörlerinin \textbf{karma (üçlü skaler) çarpımı} denir. Bileşenler satır satır yazıldığında $3\times3$ determinanta eşittir.
+\end{tanim}
+
+\textbf{Neden determinant?} $\mathbf v\times\mathbf w=\left(\begin{vmatrix}v_2&v_3\\w_2&w_3\end{vmatrix},\ -\begin{vmatrix}v_1&v_3\\w_1&w_3\end{vmatrix},\ \begin{vmatrix}v_1&v_2\\w_1&w_2\end{vmatrix}\right)$ olduğundan $\mathbf u$ ile skaler çarpım, determinantın ilk satıra göre açılımıyla aynıdır: $\mathbf i,\mathbf j,\mathbf k$ yerine $u_1,u_2,u_3$ yazılmış olur.
+
+\textbf{Neden hacim?} Paralelyüzlünün tabanı $\mathbf v$ ve $\mathbf w$ üzerine kurulu paralelkenardır; taban alanı $\|\mathbf v\times\mathbf w\|$. Yükseklik, $\mathbf u$'nun tabana dik doğrultudaki (yani $\mathbf v\times\mathbf w$ doğrultusundaki) bileşeninin mutlak değeridir: $h=|\text{comp}_{\mathbf v\times\mathbf w}\mathbf u|=\dfrac{|\mathbf u\cdot(\mathbf v\times\mathbf w)|}{\|\mathbf v\times\mathbf w\|}$. Hacim $=$ taban alanı $\times$ yükseklik $=|\mathbf u\cdot(\mathbf v\times\mathbf w)|$.
+
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.4cm)},y={(1cm,0cm)},z={(0cm,1cm)},scale=1.05]
+\fill[ana!10] (0,0,0)--(0,3,0)--(2,3.6,0)--(2,0.6,0)--cycle;
+\draw[gri] (0,3,0)--(2,3.6,0)--(2,0.6,0);
+\draw[gri] (0.6,1,2)--(0.6,4,2)--(2.6,4.6,2)--(2.6,1.6,2)--cycle;
+\draw[gri] (0,3,0)--(0.6,4,2);
+\draw[gri] (2,3.6,0)--(2.6,4.6,2);
+\draw[gri] (2,0.6,0)--(2.6,1.6,2);
+% v=(2,0.6,0), w=(0,3,0) => v x w = (0,0,6): yukarı (sağ el kuralı)
+\draw[vek,yesil] (0,0,0)--(0,3,0) node[right]{$\mathbf w$};
+\draw[vek,ana] (0,0,0)--(2,0.6,0) node[below]{$\mathbf v$};
+\draw[vek,mor] (0,0,0)--(0.6,1,2) node[above left]{$\mathbf u$};
+\draw[vek,vurgu] (0,0,0)--(0,0,3.2) node[above]{$\mathbf v\times\mathbf w$};
+\draw[dashed,vurgu] (0.6,1,2)--(0.6,1,0);
+\node[vurgu,right] at (0.6,1.05,1.0) {\small $h$};
+\end{tikzpicture}
+
+{\small Şekil 5. Paralelyüzlü: taban alanı $\|\mathbf v\times\mathbf w\|$, yükseklik $h=|\text{comp}_{\mathbf v\times\mathbf w}\mathbf u|$.}
+\end{center}
+
+\begin{teorem}[Karma çarpımın özellikleri ve uygulamaları]
+\begin{itemize}
+\item \textbf{Devirli yer değiştirme:} $\mathbf u\cdot(\mathbf v\times\mathbf w)=\mathbf v\cdot(\mathbf w\times\mathbf u)=\mathbf w\cdot(\mathbf u\times\mathbf v)$; iki vektörün yeri değişirse işaret değişir. Ayrıca $\mathbf u\cdot(\mathbf v\times\mathbf w)=(\mathbf u\times\mathbf v)\cdot\mathbf w$.
+\item \textbf{Paralelyüzlü hacmi:} $V=|\mathbf u\cdot(\mathbf v\times\mathbf w)|$.
+\item \textbf{Dörtyüzlü (tetrahedron) hacmi:} aynı üç kenar vektörüyle $V=\dfrac16|\mathbf u\cdot(\mathbf v\times\mathbf w)|$ (kaynaklardan).
+\item \textbf{Düzlemdeşlik testi:} $\mathbf u\cdot(\mathbf v\times\mathbf w)=0\iff\mathbf u,\mathbf v,\mathbf w$ aynı düzlemdedir $\iff$ lineer bağımlıdır. Dört nokta $A,B,C,D$ için: $\overrightarrow{AB}\cdot(\overrightarrow{AC}\times\overrightarrow{AD})=0\iff$ dört nokta aynı düzlemdedir.
+\item İşaret: karma çarpım pozitifse $(\mathbf u,\mathbf v,\mathbf w)$ sağ el sistemi oluşturur, negatifse sol el sistemi.
+\end{itemize}
+\end{teorem}
+
+\begin{soru}[Örnek 25 (tahta) \foto{IMG-20261009-WA0027}, \foto{IMG-20261023-WA0014}]
+$\mathbf i,\mathbf j,\mathbf k$ vektörlerinin karma çarpımını hesaplayınız ve geometrik anlamını açıklayınız.
+\end{soru}
+\begin{cevap}
+\[
+\mathbf i\cdot(\mathbf j\times\mathbf k)=\begin{vmatrix}1&0&0\\0&1&0\\0&0&1\end{vmatrix}=1 .
+\]
+(Doğrudan: $\mathbf j\times\mathbf k=\mathbf i$ ve $\mathbf i\cdot\mathbf i=1$.) $\mathbf i,\mathbf j,\mathbf k$ üzerine kurulan paralelyüzlü, kenarları 1 olan \textbf{birim küptür}; hacmi $|1|=1$'dir. Sonucun pozitif olması $(\mathbf i,\mathbf j,\mathbf k)$'nın sağ el sistemi olduğunu gösterir.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 26]
+$\mathbf u=(1,0,2)$, $\mathbf v=(0,3,1)$, $\mathbf w=(2,1,0)$ üzerine kurulan paralelyüzlünün hacmini bulunuz.
+\end{soru}
+\begin{cevap}
+\[
+\begin{vmatrix}1&0&2\\0&3&1\\2&1&0\end{vmatrix}
+=1\,(3\cdot0-1\cdot1)-0\,(0\cdot0-1\cdot2)+2\,(0\cdot1-3\cdot2)=-1-0-12=-13 .
+\]
+Hacim $V=|-13|=13$ birim küp. (Negatif işaret yalnızca $(\mathbf u,\mathbf v,\mathbf w)$ sıralamasının sol el yönelimli olduğunu söyler.)
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 27]
+$\mathbf a=(1,4,-7)$, $\mathbf b=(2,-1,4)$, $\mathbf c=(0,-9,18)$ vektörlerinin aynı düzlemde olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+\[
+\begin{vmatrix}1&4&-7\\2&-1&4\\0&-9&18\end{vmatrix}
+=1\,(-18+36)-4\,(36-0)+(-7)\,(-18-0)=18-144+126=0 .
+\]
+Karma çarpım sıfır olduğundan vektörler düzlemdeştir (lineer bağımlıdır). Bağıntıyı açıkça bulmak için $\mathbf c=\alpha\mathbf a+\beta\mathbf b$ yazalım: birinci bileşenden $\alpha+2\beta=0$, ikinciden $4\alpha-\beta=-9$ $\Rightarrow$ $\alpha=-2$, $\beta=1$; üçüncü bileşen kontrolü: $-2(-7)+1\cdot4=18$ \checkmark. Yani $\mathbf c=-2\mathbf a+\mathbf b$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 28]
+$A(1,0,1)$, $B(2,1,3)$, $C(0,2,2)$, $D(3,3,6)$ noktalarının aynı düzlemde olup olmadığını araştırınız.
+\end{soru}
+\begin{cevap}
+$\overrightarrow{AB}=(1,1,2)$, $\overrightarrow{AC}=(-1,2,1)$, $\overrightarrow{AD}=(2,3,5)$.
+\[
+\begin{vmatrix}1&1&2\\-1&2&1\\2&3&5\end{vmatrix}=1\,(10-3)-1\,(-5-2)+2\,(-3-4)=7+7-14=0 .
+\]
+Karma çarpım sıfır: dört nokta \textbf{aynı düzlemdedir}. (Gerçekten $\overrightarrow{AD}=\frac73\overrightarrow{AB}+\frac13\overrightarrow{AC}$.)
+\end{cevap}
+
+%==========================================================
+\subsection{Kaynak kitaplardan ek örnekler}
+
+Bu bölümdeki örnekler birkaç alt konuyu birlikte kullanır; sınav sorularında sık görülen türdendir.
+
+\begin{soru}[\ekal Örnek 29]
+$\mathbf u=(2,k,1)$ ve $\mathbf v=(k,-3,4)$ vektörleri hangi $k$ değeri için diktir? Bu $k$ değeri için $\mathbf u\times\mathbf v$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf u\cdot\mathbf v=2k-3k+4=4-k=0\Rightarrow k=4$. Bu durumda $\mathbf u=(2,4,1)$, $\mathbf v=(4,-3,4)$:
+\[
+\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\2&4&1\\4&-3&4\end{vmatrix}
+=\mathbf i\,(16+3)-\mathbf j\,(8-4)+\mathbf k\,(-6-16)=(19,-4,-22).
+\]
+Kontrol: $(2,4,1)\cdot(19,-4,-22)=38-16-22=0$ \checkmark; $(4,-3,4)\cdot(19,-4,-22)=76+12-88=0$ \checkmark. Ayrıca $\mathbf u\perp\mathbf v$ olduğundan $\|\mathbf u\times\mathbf v\|=\|\mathbf u\|\|\mathbf v\|$ olmalı: $\sqrt{361+16+484}=\sqrt{861}$ ve $\sqrt{21}\sqrt{41}=\sqrt{861}$ \checkmark.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 30]
+$O(0,0,0)$, $A(1,2,0)$, $B(0,1,3)$, $C(2,0,1)$ köşeli dörtyüzlünün hacmini bulunuz.
+\end{soru}
+\begin{cevap}
+Kenar vektörleri $\overrightarrow{OA}=(1,2,0)$, $\overrightarrow{OB}=(0,1,3)$, $\overrightarrow{OC}=(2,0,1)$:
+\[
+\begin{vmatrix}1&2&0\\0&1&3\\2&0&1\end{vmatrix}=1\,(1-0)-2\,(0-6)+0=1+12=13 .
+\]
+Dörtyüzlünün hacmi paralelyüzlünün altıda biridir: $V=\dfrac{13}{6}$.
+\end{cevap}
+
+\begin{soru}[\ekal Örnek 31]
+$\mathbf u$ ve $\mathbf v$ için $\|\mathbf u\|=3$, $\|\mathbf v\|=4$ ve aralarındaki açı $60^\circ$'dir. $\mathbf u\cdot\mathbf v$, $\|\mathbf u\times\mathbf v\|$ ve $\|\mathbf u+\mathbf v\|$ değerlerini bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf u\cdot\mathbf v=3\cdot4\cdot\cos60^\circ=6$; \ $\|\mathbf u\times\mathbf v\|=3\cdot4\cdot\sin60^\circ=6\sqrt3$.
+\[
+\|\mathbf u+\mathbf v\|^2=(\mathbf u+\mathbf v)\cdot(\mathbf u+\mathbf v)=\|\mathbf u\|^2+2\,\mathbf u\cdot\mathbf v+\|\mathbf v\|^2=9+12+16=37,
+\]
+$\|\mathbf u+\mathbf v\|=\sqrt{37}$. (Bu, skaler çarpımın dağılma özelliğinin tipik bir kullanımıdır.)
+\end{cevap}
+
+%==========================================================
+\subsection{Sık yapılan hatalar}
+
+\begin{dikkat}
+\begin{enumerate}
+\item \textbf{Skaler çarpımın sonucunu vektör yazmak.} $\mathbf u\cdot\mathbf v$ bir \emph{sayıdır}; $(1,2,3)\cdot(2,0,1)=(2,0,3)$ yazmak yanlıştır, doğrusu $2+0+3=5$'tir. Buna karşılık $\mathbf u\times\mathbf v$ bir \emph{vektördür}.
+\item \textbf{Vektörel çarpımda orta terimin işareti.} Determinant açılımında $\mathbf j$ teriminin önünde \emph{eksi} vardır. Sonucu her zaman $\mathbf u\cdot(\mathbf u\times\mathbf v)=0$ ile kontrol edin.
+\item \textbf{Sıranın önemi.} $\mathbf u\times\mathbf v=-(\mathbf v\times\mathbf u)$. Determinantta satırların sırası değişirse sonucun işareti değişir.
+\item \textbf{Paralellik oranında sıfır payda.} $\frac{u_1}{v_1}=\frac{u_2}{v_2}=\frac{u_3}{v_3}$ testini sıfır bileşen varken kullanmayın; $\mathbf u=\lambda\mathbf v$ ya da $\mathbf u\times\mathbf v=\mathbf 0$ kontrol edin.
+\item \textbf{Açıyı yanlış hesaplamak.} $\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\|\mathbf u\|\|\mathbf v\|}$'de paydadaki uzunlukların karekökünü almayı unutmak sık görülür (defterdeki $(1,1)\cdot(1,0)$ örneğinde $\frac12$ yazılması gibi; doğrusu $\frac{1}{\sqrt2}$).
+\item \textbf{Doğrular arasındaki açı.} Skaler çarpım negatif çıkarsa bulunan açı geniştir; doğrular arasındaki açı olarak dar açı ($180^\circ-\theta$) istenir.
+\item \textbf{Küre denkleminde işaret.} $x^2+y^2+z^2-2x-\ldots$ için merkez $(+1,\ldots)$'dir: $a=-\frac D2$. Ayrıca $r^2$'yi hesaplarken $G$'nin işaretine dikkat edin; $r^2\le0$ çıkarsa denklem küre değildir.
+\item \textbf{Karma çarpımda mutlak değer.} Hacim negatif olamaz: $V=|\mathbf u\cdot(\mathbf v\times\mathbf w)|$.
+\item \textbf{Birim vektör.} $\mathbf u$'yu kendi uzunluğuna bölmeyi unutmak ya da bileşenleri ayrı ayrı köklü sayıya bölmemek. Sonucun uzunluğunun 1 olduğunu kontrol edin.
+\item \textbf{Taban için yalnızca bağımsızlık göstermek.} Genel olarak taban için hem bağımsızlık hem germe gerekir; $\mathbb R^2$'de 2, $\mathbb R^3$'te 3 vektör söz konusuysa bağımsızlık germeyi garanti eder (bunu gerekçesiyle belirtin).
+\end{enumerate}
+\end{dikkat}
+
+%==========================================================
+\subsection{Özet ve formül kutusu}
+
+\begin{ozet}
+\textbf{Koordinatlar ve küre}
+\[
+|AB|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2},\qquad
+M_{AB}=\left(\tfrac{x_1+x_2}{2},\tfrac{y_1+y_2}{2},\tfrac{z_1+z_2}{2}\right)
+\]
+\[
+(x-a)^2+(y-b)^2+(z-c)^2=r^2\quad\Longleftrightarrow\quad x^2+y^2+z^2+Dx+Ey+Fz+G=0
+\]
+\[
+M\left(-\tfrac D2,-\tfrac E2,-\tfrac F2\right),\qquad r^2=\tfrac{D^2+E^2+F^2-4G}{4}
+\]
+
+\textbf{Vektörler}
+\[
+\overrightarrow{AB}=B-A,\qquad \|\mathbf u\|=\sqrt{u_1^2+u_2^2+u_3^2},\qquad \mathbf e=\frac{\mathbf u}{\|\mathbf u\|},\qquad \mathbf u=u_1\mathbf i+u_2\mathbf j+u_3\mathbf k
+\]
+Lineer bağımsız $\iff$ $\sum c_i\mathbf v_i=\mathbf 0$ yalnızca $c_i=0$ ile $\iff$ (kare durumda) determinant $\neq0$. Taban $=$ bağımsız $+$ geren.
+
+\textbf{Skaler çarpım (sonuç: sayı)}
+\[
+\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2+u_3v_3=\|\mathbf u\|\|\mathbf v\|\cos\theta,\qquad \mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0
+\]
+\[
+\cos\alpha=\frac{u_1}{\|\mathbf u\|},\ \cos\beta=\frac{u_2}{\|\mathbf u\|},\ \cos\gamma=\frac{u_3}{\|\mathbf u\|},\qquad \cos^2\alpha+\cos^2\beta+\cos^2\gamma=1
+\]
+\[
+\text{comp}_{\mathbf b}\mathbf a=\frac{\mathbf a\cdot\mathbf b}{\|\mathbf b\|},\qquad \text{proj}_{\mathbf b}\mathbf a=\frac{\mathbf a\cdot\mathbf b}{\|\mathbf b\|^2}\mathbf b,\qquad W=\mathbf F\cdot\mathbf D
+\]
+
+\textbf{Vektörel çarpım (sonuç: vektör)}
+\[
+\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix},\qquad
+\|\mathbf u\times\mathbf v\|=\|\mathbf u\|\|\mathbf v\|\sin\theta,\qquad \mathbf u\parallel\mathbf v\iff\mathbf u\times\mathbf v=\mathbf 0
+\]
+Paralelkenar alanı $=\|\mathbf u\times\mathbf v\|$, üçgen alanı $=\frac12\|\mathbf u\times\mathbf v\|$, tork $\boldsymbol\tau=\mathbf r\times\mathbf F$; \ $\mathbf i\times\mathbf j=\mathbf k$, $\mathbf j\times\mathbf k=\mathbf i$, $\mathbf k\times\mathbf i=\mathbf j$.
+
+\textbf{Karma çarpım (sonuç: sayı)}
+\[
+\mathbf u\cdot(\mathbf v\times\mathbf w)=\begin{vmatrix}u_1&u_2&u_3\\v_1&v_2&v_3\\w_1&w_2&w_3\end{vmatrix},\qquad
+V_{\text{paralelyüzlü}}=|\mathbf u\cdot(\mathbf v\times\mathbf w)|,\qquad V_{\text{dörtyüzlü}}=\tfrac16|\mathbf u\cdot(\mathbf v\times\mathbf w)|
+\]
+Karma çarpım $=0\iff$ düzlemdeş. \ $\mathbf i\cdot(\mathbf j\times\mathbf k)=1$ (birim küp).
+\end{ozet}

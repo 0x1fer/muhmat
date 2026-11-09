@@ -1,0 +1,1378 @@
+\section{Vektör Fonksiyonları ve Uzay Eğrileri}
+
+\subsection{Amaç ve sezgi}
+
+İlk iki konuda \emph{sabit} nesnelerle çalıştık: vektörler, doğrular, düzlemler ve yüzeyler. Oysa mühendislikte
+ilgilendiğimiz şeylerin çoğu \emph{hareket eder}: bir uçağın rotası, bir robot kolunun ucu, raylı sistemde bir vagon,
+bir CNC tezgâhında kesici takımın izlediği yol, Güneş etrafında dönen bir uydu\dots{} Bu cisimlerin her birinin $t$
+anındaki konumu uzayda bir noktadır; o noktayı orijine bağlayan vektöre \textbf{konum (yer) vektörü} denir ve zamana bağlı
+olduğu için $\mathbf r(t)$ ile gösterilir. $t$ değiştikçe $\mathbf r(t)$ vektörünün ucu uzayda bir \textbf{eğri} çizer.
+
+Bu konunun bütün fikri şu basit gözleme dayanır: \vurg{bir vektör fonksiyonu, üç tane sıradan reel fonksiyonun yan yana
+yazılmasıdır.} Bu yüzden limit, süreklilik, türev ve integral gibi Analiz~I'den bildiğimiz işlemlerin hepsi
+\emph{bileşen bileşen} yapılır. Yeni olan, bu sonuçların \emph{geometrik ve fiziksel anlamıdır}:
+
+\begin{center}
+\begin{tabular}{l l}
+\toprule
+Matematiksel nesne & Geometrik / fiziksel anlamı \\
+\midrule
+$\mathbf r(t)$ & konum; ucu eğriyi çizer \\
+$\mathbf r'(t)$ & teğet vektör; hız vektörü $\mathbf v(t)$ \\
+$\|\mathbf r'(t)\|$ & sürat (hızın büyüklüğü), $ds/dt$ \\
+$\mathbf r''(t)$ & ivme vektörü $\mathbf a(t)$ \\
+$\int_a^b\|\mathbf r'(t)\|\,dt$ & yay uzunluğu (alınan yol) \\
+$\mathbf T,\ \mathbf N,\ \mathbf B$ & eğri boyunca hareket eden ``yerel eksen takımı'' (Frenet çatısı) \\
+$\kappa$ (eğrilik) & eğrinin ne kadar keskin döndüğü \\
+$\tau$ (burulma) & eğrinin düzlemden ne kadar ``kıvrılıp çıktığı'' \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{bilgi}[Bu konunun kaynakları ve gösterim]
+Bu bölüm üç ayrı not kümesine dayanır: \textbf{09.10} tarihli defter sayfaları, \textbf{15.10} tarihli defter sayfaları ve
+\textbf{23.10} tarihli tahta fotoğrafları. Aynı örnekler bu kümelerde tekrar ettiği için her örnek bir kez yazılmış,
+bütün fotoğraf kaynakları başlıkta verilmiştir. Kaynak kitaplar: Kreyszig (\emph{Advanced Engineering Mathematics}),
+Zill \& Wright (\emph{Calculus}, çev. Cangül), Balcı (\emph{Genel Matematik II}).
+
+Gösterim: $\mathbf i=(1,0,0)$, $\mathbf j=(0,1,0)$, $\mathbf k=(0,0,1)$ standart birim vektörlerdir;
+$f(t)\mathbf i+g(t)\mathbf j+h(t)\mathbf k$ ile $(f(t),g(t),h(t))$ aynı vektörü gösterir. Tahtada hız vektörü bazen
+$V$, bazen $\mathbf v$ ile; sürat (hızın büyüklüğü) ise $\upsilon$ ile gösterilmiştir. $\|\cdot\|$ vektörün normudur (uzunluğu).
+\end{bilgi}
+
+%======================================================================
+\subsection{Vektör değerli fonksiyonlar ve işlemler}
+
+\subsubsection{Tanım ve bileşen fonksiyonlar}
+
+Analiz~I'de $f:A\to\mathbb R$ ($A\subset\mathbb R$) biçiminde, bir sayıya bir sayı karşılık getiren fonksiyonlarla
+çalıştık. Şimdi bir sayıya (genellikle zamana) bir \emph{vektör} karşılık getiren fonksiyonlara bakıyoruz.
+
+\begin{tahta}[\foto{IMG-20261009-WA0016}, \foto{IMG-20261023-WA0034}]
+Bir cismin $t$ anındaki konumu uzayda bir nokta: $P\big(x(t),y(t),z(t)\big)$. $x=f(t)$, $y=g(t)$, $z=h(t)$ ise yer vektörü
+\[ \mathbf r(t)=f(t)\,\mathbf i+g(t)\,\mathbf j+h(t)\,\mathbf k . \]
+$t$ aralığı taradığında $\mathbf r(t)$'nin ucu bir eğri çizer.
+\end{tahta}
+
+\begin{tanim}[Vektör değerli fonksiyon]
+$I\subset\mathbb R$ bir aralık, $V$ (üç boyutlu uzaydaki, $E^3$) vektörlerin kümesi olsun. $\mathbf F:I\to V$ fonksiyonuna
+\textbf{vektör değerli fonksiyon} denir:
+\[ \mathbf F(t)=f(t)\,\mathbf i+g(t)\,\mathbf j+h(t)\,\mathbf k=\big(f(t),\,g(t),\,h(t)\big). \]
+Reel değerli $f,g,h$ fonksiyonlarına $\mathbf F$'nin \textbf{bileşen fonksiyonları} denir.
+\end{tanim}
+
+Düzlemde çalışıyorsak $\mathbf k$ bileşeni yoktur: $\mathbf F(t)=f(t)\mathbf i+g(t)\mathbf j$. Örneğin
+$\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$ birim çemberi, $\mathbf r(t)=t\,\mathbf i+t^2\mathbf j+t^3\mathbf k$ ise
+uzayda ``bükülmüş kübik'' denen eğriyi verir.
+
+\subsubsection{Tanım kümesi}
+
+\begin{teorem}[En geniş tanım kümesi]
+Tanım kümesi ayrıca belirtilmemişse, $\mathbf F$'nin en geniş tanım kümesi bileşenlerinin tanım kümelerinin arakesitidir:
+\[ T_{\mathbf F}=T_f\cap T_g\cap T_h . \]
+\end{teorem}
+
+Mantığı açıktır: $\mathbf F(t)$ vektörünün tanımlı olması için \emph{üç bileşenin birden} tanımlı olması gerekir.
+
+\begin{soru}[Örnek 1 \foto{IMG-20261009-WA0016}, \foto{IMG-20261023-WA0060}]
+$\mathbf F(t)=(t+1)\,\mathbf i+\ln(1-t)\,\mathbf j+\sqrt{4-t^2}\,\mathbf k$ fonksiyonunun tanım kümesini bulunuz.
+\end{soru}
+\begin{cevap}
+Her bileşenin tanım kümesini ayrı ayrı bulup kesiştiririz.
+\begin{itemize}
+\item $f(t)=t+1$ bir polinom: $T_f=(-\infty,+\infty)$.
+\item $g(t)=\ln(1-t)$: logaritmanın içi pozitif olmalı, $1-t>0\Rightarrow t<1$: $T_g=(-\infty,1)$.
+\item $h(t)=\sqrt{4-t^2}$: karekökün içi negatif olmamalı, $4-t^2\ge 0\Rightarrow -2\le t\le 2$: $T_h=[-2,2]$.
+\end{itemize}
+Sayı doğrusunda bu üç kümenin ortak kısmı $-2$'den (dahil) $1$'e (hariç) kadardır:
+\[ T_{\mathbf F}=(-\infty,+\infty)\cap(-\infty,1)\cap[-2,2]=\boxed{[-2,1)} . \]
+$t=1$ dışarıda kalır, çünkü $\ln 0$ tanımsızdır; $t=-2$ içeride kalır, çünkü $\sqrt{0}=0$ tanımlıdır.
+\end{cevap}
+
+\subsubsection{Vektör fonksiyonlarla işlemler}
+
+\begin{tanim}[İşlemler]
+$\mathbf F,\mathbf G$ vektör değerli, $f,g$ reel değerli fonksiyonlar olsun. Ortak tanım kümesinde
+\begin{enumerate}
+\item $(\mathbf F+\mathbf G)(t)=\mathbf F(t)+\mathbf G(t)$
+\item $(\mathbf F-\mathbf G)(t)=\mathbf F(t)-\mathbf G(t)$
+\item $(\mathbf F\cdot\mathbf G)(t)=\mathbf F(t)\cdot\mathbf G(t)$ \quad (skaler çarpım: sonuç \emph{reel} fonksiyon)
+\item $(\mathbf F\times\mathbf G)(t)=\mathbf F(t)\times\mathbf G(t)$ \quad (vektörel çarpım: sonuç \emph{vektör} fonksiyon)
+\item $(f\mathbf G)(t)=f(t)\,\mathbf G(t)$ \quad (skalerle çarpım)
+\item $(\mathbf F\circ g)(t)=\mathbf F\big(g(t)\big)$ \quad (bileşke)
+\end{enumerate}
+\end{tanim}
+
+Yani her $t$ değeri için Konu~1'de öğrendiğimiz vektör işlemlerini yapıyoruz; sonuç yine $t$'nin bir fonksiyonu oluyor.
+
+\begin{soru}[Örnek 2 \foto{IMG-20261009-WA0017}, \foto{IMG-20261023-WA0060}, \foto{IMG-20261023-WA0035}]
+$\mathbf F(t)=t\,\mathbf i+t^2\mathbf j+t^3\mathbf k$, $\mathbf G(t)=(1-t)\,\mathbf i+(1+t^2)\,\mathbf j+t\,\mathbf k$,
+$f(t)=t+1$, $g(t)=t-2$ olsun. $\mathbf F+\mathbf G$, $\mathbf F\cdot\mathbf G$, $\mathbf F\times\mathbf G$, $f\mathbf G$
+ve $\mathbf F\circ g$ fonksiyonlarını bulunuz.
+\end{soru}
+\begin{cevap}
+\textbf{1) Toplam} (karşılıklı bileşenler toplanır):
+\[ (\mathbf F+\mathbf G)(t)=(t+1-t)\,\mathbf i+(t^2+1+t^2)\,\mathbf j+(t^3+t)\,\mathbf k=\mathbf i+(2t^2+1)\,\mathbf j+(t^3+t)\,\mathbf k . \]
+\textbf{2) Skaler çarpım} (karşılıklı bileşenler çarpılıp toplanır; sonuç bir sayı fonksiyonu):
+\[ (\mathbf F\cdot\mathbf G)(t)=t(1-t)+t^2(1+t^2)+t^3\cdot t=t-t^2+t^2+t^4+t^4=2t^4+t . \]
+\textbf{3) Vektörel çarpım} (determinant ile, birinci satıra göre açılım):
+\begin{align*}
+(\mathbf F\times\mathbf G)(t)&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\ t&t^2&t^3\\ 1-t&1+t^2&t\end{vmatrix}\\
+&=\mathbf i\big(t^2\cdot t-t^3(1+t^2)\big)-\mathbf j\big(t\cdot t-t^3(1-t)\big)+\mathbf k\big(t(1+t^2)-t^2(1-t)\big)\\
+&=-t^5\,\mathbf i-(t^4-t^3+t^2)\,\mathbf j+(2t^3-t^2+t)\,\mathbf k .
+\end{align*}
+\textbf{4) Skalerle çarpım} ($f(t)$ her bileşene dağıtılır):
+\[ (f\mathbf G)(t)=(t+1)\big[(1-t)\mathbf i+(1+t^2)\mathbf j+t\,\mathbf k\big]=(1-t^2)\,\mathbf i+(t^3+t^2+t+1)\,\mathbf j+(t^2+t)\,\mathbf k . \]
+\textbf{5) Bileşke} ($\mathbf F$'de $t$ yerine $g(t)=t-2$ yazılır):
+\[ (\mathbf F\circ g)(t)=\mathbf F(t-2)=(t-2)\,\mathbf i+(t-2)^2\,\mathbf j+(t-2)^3\,\mathbf k . \]
+\textbf{Kontrol:} Vektörel çarpım her iki çarpana da dik olmalıdır. Örneğin $t=1$'de $\mathbf F=(1,1,1)$,
+$\mathbf F\times\mathbf G=(-1,-1,2)$ ve $(1,1,1)\cdot(-1,-1,2)=0$ \checkmark
+\end{cevap}
+
+\begin{bilgi}[Not]
+23.10 tahta fotoğrafında (\foto{IMG-20261023-WA0035}) işlemler listesinin sağ kısmı hocanın arkasında kalmıştır;
+eksik kalan kısım 09.10 defter sayfasından (\foto{IMG-20261009-WA0017}) tamamlanmıştır. Tahtadaki toplamda $\mathbf i$
+bileşeni $(t+1-t)$ diye bırakılmış, sadeleşince $1$ olur.
+\end{bilgi}
+
+\subsubsection{Ortogonal (dik) fonksiyonlar}
+
+\begin{tanim}[Ortogonal fonksiyonlar]
+$\mathbf F$ ve $\mathbf G$ bir $I$ aralığında tanımlı olsun. \textbf{Her} $t\in I$ için $\mathbf F(t)\cdot\mathbf G(t)=0$ ise
+$\mathbf F$ ile $\mathbf G$ \textbf{ortogonaldir} (diktir).
+\end{tanim}
+
+Dikkat: Tanım ``her $t$ için'' der. $\mathbf F(t)\cdot\mathbf G(t)$ yalnızca bazı $t$ değerlerinde sıfır oluyorsa
+fonksiyonlar ortogonal değildir; sadece o anlarda vektörler diktir. (Örneğin $\mathbf F=\mathbf i$, $\mathbf G=t\,\mathbf i+\mathbf j$ için
+$\mathbf F\cdot\mathbf G=t$ yalnız $t=0$'da sıfırdır.)
+
+\begin{soru}[Örnek 3 \foto{IMG-20261009-WA0017}, \foto{IMG-20261023-WA0035}]
+$\mathbf F(t)=(t+t^2)\,\mathbf i+2t\,\mathbf j-4t\,\mathbf k$ ve $\mathbf G(t)=(2+4t)\,\mathbf i+(1-3t)\,\mathbf j+(1+t^2)\,\mathbf k$
+fonksiyonları ortogonal midir?
+\end{soru}
+\begin{cevap}
+Skaler çarpımı hesaplayıp her $t$ için sıfır olup olmadığına bakarız:
+\begin{align*}
+\mathbf F(t)\cdot\mathbf G(t)&=(t+t^2)(2+4t)+2t(1-3t)+(-4t)(1+t^2)\\
+&=(2t+6t^2+4t^3)+(2t-6t^2)+(-4t-4t^3)\\
+&=(2t+2t-4t)+(6t^2-6t^2)+(4t^3-4t^3)=0 .
+\end{align*}
+Sonuç $t$'den bağımsız olarak sıfır olduğundan $\mathbf F$ ve $\mathbf G$ \textbf{ortogonaldir}.
+\end{cevap}
+
+\subsubsection{Norm}
+
+\begin{tanim}[Norm]
+$\mathbf F(t)=f(t)\mathbf i+g(t)\mathbf j+h(t)\mathbf k$ için
+\[ \|\mathbf F(t)\|=\sqrt{\big(f(t)\big)^2+\big(g(t)\big)^2+\big(h(t)\big)^2} \]
+reel değerli fonksiyonuna $\mathbf F$'nin \textbf{normu} denir. $\mathbf F$ bir konum vektörü ise $\|\mathbf F(t)\|$,
+$t$ anında cismin orijine uzaklığıdır.
+\end{tanim}
+
+\begin{soru}[Örnek 4 \foto{IMG-20261009-WA0018}, \foto{IMG-20261023-WA0035}, \foto{IMG-20261023-WA0046}]
+$\mathbf F(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+3t\,\mathbf k$ fonksiyonunun normunu bulunuz.
+\end{soru}
+\begin{cevap}
+\[ \|\mathbf F(t)\|=\sqrt{4\cos^2t+4\sin^2t+9t^2}=\sqrt{4(\cos^2t+\sin^2t)+9t^2}=\sqrt{4+9t^2}, \]
+çünkü $\sin^2t+\cos^2t=1$. (Bu eğri bir helistir; $t$ büyüdükçe orijinden uzaklaşır.)
+\end{cevap}
+
+%======================================================================
+\subsection{Limit ve süreklilik}
+
+\subsubsection{Limit}
+
+\begin{tanim}[Limit]
+Her $\varepsilon>0$ için, $0<|t-t_0|<\delta$ iken $\|\mathbf F(t)-\mathbf L\|<\varepsilon$ olacak şekilde bir $\delta>0$
+bulunabiliyorsa $\mathbf F$'nin $t_0$'daki limiti $\mathbf L$'dir: $\displaystyle\lim_{t\to t_0}\mathbf F(t)=\mathbf L$.
+\end{tanim}
+
+Sezgisel anlamı: $t$, $t_0$'a yeterince yaklaşınca $\mathbf F(t)$ vektörünün ucu $\mathbf L$ vektörünün ucuna istediğimiz
+kadar yaklaşır. Tanımdaki tek fark, mutlak değer yerine \emph{norm} (uzaklık) kullanılmasıdır. İki vektörün uçları
+birbirine yaklaşıyorsa her bileşen de yaklaşır (ve tersi); bu yüzden şu teorem geçerlidir:
+
+\begin{teorem}[Limit bileşen bileşen alınır]
+$\lim_{t\to t_0}f(t)$, $\lim_{t\to t_0}g(t)$, $\lim_{t\to t_0}h(t)$ limitleri varsa
+\[ \lim_{t\to t_0}\mathbf F(t)=\Big(\lim_{t\to t_0}f(t)\Big)\mathbf i+\Big(\lim_{t\to t_0}g(t)\Big)\mathbf j+\Big(\lim_{t\to t_0}h(t)\Big)\mathbf k . \]
+Bileşenlerden birinin limiti yoksa $\mathbf F$'nin de limiti yoktur.
+\end{teorem}
+
+\begin{soru}[Örnek 5 \foto{IMG-20261009-WA0018}, \foto{IMG-20261023-WA0036}]
+$\mathbf F(t)=(1-t^2)\,\mathbf i+\dfrac{\sin 8t}{t}\,\mathbf j+(e^t+1)\,\mathbf k$ için $\displaystyle\lim_{t\to0}\mathbf F(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+Bileşen bileşen:
+\begin{itemize}
+\item $\lim_{t\to0}(1-t^2)=1$,
+\item $\lim_{t\to0}\dfrac{\sin8t}{t}=\lim_{t\to0}8\cdot\dfrac{\sin8t}{8t}=8\cdot1=8$ \quad ($\lim_{u\to0}\frac{\sin u}{u}=1$),
+\item $\lim_{t\to0}(e^t+1)=e^0+1=2$.
+\end{itemize}
+\[ \lim_{t\to0}\mathbf F(t)=\mathbf i+8\,\mathbf j+2\,\mathbf k . \]
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki yazım]
+Tahtada ve defterde limit ``$t\to t_0$'' diye yazılmıştır. Bulunan $\mathbf i+8\mathbf j+2\mathbf k$ sonucu ancak $t\to0$ için
+geçerlidir; doğrusu $\lim_{t\to 0}\mathbf F(t)$'dir. (Ayrıca $\mathbf F(0)$ tanımsızdır, çünkü $\frac{\sin 8t}{t}$'de payda sıfır olur;
+buna rağmen limit vardır.)
+\end{bilgi}
+
+\begin{teorem}[Limit kuralları]
+$\mathbf F$, $\mathbf G$ ve $f$ fonksiyonlarının $t_0$'da limitleri varsa (hepsinde $t\to t_0$):
+\begin{enumerate}
+\item $\lim(\mathbf F+\mathbf G)=\lim\mathbf F+\lim\mathbf G$
+\item $\lim(\mathbf F\cdot\mathbf G)=\lim\mathbf F\cdot\lim\mathbf G$
+\item $\lim(\mathbf F\times\mathbf G)=\lim\mathbf F\times\lim\mathbf G$
+\item $\lim(f\,\mathbf G)=\lim f\cdot\lim\mathbf G$
+\end{enumerate}
+\foto{IMG-20261009-WA0018}, \foto{IMG-20261023-WA0046}
+\end{teorem}
+
+\begin{soru}[Örnek 6 \foto{IMG-20261009-WA0019}, \foto{IMG-20261023-WA0046}, \foto{IMG-20261023-WA0037}]
+$\mathbf F(t)=\sin t\,\mathbf i+\cos t\,\mathbf j+(1+t)\,\mathbf k$ ve $\mathbf G(t)=\cos2t\,\mathbf i+\sin3t\,\mathbf j+(e^t+1)\,\mathbf k$
+için $\displaystyle\lim_{t\to0}\mathbf F(t)\cdot\mathbf G(t)$ ve $\displaystyle\lim_{t\to0}\mathbf F(t)\times\mathbf G(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+Önce ayrı ayrı limitler:
+\[ \lim_{t\to0}\mathbf F(t)=0\,\mathbf i+1\,\mathbf j+1\,\mathbf k=(0,1,1),\qquad \lim_{t\to0}\mathbf G(t)=1\,\mathbf i+0\,\mathbf j+2\,\mathbf k=(1,0,2). \]
+Limit kurallarından (2) ve (3):
+\[ \lim_{t\to0}\mathbf F\cdot\mathbf G=(0,1,1)\cdot(1,0,2)=0+0+2=2, \]
+\[ \lim_{t\to0}\mathbf F\times\mathbf G=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\0&1&1\\1&0&2\end{vmatrix}
+=\mathbf i(2-0)-\mathbf j(0-1)+\mathbf k(0-1)=2\,\mathbf i+\mathbf j-\mathbf k . \]
+\textbf{Kontrol:} Doğrudan $\mathbf F\cdot\mathbf G=\sin t\cos2t+\cos t\sin3t+(1+t)(e^t+1)$ yazıp $t=0$ koyarsak $0+0+1\cdot2=2$ bulunur. \checkmark
+\end{cevap}
+
+\subsubsection{Süreklilik}
+
+\begin{tanim}[Süreklilik]
+Aşağıdaki üç koşul sağlanıyorsa $\mathbf F$, $t_0$'da süreklidir:
+\begin{enumerate}
+\item $\mathbf F(t_0)$ tanımlı,
+\item $\lim_{t\to t_0}\mathbf F(t)$ var,
+\item $\lim_{t\to t_0}\mathbf F(t)=\mathbf F(t_0)$.
+\end{enumerate}
+\end{tanim}
+
+\begin{teorem}[Süreklilik ve bileşenler]
+\begin{itemize}
+\item $\mathbf F$, $t_0$'da sürekli $\iff$ bileşen fonksiyonları $f,g,h$, $t_0$'da süreklidir.
+\item $\mathbf F$ ve $\mathbf G$, $t_0$'da sürekli ise $\mathbf F+\mathbf G$, $\mathbf F-\mathbf G$, $\mathbf F\cdot\mathbf G$,
+$\mathbf F\times\mathbf G$ de $t_0$'da süreklidir.
+\end{itemize}
+\end{teorem}
+
+Geometrik olarak, sürekli bir $\mathbf r(t)$ fonksiyonunun çizdiği eğride ``kopukluk'' yoktur; kalemi kaldırmadan çizilir.
+
+\begin{soru}[Örnek 7 \foto{IMG-20261009-WA0019}, \foto{IMG-20261009-WA0021}, \foto{IMG-20261023-WA0037}]
+$\mathbf F(t)=(|t|+1)\,\mathbf i+t\,[\![t]\!]\,\mathbf j+(2+t^2)\,\mathbf k$ fonksiyonu $t=0$ ve $t=1$ noktalarında sürekli midir?
+($[\![t]\!]$: tam değer fonksiyonu, $t$'den büyük olmayan en büyük tam sayı.)
+\end{soru}
+\begin{cevap}
+$f(t)=|t|+1$ ve $h(t)=2+t^2$ her yerde süreklidir. O hâlde yalnızca $g(t)=t\,[\![t]\!]$ bileşenini incelemek yeterlidir.
+
+\textbf{$t=0$ noktası.} $g(0)=0\cdot[\![0]\!]=0$.
+\begin{itemize}
+\item $t\to0^-$ (soldan, $-1<t<0$): $[\![t]\!]=-1$, $g(t)=-t\to0$.
+\item $t\to0^+$ (sağdan, $0<t<1$): $[\![t]\!]=0$, $g(t)=0\cdot t=0\to0$.
+\end{itemize}
+Sağ ve sol limitler eşit ve $g(0)$'a eşit: $g$, dolayısıyla $\mathbf F$, $t=0$'da \textbf{süreklidir}.
+
+\textbf{$t=1$ noktası.}
+\begin{itemize}
+\item $t\to1^-$ ($0<t<1$): $[\![t]\!]=0$, $g(t)=t\cdot0\to 1\cdot0=0$.
+\item $t\to1^+$ ($1<t<2$): $[\![t]\!]=1$, $g(t)=t\cdot1\to1\cdot1=1$.
+\end{itemize}
+$\lim_{t\to1^-}g\neq\lim_{t\to1^+}g$ olduğundan limit yoktur; $\mathbf F$, $t=1$'de \textbf{sürekli değildir}.
+\end{cevap}
+
+\begin{bilgi}[Genelleme]
+$[\![t]\!]$ her tam sayıda sıçrar. $g(t)=t\,[\![t]\!]$ için $t=n$ tam sayısında sol limit $n(n-1)$, sağ limit $n\cdot n$ olur;
+sıçrama miktarı $n^2-n(n-1)=n$'dir. Bu yüzden $g$ yalnızca $n=0$'da süreklidir (sıçrama $0$), diğer bütün tam sayılarda süreksizdir.
+Çarpandaki $t$, sıfırda sıçramayı ``yok etmiştir''.
+\end{bilgi}
+
+%======================================================================
+\subsection{Uzay eğrileri ve parametrik gösterim}
+
+\subsubsection{Eğri ve parametrik denklemler}
+
+\begin{tahta}[\foto{IMG-20261009-WA0021}, \foto{IMG-20261023-WA0051}]
+$\mathbf r(t)=x(t)\,\mathbf i+y(t)\,\mathbf j+z(t)\,\mathbf k$, $t\in[a,b]$. Her $t$ için bir $P\big(x(t),y(t),z(t)\big)$
+noktası elde edilir; $t$, $[a,b]$ aralığını taradığında bu noktalar bir $C$ eğrisi üretir.
+\begin{itemize}
+\item $\mathbf r(t)$: $C$'nin \textbf{parametrik gösterimi} (vektörel denklemi),
+\item $x=x(t)$, $y=y(t)$, $z=z(t)$: \textbf{parametrik denklemler}.
+\end{itemize}
+Uzayda bir eğri şöyle de ifade edilebilir:
+(i) $y=f(x)$, $z=g(x)$, $a\le x\le b$; \quad (ii) $F(x,y,z)=0$, $G(x,y,z)=0$ (iki yüzeyin arakesiti).
+(i)'de $x=t$ alınırsa $\mathbf r(t)=t\,\mathbf i+f(t)\,\mathbf j+g(t)\,\mathbf k$, $a\le t\le b$ olur.
+\end{tahta}
+
+Bir eğriyi tanımak için izlenecek \textbf{adım adım yöntem}:
+\begin{enumerate}
+\item Parametrik denklemleri yazın: $x=x(t)$, $y=y(t)$, $z=z(t)$.
+\item $t$'yi yok edecek bir bağıntı arayın (doğru için $t$'yi çekip eşitleyin; $\cos t$, $\sin t$ varsa $\cos^2t+\sin^2t=1$ kullanın).
+\item Elde edilen kartezyen denklem(ler)i tanıyın (doğru, çember, elips, silindir üzerinde bir eğri\dots).
+\item Birkaç $t$ değeri için nokta hesaplayarak eğrinin yönünü (hangi sırayla çizildiğini) belirleyin.
+\end{enumerate}
+
+\begin{bilgi}[Parametrizasyon tek değildir]
+Aynı geometrik eğri birçok farklı $\mathbf r(t)$ ile verilebilir. Örneğin birim çember hem
+$\mathbf r_1(t)=\cos t\,\mathbf i+\sin t\,\mathbf j$ ($0\le t\le2\pi$) hem de $\mathbf r_2(t)=\cos2t\,\mathbf i+\sin2t\,\mathbf j$
+($0\le t\le\pi$) ile çizilir; ikincisinde nokta çemberi iki kat hızlı dolaşır. Eğri (nokta kümesi) aynı, ``hareket'' farklıdır.
+\end{bilgi}
+
+\subsubsection{Doğru}
+
+\begin{soru}[Örnek 8 \foto{IMG-20261009-WA0021}, \foto{IMG-20261023-WA0051}, \foto{IMG-20261023-WA0054}]
+$\mathbf r(t)=(2+3t)\,\mathbf i+(4+5t)\,\mathbf j+(6+4t)\,\mathbf k$ eğrisinin cinsini belirleyiniz.
+\end{soru}
+\begin{cevap}
+Parametrik denklemler $x=2+3t$, $y=4+5t$, $z=6+4t$. Her birinden $t$ çekilirse
+\[ \frac{x-2}{3}=\frac{y-4}{5}=\frac{z-6}{4}=t . \]
+Bu, Konu~2'deki doğrunun kartezyen (simetrik) denklemidir: eğri, $(2,4,6)$ noktasından geçen ve $\mathbf v=(3,5,4)$
+vektörüne paralel olan bir \textbf{doğrudur}. Vektörel olarak $\mathbf r(t)=\mathbf r_0+t\,\mathbf v$,
+$\mathbf r_0=(2,4,6)$ biçimindedir.
+\end{cevap}
+
+Genel olarak bileşenlerin hepsi $t$'nin birinci dereceden fonksiyonu ise eğri bir doğrudur.
+
+\subsubsection{Çember ve elips}
+
+\begin{soru}[Örnek 9 \foto{IMG-20261009-WA0022}, \foto{IMG-20261023-WA0051}, \foto{IMG-20261023-WA0054}]
+$\mathbf r(t)=4\cos t\,\mathbf i+4\sin t\,\mathbf j$, $0\le t\le2\pi$ eğrisini tanıyınız.
+\end{soru}
+\begin{cevap}
+$x=4\cos t$, $y=4\sin t$ $\Rightarrow$ $x^2+y^2=16(\cos^2t+\sin^2t)=16$. Eğri $xy$ düzleminde, merkezi orijin, yarıçapı $4$
+olan \textbf{çemberdir}. $t$: $0\to2\pi$ iken çember bir kez, saat yönünün tersine dolaşılır.
+\end{cevap}
+
+\begin{soru}[Örnek 10 \foto{IMG-20261009-WA0022}, \foto{IMG-20261023-WA0054}, \foto{IMG-20261023-WA0059}]
+$\mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+3\,\mathbf k$, $0\le t\le2\pi$ eğrisini tanıyınız.
+\end{soru}
+\begin{cevap}
+$x=\cos t$, $y=\sin t$, $z=3$. $z$ sabit olduğundan eğri $z=3$ düzlemindedir; $x^2+y^2=\cos^2t+\sin^2t=1$.
+Eğri, $z=3$ düzleminde, merkezi $(0,0,3)$, yarıçapı $1$ olan \textbf{çemberdir} (birim çemberin $3$ birim yukarı kaydırılmışı).
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki yazım]
+23.10 tahtasında (\foto{IMG-20261023-WA0054}) bu örnekte ``$y^2+y^2$'' yazılmıştır; doğrusu $x^2+y^2=1$'dir.
+\end{bilgi}
+
+\begin{bilgi}[Elips -- derste tahtada görülmedi, kaynaklardan eklendi]
+$a,b>0$ için $\mathbf r(t)=a\cos t\,\mathbf i+b\sin t\,\mathbf j$, $0\le t\le 2\pi$ eğrisinde
+$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=\cos^2t+\sin^2t=1$ olur: yarı eksenleri $a$ ve $b$ olan \textbf{elipstir}. $a=b$ ise çember elde edilir.
+\end{bilgi}
+
+\begin{soru}[\ekal Ek örnek 1 (elips)]
+$\mathbf r(t)=3\cos t\,\mathbf i+2\sin t\,\mathbf j$, $0\le t\le2\pi$ eğrisini tanıyıp yönünü belirleyiniz.
+\end{soru}
+\begin{cevap}
+$\dfrac{x}{3}=\cos t$, $\dfrac y2=\sin t$ $\Rightarrow$ $\dfrac{x^2}{9}+\dfrac{y^2}{4}=1$: $x$ ekseni üzerindeki yarı ekseni $3$,
+$y$ ekseni üzerindeki yarı ekseni $2$ olan elips. $t=0$: $(3,0)$; $t=\pi/2$: $(0,2)$; $t=\pi$: $(-3,0)$; $t=3\pi/2$: $(0,-2)$.
+Noktalar bu sırayla gezildiğinden elips saat yönünün tersine çizilir.
+\end{cevap}
+
+\subsubsection{Dairesel helis}
+
+\begin{soru}[Örnek 11 \foto{IMG-20261009-WA0025}, \foto{IMG-20261023-WA0054}]
+$\mathbf r(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+4t\,\mathbf k$ eğrisini inceleyiniz.
+\end{soru}
+\begin{cevap}
+$x=2\cos t$, $y=2\sin t$, $z=4t$. İlk iki bileşenden
+\[ x^2+y^2=4(\cos^2t+\sin^2t)=4 . \]
+Demek ki eğrinin her noktası $x^2+y^2=4$ dairesel silindirinin üzerindedir. Bu sırada $z=4t$ düzgün biçimde artar:
+$t=1\Rightarrow z=4$, $t=2\Rightarrow z=8$. $(x,y)$ izdüşümü çemberi bir kez dolaşırken ($t:0\to2\pi$) yükselme
+$4\cdot2\pi=8\pi$ olur. Silindire sarılan bu yay biçimli eğriye \textbf{dairesel helis} denir; bir turdaki yükselmeye
+(burada $8\pi$) helisin \textbf{adımı} denir.
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki yazım]
+Hem defterde (\foto{IMG-20261009-WA0025}) hem tahtada (\foto{IMG-20261023-WA0054}) ``$x^2+y^2=4(\cos t+\sin t)=4$''
+yazılmıştır. Kareler unutulmuştur; doğrusu $x^2+y^2=4(\cos^2t+\sin^2t)=4$'tür.
+\end{bilgi}
+
+Genel dairesel helis $\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j+bt\,\mathbf k$ ($a>0$, $b\ne0$) biçimindedir:
+yarıçapı $a$ olan silindirin üzerinde, adımı $2\pi b$ olan helis. DNA molekülü, yaylar ve vida dişleri helis biçimindedir.
+
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.4cm)},y={(1cm,0cm)},z={(0cm,1cm)},scale=1.1]
+\draw[eks] (0,0,0)--(3.4,0,0) node[below left]{$x$};
+\draw[eks] (0,0,0)--(0,3.2,0) node[right]{$y$};
+\draw[eks] (0,0,0)--(0,0,4.9) node[above]{$z$};
+\draw[gri,dashed,domain=0:360,samples=25,smooth,variable=\a] plot ({2*cos(\a)},{2*sin(\a)},0);
+\draw[gri,dashed,domain=0:360,samples=25,smooth,variable=\a] plot ({2*cos(\a)},{2*sin(\a)},4);
+% silindirin görünür kenarları: izdüşümde x-ekseni de yatay bileşen taşıdığından teğet noktalar (±0.894, ∓1.789)
+\draw[gri,dashed] (-0.894,1.789,0)--(-0.894,1.789,4);
+\draw[gri,dashed] (0.894,-1.789,0)--(0.894,-1.789,4);
+\draw[vurgu,very thick,domain=0:720,samples=25,smooth,variable=\a] plot ({2*cos(\a)},{2*sin(\a)},{\a/180});
+\fill[ana] (2,0,0) circle (2pt) node[below right]{$t=0$};
+\fill[ana] (2,0,2) circle (2pt) node[below right]{$t=2\pi$};
+\fill[ana] (2,0,4) circle (2pt) node[above right]{$t=4\pi$};
+\draw[ana,<->] (2,-0.6,0)--(2,-0.6,2) node[midway,left]{$8\pi$};
+\node[gri] at (0,-2.1,4.3) {$x^2+y^2=4$};
+\end{tikzpicture}
+
+{\small Şekil: $\mathbf r(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+4t\,\mathbf k$ helisi $x^2+y^2=4$ silindirine sarılır
+(düşey ölçek küçültülmüştür; bir turda yükselme $8\pi$).}
+\end{center}
+
+\subsubsection{İki yüzeyin arakesiti olarak eğri}
+
+Tahtada (ii) biçimi yalnızca söz olarak geçmiştir; bir örnekle somutlaştıralım.
+
+\begin{soru}[\ekal Ek örnek 2 (silindir ile düzlemin arakesiti)]
+$x^2+y^2=1$ silindiri ile $y+z=2$ düzleminin arakesit eğrisinin bir vektör denklemini yazınız.
+\end{soru}
+\begin{cevap}
+Eğrinin her noktası silindir üzerinde olduğundan $x=\cos t$, $y=\sin t$ alabiliriz ($x^2+y^2=1$ otomatik sağlanır).
+Düzlem denkleminden $z=2-y=2-\sin t$. Böylece
+\[ \mathbf r(t)=\cos t\,\mathbf i+\sin t\,\mathbf j+(2-\sin t)\,\mathbf k,\qquad 0\le t\le 2\pi . \]
+Eğik bir düzlem dik silindiri kestiği için bu eğri bir \textbf{elipstir} ($xy$ düzlemine izdüşümü birim çemberdir).
+\end{cevap}
+
+\subsubsection{Katlı nokta, basit eğri, kapalı eğri, köşe}
+
+\begin{tanim}[Katlı nokta, basit ve kapalı eğri, köşe]
+$\mathbf r(t)$, $a\le t\le b$ bir eğri olsun.
+\begin{itemize}
+\item Eğrinin kendisini kestiği noktalara \textbf{katlı nokta} denir: $t_1\neq t_2$ için $\mathbf r(t_1)=\mathbf r(t_2)$
+(uçların çakışması, yani $t_1=a$, $t_2=b$ durumu sayılmaz).
+\item Kendisini kesmeyen eğriye \textbf{basit eğri} denir.
+\item $\mathbf r(a)=\mathbf r(b)$ ise eğri \textbf{kapalı eğridir}.
+\item Uçları dışında kendisini kesmeyen kapalı eğriye \textbf{basit kapalı eğri} denir.
+\item $\mathbf r(a)=\mathbf r(b)$ iken $\mathbf r'(a)$ ile $\mathbf r'(b)$ aynı doğrultuda değilse eğri o noktada \textbf{köşe}
+yapar; düzgün kapanmaz.
+\end{itemize}
+\foto{IMG-20261009-WA0025}, \foto{IMG-20261023-WA0039}
+\end{tanim}
+
+Örnekler: çember basit kapalı eğridir; ``8'' rakamı biçimindeki bir eğri kapalıdır ama basit değildir (ortadaki kesişme
+noktası katlı noktadır); bir doğru parçası basit ama kapalı olmayan bir eğridir.
+
+\begin{soru}[Örnek 12 \foto{IMG-20261009-WA0025}, \foto{IMG-20261009-WA0020}, \foto{IMG-20261023-WA0039}, \foto{IMG-20261023-WA0059}]
+$\mathbf r(t)=(t^2-4)\,\mathbf i+(t^3-4t)\,\mathbf j$, $-2\le t\le2$ eğrisi kapalı mıdır, basit midir? Uç noktada köşe var mıdır?
+\end{soru}
+\begin{cevap}
+\textbf{1) Kapalılık.} $\mathbf r(-2)=(4-4)\mathbf i+(-8+8)\mathbf j=\mathbf 0$, \ $\mathbf r(2)=(4-4)\mathbf i+(8-8)\mathbf j=\mathbf 0$.
+$\mathbf r(-2)=\mathbf r(2)$ olduğundan eğri \textbf{kapalıdır}.
+
+\textbf{2) Başka kesişme var mı?} $\mathbf r(t_1)=\mathbf r(t_2)$ olsun.
+\begin{itemize}
+\item $x$ bileşenleri: $t_1^2-4=t_2^2-4\Rightarrow t_1^2=t_2^2\Rightarrow t_1=t_2$ veya $t_1=-t_2$.
+\item $t_1=t_2$ aynı noktadır, kesişme değildir. $t_2=-t_1$ için $y$ bileşenleri:
+\[ t_1^3-4t_1=(-t_1)^3-4(-t_1)=-(t_1^3-4t_1)\ \Rightarrow\ 2(t_1^3-4t_1)=0\ \Rightarrow\ t_1(t_1^2-4)=0 . \]
+\item $t_1=0\Rightarrow t_2=0$: yine aynı parametre. $t_1=\pm2\Rightarrow t_2=\mp2$: yalnızca uç noktalar.
+\end{itemize}
+Demek ki uçlar dışında kesişme yoktur: eğri \textbf{basit kapalı eğridir}.
+
+\textbf{3) Köşe.} $\mathbf r'(t)=2t\,\mathbf i+(3t^2-4)\,\mathbf j$;
+\[ \mathbf r'(2)=4\,\mathbf i+8\,\mathbf j,\qquad \mathbf r'(-2)=-4\,\mathbf i+8\,\mathbf j . \]
+Bu iki vektör paralel değildir ($4/(-4)\neq 8/8$). Eğri orijinde kapanırken \textbf{köşe} yapar. Ayrıca $x=t^2-4$ en küçük değerini $t=0$'da aldığından
+$\mathbf r(0)=(-4,0)$ eğrinin en soldaki noktasıdır.
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.62]
+\draw[eks] (-5.2,0)--(3,0) node[right]{$x$};
+\draw[eks] (0,-3.8)--(0,4.6) node[above]{$y$};
+\draw[ana,very thick,domain=-2:2,samples=25,smooth,variable=\t,
+  postaction={decorate},decoration={markings,mark=at position 0.22 with {\arrow{Stealth[length=3mm]}},
+  mark=at position 0.75 with {\arrow{Stealth[length=3mm]}}}]
+  plot ({\t*\t-4},{\t*\t*\t-4*\t});
+\draw[vek,vurgu] (0,0)--(-1,2) node[above left]{$\mathbf r'(-2)=(-4,8)$};
+\draw[vek,vurgu] (0,0)--(1,2) node[above right]{$\mathbf r'(2)=(4,8)$};
+\fill[ana] (-4,0) circle (3pt) node[below left]{$(-4,0)$, $t=0$};
+\fill[vurgu] (0,0) circle (3pt) node[below right]{köşe, $t=\pm2$};
+\end{tikzpicture}
+
+{\small Şekil: Örnek 12'deki basit kapalı eğri. Orijinde iki farklı teğet doğrultusu vardır (vektörler $1/4$ ölçeğinde çizildi).}
+\end{center}
+
+\subsubsection{Eğrinin yönü}
+
+\begin{tanim}[Yön]
+$\mathbf r(t)$, $a\le t\le b$ ve $A=\mathbf r(a)$, $B=\mathbf r(b)$ olsun. $t$, $a$'dan $b$'ye artarken $\mathbf r(t)$ noktası
+$A$'dan $B$'ye gider. $A\to B$ yönüne \textbf{pozitif yön}, $B\to A$ yönüne \textbf{negatif yön} denir.
+\foto{IMG-20261009-WA0020}, \foto{IMG-20261023-WA0041}
+\end{tanim}
+
+\begin{soru}[Örnek 13 \foto{IMG-20261009-WA0020}, \foto{IMG-20261023-WA0041}, \foto{IMG-20261023-WA0059}]
+$\mathbf r(t)=3\cos t\,\mathbf i+3\sin t\,\mathbf j$, $0\le t\le2\pi$ eğrisinin grafiğini ve yönünü belirleyiniz.
+\end{soru}
+\begin{cevap}
+$x^2+y^2=9$: merkezi orijin, yarıçapı $3$ olan çember. Birkaç nokta:
+\begin{center}
+\begin{tabular}{c c c c c c}
+\toprule
+$t$ & $0$ & $\pi/2$ & $\pi$ & $3\pi/2$ & $2\pi$\\
+\midrule
+$\mathbf r(t)$ & $(3,0)$ & $(0,3)$ & $(-3,0)$ & $(0,-3)$ & $(3,0)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Nokta $(3,0)\to(0,3)\to(-3,0)\to(0,-3)\to(3,0)$ sırasıyla, yani \textbf{saat yönünün tersine} hareket eder.
+Çember saat yönünün tersine dolaşılıyorsa bu yön pozitif yön kabul edilir.
+\end{cevap}
+
+Yönü tersine çevirmek için parametreyi ters çevirmek yeterlidir: $\mathbf r(-t)$ ya da $\mathbf r(a+b-t)$ aynı eğriyi
+ters yönde çizer. Örneğin $3\cos t\,\mathbf i-3\sin t\,\mathbf j$ aynı çemberi saat yönünde dolaşır.
+
+%======================================================================
+\subsection{Vektör fonksiyonun türevi}
+
+\subsubsection{Tanım}
+
+\begin{tanim}[Türev]
+$\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j+z(t)\mathbf k$ ve $x,y,z$ $t$'ye bağlı türevlenebilir fonksiyonlar olsun.
+$t$'de $\Delta t$ artması meydana gelirse
+\[ \lim_{\Delta t\to0}\frac{\mathbf r(t+\Delta t)-\mathbf r(t)}{\Delta t}=\lim_{\Delta t\to0}\frac{\Delta\mathbf r}{\Delta t} \]
+limiti mevcut ise bu limite $\mathbf r(t)$'nin $t$'ye göre \textbf{türevi} denir ve $\dfrac{d\mathbf r}{dt}=\mathbf r'(t)$ ile gösterilir.
+\foto{IMG-20261009-WA0020}, \foto{IMG-20261023-WA0041}
+\end{tanim}
+
+Fark oranının bileşenleri $\frac{x(t+\Delta t)-x(t)}{\Delta t}$ vb. olduğundan, limit bileşen bileşen alınır:
+
+\begin{teorem}[Türev bileşen bileşen alınır]
+\[ \frac{d\mathbf r}{dt}=\frac{dx}{dt}\,\mathbf i+\frac{dy}{dt}\,\mathbf j+\frac{dz}{dt}\,\mathbf k . \]
+\foto{IMG-20261009-WA0023}, \foto{IMG-20261023-WA0041}
+\end{teorem}
+
+\subsubsection{Geometrik anlam: teğet vektör}
+
+$\Delta\mathbf r=\mathbf r(t+\Delta t)-\mathbf r(t)$ vektörü, eğri üzerindeki iki noktayı birleştiren \textbf{kiriş}tir.
+$\Delta t>0$ için $\frac{\Delta\mathbf r}{\Delta t}$ aynı yöndedir. $\Delta t\to0$ iken ikinci nokta birinciye yaklaşır ve
+kiriş, eğrinin o noktadaki \textbf{teğet doğrultusuna} döner. Bu yüzden:
+
+\begin{teorem}[Teğet vektör]
+$\mathbf r'(t)\neq\mathbf 0$ ise $\mathbf r'(t)$ vektörü eğriye $\mathbf r(t)$ noktasında \textbf{teğettir} ve eğrinin
+çizilme yönünü (pozitif yönü) gösterir. \foto{IMG-20261009-WA0023}, \foto{IMG-20261023-WA0062}, \foto{IMG-20261023-WA0065}
+\end{teorem}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\draw[ana,thick,domain=0.6:5.6,samples=20,smooth] plot (\x,{0.5+1.1*\x-0.12*\x*\x}) node[right]{$C$};
+\coordinate (O) at (0.4,-1);
+\coordinate (P) at (2,2.22);
+\coordinate (Q) at (4.2,3.003);
+\draw[vek] (O)--(P) node[midway,left]{$\mathbf r(t)$};
+\draw[vek] (O)--(Q) node[midway,below right]{$\mathbf r(t+\Delta t)$};
+\draw[vek,turuncu] (P)--(Q) node[midway,below]{$\Delta\mathbf r$};
+\draw[vek,vurgu] (P)--++(1.7,1.054) node[above]{$\mathbf r'(t)$};
+\fill (O) circle (1.5pt) node[below]{$O$};
+\fill (P) circle (1.5pt);
+\fill (Q) circle (1.5pt);
+\end{tikzpicture}
+
+{\small Şekil: Kiriş $\Delta\mathbf r$, $\Delta t\to0$ iken teğet doğrultusuna döner; limit vektör $\mathbf r'(t)$ teğet vektördür.}
+\end{center}
+
+\begin{bilgi}[Tahtadaki yazım]
+Defterde ve tahtada (\foto{IMG-20261009-WA0023}, \foto{IMG-20261023-WA0062}) kiriş ``$\Delta x$'' diye etiketlenmiştir;
+doğrusu $\Delta\mathbf r$'dir (kiriş, konum vektörlerinin farkıdır).
+\end{bilgi}
+
+\textbf{Teğet doğru} (kaynaklardan): $\mathbf r'(t_0)\neq\mathbf 0$ ise eğriye $\mathbf r(t_0)$ noktasında teğet olan doğrunun
+denklemi, Konu~2'deki doğru denklemiyle
+\[ \mathbf L(u)=\mathbf r(t_0)+u\,\mathbf r'(t_0),\qquad u\in\mathbb R \]
+biçimindedir.
+
+\begin{soru}[\ekal Ek örnek 3 (teğet doğru)]
+$\mathbf r(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+4t\,\mathbf k$ helisine $t=\pi/2$ noktasında teğet olan doğrunun
+parametrik denklemlerini yazınız.
+\end{soru}
+\begin{cevap}
+$\mathbf r(\pi/2)=(0,\,2,\,2\pi)$. $\mathbf r'(t)=-2\sin t\,\mathbf i+2\cos t\,\mathbf j+4\,\mathbf k$ $\Rightarrow$
+$\mathbf r'(\pi/2)=(-2,0,4)$. Teğet doğru:
+\[ x=-2u,\qquad y=2,\qquad z=2\pi+4u,\qquad u\in\mathbb R . \]
+\end{cevap}
+
+\subsubsection{Türev kuralları}
+
+\begin{teorem}[Türev kuralları]
+$\varphi$ skaler, $\mathbf F$ ve $\mathbf G$ vektörel fonksiyonlar olsun (hepsi $t$'ye bağlı ve türevlenebilir):
+\begin{description}
+\item[(i)] $\dfrac{d}{dt}(\varphi\mathbf F)=\varphi\dfrac{d\mathbf F}{dt}+\dfrac{d\varphi}{dt}\mathbf F$
+\item[(ii)] $\dfrac{d}{dt}(\mathbf F\cdot\mathbf G)=\dfrac{d\mathbf F}{dt}\cdot\mathbf G+\mathbf F\cdot\dfrac{d\mathbf G}{dt}$ \quad (sonuç skaler)
+\item[(iii)] $\dfrac{d}{dt}(\mathbf F\times\mathbf G)=\dfrac{d\mathbf F}{dt}\times\mathbf G+\mathbf F\times\dfrac{d\mathbf G}{dt}$ \quad (sonuç vektörel; \vurg{sıra korunmalı})
+\item[(iv)] $\dfrac{d}{dt}(\mathbf F+\mathbf G)=\dfrac{d\mathbf F}{dt}+\dfrac{d\mathbf G}{dt}$
+\item[(v)] (kaynaklardan, zincir kuralı) $\dfrac{d}{dt}\mathbf F\big(g(t)\big)=g'(t)\,\mathbf F'\big(g(t)\big)$
+\end{description}
+\foto{IMG-20261009-WA0023}, \foto{IMG-20261023-WA0062}, \foto{IMG-20261023-WA0065}
+\end{teorem}
+
+Bunlar Analiz~I'deki çarpım kuralının aynısıdır; kanıtları bileşenler yazılıp tek değişkenli çarpım kuralı uygulanarak yapılır.
+Örneğin (ii) için $\mathbf F\cdot\mathbf G=f_1g_1+f_2g_2+f_3g_3$ olduğundan
+\[ (\mathbf F\cdot\mathbf G)'=(f_1'g_1+f_1g_1')+(f_2'g_2+f_2g_2')+(f_3'g_3+f_3g_3')=\mathbf F'\cdot\mathbf G+\mathbf F\cdot\mathbf G' . \]
+(iii)'te sıranın önemi şuradan gelir: vektörel çarpım değişmeli değildir, $\mathbf G\times\mathbf F'=-\mathbf F'\times\mathbf G$.
+
+\begin{teorem}[Sabit uzunluklu vektör türevine diktir -- kaynaklardan]
+$\|\mathbf r(t)\|=c$ (sabit) ise her $t$ için $\mathbf r(t)\cdot\mathbf r'(t)=0$, yani $\mathbf r'\perp\mathbf r$.
+\end{teorem}
+\textit{Kanıt.} $\mathbf r\cdot\mathbf r=\|\mathbf r\|^2=c^2$ sabittir. (ii) kuralıyla türev alınırsa
+$\mathbf r'\cdot\mathbf r+\mathbf r\cdot\mathbf r'=2\,\mathbf r\cdot\mathbf r'=0$. \hfill$\square$
+
+Geometrik anlamı: Küre (ya da çember) üzerinde hareket eden bir noktanın hızı her zaman yarıçapa diktir. Bu teorem ileride
+$\mathbf T\perp\mathbf T'$ sonucunu elde etmek için de kullanılacaktır.
+
+\subsubsection{Yüksek mertebeden türevler ve örnekler}
+
+$\mathbf r'$ de bir vektör fonksiyonu olduğundan tekrar türevi alınabilir:
+$\mathbf r''=\dfrac{d^2\mathbf r}{dt^2}$, $\mathbf r'''=\dfrac{d^3\mathbf r}{dt^3}$, \dots{} Hepsi bileşen bileşen hesaplanır.
+
+\begin{soru}[Örnek 14 \foto{IMG-20261009-WA0023}, \foto{IMG-20261023-WA0062}]
+$\mathbf F(t)=t^2\,\mathbf i+e^{-t}\,\mathbf j+\sin t\,\mathbf k$ için $\dfrac{d\mathbf F}{dt}$, $\dfrac{d^2\mathbf F}{dt^2}$, $\dfrac{d^3\mathbf F}{dt^3}$'ü bulunuz.
+\end{soru}
+\begin{cevap}
+\begin{align*}
+\frac{d\mathbf F}{dt}&=2t\,\mathbf i-e^{-t}\,\mathbf j+\cos t\,\mathbf k,\\
+\frac{d^2\mathbf F}{dt^2}&=2\,\mathbf i+e^{-t}\,\mathbf j-\sin t\,\mathbf k,\\
+\frac{d^3\mathbf F}{dt^3}&=0\,\mathbf i-e^{-t}\,\mathbf j-\cos t\,\mathbf k=-e^{-t}\,\mathbf j-\cos t\,\mathbf k .
+\end{align*}
+(Tahtada ikinci ve üçüncü türevlerin paydası ``$dt$'' diye yazılmıştır; doğrusu $dt^2$ ve $dt^3$'tür.)
+\end{cevap}
+
+\begin{soru}[Örnek 15 \foto{IMG-20261009-WA0024}, \foto{IMG-20261023-WA0062}, \foto{IMG-20261023-WA0064}, \foto{IMG-20261023-WA0068}]
+$\mathbf r(t)=(1-\cos t)\,\mathbf i+\sin t\,\mathbf j+t\,\mathbf k$ için $\mathbf r'$, $\mathbf r''$ ve bunların $t=\pi/2$'deki değerlerini bulunuz.
+\end{soru}
+\begin{cevap}
+\[ \mathbf r'(t)=\sin t\,\mathbf i+\cos t\,\mathbf j+\mathbf k\ \xrightarrow{t=\pi/2}\ \mathbf r'(\pi/2)=1\,\mathbf i+0\,\mathbf j+1\,\mathbf k=\mathbf i+\mathbf k, \]
+\[ \mathbf r''(t)=\cos t\,\mathbf i-\sin t\,\mathbf j\ \xrightarrow{t=\pi/2}\ \mathbf r''(\pi/2)=0\,\mathbf i-1\,\mathbf j=-\mathbf j . \]
+(Tahtada $\mathbf r'(\pi/2)$ satırında $\mathbf k$ katsayısı ``$0$'' gibi okunmaktadır; $\mathbf k$ bileşeni sabit $1$ olduğundan
+doğrusu $1\,\mathbf k$'dir, tahtadaki sonuç $\mathbf i+\mathbf k$ zaten doğrudur.)
+\end{cevap}
+
+\begin{soru}[Örnek 16 \foto{IMG-20261009-WA0024}, \foto{IMG-20261023-WA0064}, \foto{IMG-20261023-WA0068}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j+bt\,\mathbf k$ için $\mathbf r'$, $\mathbf r''$ ve $\mathbf r'\times\mathbf r''$'yü bulunuz.
+\end{soru}
+\begin{cevap}
+\[ \mathbf r'(t)=-a\sin t\,\mathbf i+a\cos t\,\mathbf j+b\,\mathbf k,\qquad \mathbf r''(t)=-a\cos t\,\mathbf i-a\sin t\,\mathbf j . \]
+\begin{align*}
+\mathbf r'\times\mathbf r''&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-a\sin t&a\cos t&b\\-a\cos t&-a\sin t&0\end{vmatrix}\\
+&=\mathbf i\,(0+ab\sin t)-\mathbf j\,(0+ab\cos t)+\mathbf k\,(a^2\sin^2t+a^2\cos^2t)\\
+&=ab\sin t\,\mathbf i-ab\cos t\,\mathbf j+a^2\,\mathbf k .
+\end{align*}
+Bu sonuç, helisin eğrilik ve burulmasını hesaplarken (aşağıda) tekrar kullanılacaktır. Normu
+$\|\mathbf r'\times\mathbf r''\|=\sqrt{a^2b^2+a^4}=a\sqrt{a^2+b^2}$'dir ($a>0$).
+\end{cevap}
+
+\begin{soru}[Örnek 17 \foto{IMG-20261009-WA0024}, \foto{IMG-20261023-WA0064}, \foto{IMG-20261023-WA0068}]
+$\mathbf u(t)=t\,\mathbf i-t\,\mathbf j+\dfrac{t^2}{2}\,\mathbf k$ ve $\mathbf v(t)=\dfrac{t^4}{4}\,\mathbf i+\dfrac{t^3}{3}\,\mathbf j+\dfrac{t^2}{2}\,\mathbf k$
+için $\dfrac{d}{dt}(\mathbf u\times\mathbf v)$'yi bulunuz.
+\end{soru}
+\begin{cevap}[Çözüm (iki yol)]
+\textbf{1. yol: önce çarp, sonra türev al.}
+\begin{align*}
+\mathbf u\times\mathbf v&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\ t&-t&\frac{t^2}{2}\\ \frac{t^4}{4}&\frac{t^3}{3}&\frac{t^2}{2}\end{vmatrix}
+=\mathbf i\Big(-\frac{t^3}{2}-\frac{t^5}{6}\Big)-\mathbf j\Big(\frac{t^3}{2}-\frac{t^6}{8}\Big)+\mathbf k\Big(\frac{t^4}{3}+\frac{t^5}{4}\Big)\\
+&=\Big(-\frac{t^3}{2}-\frac{t^5}{6}\Big)\mathbf i+\Big(\frac{t^6}{8}-\frac{t^3}{2}\Big)\mathbf j+\Big(\frac{t^4}{3}+\frac{t^5}{4}\Big)\mathbf k .
+\end{align*}
+Bileşen bileşen türev:
+\[ \frac{d}{dt}(\mathbf u\times\mathbf v)=\Big(-\frac{3t^2}{2}-\frac{5t^4}{6}\Big)\mathbf i+\Big(\frac{3t^5}{4}-\frac{3t^2}{2}\Big)\mathbf j+\Big(\frac{4t^3}{3}+\frac{5t^4}{4}\Big)\mathbf k . \]
+
+\textbf{2. yol: çarpım kuralı} $(\mathbf u\times\mathbf v)'=\mathbf u'\times\mathbf v+\mathbf u\times\mathbf v'$.
+$\mathbf u'=(1,-1,t)$, $\mathbf v'=(t^3,t^2,t)$.
+\begin{align*}
+\mathbf u'\times\mathbf v&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&-1&t\\ \frac{t^4}{4}&\frac{t^3}{3}&\frac{t^2}{2}\end{vmatrix}
+=\Big(-\frac{t^2}{2}-\frac{t^4}{3}\Big)\mathbf i+\Big(\frac{t^5}{4}-\frac{t^2}{2}\Big)\mathbf j+\Big(\frac{t^3}{3}+\frac{t^4}{4}\Big)\mathbf k,\\
+\mathbf u\times\mathbf v'&=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\t&-t&\frac{t^2}{2}\\ t^3&t^2&t\end{vmatrix}
+=\Big(-t^2-\frac{t^4}{2}\Big)\mathbf i+\Big(\frac{t^5}{2}-t^2\Big)\mathbf j+\big(t^3+t^4\big)\mathbf k .
+\end{align*}
+Toplarsak: $\mathbf i$: $-\frac{3t^2}{2}-\frac{5t^4}{6}$; \ $\mathbf j$: $\frac{3t^5}{4}-\frac{3t^2}{2}$; \ $\mathbf k$: $\frac{4t^3}{3}+\frac{5t^4}{4}$.
+İki yol aynı sonucu verir. \checkmark
+\end{cevap}
+
+\begin{dikkat}[Defterdeki hesap hatası]
+09.10 defterinde (\foto{IMG-20261009-WA0024}) $\mathbf j$ bileşeninin türevi $\frac{3t^5}{2}-\frac{3t^2}{2}$ yazılmıştır.
+$\frac{d}{dt}\big(\frac{t^6}{8}\big)=\frac{6t^5}{8}=\frac{3t^5}{4}$ olduğundan doğrusu $\frac{3t^5}{4}-\frac{3t^2}{2}$'dir.
+23.10 tahtasında (\foto{IMG-20261023-WA0064}) bu terim doğru olarak $\frac68t^5$ yazılmıştır. Ayrıca defterde 2. yol
+yalnızca formül olarak verilmiş, hesaplanmamıştır; yukarıda tamamlandı.
+\end{dikkat}
+
+\subsubsection{Düzgün ve parçalı düzgün eğri}
+
+\begin{tanim}[Düzgün ve parçalı düzgün eğri]
+$\mathbf r$, $I$ aralığında sürekli türevli ve $I$'nın iç noktalarında $\mathbf r'(t)\neq\mathbf 0$ ise $\mathbf r$'ye
+\textbf{düzgün fonksiyon}, çizdiği $C$ eğrisine \textbf{düzgün (pürüzsüz) eğri} denir. $I$ aralığı, $\mathbf r$'nin düzgün olduğu
+sonlu sayıda alt aralığa bölünebiliyorsa $\mathbf r$'ye ve eğriye \textbf{parçalı düzgün} denir.
+\foto{IMG-20261015-WA0038}, \foto{IMG-20261023-WA0053}
+\end{tanim}
+
+Neden $\mathbf r'\neq\mathbf 0$ şartı? Çünkü teğet doğrultusunu $\mathbf r'$ belirler; $\mathbf r'=\mathbf 0$ olduğu yerde nokta
+``durur'' ve yön aniden değişebilir, eğride sivri uç ya da köşe oluşabilir. Düzgün eğride teğet doğrultusu sürekli döner.
+
+\begin{soru}[Örnek 18 \foto{IMG-20261015-WA0038}, \foto{IMG-20261023-WA0053}]
+$\mathbf r(t)=a(t-\sin t)\,\mathbf i+a(1-\cos t)\,\mathbf j$, $-2\pi\le t\le2\pi$ ($a>0$) eğrisi (sikloid) düzgün müdür?
+\end{soru}
+\begin{cevap}
+$\mathbf r$ her yerde sürekli türevlidir: $\mathbf r'(t)=a(1-\cos t)\,\mathbf i+a\sin t\,\mathbf j$.
+$\mathbf r'(t)=\mathbf 0$ olması için $1-\cos t=0$ ve $\sin t=0$ olmalı; bu da $t=2k\pi$ demektir. Aralıkta
+\[ \mathbf r'(-2\pi)=\mathbf 0,\qquad \mathbf r'(0)=\mathbf 0,\qquad \mathbf r'(2\pi)=\mathbf 0 . \]
+$t=-2\pi$ ve $t=2\pi$ uç noktalardır, ancak $t=0$ bir iç noktadır; bu yüzden eğri $[-2\pi,2\pi]$'de düzgün \emph{değildir}.
+$t=-2\pi,0,2\pi$ dışında $\mathbf r'(t)\neq\mathbf 0$ olduğundan $[-2\pi,0]$ ve $[0,2\pi]$ aralıklarının her birinde düzgündür.
+Sonuç: sikloid \textbf{parçalı düzgündür}. $\mathbf r'=\mathbf 0$ olan noktalar ($x=-2\pi a,\,0,\,2\pi a$) sivri uçlardır.
+\end{cevap}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.62]
+\draw[eks] (-7.2,0)--(7.6,0) node[right]{$x$};
+\draw[eks] (0,-0.4)--(0,2.9) node[above]{$y$};
+\draw[gri,dashed] (3.1416,1) circle (1);
+\draw[ana,very thick,domain=-360:0,samples=25,smooth,variable=\t] plot ({rad(\t)-sin(\t)},{1-cos(\t)});
+\draw[ana,very thick,domain=0:360,samples=25,smooth,variable=\t] plot ({rad(\t)-sin(\t)},{1-cos(\t)});
+\fill[vurgu] (-6.2832,0) circle (3pt) node[below]{$-2\pi a$};
+\fill[vurgu] (0,0) circle (3pt) node[below right]{$0$};
+\fill[vurgu] (6.2832,0) circle (3pt) node[below]{$2\pi a$};
+\draw[gri,dashed] (-3.1416,0)--(-3.1416,2) node[above]{$2a$};
+\node[vurgu] at (0,-1.1) {$\mathbf r'=\mathbf 0$ noktaları (sivri uçlar)};
+\end{tikzpicture}
+
+{\small Şekil: Sikloid ($a=1$ çizildi), yarıçapı $a$ olan bir tekerleğin çevresindeki bir noktanın izlediği yoldur.
+İki kemer, kemer yüksekliği $2a$.}
+\end{center}
+
+\begin{bilgi}[Tahtadaki yazım]
+Defter ve tahtada $\mathbf r'(t)$ satırında ilk terimdeki $\mathbf i$ yazılmamıştır; ayrıca aralığın sol ucunun ``$<$'' mi
+``$\le$'' mi olduğu \okunamadi{aralığın sol ucundaki eşitsizlik işareti}. Çözümde $\mathbf r'(\pm2\pi)$ hesaplandığı için kapalı aralık
+$-2\pi\le t\le2\pi$ alınmıştır; sonuç (parçalı düzgünlük) her iki durumda da aynıdır.
+\end{bilgi}
+
+%======================================================================
+\subsection{Vektör fonksiyonların integrali}
+
+\subsubsection{Belirsiz integral}
+
+\begin{tanim}[Anti-türev ve belirsiz integral]
+$\mathbf R'(t)=\mathbf r(t)$ ise $\mathbf R$, $\mathbf r$'nin bir \textbf{anti-türevidir}. $\mathbf C$ sabit bir vektör ise
+$(\mathbf R(t)+\mathbf C)'=\mathbf r(t)$ olduğundan $\mathbf R+\mathbf C$ de anti-türevdir.
+$\displaystyle\int\mathbf r(t)\,dt=\mathbf R(t)+\mathbf C$ ifadesine $\mathbf r(t)$'nin \textbf{belirsiz integrali} denir.
+$\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j+z(t)\mathbf k$ ise
+\[ \int\mathbf r(t)\,dt=\Big(\int x(t)\,dt\Big)\mathbf i+\Big(\int y(t)\,dt\Big)\mathbf j+\Big(\int z(t)\,dt\Big)\mathbf k . \]
+\foto{IMG-20261015-WA0037}, \foto{IMG-20261023-WA0055}
+\end{tanim}
+
+\vurg{Önemli:} İntegral sabiti artık bir \emph{sayı} değil, bir \emph{vektördür}: $\mathbf C=c_1\mathbf i+c_2\mathbf j+c_3\mathbf k$.
+Her bileşenden gelen sabitler bu vektörde toplanır.
+
+\begin{soru}[Örnek 19 \foto{IMG-20261015-WA0037}, \foto{IMG-20261023-WA0055}]
+$\mathbf r(t)=2t\,\mathbf i+e^t\,\mathbf j+4\sin2t\,\mathbf k$ fonksiyonunun belirsiz integralini bulunuz.
+\end{soru}
+\begin{cevap}
+\[ \int\mathbf r(t)\,dt=2\Big(\int t\,dt\Big)\mathbf i+\Big(\int e^t\,dt\Big)\mathbf j+4\Big(\int\sin2t\,dt\Big)\mathbf k
+=t^2\,\mathbf i+e^t\,\mathbf j-2\cos2t\,\mathbf k+\mathbf C . \]
+($\int\sin2t\,dt=-\frac12\cos2t$ olduğundan $4\cdot(-\frac12)=-2$.) $\mathbf C=c_1\mathbf i+c_2\mathbf j+c_3\mathbf k$ sabit vektör ile
+\[ \int\mathbf r(t)\,dt=(t^2+c_1)\,\mathbf i+(e^t+c_2)\,\mathbf j+(-2\cos2t+c_3)\,\mathbf k . \]
+\end{cevap}
+
+\subsubsection{Başlangıç değer problemi}
+
+Türevi ve bir noktadaki değeri bilinen bir vektör fonksiyonu bulmak için: (1) türevin integralini alın (sabit vektör $\mathbf C$ ile);
+(2) verilen $t_0$ değerini yerine koyun; (3) çıkan denklemden $\mathbf C$'yi çözün.
+
+\begin{soru}[Örnek 20 \foto{IMG-20261015-WA0037}, \foto{IMG-20261023-WA0055}]
+$\mathbf r'(t)=2t\,\mathbf i+\sin t\,\mathbf j+e^t\,\mathbf k$ ve $\mathbf r(0)=2\,\mathbf i+2\,\mathbf j$ bağıntılarını sağlayan $\mathbf r(t)$ fonksiyonunu bulunuz.
+\end{soru}
+\begin{cevap}
+\textbf{1)} İntegral: $\mathbf r(t)=\int2t\,dt\,\mathbf i+\int\sin t\,dt\,\mathbf j+\int e^t\,dt\,\mathbf k+\mathbf C=t^2\,\mathbf i-\cos t\,\mathbf j+e^t\,\mathbf k+\mathbf C$.
+
+\textbf{2)} $t=0$: $\mathbf r(0)=0\,\mathbf i-1\,\mathbf j+1\,\mathbf k+\mathbf C=2\,\mathbf i+2\,\mathbf j$.
+
+\textbf{3)} $\mathbf C=2\,\mathbf i+2\,\mathbf j-(-\mathbf j+\mathbf k)=2\,\mathbf i+3\,\mathbf j-\mathbf k$. Böylece
+\[ \boxed{\mathbf r(t)=(t^2+2)\,\mathbf i+(3-\cos t)\,\mathbf j+(e^t-1)\,\mathbf k} \]
+\textbf{Kontrol:} $\mathbf r(0)=2\mathbf i+(3-1)\mathbf j+(1-1)\mathbf k=2\mathbf i+2\mathbf j$ \checkmark; türevi de $\mathbf r'(t)$'yi verir.
+\end{cevap}
+
+\begin{bilgi}[Tahtadaki yazım]
+15.10 defterinde ilk integral ``$\int\mathbf r'(t)\,dt\,\mathbf i$'' diye yazılmıştır, kastedilen $\int 2t\,dt\,\mathbf i$'dir.
+23.10 tahtasında $t=0$ satırında $\mathbf j$ önündeki işaret üst üste yazılmıştır; doğrusu $-\mathbf j$'dir ($-\cos0=-1$) ve bulunan
+$\mathbf C$ bununla tutarlıdır.
+\end{bilgi}
+
+\begin{soru}[\ekal Ek örnek 4 (ivmeden konuma)]
+Bir cismin ivmesi $\mathbf a(t)=2\,\mathbf i+6t\,\mathbf j$, başlangıç hızı $\mathbf v(0)=\mathbf i-\mathbf k$ ve başlangıç konumu
+$\mathbf r(0)=\mathbf j$'dir. $\mathbf v(t)$ ve $\mathbf r(t)$'yi bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf v(t)=\int\mathbf a\,dt=2t\,\mathbf i+3t^2\,\mathbf j+\mathbf C_1$; $\mathbf v(0)=\mathbf C_1=\mathbf i-\mathbf k$ $\Rightarrow$
+$\mathbf v(t)=(2t+1)\,\mathbf i+3t^2\,\mathbf j-\mathbf k$.
+
+$\mathbf r(t)=\int\mathbf v\,dt=(t^2+t)\,\mathbf i+t^3\,\mathbf j-t\,\mathbf k+\mathbf C_2$; $\mathbf r(0)=\mathbf C_2=\mathbf j$ $\Rightarrow$
+$\mathbf r(t)=(t^2+t)\,\mathbf i+(t^3+1)\,\mathbf j-t\,\mathbf k$.
+
+İkinci mertebeden problemde iki kez integral alındığı için iki sabit vektör ($\mathbf C_1$, $\mathbf C_2$) ve iki başlangıç koşulu gerekir.
+\end{cevap}
+
+\subsubsection{Belirli integral}
+
+\begin{tanim}[Belirli integral]
+$f,g,h$ $[a,b]$ aralığında integrallenebilen fonksiyonlar ve $\mathbf F(t)=f(t)\mathbf i+g(t)\mathbf j+h(t)\mathbf k$ olsun.
+$\mathbf F$'nin $[a,b]$'deki belirli integrali
+\[ \int_a^b\mathbf F(t)\,dt=\Big(\int_a^bf(t)\,dt\Big)\mathbf i+\Big(\int_a^bg(t)\,dt\Big)\mathbf j+\Big(\int_a^bh(t)\,dt\Big)\mathbf k . \]
+\foto{IMG-20261015-WA0037}, \foto{IMG-20261023-WA0040}
+\end{tanim}
+
+Sonuç bir \emph{sabit vektördür}. Analizin temel teoremi de geçerlidir: $\mathbf R'=\mathbf F$ ise
+$\int_a^b\mathbf F(t)\,dt=\mathbf R(b)-\mathbf R(a)$. Fiziksel anlam: $\int_{t_1}^{t_2}\mathbf v(t)\,dt=\mathbf r(t_2)-\mathbf r(t_1)$, yani
+hızın integrali \emph{yer değiştirme} vektörüdür (alınan yol değil!).
+
+\begin{soru}[Örnek 21 \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0040}]
+$\mathbf F(t)=2t\,\mathbf i+(1+t^2)\,\mathbf j+\sin\pi t\,\mathbf k$ için $\displaystyle\int_0^1\mathbf F(t)\,dt$'yi hesaplayınız.
+\end{soru}
+\begin{cevap}
+\[ \int_0^1\mathbf F(t)\,dt=t^2\Big|_0^1\mathbf i+\Big(t+\frac{t^3}{3}\Big)\Big|_0^1\mathbf j-\frac{\cos\pi t}{\pi}\Big|_0^1\mathbf k
+=\mathbf i+\frac43\,\mathbf j-\frac1\pi(\cos\pi-\cos0)\,\mathbf k . \]
+$\cos\pi-\cos0=-1-1=-2$ olduğundan
+\[ \int_0^1\mathbf F(t)\,dt=\mathbf i+\frac43\,\mathbf j+\frac2\pi\,\mathbf k . \]
+\end{cevap}
+
+%======================================================================
+\subsection{Yay uzunluğu ve yay uzunluğu parametrelemesi}
+
+\subsubsection{Yay uzunluğu formülü}
+
+Sezgi: $t$'den $t+dt$'ye geçerken nokta yaklaşık $\mathbf r'(t)\,dt$ kadar yer değiştirir; bu küçük parçanın uzunluğu
+$\|\mathbf r'(t)\|\,dt$'dir. Bütün parçaları toplamak (integral almak) eğrinin uzunluğunu verir. Fiziksel olarak: süratin
+zamana göre integrali alınan yoldur.
+
+\begin{teorem}[Yay uzunluğu]
+Denklemi $\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j+z(t)\mathbf k$, $a\le t\le b$ olan düzgün (ya da parçalı düzgün) bir $C$ eğrisinin
+uzunluğu
+\[ \ell=\int_a^b\|\mathbf r'(t)\|\,dt=\int_a^b\sqrt{\big(x'(t)\big)^2+\big(y'(t)\big)^2+\big(z'(t)\big)^2}\,dt . \]
+(Eğrinin bir kez çizildiği, yani kendi üzerinden geri dönmediği varsayılır.) \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0040}
+\end{teorem}
+
+\begin{soru}[Örnek 22 \foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0040}, \foto{IMG-20261023-WA0058}]
+$\mathbf r(t)=5\cos t\,\mathbf i+5\sin t\,\mathbf j+12t\,\mathbf k$, $0\le t\le2\pi$ denklemli helis parçasının uzunluğunu bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf r'(t)=-5\sin t\,\mathbf i+5\cos t\,\mathbf j+12\,\mathbf k$,
+\[ \|\mathbf r'(t)\|=\sqrt{25\sin^2t+25\cos^2t+144}=\sqrt{25+144}=\sqrt{169}=13 . \]
+\[ \ell=\int_0^{2\pi}13\,dt=13t\Big|_0^{2\pi}=26\pi . \]
+\end{cevap}
+
+\begin{tahta}[\foto{IMG-20261015-WA0039}, \foto{IMG-20261023-WA0040}]
+Silindiri yan yüzeyinden kesip düzleme açınca bir turluk helis, bir dikdörtgenin \textbf{köşegeni} olur. Dikdörtgenin tabanı
+çemberin çevresi $2\pi\cdot5=10\pi$, yüksekliği bir turdaki yükselme $12\cdot2\pi=24\pi$'dir:
+\[ \ell=\sqrt{(10\pi)^2+(24\pi)^2}=\pi\sqrt{100+576}=26\pi . \]
+\end{tahta}
+
+Bu güzel sağlama her dairesel helis için çalışır: $\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j+bt\,\mathbf k$ için
+$\|\mathbf r'\|=\sqrt{a^2+b^2}$ sabittir ve bir turun uzunluğu $2\pi\sqrt{a^2+b^2}$'dir.
+
+\begin{soru}[\ekal Ek örnek 5 (yay uzunluğu)]
+$\mathbf r(t)=2t\,\mathbf i+t^2\,\mathbf j+\ln t\,\mathbf k$, $1\le t\le e$ eğrisinin uzunluğunu bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf r'(t)=2\,\mathbf i+2t\,\mathbf j+\frac1t\,\mathbf k$,
+\[ \|\mathbf r'(t)\|^2=4+4t^2+\frac{1}{t^2}=\Big(2t+\frac1t\Big)^2\quad\Rightarrow\quad\|\mathbf r'(t)\|=2t+\frac1t\ \ (t>0). \]
+\[ \ell=\int_1^e\Big(2t+\frac1t\Big)dt=\big[t^2+\ln t\big]_1^e=(e^2+1)-(1+0)=e^2 . \]
+İpucu: Kökün içi tam kare çıkıyorsa integral kolaylaşır; ders kitaplarındaki alıştırmalar çoğunlukla bu şekilde kurulur.
+\end{cevap}
+
+\subsubsection{Yay uzunluğu fonksiyonu ve yay uzunluğu parametrelemesi}
+
+\begin{bilgi}[Kısmen derste tahtada görülmedi, kaynaklardan eklendi]
+Tahtada $\dfrac{ds}{dt}=\|\mathbf r'(t)\|$ bağıntısı ve $\mathbf T=\dfrac{d\mathbf r}{ds}$ tanımı verilmiştir
+(\foto{IMG-20261015-WA0033}, \foto{IMG-20261023-WA0065}). Yay uzunluğu fonksiyonu ve eğrinin yay uzunluğu ile
+yeniden parametrelenmesi kaynaklara göre aşağıda tamamlanmıştır.
+\end{bilgi}
+
+\begin{tanim}[Yay uzunluğu fonksiyonu]
+Eğri üzerinde sabit bir $\mathbf r(t_0)$ noktasından itibaren ölçülen yay uzunluğu
+\[ s(t)=\int_{t_0}^{t}\|\mathbf r'(u)\|\,du \]
+fonksiyonudur. Analizin temel teoreminden $\dfrac{ds}{dt}=\|\mathbf r'(t)\|$. Eğri düzgünse $ds/dt>0$, yani $s$ kesin artandır ve
+$t$, $s$ cinsinden çözülebilir.
+\end{tanim}
+
+\textbf{Adım adım yay uzunluğu parametrelemesi:}
+\begin{enumerate}
+\item $\|\mathbf r'(t)\|$'yi hesaplayın.
+\item $s(t)=\int_{t_0}^t\|\mathbf r'(u)\|\,du$ integralini bulun.
+\item $s=s(t)$ bağıntısından $t=t(s)$'yi çözün.
+\item $\mathbf r(t(s))$ yazın. Bu yeni gösterimde $\left\|\dfrac{d\mathbf r}{ds}\right\|=1$'dir: nokta ``birim süratle'' hareket eder.
+\end{enumerate}
+
+\begin{soru}[\ekal Ek örnek 6 (helisin yay uzunluğu ile parametrelenmesi)]
+$\mathbf r(t)=5\cos t\,\mathbf i+5\sin t\,\mathbf j+12t\,\mathbf k$ helisini, $t=0$ noktasından ölçülen yay uzunluğu $s$ ile parametreleyiniz.
+\end{soru}
+\begin{cevap}
+Örnek 22'den $\|\mathbf r'(t)\|=13$. $s(t)=\int_0^t13\,du=13t$ $\Rightarrow$ $t=\dfrac{s}{13}$. Yerine yazarsak
+\[ \mathbf r(s)=5\cos\frac{s}{13}\,\mathbf i+5\sin\frac{s}{13}\,\mathbf j+\frac{12s}{13}\,\mathbf k,\qquad s\ge0 . \]
+Kontrol: $\dfrac{d\mathbf r}{ds}=-\dfrac5{13}\sin\dfrac s{13}\,\mathbf i+\dfrac5{13}\cos\dfrac s{13}\,\mathbf j+\dfrac{12}{13}\,\mathbf k$,
+normu $\sqrt{\frac{25}{169}+\frac{144}{169}}=1$ \checkmark
+\end{cevap}
+
+%======================================================================
+\subsection{Frenet çatısı (T, N, B), eğrilik ve burulma}
+
+Eğri boyunca hareket eden bir gözlemci düşünün (örneğin bir lunaparkta trende oturan biri). Onun için doğal eksenler
+``ileri'' (teğet), ``dönüşün merkezine doğru'' (asal normal) ve bu ikisine dik ``yukarı'' (binormal) yönleridir. Bu üç birim
+vektör, eğrinin her noktasında değişen bir dik koordinat sistemi oluşturur.
+
+\subsubsection{Birim teğet vektör \texorpdfstring{$\mathbf T$}{T}}
+
+\begin{tahta}[\foto{IMG-20261015-WA0033}, \foto{IMG-20261023-WA0065}]
+$\mathbf r'(t)\neq\mathbf 0$ ise $\mathbf r'(t)$ eğriye teğettir. $s$: eğri üzerinde sabit bir noktadan itibaren ölçülen yay uzunluğu,
+$\dfrac{ds}{dt}=\|\mathbf r'(t)\|$. \quad $\mathbf T=\dfrac{d\mathbf r}{ds}$: yörüngeye teğet doğrultudaki birim vektör. $t$ ile (zincir kuralı):
+\[ \mathbf T=\frac{d\mathbf r/dt}{ds/dt}=\frac{\mathbf r'(t)}{\|\mathbf r'(t)\|} . \]
+\end{tahta}
+
+$\mathbf T$, teğet vektörün kendi uzunluğuna bölünmüş hâlidir; bu yüzden $\|\mathbf T\|=1$'dir ve yalnızca \emph{yön} bilgisi taşır.
+
+\subsubsection{Asal normal \texorpdfstring{$\mathbf N$}{N}}
+
+$\|\mathbf T\|=1$ sabit olduğundan, ``sabit uzunluklu vektör türevine diktir'' teoremi $\mathbf T$'ye uygulanabilir:
+
+\begin{tahta}[\foto{IMG-20261015-WA0033}, \foto{IMG-20261023-WA0065}]
+\[ \mathbf T\cdot\mathbf T=1\ \Rightarrow\ \frac{d}{ds}(\mathbf T\cdot\mathbf T)=\frac{d\mathbf T}{ds}\cdot\mathbf T+\mathbf T\cdot\frac{d\mathbf T}{ds}=0
+\ \Rightarrow\ 2\,\mathbf T\cdot\frac{d\mathbf T}{ds}=0\ \Rightarrow\ \mathbf T\perp\frac{d\mathbf T}{ds}. \]
+$\dfrac{d\mathbf T}{ds}\neq\mathbf 0$ ise $\dfrac{d\mathbf T}{ds}$ doğrultusundaki birim vektöre \textbf{asal normal} $\mathbf N$ denir; $\mathbf T\perp\mathbf N$.
+$t$ ile:
+\[ \mathbf N=\frac{\mathbf T'(t)}{\|\mathbf T'(t)\|} . \]
+\end{tahta}
+
+$\mathbf N$, eğrinin \emph{büküldüğü tarafı}, yani dönüşün iç tarafını gösterir. (Tahtada $\|\mathbf T\|=1$ yerine kısaca ``$T=1$''
+yazılmıştır.)
+
+\subsubsection{Binormal \texorpdfstring{$\mathbf B$}{B} ve Frenet üçlüsü}
+
+\begin{tanim}[Binormal ve Frenet üçlüsü]
+Hem $\mathbf T$'ye hem $\mathbf N$'ye dik olan
+\[ \mathbf B=\mathbf T\times\mathbf N \]
+vektörüne \textbf{binormal vektör} denir. $\mathbf T$, $\mathbf N$, $\mathbf B$ birim ve karşılıklı dik vektörlerdir; bu sağ el
+sistemine \textbf{Frenet üçlüsü} (TNB çatısı) denir. \foto{IMG-20261015-WA0033}, \foto{IMG-20261023-WA0065}
+\end{tanim}
+
+$\mathbf T$ ve $\mathbf N$ birim ve dik olduğundan $\|\mathbf B\|=\|\mathbf T\|\|\mathbf N\|\sin90^\circ=1$'dir. Sağ el sistemi
+olduğu için $\mathbf N=\mathbf B\times\mathbf T$ ve $\mathbf T=\mathbf N\times\mathbf B$ de geçerlidir.
+
+\begin{dikkat}[Defterdeki etiket hatası]
+15.10 defterindeki çizimde (\foto{IMG-20261015-WA0033}) binormal okunun yanına ``$\mathbf B=\mathbf N\times\mathbf T$'' yazılmıştır.
+Tanıma göre doğrusu $\mathbf B=\mathbf T\times\mathbf N$'dir; $\mathbf N\times\mathbf T=-\mathbf B$ ters yönü gösterir. 23.10
+tahtasında (\foto{IMG-20261023-WA0065}) doğru biçimde $\mathbf B=\mathbf T\times\mathbf N$ yazılmıştır.
+\end{dikkat}
+
+\begin{teorem}[Hesap için pratik formüller -- kaynaklardan]
+\[ \mathbf T=\frac{\mathbf r'}{\|\mathbf r'\|},\qquad \mathbf B=\frac{\mathbf r'\times\mathbf r''}{\|\mathbf r'\times\mathbf r''\|},\qquad \mathbf N=\mathbf B\times\mathbf T . \]
+Bu yol, $\mathbf T'(t)$'yi türetmekten (bölüm kuralıyla uğraşmaktan) çoğu zaman daha kısadır.
+\end{teorem}
+
+Gerekçesi: $\mathbf r'=\upsilon\mathbf T$ ($\upsilon=ds/dt$) ve türevi $\mathbf r''=\upsilon'\mathbf T+\upsilon\mathbf T'$'dür. $\mathbf T'$,
+$\mathbf N$ doğrultusunda olduğundan $\mathbf r'\times\mathbf r''=\upsilon\,\|\mathbf T'\|\,\upsilon\,(\mathbf T\times\mathbf N)$, yani $\mathbf B$ ile aynı yöndedir.
+
+\textbf{Üç önemli düzlem} (kaynaklardan): $\mathbf T$ ve $\mathbf N$'nin gerdiği düzleme \textbf{oskülatör (öpücü) düzlem}
+(normali $\mathbf B$), $\mathbf N$ ve $\mathbf B$'nin gerdiğine \textbf{normal düzlem} (normali $\mathbf T$), $\mathbf T$ ve $\mathbf B$'nin
+gerdiğine \textbf{doğrultucu düzlem} (normali $\mathbf N$) denir. Düzlemsel bir eğri her zaman kendi oskülatör düzleminde yatar.
+
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.4cm)},y={(1cm,0cm)},z={(0cm,1cm)},scale=1.15]
+\draw[eks] (0,0,0)--(3.3,0,0) node[below left]{$x$};
+\draw[eks] (0,0,0)--(0,3.6,0) node[right]{$y$};
+\draw[eks] (0,0,0)--(0,0,5.2) node[above]{$z$};
+\draw[gri,dashed,domain=0:360,samples=25,smooth,variable=\a] plot ({2*cos(\a)},{2*sin(\a)},0);
+\draw[ana,very thick,domain=0:540,samples=25,smooth,variable=\a] plot ({2*cos(\a)},{2*sin(\a)},{\a/114.59});
+\coordinate (P) at (0,2,0.785);
+\draw[vek,vurgu] (P)--(-1.358,2,1.125) node[above right]{$\mathbf T$};
+\draw[vek,yesil] (P)--(0,0.6,0.785) node[above left]{$\mathbf N$};
+\draw[vek,mor] (P)--(0.340,2,2.143) node[left]{$\mathbf B=\mathbf T\times\mathbf N$};
+\fill (P) circle (2pt) node[below right]{$P$};
+\end{tikzpicture}
+
+{\small Şekil: $\mathbf r(t)=2\cos t\,\mathbf i+2\sin t\,\mathbf j+\frac t2\,\mathbf k$ helisinin $t=\pi/2$ noktasındaki Frenet üçlüsü:
+$\mathbf T$ ileri (teğet), $\mathbf N$ silindirin eksenine doğru (yatay), $\mathbf B$ ikisine dik.}
+\end{center}
+
+\begin{soru}[Örnek 23 \foto{IMG-20261015-WA0034}, \foto{IMG-20261023-WA0047}, \foto{IMG-20261023-WA0067}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ ($a>0$) çemberinin $\mathbf T$, $\mathbf N$, $\mathbf B$ vektörlerini bulunuz.
+\end{soru}
+\begin{cevap}
+\textbf{$\mathbf T$:} $\mathbf r'(t)=-a\sin t\,\mathbf i+a\cos t\,\mathbf j$, \ $\|\mathbf r'(t)\|=\sqrt{a^2\sin^2t+a^2\cos^2t}=a$.
+\[ \mathbf T=\frac{\mathbf r'(t)}{\|\mathbf r'(t)\|}=\frac{-a\sin t\,\mathbf i+a\cos t\,\mathbf j}{a}=-\sin t\,\mathbf i+\cos t\,\mathbf j . \]
+\textbf{$\mathbf N$:} $\mathbf T'(t)=-\cos t\,\mathbf i-\sin t\,\mathbf j$, \ $\|\mathbf T'(t)\|=1$,
+\[ \mathbf N=\frac{\mathbf T'(t)}{\|\mathbf T'(t)\|}=-\cos t\,\mathbf i-\sin t\,\mathbf j=-\frac1a\,\mathbf r(t)\quad(\text{merkeze doğru}). \]
+\textbf{$\mathbf B$:}
+\[ \mathbf B=\mathbf T\times\mathbf N=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-\sin t&\cos t&0\\-\cos t&-\sin t&0\end{vmatrix}
+=0\,\mathbf i-0\,\mathbf j+\underbrace{(\sin^2t+\cos^2t)}_{1}\mathbf k=\boxed{\mathbf k} . \]
+Yorum: $\mathbf N$ her zaman çemberin merkezine yönelir; $\mathbf B=\mathbf k$ sabittir ve çemberin düzlemine diktir (çizimde
+``$\odot$'' ile, kâğıttan dışarı doğru gösterilir). Sabit $\mathbf B$, eğrinin düzlemsel olduğunun işaretidir.
+\end{cevap}
+
+\begin{bilgi}[Defterdeki yazım hataları]
+15.10 defterinde (\foto{IMG-20261015-WA0034}) $\mathbf T$ ``$\sin t\,\mathbf i+\cos t\,\mathbf j$'' diye yazılmıştır; doğrusu
+$-\sin t\,\mathbf i+\cos t\,\mathbf j$'dir (determinantta zaten doğru hâli kullanılmıştır). Aynı sayfada $\mathbf r'(t)$'nin ilk
+teriminde $\mathbf i$ unutulmuştur. 23.10 tahtasında (\foto{IMG-20261023-WA0067}) hesap doğru yazılmıştır.
+\end{bilgi}
+
+\subsubsection{Eğrilik ve eğrilik yarıçapı}
+
+Eğrilik, birim teğet vektörün \emph{birim yol başına} ne kadar hızlı döndüğünü ölçer. Doğru üzerinde $\mathbf T$ hiç dönmez
+(eğrilik $0$); küçük bir çemberde çok hızlı döner (eğrilik büyük).
+
+\begin{tahta}[\foto{IMG-20261015-WA0035}, \foto{IMG-20261023-WA0038}]
+$\mathbf T=\dfrac{d\mathbf r}{ds}\Rightarrow\dfrac{d\mathbf T}{ds}=\dfrac{d^2\mathbf r}{ds^2}$. \ $\dfrac{d\mathbf T}{ds}$, $\mathbf N$
+doğrultusundadır: $\dfrac{d\mathbf T}{ds}=\left\|\dfrac{d\mathbf T}{ds}\right\|\mathbf N=\kappa\,\mathbf N$.
+\begin{itemize}
+\item Eğrilik: $\kappa=\left\|\dfrac{d\mathbf T}{ds}\right\|=\left\|\dfrac{d^2\mathbf r}{ds^2}\right\|$
+\item Eğrilik yarıçapı: $\rho=\dfrac1\kappa\ \Rightarrow\ \dfrac{d\mathbf T}{ds}=\dfrac1\rho\,\mathbf N$
+\end{itemize}
+\[ \rho=\left\|\frac{d^2\mathbf r}{ds^2}\right\|^{-1}=\left\{\Big(\frac{d^2x}{ds^2}\Big)^2+\Big(\frac{d^2y}{ds^2}\Big)^2+\Big(\frac{d^2z}{ds^2}\Big)^2\right\}^{-1/2} \]
+\end{tahta}
+
+Pratikte eğri $s$ ile değil $t$ ile verilir. Zincir kuralı $\frac{d\mathbf T}{dt}=\frac{d\mathbf T}{ds}\frac{ds}{dt}$ ile:
+
+\begin{teorem}[Eğrilik formülleri -- kaynaklardan]
+\[ \kappa=\left\|\frac{d\mathbf T}{ds}\right\|=\frac{\|\mathbf T'(t)\|}{\|\mathbf r'(t)\|}=\frac{\|\mathbf r'(t)\times\mathbf r''(t)\|}{\|\mathbf r'(t)\|^3},\qquad \rho=\frac1\kappa . \]
+\textbf{Düzlem eğrisi} $y=f(x)$ için:
+\[ \kappa(x)=\frac{|f''(x)|}{\big(1+(f'(x))^2\big)^{3/2}} . \]
+Parametrik düzlem eğrisi $x=x(t)$, $y=y(t)$ için: \ $\kappa=\dfrac{|x'y''-y'x''|}{\big((x')^2+(y')^2\big)^{3/2}}$.
+\end{teorem}
+
+\textit{Vektörel çarpım formülünün çıkarılışı.} $\upsilon=\|\mathbf r'\|$ olsun. $\mathbf r'=\upsilon\,\mathbf T$ ve
+$\mathbf T'(t)=\frac{d\mathbf T}{ds}\upsilon=\kappa\upsilon\,\mathbf N$ olduğundan
+\[ \mathbf r''=\upsilon'\,\mathbf T+\upsilon\,\mathbf T'=\upsilon'\,\mathbf T+\kappa\upsilon^2\,\mathbf N . \]
+$\mathbf T\times\mathbf T=\mathbf 0$ ve $\mathbf T\times\mathbf N=\mathbf B$ kullanılarak
+$\mathbf r'\times\mathbf r''=\kappa\upsilon^3\,\mathbf B$, normu alınınca $\|\mathbf r'\times\mathbf r''\|=\kappa\upsilon^3$ bulunur.
+$y=f(x)$ formülü ise $\mathbf r(x)=x\,\mathbf i+f(x)\,\mathbf j$ için $\mathbf r'\times\mathbf r''=f''(x)\,\mathbf k$ ve
+$\|\mathbf r'\|=\sqrt{1+f'^2}$ yazılarak elde edilir.
+
+\begin{soru}[Örnek 24 \foto{IMG-20261015-WA0038}, \foto{IMG-20261023-WA0052}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ çemberinin eğriliğini ve eğrilik yarıçapını bulunuz.
+\end{soru}
+\begin{cevap}
+Örnek 23'ten $\mathbf T'(t)=-\cos t\,\mathbf i-\sin t\,\mathbf j$ ve $\dfrac{ds}{dt}=\|\mathbf r'(t)\|=a$. Zincir kuralıyla
+\[ \frac{d\mathbf T}{ds}=\frac{d\mathbf T/dt}{ds/dt}=\frac1a(-\cos t\,\mathbf i-\sin t\,\mathbf j)\ \Rightarrow\ \kappa=\left\|\frac{d\mathbf T}{ds}\right\|=\frac1a,\qquad \boxed{\rho=a} . \]
+Çemberin eğrilik yarıçapı kendi yarıçapına eşittir; eğriliği her noktada aynıdır. Büyük çember ``az'', küçük çember ``çok'' eğridir.
+(Formülle kontrol: $\mathbf r'\times\mathbf r''=a^2\,\mathbf k$, $\kappa=a^2/a^3=1/a$ \checkmark)
+\end{cevap}
+
+\begin{soru}[\ekal Ek örnek 7 (helisin eğriliği)]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j+bt\,\mathbf k$ ($a>0$) helisinin eğriliğini bulunuz. Örnek 11 ve Örnek 22'deki
+helisler için sayısal değerleri yazınız.
+\end{soru}
+\begin{cevap}
+Örnek 16'dan $\mathbf r'\times\mathbf r''=ab\sin t\,\mathbf i-ab\cos t\,\mathbf j+a^2\,\mathbf k$, \ $\|\mathbf r'\times\mathbf r''\|=a\sqrt{a^2+b^2}$.
+Ayrıca $\|\mathbf r'\|=\sqrt{a^2\sin^2t+a^2\cos^2t+b^2}=\sqrt{a^2+b^2}$. Böylece
+\[ \kappa=\frac{a\sqrt{a^2+b^2}}{(a^2+b^2)^{3/2}}=\frac{a}{a^2+b^2}\quad(\text{sabit}). \]
+\begin{itemize}
+\item Örnek 11 ($a=2$, $b=4$): $\kappa=\dfrac{2}{20}=\dfrac1{10}$, \ $\rho=10$.
+\item Örnek 22 ($a=5$, $b=12$): $\kappa=\dfrac{5}{169}$, \ $\rho=\dfrac{169}{5}=33{,}8$.
+\end{itemize}
+$b=0$ için çemberin $\kappa=1/a$ sonucu geri gelir; $b$ büyüdükçe helis ``gerilir'' ve eğriliği azalır.
+\end{cevap}
+
+\begin{soru}[\ekal Ek örnek 8 (elipsin köşelerdeki eğriliği)]
+$\mathbf r(t)=3\cos t\,\mathbf i+2\sin t\,\mathbf j$ elipsinin $(3,0)$ ve $(0,2)$ noktalarındaki eğriliklerini bulunuz.
+\end{soru}
+\begin{cevap}
+$x'=-3\sin t$, $y'=2\cos t$, $x''=-3\cos t$, $y''=-2\sin t$; \ $x'y''-y'x''=6\sin^2t+6\cos^2t=6$. Böylece
+\[ \kappa(t)=\frac{6}{(9\sin^2t+4\cos^2t)^{3/2}} . \]
+$(3,0)$, $t=0$: $\kappa=\dfrac{6}{4^{3/2}}=\dfrac68=\dfrac34$. \quad $(0,2)$, $t=\pi/2$: $\kappa=\dfrac{6}{9^{3/2}}=\dfrac{6}{27}=\dfrac29$.
+Elipsin uzun ekseninin ucunda (sivri tarafta) eğrilik büyük, kısa ekseninin ucunda (basık tarafta) küçüktür.
+\end{cevap}
+
+\subsubsection{Eğrilik çemberi}
+
+\begin{tanim}[Eğrilik (oskülatör) çemberi -- kaynaklardan]
+Eğrinin bir $P$ noktasında $\kappa>0$ olsun. Oskülatör düzlemde bulunan, merkezi $P$'den $\mathbf N$ yönünde $\rho=1/\kappa$
+uzaklıktaki noktada olan ve yarıçapı $\rho$ olan çembere $P$'deki \textbf{eğrilik çemberi} denir. Merkezi:
+\[ \mathbf r_M=\mathbf r(P)+\rho\,\mathbf N . \]
+Eğrilik çemberi eğriye $P$'de teğettir, aynı eğriliğe sahiptir ve eğriyi $P$ civarında en iyi yaklaşan çemberdir.
+\end{tanim}
+
+Uygulama: Bir karayolu virajının tasarımında, araç virajın bir noktasında sanki eğrilik çemberi üzerinde dönüyormuş gibi
+davranır; gereken merkezcil ivme $\upsilon^2/\rho$'dur (aşağıda hareket bölümüne bakınız).
+
+\begin{soru}[\ekal Ek örnek 9 (parabolün eğrilik çemberi)]
+$y=x^2$ parabolünün orijindeki eğriliğini, eğrilik yarıçapını ve eğrilik çemberinin denklemini bulunuz.
+\end{soru}
+\begin{cevap}
+$f'(x)=2x$, $f''(x)=2$:
+\[ \kappa(x)=\frac{2}{(1+4x^2)^{3/2}}\ \Rightarrow\ \kappa(0)=2,\qquad \rho=\frac12 . \]
+Orijinde teğet $x$ ekseni, parabol yukarı büküldüğü için $\mathbf N=\mathbf j$'dir. Merkez $(0,0)+\frac12(0,1)=\big(0,\frac12\big)$:
+\[ x^2+\Big(y-\frac12\Big)^2=\frac14 . \]
+$\kappa(x)$ ifadesinden parabolün en eğri noktasının tepe noktası olduğu, $|x|$ büyüdükçe eğriliğin sıfıra gittiği görülür.
+\end{cevap}
+
+\subsubsection{Burulma (kısaca)}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Burulma (torsiyon) ve Frenet--Serret formülleri derste işlenmemiştir; müfredatta ``kısaca'' yer aldığı için ana fikirleri verilmiştir.
+\end{bilgi}
+
+Eğrilik, eğrinin oskülatör düzlemi \emph{içinde} ne kadar büküldüğünü ölçer. Uzay eğrileri ayrıca bu düzlemden
+``kıvrılıp çıkar''; bunun ölçüsü binormalin dönme hızıdır. $\mathbf B$ birim olduğundan $\frac{d\mathbf B}{ds}\perp\mathbf B$; ayrıca
+$\frac{d\mathbf B}{ds}\perp\mathbf T$ olduğu gösterilebilir. Dolayısıyla $\frac{d\mathbf B}{ds}$, $\mathbf N$ doğrultusundadır.
+
+\begin{teorem}[Burulma ve Frenet--Serret formülleri]
+\[ \frac{d\mathbf B}{ds}=-\tau\,\mathbf N,\qquad \tau=\frac{(\mathbf r'\times\mathbf r'')\cdot\mathbf r'''}{\|\mathbf r'\times\mathbf r''\|^2} . \]
+\[ \frac{d\mathbf T}{ds}=\kappa\,\mathbf N,\qquad \frac{d\mathbf N}{ds}=-\kappa\,\mathbf T+\tau\,\mathbf B,\qquad \frac{d\mathbf B}{ds}=-\tau\,\mathbf N . \]
+Düzlemsel bir eğride $\mathbf B$ sabittir, dolayısıyla $\tau=0$'dır (tersi de doğrudur).
+\end{teorem}
+
+Örnek: Helis için (Örnek 16) $\mathbf r'''=a\sin t\,\mathbf i-a\cos t\,\mathbf j$ ve
+$(\mathbf r'\times\mathbf r'')\cdot\mathbf r'''=a^2b\sin^2t+a^2b\cos^2t=a^2b$; $\|\mathbf r'\times\mathbf r''\|^2=a^2(a^2+b^2)$. Böylece
+$\tau=\dfrac{b}{a^2+b^2}$ sabittir. Çember için ($b=0$) $\tau=0$, Örnek 23'te bulunan sabit $\mathbf B=\mathbf k$ ile tutarlıdır.
+
+%======================================================================
+\subsection{Uzayda hareket: hız, ivme, sürat}
+
+\subsubsection{Tanımlar}
+
+\begin{tahta}[\foto{IMG-20261015-WA0034}, \foto{IMG-20261023-WA0047}, \foto{IMG-20261023-WA0067}]
+$C:\mathbf r(t)$ eğrisi üzerinde hareket eden parçacığın $t$ anındaki konumu $\mathbf r(t)$ olsun.
+\begin{itemize}
+\item Ortalama hız: $\mathbf v_{\text{ort}}=\dfrac{\mathbf r(t)-\mathbf r(t_0)}{t-t_0}$
+\item Anlık hız: $\mathbf v(t_0)=\displaystyle\lim_{t\to t_0}\frac{\mathbf r(t)-\mathbf r(t_0)}{t-t_0}=\mathbf r'(t_0)$
+\item İvme: $\mathbf a(t_0)=\displaystyle\lim_{t\to t_0}\frac{\mathbf v(t)-\mathbf v(t_0)}{t-t_0}=\mathbf v'(t_0)=\mathbf r''(t_0)$
+\item Sürat: $\|\mathbf v(t)\|=\|\mathbf r'(t)\|$
+\item $\mathbf v=\dfrac{d\mathbf r}{dt}=\dfrac{d\mathbf r}{ds}\cdot\dfrac{ds}{dt}=\upsilon\,\mathbf T$, \ $\upsilon=\dfrac{ds}{dt}$: sürat $\ \Rightarrow\ \mathbf T=\dfrac{\mathbf v}{\|\mathbf v\|}$
+\end{itemize}
+\end{tahta}
+
+\begin{bilgi}[Tahtadaki yazım]
+15.10 defterinde ve 23.10 tahtasının bir fotoğrafında (\foto{IMG-20261015-WA0034}, \foto{IMG-20261023-WA0047}) son satır
+``$\mathbf v=\frac{d\mathbf r}{ds}$'' diye başlamaktadır. Doğrusu $\mathbf v=\frac{d\mathbf r}{dt}$'dir ($\frac{d\mathbf r}{ds}=\mathbf T$
+birim vektördür, hız değildir). \foto{IMG-20261023-WA0067} fotoğrafında doğru hâli yazılmıştır.
+\end{bilgi}
+
+Özetle: \textbf{hız} bir vektördür (yön + büyüklük); \textbf{sürat} hızın büyüklüğüdür (skaler); \textbf{ivme} hızın değişim hızıdır
+ve hem büyüklüğün hem de \emph{yönün} değişmesinden doğar. Sabit süratle dönen bir cismin de ivmesi vardır.
+
+\begin{soru}[Örnek 25 \foto{IMG-20261015-WA0036}, \foto{IMG-20261023-WA0049}, \foto{IMG-20261023-WA0067}]
+$a>0$ olmak üzere konum vektörü $\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ olan hareketlinin hız vektörü konum vektörüne dik midir?
+\end{soru}
+\begin{cevap}
+$\mathbf v(t)=\mathbf r'(t)=-a\sin t\,\mathbf i+a\cos t\,\mathbf j$.
+\[ \mathbf v(t)\cdot\mathbf r(t)=(-a\sin t)(a\cos t)+(a\cos t)(a\sin t)=-a^2\sin t\cos t+a^2\sin t\cos t=0 . \]
+Her $t$ için $\mathbf v\perp\mathbf r$: çembersel harekette hız her an yarıçapa diktir. Bu, $\|\mathbf r(t)\|=a$ sabit olduğu için
+``sabit uzunluklu vektör türevine diktir'' teoreminin bir örneğidir.
+\end{cevap}
+
+\begin{soru}[Örnek 26 \foto{IMG-20261015-WA0036}, \foto{IMG-20261023-WA0049}, \foto{IMG-20261023-WA0067}]
+Konum vektörü $\mathbf r(t)=5\cos t\,\mathbf i+5\sin t\,\mathbf j+6t^2\,\mathbf k$ olan hareketlinin hızını ve ivmesini bulunuz.
+Hız ve ivme ne zaman diktir?
+\end{soru}
+\begin{cevap}
+\[ \mathbf v(t)=-5\sin t\,\mathbf i+5\cos t\,\mathbf j+12t\,\mathbf k,\qquad \mathbf a(t)=\mathbf v'(t)=-5\cos t\,\mathbf i-5\sin t\,\mathbf j+12\,\mathbf k . \]
+Diklik için skaler çarpım sıfır olmalı:
+\[ \mathbf a(t)\cdot\mathbf v(t)=25\sin t\cos t-25\sin t\cos t+144t=144t=0\ \Rightarrow\ \boxed{t=0} . \]
+Not: $\mathbf a\cdot\mathbf v=\frac12\frac{d}{dt}\|\mathbf v\|^2$ olduğundan $\mathbf a\perp\mathbf v$ olduğu anlar süratin
+(anlık olarak) değişmediği anlardır. Burada $\|\mathbf v\|^2=25+144t^2$, türevi $t=0$'da sıfırdır. \checkmark
+\end{cevap}
+
+\begin{soru}[Örnek 27 \foto{IMG-20261015-WA0036}, \foto{IMG-20261023-WA0049}, \foto{IMG-20261023-WA0038}]
+Parametrik denklemleri $x=e^{-t}$, $y=2\cos3t$, $z=2\sin3t$ olan eğri boyunca bir cisim hareket etmektedir ($t$: zaman).
+(a) Hızı ve ivmesi nedir? (b) $t=0$ iken hız ve ivmenin büyüklükleri nedir? (c) $t=0$ iken birim teğet vektör nedir?
+\end{soru}
+\begin{cevap}
+$\mathbf r(t)=e^{-t}\,\mathbf i+2\cos3t\,\mathbf j+2\sin3t\,\mathbf k$.
+
+\textbf{(a)} $\mathbf v=\dfrac{d\mathbf r}{dt}=-e^{-t}\,\mathbf i-6\sin3t\,\mathbf j+6\cos3t\,\mathbf k$, \quad
+$\mathbf a=\dfrac{d\mathbf v}{dt}=e^{-t}\,\mathbf i-18\cos3t\,\mathbf j-18\sin3t\,\mathbf k$.
+
+\textbf{(b)} $t=0$: $\mathbf v(0)=-\mathbf i+6\,\mathbf k\Rightarrow\|\mathbf v(0)\|=\sqrt{(-1)^2+6^2}=\sqrt{37}$;
+\ $\mathbf a(0)=\mathbf i-18\,\mathbf j\Rightarrow\|\mathbf a(0)\|=\sqrt{1+324}=\sqrt{325}=5\sqrt{13}$.
+
+\textbf{(c)} $\mathbf T(0)=\dfrac{\mathbf v(0)}{\|\mathbf v(0)\|}=-\dfrac1{\sqrt{37}}\,\mathbf i+\dfrac6{\sqrt{37}}\,\mathbf k$.
+\end{cevap}
+
+\subsubsection{İvmenin teğet ve normal bileşenleri}
+
+İvme vektörünü, hareketin kendi eksenleri olan $\mathbf T$ ve $\mathbf N$ cinsinden yazmak fiziksel olarak çok aydınlatıcıdır:
+\emph{teğet bileşen} süratin değişimini, \emph{normal bileşen} yönün değişimini (dönmeyi) ölçer.
+
+\begin{soru}[Örnek 28 \foto{IMG-20261015-WA0035}, \foto{IMG-20261023-WA0052}]
+Bir nokta $\mathbf r=\mathbf r(t)$ eğrisi boyunca hareket ediyor; $s$ alınan yol, $\upsilon=\left\|\dfrac{d\mathbf r}{dt}\right\|=\dfrac{ds}{dt}$ sürattir.
+\[ \mathbf a=\frac{d\upsilon}{dt}\,\mathbf T+\frac{\upsilon^2}{\rho}\,\mathbf N \]
+olduğunu gösteriniz.
+\end{soru}
+\begin{cevap}
+$\mathbf v=\upsilon\,\mathbf T$ eşitliğinin türevini çarpım kuralı (i) ile alalım:
+\[ \mathbf a=\frac{d\mathbf v}{dt}=\frac{d\upsilon}{dt}\,\mathbf T+\upsilon\,\frac{d\mathbf T}{dt} . \]
+Zincir kuralıyla $\dfrac{d\mathbf T}{dt}=\dfrac{d\mathbf T}{ds}\cdot\dfrac{ds}{dt}=\upsilon\,\dfrac{d\mathbf T}{ds}$ ve
+$\dfrac{d\mathbf T}{ds}=\kappa\mathbf N=\dfrac1\rho\mathbf N$ olduğundan
+\[ \mathbf a=\frac{d\upsilon}{dt}\,\mathbf T+\upsilon^2\,\frac{d\mathbf T}{ds}=\frac{d\upsilon}{dt}\,\mathbf T+\frac{\upsilon^2}{\rho}\,\mathbf N . \qquad\blacksquare \]
+Tahtadaki çizimde $\mathbf a$ vektörü, eğrinin $P$ noktasında $\frac{d\upsilon}{dt}\mathbf T$ (teğet) ve $\frac{\upsilon^2}{\rho}\mathbf N$
+(eğrinin iç tarafına doğru) bileşenlerinden oluşan paralelkenarın köşegeni olarak gösterilmiştir.
+\end{cevap}
+
+\begin{teorem}[İvmenin teğet ve normal bileşenleri]
+\[ \mathbf a=a_T\,\mathbf T+a_N\,\mathbf N,\qquad a_T=\frac{d\upsilon}{dt},\qquad a_N=\kappa\upsilon^2=\frac{\upsilon^2}{\rho} . \]
+Hesap için pratik formüller (kaynaklardan):
+\[ a_T=\frac{\mathbf v\cdot\mathbf a}{\|\mathbf v\|},\qquad a_N=\frac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|}=\sqrt{\|\mathbf a\|^2-a_T^2} . \]
+İvme her zaman oskülatör düzlemdedir; $\mathbf B$ yönünde bileşeni yoktur.
+\end{teorem}
+
+Pratik formüllerin gerekçesi: $\mathbf v=\upsilon\mathbf T$ ile $\mathbf a=a_T\mathbf T+a_N\mathbf N$'nin skaler çarpımı
+$\upsilon\,a_T$, vektörel çarpımı $\upsilon\,a_N\,\mathbf B$'dir. Ayrıca $\mathbf T\perp\mathbf N$ olduğundan Pisagor ile
+$\|\mathbf a\|^2=a_T^2+a_N^2$.
+
+\begin{soru}[Örnek 29 \foto{IMG-20261015-WA0038}, \foto{IMG-20261023-WA0052}]
+$\mathbf r(t)=a\cos t\,\mathbf i+a\sin t\,\mathbf j$ ($t$: zaman) çembersel hareketinde ivmeyi teğet ve normal bileşenlerine ayırınız.
+\end{soru}
+\begin{cevap}
+Sürat $\upsilon=\|\mathbf r'\|=a$ sabittir, dolayısıyla $\dfrac{d\upsilon}{dt}=0$: teğet bileşen yoktur. Örnek 24'ten $\rho=a$.
+\[ \mathbf a(t)=\mathbf r''(t)=-a\cos t\,\mathbf i-a\sin t\,\mathbf j=a\,(-\cos t\,\mathbf i-\sin t\,\mathbf j)=a\,\mathbf N . \]
+Formülle: $\dfrac{\upsilon^2}{\rho}\mathbf N=\dfrac{a^2}{a}\mathbf N=a\,\mathbf N$ \checkmark. Düzgün çembersel harekette ivme tamamen
+merkeze yöneliktir (merkezcil ivme).
+\end{cevap}
+
+\begin{soru}[\ekal Ek örnek 10 (Örnek 27'nin devamı: \texorpdfstring{$a_T$}{aT} ve \texorpdfstring{$a_N$}{aN})]
+Örnek 27'deki hareket için $t=0$ anında ivmenin teğet ve normal bileşenlerini bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf v(0)=(-1,0,6)$, $\mathbf a(0)=(1,-18,0)$, $\|\mathbf v(0)\|=\sqrt{37}$.
+\[ a_T=\frac{\mathbf v\cdot\mathbf a}{\|\mathbf v\|}=\frac{-1+0+0}{\sqrt{37}}=-\frac{1}{\sqrt{37}} \quad(\text{negatif: cisim yavaşlıyor}). \]
+\[ \mathbf v\times\mathbf a=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\-1&0&6\\1&-18&0\end{vmatrix}=108\,\mathbf i+6\,\mathbf j+18\,\mathbf k,\qquad
+\|\mathbf v\times\mathbf a\|=\sqrt{12024}=6\sqrt{334} . \]
+\[ a_N=\frac{6\sqrt{334}}{\sqrt{37}}\approx18{,}03 . \]
+Kontrol: $a_T^2+a_N^2=\dfrac{1}{37}+\dfrac{12024}{37}=\dfrac{12025}{37}=325=\|\mathbf a(0)\|^2$ \checkmark
+\end{cevap}
+
+\subsubsection{Mermi hareketi}
+
+\begin{bilgi}[Derste tahtada görülmedi, kaynaklardan eklendi]
+Mermi (eğik atış) hareketi, vektör fonksiyonların integralinin klasik uygulamasıdır; Zill \& Wright ve Kreyszig'e göre kısaca verilmiştir.
+\end{bilgi}
+
+Bir cisim orijinden, yatayla $\alpha$ açısı yapacak şekilde $v_0$ ilk süratiyle atılsın. Hava direnci ihmal edilirse tek kuvvet
+yerçekimidir: $\mathbf a(t)=-g\,\mathbf j$. Başlangıç koşulları $\mathbf v(0)=v_0\cos\alpha\,\mathbf i+v_0\sin\alpha\,\mathbf j$,
+$\mathbf r(0)=\mathbf 0$. İki kez integral alarak (Örnek 20'deki yöntem):
+\[ \mathbf v(t)=v_0\cos\alpha\,\mathbf i+(v_0\sin\alpha-gt)\,\mathbf j,\qquad
+\mathbf r(t)=(v_0\cos\alpha)\,t\,\mathbf i+\Big((v_0\sin\alpha)\,t-\frac12gt^2\Big)\mathbf j . \]
+
+\begin{teorem}[Mermi hareketinin temel büyüklükleri]
+\begin{itemize}
+\item Uçuş süresi ($y=0$, $t>0$): $t_u=\dfrac{2v_0\sin\alpha}{g}$
+\item Menzil (yatay uzaklık): $R=\dfrac{v_0^2\sin2\alpha}{g}$ \quad (en büyük menzil $\alpha=45^\circ$'de)
+\item En büyük yükseklik ($y'=0$, $t=\frac{v_0\sin\alpha}{g}$): $H=\dfrac{v_0^2\sin^2\alpha}{2g}$
+\end{itemize}
+Yörünge bir paraboldür: $t=\dfrac{x}{v_0\cos\alpha}$ yazılırsa $y=x\tan\alpha-\dfrac{g}{2v_0^2\cos^2\alpha}\,x^2$.
+\end{teorem}
+
+\begin{soru}[\ekal Ek örnek 11 (eğik atış)]
+Bir top yerden $v_0=40$ m/s ilk süratle, yatayla $30^\circ$ açı yapacak şekilde atılıyor ($g\approx10$ m/s$^2$ alınız).
+Uçuş süresini, menzili, en büyük yüksekliği ve yere çarpma süratini bulunuz.
+\end{soru}
+\begin{cevap}
+$v_0\cos30^\circ=20\sqrt3$, $v_0\sin30^\circ=20$. $\mathbf r(t)=20\sqrt3\,t\,\mathbf i+(20t-5t^2)\,\mathbf j$.
+\begin{itemize}
+\item Uçuş süresi: $20t-5t^2=0\Rightarrow t_u=4$ s.
+\item Menzil: $x(4)=80\sqrt3\approx138{,}6$ m \ (formülle: $\frac{1600\sin60^\circ}{10}=80\sqrt3$ \checkmark).
+\item En büyük yükseklik: $y'=20-10t=0\Rightarrow t=2$, $H=y(2)=40-20=20$ m.
+\item Çarpma: $\mathbf v(4)=20\sqrt3\,\mathbf i+(20-40)\,\mathbf j$, $\|\mathbf v(4)\|=\sqrt{1200+400}=40$ m/s (atış süratine eşit).
+\end{itemize}
+\end{cevap}
+
+%======================================================================
+\subsection{Kaynak kitaplardan ek örnekler}
+
+\begin{soru}[\ekal Ek örnek 12 (bükülmüş kübik: Frenet üçlüsü, eğrilik, burulma)]
+$\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t^3\,\mathbf k$ eğrisinin $t=0$ noktasında $\mathbf T$, $\mathbf N$, $\mathbf B$, $\kappa$ ve $\tau$'yu bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf r'=(1,2t,3t^2)$, $\mathbf r''=(0,2,6t)$, $\mathbf r'''=(0,0,6)$. $t=0$'da: $\mathbf r'=(1,0,0)$, $\mathbf r''=(0,2,0)$.
+\[ \mathbf r'\times\mathbf r''=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&0&0\\0&2&0\end{vmatrix}=(0,0,2),\qquad \|\mathbf r'\times\mathbf r''\|=2,\quad\|\mathbf r'\|=1 . \]
+\begin{itemize}
+\item $\mathbf T=(1,0,0)=\mathbf i$, \ $\mathbf B=\dfrac{(0,0,2)}{2}=\mathbf k$, \ $\mathbf N=\mathbf B\times\mathbf T=\mathbf k\times\mathbf i=\mathbf j$.
+\item $\kappa=\dfrac{\|\mathbf r'\times\mathbf r''\|}{\|\mathbf r'\|^3}=\dfrac21=2$, \quad $\rho=\dfrac12$.
+\item $\tau=\dfrac{(\mathbf r'\times\mathbf r'')\cdot\mathbf r'''}{\|\mathbf r'\times\mathbf r''\|^2}=\dfrac{(0,0,2)\cdot(0,0,6)}{4}=3$.
+\end{itemize}
+$\tau\neq0$ olduğundan eğri düzlemsel değildir.
+\end{cevap}
+
+\begin{soru}[\ekal Ek örnek 13 (sikloid kemerinin uzunluğu)]
+Örnek 18'deki sikloidin bir kemerinin ($0\le t\le2\pi$) uzunluğunu bulunuz.
+\end{soru}
+\begin{cevap}
+$\|\mathbf r'(t)\|^2=a^2(1-\cos t)^2+a^2\sin^2t=a^2(2-2\cos t)=4a^2\sin^2\frac t2$ \ ($1-\cos t=2\sin^2\frac t2$).
+$0\le t\le2\pi$'de $\sin\frac t2\ge0$ olduğundan $\|\mathbf r'(t)\|=2a\sin\frac t2$.
+\[ \ell=\int_0^{2\pi}2a\sin\frac t2\,dt=2a\Big[-2\cos\frac t2\Big]_0^{2\pi}=2a\,(2+2)=8a . \]
+Sikloid parçalı düzgün olduğu için yay uzunluğu formülü uygulanabilir (iç noktalarda $\mathbf r'\neq\mathbf 0$).
+\end{cevap}
+
+\begin{soru}[\ekal Ek örnek 14 (ivmenin bileşenleri)]
+$\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j+t^3\,\mathbf k$ boyunca hareket eden cismin $t=1$ anındaki $a_T$, $a_N$ ve $\kappa$ değerlerini bulunuz.
+\end{soru}
+\begin{cevap}
+$\mathbf v(1)=(1,2,3)$, $\mathbf a(1)=(0,2,6)$, $\|\mathbf v\|=\sqrt{14}$, $\|\mathbf a\|^2=40$.
+\[ a_T=\frac{\mathbf v\cdot\mathbf a}{\|\mathbf v\|}=\frac{0+4+18}{\sqrt{14}}=\frac{22}{\sqrt{14}}\approx5{,}88 . \]
+$\mathbf v\times\mathbf a=(2\cdot6-3\cdot2,\ 3\cdot0-1\cdot6,\ 1\cdot2-2\cdot0)=(6,-6,2)$, \ $\|\mathbf v\times\mathbf a\|=\sqrt{76}=2\sqrt{19}$.
+\[ a_N=\frac{2\sqrt{19}}{\sqrt{14}}\approx2{,}33,\qquad \kappa=\frac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|^3}=\frac{2\sqrt{19}}{14\sqrt{14}}\approx0{,}166 . \]
+Kontrol: $a_T^2+a_N^2=\frac{484}{14}+\frac{76}{14}=\frac{560}{14}=40=\|\mathbf a\|^2$ \checkmark; ayrıca $a_N=\kappa\upsilon^2$ \checkmark
+\end{cevap}
+
+\begin{soru}[\ekal Ek örnek 15 (iki eğrinin kesişme açısı)]
+$\mathbf r_1(t)=t\,\mathbf i+t^2\,\mathbf j+t^3\,\mathbf k$ ve $\mathbf r_2(t)=\sin t\,\mathbf i+\sin2t\,\mathbf j+t\,\mathbf k$ eğrileri orijinde
+kesişir. Kesişme açısını (teğetleri arasındaki açıyı) bulunuz.
+\end{soru}
+\begin{cevap}
+İkisi de $t=0$'da orijindedir. $\mathbf r_1'(0)=(1,0,0)$, $\mathbf r_2'(t)=(\cos t,2\cos2t,1)\Rightarrow\mathbf r_2'(0)=(1,2,1)$.
+\[ \cos\theta=\frac{\mathbf r_1'(0)\cdot\mathbf r_2'(0)}{\|\mathbf r_1'(0)\|\,\|\mathbf r_2'(0)\|}=\frac{1}{1\cdot\sqrt6}\ \Rightarrow\ \theta=\arccos\frac1{\sqrt6}\approx65{,}9^\circ . \]
+\end{cevap}
+
+%======================================================================
+\subsection{Sık yapılan hatalar}
+
+\begin{dikkat}
+\begin{itemize}
+\item \textbf{Tanım kümesinde birleşim almak.} $T_{\mathbf F}$ bileşenlerin tanım kümelerinin \emph{arakesitidir}, birleşimi değil.
+Ayrıca uç noktaların açık/kapalı oluşuna dikkat: $\ln$ için $>0$, karekök için $\ge0$.
+\item \textbf{Ortogonallikte tek bir $t$ yeterli sanmak.} $\mathbf F\cdot\mathbf G=0$ \emph{her} $t$ için sağlanmalıdır.
+\item \textbf{Vektörel çarpımın türevinde sırayı bozmak.} $(\mathbf F\times\mathbf G)'=\mathbf F'\times\mathbf G+\mathbf F\times\mathbf G'$;
+$\mathbf G\times\mathbf F'$ yazmak işareti değiştirir.
+\item \textbf{İntegral sabitini skaler yazmak.} Vektör fonksiyonun integralinde sabit bir \emph{vektördür} ($\mathbf C=c_1\mathbf i+c_2\mathbf j+c_3\mathbf k$);
+başlangıç koşulu her bileşen için ayrı denklem verir.
+\item \textbf{Belirli integrali ``yol'' sanmak.} $\int\mathbf v\,dt$ yer değiştirme vektörüdür; alınan yol $\int\|\mathbf v\|\,dt$'dir.
+\item \textbf{$\cos^2t+\sin^2t$ yerine $\cos t+\sin t$ yazmak.} Tahtada da görülen bu hata (helis örneği) sonucu bozmasa da yanlıştır;
+kareler unutulmamalı.
+\item \textbf{$\mathbf B=\mathbf N\times\mathbf T$ yazmak.} Doğrusu $\mathbf B=\mathbf T\times\mathbf N$; ters sıra $-\mathbf B$ verir.
+\item \textbf{$\mathbf N$'yi $\mathbf r''$'nün normalleştirilmişi sanmak.} Genelde $\mathbf r''$, $\mathbf T$ yönünde de bileşene sahiptir
+($\mathbf r''=\upsilon'\mathbf T+\kappa\upsilon^2\mathbf N$); yalnızca sürat sabitse $\mathbf r''\parallel\mathbf N$ olur.
+\item \textbf{Eğrilikte $\|\mathbf T'(t)\|$'yi doğrudan $\kappa$ sanmak.} $\kappa=\|d\mathbf T/ds\|=\|\mathbf T'(t)\|/\|\mathbf r'(t)\|$; $\|\mathbf r'\|$'ye bölmeyi unutmayın.
+\item \textbf{Eğrilik formülünde küpü unutmak.} $\kappa=\|\mathbf r'\times\mathbf r''\|/\|\mathbf r'\|^{3}$; $y=f(x)$ için payda $(1+f'^2)^{3/2}$.
+\item \textbf{$\mathbf v=d\mathbf r/ds$ yazmak.} Hız $d\mathbf r/dt$'dir; $d\mathbf r/ds=\mathbf T$ birim teğettir.
+\item \textbf{Düzgünlükte uç noktalarla iç noktaları karıştırmak.} $\mathbf r'=\mathbf 0$ şartı yalnız \emph{iç} noktalarda yasaktır;
+sikloidde $t=0$ iç nokta olduğu için eğri tüm aralıkta düzgün değil, parçalı düzgündür.
+\end{itemize}
+\end{dikkat}
+
+%======================================================================
+\subsection{Özet ve formül kutusu}
+
+\begin{ozet}
+\textbf{Temel ilke:} Vektör fonksiyonlarda limit, süreklilik, türev ve integral \emph{bileşen bileşen} yapılır.
+\begin{center}
+\begin{tabular}{l l}
+\toprule
+Kavram & Formül \\
+\midrule
+Tanım kümesi & $T_{\mathbf F}=T_f\cap T_g\cap T_h$ \\
+Norm & $\|\mathbf F(t)\|=\sqrt{f^2+g^2+h^2}$ \\
+Ortogonallik & her $t$ için $\mathbf F(t)\cdot\mathbf G(t)=0$ \\
+Türev & $\mathbf r'(t)=x'\mathbf i+y'\mathbf j+z'\mathbf k$ (teğet vektör) \\
+Çarpım kuralları & $(\mathbf F\cdot\mathbf G)'=\mathbf F'\cdot\mathbf G+\mathbf F\cdot\mathbf G'$, \ $(\mathbf F\times\mathbf G)'=\mathbf F'\times\mathbf G+\mathbf F\times\mathbf G'$ \\
+$\|\mathbf r\|$ sabit & $\Rightarrow\ \mathbf r\cdot\mathbf r'=0$ \\
+Düzgün eğri & $\mathbf r'$ sürekli, iç noktalarda $\mathbf r'\neq\mathbf 0$ \\
+Belirsiz integral & $\int\mathbf r\,dt=\mathbf R(t)+\mathbf C$ ($\mathbf C$ sabit vektör) \\
+Yay uzunluğu & $\ell=\int_a^b\|\mathbf r'(t)\|\,dt$, \ $ds/dt=\|\mathbf r'(t)\|$ \\
+Birim teğet & $\mathbf T=\mathbf r'/\|\mathbf r'\|=d\mathbf r/ds$ \\
+Asal normal & $\mathbf N=\mathbf T'/\|\mathbf T'\|$ \\
+Binormal & $\mathbf B=\mathbf T\times\mathbf N=\dfrac{\mathbf r'\times\mathbf r''}{\|\mathbf r'\times\mathbf r''\|}$ \\
+Eğrilik & $\kappa=\|d\mathbf T/ds\|=\dfrac{\|\mathbf r'\times\mathbf r''\|}{\|\mathbf r'\|^3}$, \ $\rho=1/\kappa$ \\
+$y=f(x)$ eğriliği & $\kappa=\dfrac{|f''|}{(1+f'^2)^{3/2}}$ \\
+Burulma & $\tau=\dfrac{(\mathbf r'\times\mathbf r'')\cdot\mathbf r'''}{\|\mathbf r'\times\mathbf r''\|^2}$ \\
+Hız, sürat, ivme & $\mathbf v=\mathbf r'=\upsilon\mathbf T$, \ $\upsilon=\|\mathbf v\|$, \ $\mathbf a=\mathbf r''$ \\
+İvme bileşenleri & $\mathbf a=\dfrac{d\upsilon}{dt}\mathbf T+\dfrac{\upsilon^2}{\rho}\mathbf N$, \ $a_T=\dfrac{\mathbf v\cdot\mathbf a}{\|\mathbf v\|}$, \ $a_N=\dfrac{\|\mathbf v\times\mathbf a\|}{\|\mathbf v\|}$ \\
+Mermi & $\mathbf r=(v_0\cos\alpha)t\,\mathbf i+\big((v_0\sin\alpha)t-\tfrac12gt^2\big)\mathbf j$, \ $R=\dfrac{v_0^2\sin2\alpha}{g}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Hazır sonuçlar:}
+\begin{itemize}
+\item Çember $a\cos t\,\mathbf i+a\sin t\,\mathbf j$: $\mathbf T=(-\sin t,\cos t,0)$, $\mathbf N=-\mathbf r/a$, $\mathbf B=\mathbf k$, $\kappa=1/a$, $\tau=0$.
+\item Helis $a\cos t\,\mathbf i+a\sin t\,\mathbf j+bt\,\mathbf k$: $\|\mathbf r'\|=\sqrt{a^2+b^2}$, $\kappa=\dfrac{a}{a^2+b^2}$,
+$\tau=\dfrac{b}{a^2+b^2}$, bir tur uzunluğu $2\pi\sqrt{a^2+b^2}$.
+\item Doğru $\mathbf r_0+t\mathbf v$: $\kappa=0$. \quad Sikloid kemeri: uzunluk $8a$.
+\end{itemize}
+\end{ozet}
